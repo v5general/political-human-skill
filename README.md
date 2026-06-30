@@ -361,8 +361,9 @@ Tell the ones who are hesitating: follow me, and you live. Look back, and you ge
 ```text
 political-human-skill/
 ├── README.md / README_zh.md / README_ja.md / README_ko.md    # four-language READMEs
-├── SKILL.md                                                    # main runtime protocol
-├── SPEC.md                                                     # authoring & safety spec
+├── SKILL.md                                                    # canonical English runtime protocol
+├── SPEC.md                                                     # canonical English authoring & safety spec
+├── SPEC_zh.md                                                  # Chinese localized authoring & safety spec
 ├── test-prompts.json                                           # Darwin regression prompts
 ├── quality/                     # Darwin quality-evolution layer (adapter + results)
 ├── safety/                      # safety ruleset (6 docs: policies, review flows, examples)
@@ -378,7 +379,17 @@ political-human-skill/
     └── caesar_modernized/       # Caesar → populist-reform coalition leader
 ```
 
-> Full directory plan in `SPEC.md` section 21. The repo ships the framework core: `SKILL.md` main protocol, `safety/` ruleset, `templates/`, `core/` runtime engines, `validators/`, `game_adapter/` (Absolute Majority adapter), `families/` (family metadata), the Darwin quality layer, and three self-contained converted example personas under `personas/examples/` (Oda Nobunaga · Cao Cao · Julius Caesar); all parts keep evolving.
+> Full directory plan in `SPEC.md` section 22. The repo ships the framework core: `SKILL.md` main protocol, `safety/` ruleset, `templates/`, `core/` runtime engines, `validators/`, `game_adapter/` (Absolute Majority adapter), `families/` (family metadata), the Darwin quality layer, and three self-contained converted example personas under `personas/examples/` (Oda Nobunaga · Cao Cao · Julius Caesar); all parts keep evolving.
+
+---
+
+## Generated personas and examples
+
+`personas/examples/` is a small set of built-in examples, not a place where every generated character should be saved. Personas created during normal use belong in your own runtime, game data, local workspace, or downstream project. For example, an *Absolute Majority* integration can store generated NPCs in its own game data directory instead of adding them to this repository.
+
+The examples are also not fixed templates. They show the file shape, safety boundaries, and conversion style. If you ask for a new Oda Nobunaga, Cao Cao, or Caesar conversion, the skill should generate it again from the current request and safety rules rather than copying the example folder.
+
+For the stricter storage and example reuse rules, see `SPEC.md` sections 18-19.
 
 ---
 

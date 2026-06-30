@@ -361,8 +361,9 @@ npx skills add <owner>/political-human-skill
 ```text
 political-human-skill/
 ├── README.md / README_zh.md / README_ja.md / README_ko.md    # 四语言 README
-├── SKILL.md                                                    # 主运行时协议
-├── SPEC.md                                                     # 创作与安全规范
+├── SKILL.md                                                    # 英文 canonical 运行协议
+├── SPEC.md                                                     # 英文 canonical 创作与安全规范
+├── SPEC_zh.md                                                  # 中文本地化创作与安全规范
 ├── test-prompts.json                                           # Darwin 回归测试 prompt
 ├── quality/                     # Darwin 品质进化层（适配器 + 结果）
 ├── safety/                      # 安全规则集（6 篇文档）
@@ -378,7 +379,17 @@ political-human-skill/
     └── caesar_modernized/       # 凯撒 → 民粹改革派联盟领袖
 ```
 
-> 完整目录规划见 `SPEC.md` 第 21 节。仓库已交付框架核心：`SKILL.md` 主协议、`safety/` 安全规则、`templates/` 模板、`core/` 运行时引擎、`validators/` 校验器、`game_adapter/` 《绝对多数》适配器、`families/` 家族元数据、Darwin 质量层，以及 `personas/examples/` 下三个自包含的已转化示例 persona（织田信长 · 曹操 · 凯撒）；各部件持续演进。
+> 完整目录规划见 `SPEC.md` 第 22 节。仓库已交付框架核心：`SKILL.md` 主协议、`safety/` 安全规则、`templates/` 模板、`core/` 运行时引擎、`validators/` 校验器、`game_adapter/` 《绝对多数》适配器、`families/` 家族元数据、Darwin 质量层，以及 `personas/examples/` 下三个自包含的已转化示例 persona（织田信长 · 曹操 · 凯撒）；各部件持续演进。
+
+---
+
+## 生成 Persona 与示例
+
+`personas/examples/` 只是一组项目自带示例，不是保存所有生成角色的目录。日常使用中生成的 persona 应放在你自己的运行环境、游戏数据目录、本地工作区或派生项目中。例如接入《绝对多数》时，可以把生成的 NPC 保存到游戏自己的数据目录，而不是加入本仓库。
+
+示例也不是固定模板。它们展示文件结构、安全边界和转化风格。如果你要求重新生成织田信长、曹操或凯撒这类历史人物转化，Skill 应根据当前请求和安全规则重新生成，而不是复制示例文件夹。
+
+更严格的存放和示例复用规则见 `SPEC.md` 第 18-19 节。
 
 ---
 

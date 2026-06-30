@@ -361,8 +361,9 @@ npx skills add <owner>/political-human-skill
 ```text
 political-human-skill/
 ├── README.md / README_zh.md / README_ja.md / README_ko.md    # 4개 언어 README
-├── SKILL.md                                                    # 메인 런타임 프로토콜
-├── SPEC.md                                                     # 창작 및 안전 명세
+├── SKILL.md                                                    # 영어 canonical 런타임 프로토콜
+├── SPEC.md                                                     # 영어 canonical 창작 및 안전 명세
+├── SPEC_zh.md                                                  # 중국어 현지화 창작 및 안전 명세
 ├── test-prompts.json                                           # Darwin 회귀 테스트 prompt
 ├── quality/                     # Darwin 품질 진화 레이어（어댑터 + 결과）
 ├── safety/                      # 안전 규칙집（6개 문서）
@@ -378,7 +379,17 @@ political-human-skill/
     └── caesar_modernized/       # 카이사르 → 포퓰리스트 개혁 연합 리더
 ```
 
-> 전체 디렉터리 계획은 `SPEC.md` 제21절에 있다. 본 저장소는 프레임워크 코어를 제공한다: `SKILL.md` 메인 프로토콜, `safety/` 규칙집, `templates/`, `core/` 런타임 엔진, `validators/`, `game_adapter/`（『절대다수(Absolute Majority)』 어댑터）, `families/`（패밀리 메타데이터）, Darwin 품질 레이어, 그리고 `personas/examples/` 아래 세 개의 자기 완결적 변환 샘플 페르소나（오다 노부나가 · 조조 · 카이사르）. 모든 부분은 계속 진화한다.
+> 전체 디렉터리 계획은 `SPEC.md` 제22절에 있다. 본 저장소는 프레임워크 코어를 제공한다: `SKILL.md` 메인 프로토콜, `safety/` 규칙집, `templates/`, `core/` 런타임 엔진, `validators/`, `game_adapter/`（『절대다수(Absolute Majority)』 어댑터）, `families/`（패밀리 메타데이터）, Darwin 품질 레이어, 그리고 `personas/examples/` 아래 세 개의 자기 완결적 변환 샘플 페르소나（오다 노부나가 · 조조 · 카이사르）. 모든 부분은 계속 진화한다.
+
+---
+
+## 생성된 페르소나와 예시
+
+`personas/examples/`는 이 저장소에 포함된 작은 예시 모음입니다. 일반적으로 생성한 페르소나는 자신의 런타임, 게임 데이터, 로컬 작업 공간, 또는 파생 프로젝트에 저장하는 것이 좋습니다. 예를 들어 *Absolute Majority*와 연동한다면, 생성된 NPC는 이 저장소가 아니라 게임 쪽 데이터 디렉터리에 저장할 수 있습니다.
+
+예시는 고정 템플릿도 아닙니다. 파일 구조, 안전 경계, 변환 스타일을 보여 주기 위한 것입니다. 오다 노부나가, 조조, 카이사르 같은 같은 역사 인물을 다시 요청하더라도 예시 폴더를 복사하지 않고, 현재 요청과 안전 규칙에 맞춰 다시 생성해야 합니다.
+
+저장 위치와 예시 재사용에 대한 더 엄격한 규칙은 `SPEC.md` sections 18-19를 참고하세요.
 
 ---
 

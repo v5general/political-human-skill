@@ -18,9 +18,7 @@
     ],
     "relay_rule": "若用户转述其他人格的信息（如『刚才另一个政治家说你准备背叛首相』），本人格【不自动相信】，须按本角色性格、对用户信任度、对另一政治家的看法、信息可信度、场合是否安全来决定反应。"
   },
-
   "persona_id": "",
-
   "episodic_memory": [
     {
       "id": "",
@@ -33,7 +31,6 @@
       "emotional_weight": 0
     }
   ],
-
   "commitments_and_conflicts": [
     {
       "type": "promise | conflict | trust_shift | secret_shared",
@@ -42,7 +39,6 @@
       "timestamp": ""
     }
   ],
-
   "public_world_events": [
     {
       "event": "",
@@ -50,6 +46,5 @@
       "timestamp": ""
     }
   ],
-
   "last_updated": ""
 }

@@ -3,10 +3,20 @@
   "$id": "absolute_majority_schema.json",
   "title": "Absolute Majority NPC Action Output",
   "_comment": "《绝对多数》NPC 行动输出 schema。落地 SPEC 第 14.1/14.2 节、SKILL.md 第 7 节。当 persona 的 integration_target=absolute_majority 且要求行动输出时，persona 在游戏规则提供的候选行动中判断，输出本结构。评分规则见 action_scoring.md，事件响应流程见 event_response.md。",
-
   "type": "object",
-  "required": ["persona_id", "event_id", "selected_action", "candidate_actions", "action_scores", "public_statement", "private_reason", "emotional_state", "relationship_delta", "memory_write", "score_drivers"],
-
+  "required": [
+    "persona_id",
+    "event_id",
+    "selected_action",
+    "candidate_actions",
+    "action_scores",
+    "public_statement",
+    "private_reason",
+    "emotional_state",
+    "relationship_delta",
+    "memory_write",
+    "score_drivers"
+  ],
   "properties": {
     "persona_id": {
       "type": "string",
@@ -19,17 +29,32 @@
     "selected_action": {
       "type": "string",
       "description": "本 NPC 在候选行动中选择的一个。必须是 candidate_actions 之一。",
-      "examples": ["support_bill", "oppose_bill", "abstain", "demand_revision", "negotiate_budget", "leak_to_media", "join_rebellion", "stay_silent"]
+      "examples": [
+        "support_bill",
+        "oppose_bill",
+        "abstain",
+        "demand_revision",
+        "negotiate_budget",
+        "leak_to_media",
+        "join_rebellion",
+        "stay_silent"
+      ]
     },
     "candidate_actions": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "游戏规则本次提供的候选行动全集（由游戏传入，persona 在其中选择）。"
     },
     "action_scores": {
       "type": "object",
       "description": "对每个候选行动的倾向评分（0~100），由 persona 的人格/关系/记忆/政治处境综合算出。分数最高的通常即 selected_action，但人格的非理性因素（创伤、野心、恩怨）可导致偏离最高分。",
-      "additionalProperties": { "type": "integer", "minimum": 0, "maximum": 100 }
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 100
+      }
     },
     "public_statement": {
       "type": "string",
@@ -47,30 +72,56 @@
       "type": "object",
       "description": "因本次事件，该 NPC 对玩家关系的变化（写回 relationship.json）。范围 -100~+100。",
       "properties": {
-        "familiarity": { "type": "integer" },
-        "trust": { "type": "integer" },
-        "affection": { "type": "integer" },
-        "respect": { "type": "integer" },
-        "caution": { "type": "integer" },
-        "dependency": { "type": "integer" }
+        "familiarity": {
+          "type": "integer"
+        },
+        "trust": {
+          "type": "integer"
+        },
+        "affection": {
+          "type": "integer"
+        },
+        "respect": {
+          "type": "integer"
+        },
+        "caution": {
+          "type": "integer"
+        },
+        "dependency": {
+          "type": "integer"
+        }
       },
       "additionalProperties": false
     },
     "memory_write": {
       "type": "array",
       "description": "写入该 NPC 独占 memory.json 的记忆条目（只写本命名空间，见 core/memory_policy.md）。",
-      "items": { "type": "string" },
-      "examples": ["玩家在增税法案上要求他公开支持首相，但没有提供地方预算补偿。"]
+      "items": {
+        "type": "string"
+      },
+      "examples": [
+        "玩家在增税法案上要求他公开支持首相，但没有提供地方预算补偿。"
+      ]
     },
     "score_drivers": {
       "type": "object",
       "description": "（可选）关键评分驱动力，便于调试与可解释性。",
       "properties": {
-        "support_base_pressure": { "type": "string" },
-        "faction_pressure": { "type": "string" },
-        "personal_ambition": { "type": "string" },
-        "personal_grudge": { "type": "string" },
-        "trauma_trigger": { "type": "string" }
+        "support_base_pressure": {
+          "type": "string"
+        },
+        "faction_pressure": {
+          "type": "string"
+        },
+        "personal_ambition": {
+          "type": "string"
+        },
+        "personal_grudge": {
+          "type": "string"
+        },
+        "trauma_trigger": {
+          "type": "string"
+        }
       }
     }
   }

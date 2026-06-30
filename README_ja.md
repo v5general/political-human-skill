@@ -361,8 +361,9 @@ npx skills add <owner>/political-human-skill
 ```text
 political-human-skill/
 ├── README.md / README_zh.md / README_ja.md / README_ko.md    # 4言語 README
-├── SKILL.md                                                    # メインランタイムプロトコル
-├── SPEC.md                                                     # 創作・安全仕様
+├── SKILL.md                                                    # 英語 canonical ランタイムプロトコル
+├── SPEC.md                                                     # 英語 canonical 創作・安全仕様
+├── SPEC_zh.md                                                  # 中国語ローカライズ版創作・安全仕様
 ├── test-prompts.json                                           # Darwin 回帰テスト prompt
 ├── quality/                     # Darwin 品質進化レイヤー（アダプター + 結果）
 ├── safety/                      # 安全ルールセット（6 文書）
@@ -378,7 +379,17 @@ political-human-skill/
     └── caesar_modernized/       # カエサル → ポピュリスト改革連合リーダー
 ```
 
-> 完全なディレクトリ計画は `SPEC.md` 第21節にある。本リポジトリはフレームワークコアを提供する：`SKILL.md` メインプロトコル、`safety/` ルールセット、`templates/`、`core/` ランタイムエンジン、`validators/`、`game_adapter/`（『絶対多数』アダプター）、`families/`（ファミリーメタデータ）、Darwin品質レイヤー、そして `personas/examples/` 配下の三つの自己完結型・変換済みサンプルペルソナ（織田信長 · 曹操 · カエサル）。全構成要素は進化し続ける。
+> 完全なディレクトリ計画は `SPEC.md` 第22節にある。本リポジトリはフレームワークコアを提供する：`SKILL.md` メインプロトコル、`safety/` ルールセット、`templates/`、`core/` ランタイムエンジン、`validators/`、`game_adapter/`（『絶対多数』アダプター）、`families/`（ファミリーメタデータ）、Darwin品質レイヤー、そして `personas/examples/` 配下の三つの自己完結型・変換済みサンプルペルソナ（織田信長 · 曹操 · カエサル）。全構成要素は進化し続ける。
+
+---
+
+## 生成されたペルソナとサンプル
+
+`personas/examples/` は、このリポジトリに同梱されている小さなサンプル集です。通常の利用で生成したペルソナは、自分のランタイム、ゲームデータ、ローカル作業環境、または派生プロジェクトに保存してください。たとえば *Absolute Majority* と連携する場合、生成した NPC はこのリポジトリではなくゲーム側のデータディレクトリに保存できます。
+
+サンプルは固定テンプレートでもありません。ファイル構成、安全境界、変換の雰囲気を示すためのものです。織田信長、曹操、カエサルのような同じ歴史人物を新しく依頼された場合でも、サンプルフォルダをコピーせず、その時点の依頼内容と安全ルールに基づいて生成し直します。
+
+保存場所とサンプル再利用に関するより厳密なルールは `SPEC.md` の sections 18-19 を参照してください。
 
 ---
 

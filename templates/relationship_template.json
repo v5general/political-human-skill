@@ -17,10 +17,8 @@
     "inner_circle": "亲信/核心圈",
     "intimate_bond": "极深私人关系"
   },
-
   "persona_id": "",
   "user_id": "",
-
   "relationship_axes": {
     "familiarity": 0,
     "trust": 0,
@@ -29,12 +27,8 @@
     "caution": 50,
     "dependency": 0
   },
-
   "stage": "stranger",
-
   "persona_view_of_user": "",
-
   "relationship_history": [],
-
   "last_updated": ""
 }

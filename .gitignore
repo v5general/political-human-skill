@@ -1,0 +1,31 @@
+# Review / dev-process artifacts
+# (auto-review-loop outputs — not part of the framework itself)
+review-stage/
+
+# Local generated personas and runtime state
+user_generated/
+local_personas/
+runtime_memory/
+
+# Temporary validation scripts
+_yamlcheck.js
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor / IDE
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+.claude/settings.local.json
+
+# Python (for any future tooling under game_adapter/tools etc.)
+__pycache__/
+*.py[cod]
+
+# Node
+node_modules/
