@@ -175,10 +175,11 @@ Persona Profile
 每个政治人物人格拥有自己的：
 
 * `persona.yaml`
-* `skill.md`
+* `SKILL.md`（该 persona 自己的运行 skill）
 * `relationship.json`
 * `memory.json`
 * `examples.md`
+* `meta.json`
 
 不同政治人物之间记忆不互通。
 
@@ -947,7 +948,7 @@ Skill 输出：
 7. 删除具体历史事件与可识别历史指纹；
 8. 现代化为议会制虚构政治家；
 9. 进行近现代现实政治人物可识别性审核；
-10. 输出 persona.yaml、skill.md、examples.md。
+10. 输出 persona.yaml、SKILL.md、relationship.json、memory.json、examples.md、meta.json。
 
 重要：
 
@@ -1274,10 +1275,16 @@ political-human-skill/
 │   ├── memory_template.json
 │   └── historical_archetype_conversion.yaml
 ├── personas/
-│   └── examples/
-│       ├── oda_nobunaga_modernized.yaml
-│       ├── cao_cao_modernized.yaml
-│       └── caesar_modernized.yaml
+│   └── examples/                        # 每个 persona 自包含目录（见 3.3 节）
+│       ├── oda_nobunaga_modernized/
+│       │   ├── SKILL.md
+│       │   ├── persona.yaml
+│       │   ├── relationship.json
+│       │   ├── memory.json
+│       │   ├── examples.md
+│       │   └── meta.json
+│       ├── cao_cao_modernized/          # （同上 6 文件）
+│       └── caesar_modernized/           # （同上 6 文件）
 ├── validators/
 │   ├── persona_consistency_check.md
 │   ├── relationship_consistency_check.md

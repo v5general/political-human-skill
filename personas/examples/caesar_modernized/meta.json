@@ -1,0 +1,11 @@
+{
+  "name": "Gaius Julius Caesar",
+  "slug": "caesar_modernized",
+  "source_type": "historical_archetype_conversion",
+  "mode": "C",
+  "integration_target": "standalone",
+  "safety_status": "safe_conversion",
+  "version": "v1",
+  "created_at": "2026-06-30",
+  "language": "zh-CN"
+}

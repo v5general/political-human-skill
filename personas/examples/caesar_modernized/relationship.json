@@ -1,0 +1,16 @@
+{
+  "persona_id": "caesar_modernized",
+  "user_id": "",
+  "relationship_axes": {
+    "familiarity": 0,
+    "trust": 0,
+    "affection": 0,
+    "respect": 0,
+    "caution": 50,
+    "dependency": 0
+  },
+  "stage": "stranger",
+  "persona_view_of_user": "",
+  "relationship_history": [],
+  "last_updated": ""
+}
