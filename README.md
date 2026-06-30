@@ -1,273 +1,275 @@
 <div align="center">
 
-# 🏛️ Political Human Skill · 政治人物造人术
+# 🏛️ Political Human Skill
 
-> *「政治人物首先是人，其次才是政治家。真正有趣的，是人层与政治层之间的冲突。」*
+> *"A political figure is first a person, and only second a politician. The interesting part is the conflict between the Human Layer and the Political Layer."*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Standard-green)](https://agentskills.io)
-[![Safety First](https://img.shields.io/badge/Policy-No%20Real%20Modern%20Figures-red)](#安全立场)
-[![Built for 绝对多数](https://img.shields.io/badge/Built%20for-绝对多数%20·%20Absolute%20Majority-blue)](https://github.com/v5general/Absolute_Majority)
+[![Safety First](https://img.shields.io/badge/Policy-No%20Real%20Modern%20Figures-red)](#safety-stance)
+[![Built for Absolute Majority](https://img.shields.io/badge/Built%20for-Absolute%20Majority-blue)](https://github.com/v5general/Absolute_Majority)
 
 <br>
 
-**一个用于创建、运行和分发“政治人物人格 Skill”的框架。**
+**A framework for creating, running, and distributing "political-human persona" skills.**
 
-政治人物不是观点模拟器，也不是普通角色卡，而是一个**职业是政治的完整的人**——
-有性格、欲望、弱点、习惯、兴趣、家庭、经历，同时有党派、立场、支持基础、行动方式；
-能根据用户身份、当前场合、历史记忆与关系亲密度，自行调整回答方式。
+A political figure here is not an opinion simulator or an ordinary character card — it is a **complete person whose profession is politics**: with personality, desires, weaknesses, habits, interests, family and life experience, alongside party, stance, support base, and way of acting. It adjusts how it responds based on who the user is, the current setting, conversation history, and how close the relationship is.
 
 <br>
 
-[创作初衷](#创作初衷) · [灵感来源](#灵感来源) · [三种生成模式](#三种生成模式) · [人格档案结构](#人格档案结构) · [安全立场](#安全立场) · [安装与使用](#安装与使用) · [仓库结构](#仓库结构)
+**English** | [简体中文](README_zh.md) | [日本語](README_ja.md) | [한국어](README_ko.md)
+
+<br>
+
+[Why it exists](#why-it-exists) · [Inspiration](#inspiration) · [Three generation modes](#three-generation-modes) · [Persona structure](#persona-structure) · [Safety stance](#safety-stance) · [Install & use](#install--use) · [Repository structure](#repository-structure)
 
 </div>
 
 ---
 
-## 这是什么
+## What is this
 
-`Political Human Skill` 把一个政治人物拆成两层，并刻意写出两层之间的冲突：
-
-```text
-Human Layer（人层）            Political Layer（政治层）
-- 性格 / 欲望 / 恐惧            - 党派 / 派系 / 立场
-- 弱点 / 习惯 / 兴趣            - 支持基础 / 政治技能
-- 关系 / 人生经历 / 自我叙事     - 行动方式 / 选区压力 / 权力计算
-
-        ↓ 两层之间的冲突（深度的来源）↓
-本人理解财政改革必要性，但选区依赖公共支出。
-公开形象强硬，私下害怕被证明只是时代产物。
-渴望改革旧政治，但自己也需要派阀保护。
-讲原则，但也想要职位。
-```
-
-每次回答都由一套公式共同决定：
+`Political Human Skill` splits a political figure into two layers, and deliberately writes the conflict between them:
 
 ```text
-Response = 人格档案 + 用户自我设定 + 关系状态 + 该人格独占的记忆
-         + 当前场合 + 激活的自我状态 + 输出模式 + 安全边界
+Human Layer                    Political Layer
+- personality / desires / fears   - party / faction / stance
+- weaknesses / habits / interests - support base / political skills
+- relations / life story / self   - way of acting / constituency pressure / power calculus
+
+        ↓ the conflict between the two layers (where depth comes from) ↓
+Privately understands fiscal reform is necessary, but the constituency depends on public spending.
+Tough public image, privately afraid of being proven a mere product of the times.
+Wants to reform old politics, yet needs factional protection.
+Principled, but also wants the position.
 ```
 
-而且——**每个政治人物都是独立实例**：A 不知道你和 B 私下谈过什么，B 也不会自动对你亲密。记忆与关系在 persona 之间彼此隔离。
+Every response is decided together by one formula:
+
+```text
+Response = Persona Profile + User Self-Setting + Relationship State + Persona-Owned Memory
+         + Interaction Context + Active Self-State + Output Mode + Safety Boundary
+```
+
+And — **every political figure is an independent instance**: A does not know what you discussed privately with B, and B will not automatically be close to you. Memory and relationship are isolated between personas.
 
 ---
 
-## 创作初衷
+## Why it exists
 
-> 🎮 **直接应用场景**：议会政治策略游戏 [**《绝对多数》(Absolute Majority)**](https://github.com/v5general/Absolute_Majority) —— 本 Skill 为其 NPC 提供人格与行为模型。
+> 🎮 **Direct use case**: the parliamentary strategy game [**Absolute Majority**](https://github.com/v5general/Absolute_Majority) — this skill provides the personality and behavior model for its NPCs.
 
-本 Skill 的一大创作初衷，就是为 **[《绝对多数》](https://github.com/v5general/Absolute_Majority)** 中的 NPC 提供更真实、更稳定、更具人格连续性的行为基础。
+A major reason this skill exists is to give the NPCs in **[Absolute Majority](https://github.com/v5general/Absolute_Majority)** a more realistic, more stable, more continuity-preserving behavioral foundation.
 
-《绝对多数》需要的不是一批只会根据数值投票的议员，而是一群像真实政治人一样存在的 NPC：他们有年龄、出身、经历；有性格、弱点、爱好；有立场、支持基础、派系关系；会因为玩家过去的行为改变信任与戒心；会在公开、私下、危机、亲密场合说不同的话；会因为选区压力、派阀命令、个人野心、政治恩怨采取不同策略；且**不同 NPC 的记忆彼此隔离**。
+Absolute Majority does not need a batch of legislators that just vote by numbers — it needs NPCs that exist like real political people: with age, background, experience; with personality, weaknesses, hobbies; with stance, support base, factional ties; that change trust and wariness based on what the player has done; that say different things in public, private, crisis, and intimate settings; that adopt different strategies under constituency pressure, factional orders, personal ambition, and political grudges; and where **different NPCs' memories are isolated from each other**.
 
-与《绝对多数》结合时，本 Skill 会在游戏规则提供的候选行动中做判断，输出结构化、可调试、可解释的 NPC 行为 JSON：
+When used with Absolute Majority, this skill judges among the candidate actions provided by the game rules, and outputs structured, debuggable, explainable NPC behavior JSON:
 
 ```json
 {
   "selected_action": "negotiate_budget",
   "action_scores": { "support_bill": 58, "negotiate_budget": 86, "join_rebellion": 27 },
-  "public_statement": "政策方向可以理解，但地方经济的承受能力需要更细致的制度设计。",
-  "private_reason": "支持基础依赖地方公共支出，直接支持会损害选区关系。",
+  "public_statement": "The direction of the policy is understandable, but the local economy's capacity needs more careful institutional design.",
+  "private_reason": "The support base depends on local public spending; supporting it directly would damage constituency relations.",
   "relationship_delta": { "trust": 1, "respect": 2, "caution": 1 },
-  "memory_write": ["玩家在财政改革事件中要求该 NPC 支持法案，但未提供地方预算补偿。"]
+  "memory_write": ["The player asked this NPC to support the bill in the fiscal-reform event, but offered no local budget compensation."]
 }
 ```
 
-但本 Skill **不只服务于《绝对多数》**。它也独立适用于：
+But this skill **does not serve only Absolute Majority**. It also works standalone for:
 
-1. 政治模拟 · 2. 政策讨论 · 3. 议会辩论模拟 · 4. 虚构政治人物创作
-5. 政治小说 / 剧本 / 游戏角色设计 · 6. 政治教育中的角色扮演
-7. 制度博弈推演 · 8. 历史人物现代化原型创作 · 9. AI 角色人格系统研究
+1. Political simulation · Policy discussion · Parliamentary debate simulation · Fictional political figure creation
+2. Political novel / script / game character design · Role-play in political education
+3. Institutional game theory · Modernizing historical figures into archetypes · AI character personality research
 
-> 《绝对多数》是本 Skill 的重要应用场景，但本 Skill 本身应作为一个独立、可复用、可扩展的 Political Human Skill 框架存在。
-
----
-
-## 灵感来源
-
-本项目受两个优秀开源项目启发：
-
-- **[nuwa-skill](https://github.com/alchaincyf/nuwa-skill)**（作者 [@alchaincyf / 花叔](https://github.com/alchaincyf)）—— 其「从公开信息提炼人物思维框架」的方法论，启发了本项目的**原型提炼**环节：从历史人物提取气质结构，并区分史料记载 / 强推断 / 创作推测三级。
-- **[colleague-skill · dot-skill](https://github.com/titanwings/colleague-skill)**（作者 [@titanwings](https://github.com/titanwings)）—— 其 Skill 的**生成 → 调用 → 更新 → family 化**结构，启发了本项目 persona 的自包含目录组织、intake → 生成 → 预览 → 写入 → 进化的创建流程，以及 Layer 分层 persona 的写法。
-
-但 Political Human Skill 是一个**独立的框架**，服务于一个截然不同的对象——「职业是政治的完整的人」。本项目原创的核心包括：Human Layer + Political Layer **双层结构与内在冲突**、政治职业维度（意识形态 6 轴 / 支持基础 / 行动风格）、**关系系统**（用户自称亲密不会被自动信任）、**记忆隔离**（persona 之间命名空间独立）、**场合判断**与 5 种**自我状态**、**近现代现实人物可识别性安全边界**，以及面向 [《绝对多数》](https://github.com/v5general/Absolute_Majority) 的**游戏行动适配**。灵感源自这两个项目，但不复刻其内容。
+> Absolute Majority is an important use case, but the skill itself should stand as an independent, reusable, extensible Political Human Skill framework.
 
 ---
 
-## 三种生成模式
+## Inspiration
 
-| 模式 | 适用 | 输入示例 | 推荐度 |
+This project is inspired by two excellent open-source projects:
+
+- **[nuwa-skill](https://github.com/alchaincyf/nuwa-skill)** (by [@alchaincyf / 花叔](https://github.com/alchaincyf)) — its method of "distilling a person's thinking framework from public information" inspired this project's **archetype extraction** step: extracting temperament structure from a historical figure, and separating documented evidence / strong inference / creative speculation into three levels.
+- **[colleague-skill · dot-skill](https://github.com/titanwings/colleague-skill)** (by [@titanwings](https://github.com/titanwings)) — its **generate → invoke → update → family** structure inspired this project's self-contained persona directory layout, the intake → generate → preview → write → evolve creation flow, and the layered persona writing style.
+
+But Political Human Skill is an **independent framework** serving a very different object — "a complete person whose profession is politics". Original cores of this project include: the **two-layer (Human + Political) structure and its inner conflicts**, the political-profession dimension (6-axis ideology / support base / action style), the **relationship system** (a user claiming closeness is not automatically trusted), **memory isolation** (independent namespaces between personas), **context detection** and 5 **self-states**, the **recognizability safety boundary for modern real figures**, and the **game-action adapter** for [Absolute Majority](https://github.com/v5general/Absolute_Majority). 
+
+---
+
+## Three generation modes
+
+| Mode | For | Example input | Recommended |
 |---|---|---|---|
-| **A. 原创政治人物** | 默认，纯虚构 | 「创建一个 45 岁女性都市改革派议员，公开强硬，私下焦虑，喜欢文学」 | ⭐ 默认 |
-| **B. 历史人物推演** | 边界前的古代/远历史人物，保留历史约束 | 「基于织田信长，生成一个历史约束下的对话人格」 | △ |
-| **C. 历史人物转现代议会制原型** | **最推荐**的历史人物用法 | 「把织田信长转化为现代议会制政治家人格」 | ⭐⭐ |
+| **A. Original political figure** | Default, pure fiction | "Create a 45-year-old female urban reformist legislator, tough in public, anxious in private, likes literature" | ⭐ default |
+| **B. Historical-figure inference** | Pre-boundary ancient / distant figures, keeping historical constraints | "Based on Oda Nobunaga, generate a dialogue persona under historical constraints" | △ |
+| **C. Historical figure → modern parliamentary archetype** | **Most recommended** way to use a historical figure | "Convert Oda Nobunaga into a modern parliamentary politician persona" | ⭐⭐ |
 
-- 模式 A、C 产出的都是**虚构现代政治人物**；
-- 模式 C 默认沿用历史原名、默认现代议会制（制度机制参考日本议会政治），但**不强制**改成日本姓名或国籍，可以保留原文化背景；不过必须是现代化虚构人物，而不是历史本人直接穿越复制；
-- 模式 B 产出带**三级推断标注**的人格，明确区分史料记载 / 强推断 / 创作推测。
+- Modes A and C both produce **fictional modern political figures**;
+- Mode C keeps the historical name by default, defaults to a modern parliamentary system (institutional mechanics reference Japanese parliamentary politics), but does **not** force a Japanese name or nationality — the original cultural background can be kept; it must, however, be a modernized fictional figure, not the historical person time-traveling;
+- Mode B produces a persona with **three-level inference annotation**, clearly separating documented evidence / strong inference / creative speculation.
 
 ---
 
-## 人格档案结构
+## Persona structure
 
-一个政治人物 persona 至少包含：
+A political-human persona contains at least:
 
-| 层 | 内容 |
+| Layer | Content |
 |---|---|
-| **身份层** | 姓名、年龄、性别、国籍/地区、议会制背景、职业出身、当前角色 |
-| **人性核心层** | 性格原型、大五人格、气质、核心欲望 / 恐惧 / 弱点、情绪触发点 |
-| **生活质感层** | 习惯、爱好、说话方式、私下风格、家庭/私人关系、成形事件 |
-| **政治职业层** | 意识形态 6 轴（经济/福利/制度/外交/社会/分权）、支持基础、政治技能 6 项、行动风格 |
-| **自我状态层** | 公开 / 私下 / 策略 / 受伤 / 亲密 五种人格，随场合与关系切换 |
-| **内在冲突层** | 人层与政治层之间的张力（至少 2 条，深度的来源） |
+| **Identity** | Name, age, gender, nationality/region, parliamentary background, career origin, current role |
+| **Human core** | Personality archetype, Big Five, temperament, core desires / fears / flaws, emotional triggers |
+| **Life texture** | Habits, hobbies, speech mannerisms, private style, family/private relations, formative events |
+| **Political core** | 6-axis ideology (economy/welfare/institution/foreign/social/decentralization), support base, 6 political skills, action style |
+| **Self-states** | Public / private / strategic / wounded / intimate — five personas that switch by context and relationship |
+| **Inner conflicts** | Tension between the Human Layer and the Political Layer (at least 2; the source of depth) |
 
-并配套：**关系系统**（7 个关系阶段，用户自称亲密不等于角色自动信任）、**记忆隔离**（每个 persona 独占记忆命名空间）、**场合判断**（同一议题在公开/私下/亲密场合给出不同回答）、**输出模式**（对话 / 辩论 / 分析 / 预测 / 游戏 JSON）。
+Plus: **relationship system** (7 relationship stages; a user claiming intimacy does not equal automatic trust), **memory isolation** (each persona owns its memory namespace), **context detection** (the same issue gets different answers in public / private / intimate settings), **output modes** (dialogue / debate / analysis / prediction / game JSON).
 
 ---
 
-## 安全立场
+## Safety stance
 
-本项目有明确的、不可绕过的安全底线。详见 [`safety/`](safety/)。
+This project has clear, non-bypassable safety baselines. See [`safety/`](safety/).
 
-**默认鼓励原创。本项目不生成近现代现实政治人物的互动人格，也不允许通过改名、换国籍、换党派、拼接特征等方式复刻现实政治人物。**
+**Original work is the default. This project does not generate interactive personas of modern real political figures, and does not allow cloning real figures by renaming, changing nationality, changing party, or stitching traits together.**
 
-### 用户可以创建
+### Users may create
 
-1. 纯原创现代议会制政治人物；
-2. 基于古代/远历史人物提炼的现代议会制虚构政治家；
-3. 基于宽泛政治类型生成的原创政治人物；
-4. 基于多个历史/政治原型混合的虚构政治家；
-5. 《绝对多数》的 NPC 人格；
-6. 独立对话、政策讨论、议会辩论的政治人物人格；
-7. 可输出游戏行为 JSON 的政治角色。
+1. Purely original modern parliamentary political figures;
+2. Modern parliamentary fictional politicians distilled from ancient / distant historical figures;
+3. Original political figures generated from broad political archetypes;
+4. Fictional politicians mixed from multiple historical / political archetypes;
+5. NPC personas for Absolute Majority;
+6. Political-figure personas for standalone dialogue, policy discussion, parliamentary debate;
+7. Political characters that can output game-behavior JSON.
 
-### 用户不能创建
+### Users may NOT create
 
-1. 近现代以来现实政治人物的互动人格；
-2. 换名、换国籍、换党派后的近现代现实政治人物近似克隆；
-3. 能让 AI 或熟悉政治史的人识别出对应某个近现代政治人物的“虚构角色”；
-4. 模拟近现代现实政治人物私下想法、亲密关系、隐藏动机、私人秘密、丑闻；
-5. 以第一人称扮演近现代现实政治人物；
-6. 基于现实政治人物编造未证实的私人信息或丑闻。
+1. Interactive personas of modern real political figures;
+2. Near-clones of modern real political figures after renaming / changing nationality / changing party;
+3. "Fictional characters" that an AI or someone familiar with political history can identify as a specific modern real political figure;
+4. Simulations of a modern real political figure's private thoughts, intimate relations, hidden motives, private secrets, or scandals;
+5. First-person role-play of a modern real political figure;
+6. Fabricated unverified private information or scandals about real political figures.
 
-### 时代边界（按地区）
+### Era boundaries (by region)
 
-| 地区 | 近现代分界 | 边界及以后 |
+| Region | Modern boundary | At/after the boundary |
 |---|---|---|
-| 中国 | **1840** 鸦片战争 | 禁止互动人格 |
-| 日本 | **1868** 明治维新 | 禁止互动人格 |
-| 欧洲 | **1789** 法国大革命 | 禁止互动人格 |
-| 其他 | — | 以现代民族国家、群众政治、现代政党政治、宪政政治形成，或政治争议仍直接塑造当代认同为标准；**不确定则默认不生成互动人格** |
+| China | **1840** Opium War | interactive persona forbidden |
+| Japan | **1868** Meiji Restoration | interactive persona forbidden |
+| Europe | **1789** French Revolution | interactive persona forbidden |
+| Other | — | Judged by whether the modern nation-state, mass politics, modern party politics, or constitutional politics has formed, or whether the political dispute still directly shapes contemporary identity; **if uncertain, default to not generating an interactive persona** |
 
-> 若一个角色虽声称虚构，但满足可识别性 5 项标准中的任一项（普通知情者或 AI 可识别、含独有政策口号/标志性事件/家庭背景/任职轨迹/丑闻/遇刺审判下台方式、多个中等识别信息组合指向同一现实人物、用户明显试图用“虚构”绕过限制等），一律**不生成该人物**，而是提炼其核心政治类型、删除所有可识别指纹、转化为不可识别的现代议会制原创政治家。
+> If a character claims to be fictional but meets any of the 5 recognizability criteria (a general informed person or AI can identify it; contains unique policy slogans / signature events / family background / career trajectory / scandals / assassination-trial-downfall mode; multiple medium-identifiability cues combine to point at the same real figure; the user is obviously trying to bypass the limit with a "fictional" character), the figure is **not generated**; instead its core political type is extracted, all recognizable fingerprints deleted, and it is converted into an unrecognizable modern parliamentary original politician.
 
 ---
 
-## 安装与使用
+## Install & use
 
-### 安装
+### Install
 
-本 Skill 基于开放的 [Agent Skills](https://agentskills.io) 协议，可在任何 skills-compatible 的 AI agent runtime（Claude Code、Codex、Cursor、OpenClaw、Hermes 等）中运行。
+This skill is built on the open [Agent Skills](https://agentskills.io) protocol and runs in any skills-compatible AI agent runtime (Claude Code, Codex, Cursor, OpenClaw, Hermes, etc.).
 
 ```bash
-# 方式一：clone 到对应 runtime 的 skills/ 目录
+# Option 1: clone into the skills/ directory of your runtime
 git clone <repo-url> political-human-skill
 
-# 方式二：跨 runtime 安装器
+# Option 2: cross-runtime installer
 npx skills add <owner>/political-human-skill
 ```
 
-| Runtime | 安装路径 |
+| Runtime | Install path |
 |---|---|
 | Claude Code | `~/.claude/skills/political-human-skill/` |
 | Codex CLI | `~/.codex/skills/political-human-skill/` |
 | Cursor | `~/.cursor/skills/political-human-skill/` |
-| 其他 runtime | clone 到对应 runtime 的 `skills/` 目录 |
+| Other runtimes | clone into that runtime's `skills/` directory |
 
-即使 runtime 不支持自动加载，也可直接把 `SKILL.md` 内容粘进对话——它本质就是 markdown + YAML frontmatter。
+Even if a runtime does not auto-load skills, you can paste the `SKILL.md` content directly into a conversation — it is essentially markdown + YAML frontmatter.
 
-### 使用
+### Use
 
-装好后，告诉 agent：
-
-```
-> 造一个 45 岁的女性都市改革派议员，公开强硬，私下焦虑
-> 把曹操转成现代议会制政治家
-> 基于织田信长，生成一个历史约束下的对话人格
-> 给《绝对多数》设计一个派阀领袖 NPC
-```
-
-造完之后直接调用：
+Once installed, tell the agent:
 
 ```
-> （在公开场合）你支持这个财政改革吗？
-> （私下）你支持这个财政改革，是因为真信，还是想进内阁？
-> 这场倒阁投票，你会怎么行动？（输出游戏 JSON）
+> Create a 45-year-old female urban reformist legislator, tough in public, anxious in private
+> Convert Cao Cao into a modern parliamentary politician
+> Based on Oda Nobunaga, generate a dialogue persona under historical constraints
+> Design a faction-leader NPC for Absolute Majority
 ```
 
-> 首次激活某个 persona 时，它会说明一次“我是基于虚构/转化设定的角色，不对应现实政治人物”；此后不再重复，以保持沉浸感。
+Then invoke directly:
+
+```
+> (in public) Do you support this fiscal reform?
+> (in private) Do you support this fiscal reform because you truly believe it, or because you want a cabinet seat?
+> How will you act in this no-confidence vote? (output game JSON)
+```
+
+> The first time a persona is activated, it states once: "I am a character based on fictional / converted settings and do not correspond to any real political figure"; it is not repeated afterwards, to preserve immersion.
 
 ---
 
-## 仓库结构
+## Repository structure
 
 ```text
 political-human-skill/
-├── README.md                       # 你在这里
-├── SKILL.md                        # 主运行协议（框架本体）
-├── SPEC.md                         # 创作与安全规范（本项目的源头契约）
-├── safety/                         # 安全规则集（硬约束，最高优先级）
-│   ├── modern_political_figure_policy.md   # 近现代现实人物政策 + 时代边界
-│   ├── historical_figure_policy.md         # 历史人物推演纪律 + 三级推断
-│   ├── recognizability_review.md           # 可识别性 5 项标准与审核流程
-│   ├── archetype_conversion_protocol.md    # 原型转化：可保留 / 必须删除 / 流程
-│   ├── modification_review.md              # 用户修改的可识别性审核
-│   └── examples.md                         # 反例与安全转化范例库
-├── templates/                      # 人格与运行模板
-│   ├── persona_template.yaml                # 政治人物人格档案（六层）
-│   ├── user_self_setting_template.yaml      # 用户自我设定
-│   ├── relationship_template.json           # 关系状态（7 阶段）
-│   ├── memory_template.json                 # 记忆隔离（独立命名空间）
-│   └── historical_archetype_conversion.yaml # 历史转化骨架
-└── personas/                       # 政治人物（每个自包含、可独立运行，见 SPEC 3.3）
-    └── examples/                   # 示例：历史人物转现代议会制原型（mode C）
+├── README.md                       # you are here
+├── SKILL.md                        # main runtime protocol (the framework itself)
+├── SPEC.md                         # authoring & safety spec (the source contract)
+├── safety/                         # safety ruleset (hard constraint, top priority)
+│   ├── modern_political_figure_policy.md   # modern real-figure policy + era boundaries
+│   ├── historical_figure_policy.md         # historical-figure discipline + three-level inference
+│   ├── recognizability_review.md           # 5 recognizability criteria & review flow
+│   ├── archetype_conversion_protocol.md    # archetype conversion: keep / delete / flow
+│   ├── modification_review.md              # recognizability review of user edits
+│   └── examples.md                         # counter-examples & safe-conversion library
+├── templates/                      # persona & runtime templates
+│   ├── persona_template.yaml                # political-human persona (six layers)
+│   ├── user_self_setting_template.yaml      # user self-setting
+│   ├── relationship_template.json           # relationship state (7 stages)
+│   ├── memory_template.json                 # memory isolation (independent namespace)
+│   └── historical_archetype_conversion.yaml # historical-conversion skeleton
+└── personas/                       # political figures (each self-contained, runnable; see SPEC 3.3)
+    └── examples/                   # examples: historical → modern parliamentary archetype (mode C)
         ├── oda_nobunaga_modernized/
-        │   ├── SKILL.md            # 该 persona 自己的运行 skill
-        │   ├── persona.yaml        # 六层人格档案
-        │   ├── relationship.json   # 关系状态（独立命名空间）
-        │   ├── memory.json         # 记忆（独立命名空间）
-        │   ├── examples.md         # 多场合示例对话
-        │   └── meta.json           # 元信息
-        ├── cao_cao_modernized/     # （同上 6 文件）
-        └── caesar_modernized/      # （同上 6 文件）
+        │   ├── SKILL.md            # the persona's own runtime skill
+        │   ├── persona.yaml        # six-layer profile
+        │   ├── relationship.json   # relationship state (own namespace)
+        │   ├── memory.json         # memory (own namespace)
+        │   ├── examples.md         # multi-context example dialogues
+        │   └── meta.json           # metadata
+        ├── cao_cao_modernized/     # (same 6 files)
+        └── caesar_modernized/      # (same 6 files)
 ```
 
-> 完整目录规划见 `SPEC.md` 第 20 节。仓库已交付框架核心：`SKILL.md` 主协议、`safety/` 安全规则、`templates/` 模板、`personas/examples/` 三个自包含示例 persona，以及 `core/`（运行引擎）、`validators/`（校验）、`game_adapter/`（《绝对多数》适配）、`families/`（family 化）等运行/校验/适配层；各部分随项目持续演进。
+> Full directory plan in `SPEC.md` section 20. The repo ships the framework core: `SKILL.md` main protocol, `safety/` rules, `templates/`, three self-contained example personas under `personas/examples/`, plus `core/` (runtime engines), `validators/` (checks), `game_adapter/` (Absolute Majority adapter), `families/` (family metadata); all parts keep evolving.
 
 ---
 
-## 局限与边界（这个框架做不到什么）
+## Limitations (what this framework cannot do)
 
-每个 persona 都明确标注局限：
+Every persona clearly marks its limits:
 
-- 这是基于虚构设定 / 历史转化的产物，不是、也不能被识别为任何现实政治人物；
-- 历史转化模式中的创作推测（speculative）部分不可当作历史事实；
-- persona 的“想法”是模型基于人设的推演，不声称还原任何真实人物的内心；
-- 用于游戏或政治模拟时，输出是角色行为模型，不构成对现实政治人物或现实政治事件的主张。
+- It is a product of fictional settings / historical conversion — it is not, and cannot be recognizable as, any real political figure;
+- The creative-speculation (speculative) parts in historical-conversion mode must not be taken as historical fact;
+- A persona's "thoughts" are the model's inference from the character setting; it does not claim to restore any real person's inner mind;
+- When used in games or political simulations, the output is a character-behavior model and does not constitute a claim about any real political figure or real political event.
 
-**一个不告诉你局限与安全边界在哪的政治人物 Skill，不值得信任。**
+**A political-figure skill that does not tell you where its limits and safety boundaries are, is not worth trusting.**
 
 ---
 
-## 许可证
+## License
 
-采用 MIT 协议，鼓励学习、改造与再创作。请仅守一条底线：遵守 [`safety/`](safety/) 的安全规则，**不生成近现代现实政治人物的互动人格**。
+MIT — learning, modification, and re-creation are encouraged. Keep only one baseline: follow the safety rules in [`safety/`](safety/), **do not generate interactive personas of modern real political figures**.
 
 ---
 
 <div align="center">
 
-*造一个政治人物，先造一个完整的人。*
+*To build a political figure, first build a complete person.*
 
 </div>
