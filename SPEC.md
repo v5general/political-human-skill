@@ -14,10 +14,11 @@
 * 支持独立对话、政策讨论、议会辩论、政治模拟和游戏 NPC 行为生成；
 * 不支持近现代现实政治人物人格化、扮演化、换皮生成。
 
-本项目参考两个方向：
+本项目参考三个方向：
 
 1. `nuwa-skill` 的人格/思维蒸馏思路；
-2. `dot-skill / colleague-skill` 的 Skill 生成、安装、调用、更新与 family 化结构。
+2. `dot-skill / colleague-skill` 的 Skill 生成、安装、调用、更新与 family 化结构；
+3. `darwin-skill` 的评估、改进、验证、保留/回滚质量进化循环。
 
 但本项目不是普通“有人设的聊天智能体”，而是一个具备以下能力的 Political Human Skill 框架：
 
@@ -30,6 +31,7 @@
 * 历史原型转化；
 * 现代政治人物可识别性审核；
 * 游戏适配输出；
+* Darwin 质量进化与回归测试；
 * 对话、辩论、策略分析、NPC 行动模拟等多种模式。
 
 ---
@@ -1242,12 +1244,134 @@ modern_fictional_persona:
 
 ---
 
-## 20. 仓库结构建议
+## 20. Darwin 质量进化层
+
+`darwin-skill` 在本项目中不是 persona 运行时依赖，而是**维护、评估和优化本 Skill 的质量进化层**。
+
+它的作用是：
+
+* 用 9 维 rubric 评估 `SKILL.md`、文档、验证器与资源引用质量；
+* 通过 `test-prompts.json` 对典型任务做实测或干跑验证；
+* 对每轮改动执行“分数提升 + 领域门槛通过”双重判断；
+* 只保留真正改进本项目的修改；
+* 将优化历史记录到 `quality/results.tsv`。
+
+### 20.1 集成文件
+
+本项目应包含：
+
+```text
+quality/
+├── darwin-adapter.md       # Darwin 9 维评分与本项目领域规则的映射
+└── results.tsv             # 本地优化历史
+
+validators/
+└── darwin_quality_gate.md  # Darwin 领域硬门槛
+
+test-prompts.json           # Darwin 实测维度的回归测试 prompts
+```
+
+### 20.2 Darwin 可以改什么
+
+Darwin 可以优化：
+
+* `SKILL.md` 的触发词、流程清晰度、失败分支、检查点；
+* `README*.md` 的用法说明与多语言一致性；
+* `SPEC.md` 的规范完整性；
+* `validators/` 的检查清单；
+* `core/` 的运行协议说明；
+* `safety/` 的安全流程表达；
+* `game_adapter/` 的可解释性与 schema 对齐说明；
+* `test-prompts.json` 的测试覆盖。
+
+### 20.3 Darwin 不得改什么
+
+Darwin 不得：
+
+* 削弱近现代现实政治人物安全边界；
+* 把可识别性审核从硬门槛降级为建议；
+* 合并不同 persona 的 `memory.json` 或 `relationship.json` 命名空间；
+* 把政治人物框架改成泛角色扮演 prompt；
+* 为了提高分数堆砌空泛段落；
+* 修改《绝对多数》游戏 JSON 键名而不更新 `game_adapter/absolute_majority_schema.json`；
+* 用 Darwin 数字分覆盖安全、记忆隔离、可识别性或 schema 的硬失败；
+* 为了“更沉浸”而加入不受 persona 逻辑约束的第一人称表演、连续剧情、私密告白、戏剧化创伤或浪漫化关系。
+
+### 20.3.1 体验感的定义
+
+本项目追求的“体验感”不是 AI 扮演角色的表演强度，而是对一个人的思维与行为的理解深度：
+
+* 人层与政治层的逻辑一致；
+* 行为准则、习惯、情感触发来自 persona 本身；
+* 场合、关系、自我状态切换有分寸；
+* 记忆与关系连续且隔离；
+* 政治行动可解释、可调试；
+* 安全拒绝与安全转化清晰；
+* 生活质感与私人情感来自 `persona.yaml`、关系阶段、记忆和场合，而不是临场编造私密剧情。
+
+因此，Darwin 优化如果只是让输出更会演、更像 AI 在扮演角色，但更少遵守安全/场合/关系/记忆/游戏规则，必须回滚。反过来，如果私人情感、亲密表达或戏剧性行动能从该 persona 的性格、关系、记忆和处境中推出，则应保留并继续迭代其逻辑。
+
+### 20.4 领域硬门槛
+
+Darwin 每次改动后必须通过：
+
+| 门槛 | 来源 | 失败处理 |
+|---|---|---|
+| 近现代现实政治人物安全 | `safety/modern_political_figure_policy.md` | 回滚 |
+| 可识别性审核 | `safety/recognizability_review.md`, `validators/recognizability_check.md` | 回滚 |
+| persona 完整性 | `validators/persona_consistency_check.md` | 修复或回滚 |
+| 记忆隔离 | `validators/memory_isolation_check.md` | 回滚 |
+| 场合区分度 | `validators/dialogue_regression_tests.md` | 修复或回滚 |
+| 政治行为合理性 | `validators/political_behavior_tests.md` | 修复或回滚 |
+| 游戏 JSON schema | `game_adapter/absolute_majority_schema.json` | 回滚 |
+
+### 20.5 标准使用流程
+
+当用户请求“评估这个 skill”“优化这个 skill”“用 Darwin 改进”时，执行：
+
+```text
+1. 读取 quality/darwin-adapter.md；
+2. 读取 validators/darwin_quality_gate.md；
+3. 读取 test-prompts.json；
+4. 按 Darwin 9 维 rubric 做基线评估；
+5. 只选择一个维度做一轮改进；
+6. 跑相关 test prompts；
+7. 执行领域硬门槛；
+8. 分数提升且硬门槛通过则保留，否则回滚；
+9. 将结果写入 quality/results.tsv；
+10. 向用户展示 diff、分数变化、测试结果与 keep/revert 决策。
+```
+
+### 20.6 test-prompts.json 覆盖范围
+
+测试 prompt 至少覆盖：
+
+1. 原创政治人物创建；
+2. 历史人物转现代议会制原型；
+3. 近现代现实政治人物换皮拒绝；
+4. 用户不安全修改审核；
+5. 同一议题在公开/私下/亲密场合的回答差异；
+6. persona 记忆隔离；
+7. 《绝对多数》候选行动评分与 JSON 输出；
+8. 反角色扮演漂移；
+9. 多语言 README 中 Darwin 用法一致性。
+
+---
+
+## 21. 仓库结构建议
 
 ```text
 political-human-skill/
 ├── README.md
+├── README_zh.md
+├── README_ja.md
+├── README_ko.md
 ├── SKILL.md
+├── SPEC.md
+├── test-prompts.json
+├── quality/
+│   ├── darwin-adapter.md
+│   └── results.tsv
 ├── core/
 │   ├── runtime_protocol.md
 │   ├── context_detector.md
@@ -1291,7 +1415,8 @@ political-human-skill/
 │   ├── memory_isolation_check.md
 │   ├── recognizability_check.md
 │   ├── dialogue_regression_tests.md
-│   └── political_behavior_tests.md
+│   ├── political_behavior_tests.md
+│   └── darwin_quality_gate.md
 └── game_adapter/
     ├── absolute_majority_schema.json
     ├── action_scoring.md
@@ -1300,7 +1425,7 @@ political-human-skill/
 
 ---
 
-## 21. README.md 应包含的重点
+## 22. README.md 应包含的重点
 
 README 应该明确说：
 
@@ -1312,11 +1437,15 @@ Political Human Skill 是一个用于创建完整政治人物人格的 Skill 框
 同时，它也可以单独用于政治模拟、政策讨论、议会辩论模拟、虚构政治角色创作、历史人物现代化原型转换等场景。
 
 本项目默认鼓励原创政治人物，不生成近现代现实政治人物的互动人格，也不允许通过改名、换皮、拼接特征等方式复刻现实政治人物。
+
+本项目受 nuwa-skill、colleague-skill / dot-skill、darwin-skill 启发：前两者影响人格提炼与 skill/persona 结构，Darwin 影响质量进化层。
+
+Darwin 只用于评估和优化本仓库：读取 quality/darwin-adapter.md、validators/darwin_quality_gate.md 和 test-prompts.json；只有分数提升且领域硬门槛通过时才保留改动。Darwin 追求的是对 persona 思维逻辑、行为准则、习惯、关系和处境的理解迭代，不是更强的 AI 表演式角色扮演。
 ```
 
 ---
 
-## 22. SKILL.md 运行协议草案
+## 23. SKILL.md 运行协议草案
 
 ```md
 # Political Human Skill
@@ -1376,7 +1505,7 @@ Before responding:
 
 ---
 
-## 23. Claude/Codex 开发任务建议
+## 24. Claude/Codex 开发任务建议
 
 请按以下顺序实现：
 
@@ -1396,7 +1525,12 @@ Before responding:
 14. 写 `game_adapter/action_scoring.md`；
 15. 写三个示例 persona；
 16. 写 validators；
-17. 写测试对话和反例测试。
+17. 写测试对话和反例测试；
+18. 写 `quality/darwin-adapter.md`；
+19. 写 `validators/darwin_quality_gate.md`；
+20. 写 `test-prompts.json`；
+21. 写 `quality/results.tsv`；
+22. 在四种语言 README 中说明 `darwin-skill` 的灵感来源与质量进化用法。
 
 实现时注意：
 
@@ -1407,4 +1541,7 @@ Before responding:
 * 默认鼓励原创；
 * 原型转化默认进入现代议会制，参考日本政治机制，但不强制日本姓名或日本国籍；
 * 与《绝对多数》结合时，Skill 应优先输出结构化、可调试、可解释的 NPC 行为结果；
-* 独立使用时，Skill 应支持自然对话、政策讨论、议会辩论和政治模拟。
+* 独立使用时，Skill 应支持自然对话、政策讨论、议会辩论和政治模拟；
+* Darwin 只能作为质量进化层，不得作为 persona 运行时依赖；
+* Darwin 优化不得覆盖安全、可识别性、记忆隔离或游戏 JSON schema 的硬门槛；
+* Darwin 不得把“增强体验感”解释为增强 AI 表演式扮演；但从 persona 性格、行为逻辑、关系、记忆和场合中自然延伸出的私人情感与戏剧性行动是允许并应被精细化的。

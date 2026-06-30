@@ -7,7 +7,7 @@ description: |
   历史记忆、关系亲密度自行调整回答方式。
   三种生成模式：(1) 原创现代议会制政治人物 (2) 古代/远历史人物推演 (3) 历史人物转现代议会制虚构原型。
   触发词：「造一个政治人物」「做个议员」「把织田信长转成现代政治家」「转生为议员」
-  「议会辩论」「政治模拟」「绝对多数 NPC」「政策讨论」「政治策略」。
+  「议会辩论」「政治模拟」「绝对多数 NPC」「政策讨论」「政治策略」「评估这个 skill」「Darwin 优化」。
   安全底线：不生成近现代现实政治人物的互动人格，也不允许改名/换国籍/换党派/拼接特征等方式复刻现实政治人物。
 argument-hint: "[模式] [人物或需求]"
 version: "0.1.0"
@@ -19,7 +19,7 @@ allowed-tools: Read, Write, Edit, Bash, WebSearch
 
 > **Execution Root / 执行根目录**：所有相对路径（`safety/...`、`templates/...`、`personas/...`）均相对于本 `SKILL.md` 所在目录。不要在命令前拼宿主相关路径。
 
-> **本 Skill 不是角色扮演聊天玩具，而是一个政治人物框架**。它参考 [nuwa-skill](https://github.com/alchaincyf/nuwa-skill) 的人格/思维蒸馏思路，以及 [colleague-skill (dot-skill)](https://github.com/titanwings/colleague-skill) 的 Skill 生成、调用、更新与 family 化结构，但服务于一个截然不同的对象：**职业是政治的完整的人**。
+> **本 Skill 不是角色扮演聊天玩具，而是一个政治人物框架**。它参考 [nuwa-skill](https://github.com/alchaincyf/nuwa-skill) 的人格/思维蒸馏思路、[colleague-skill (dot-skill)](https://github.com/titanwings/colleague-skill) 的 Skill 生成/调用/更新/family 化结构，以及 [darwin-skill](https://github.com/alchaincyf/darwin-skill) 的评估/改进/验证/保留或回滚循环。但服务于一个截然不同的对象：**职业是政治的完整的人**。Darwin 只作为本仓库的质量进化层，不作为 persona 运行时依赖。
 
 # Political Human Skill · 政治人物造人术
 
@@ -451,7 +451,40 @@ output_modes:
 
 ---
 
-## 14. 管理操作（继承 colleague）
+## 14. 质量进化层（Darwin）
+
+本项目接入 `darwin-skill` 的可用能力，用于维护和优化本 skill 本身：
+
+- `quality/darwin-adapter.md`：定义 Darwin 9 维评分如何映射到本框架；
+- `validators/darwin_quality_gate.md`：定义本项目的领域硬门槛；
+- `test-prompts.json`：为 Darwin 的实测维度提供回归测试；
+- `quality/results.tsv`：记录本地优化历史。
+
+**使用边界**：
+
+1. Darwin 只能优化本仓库的表达、结构、检查点、失败分支、测试提示词和文档一致性；
+2. Darwin 不得削弱 `safety/` 中的现代现实政治人物边界；
+3. Darwin 不得合并不同 persona 的 memory / relationship 命名空间；
+4. Darwin 不得把本框架改写成泛角色扮演 prompt 或“AI 扮演角色”的表演规则；
+5. Darwin 不得把“增强体验感”解释为无条件 stay in character、用户一推就升级亲密、或为了戏剧效果临场加戏；
+6. Darwin 的数字分数不能覆盖安全、可识别性、记忆隔离、游戏 JSON schema 的硬失败。
+
+本项目所说的“体验感”是对这个人的思维逻辑、行为准则、习惯、情感触发与政治处境的理解迭代。私人情感、亲密表达、创伤反应、戏剧性行动都可以存在，但必须从 persona 的人层/政治层、关系阶段、记忆与当前场合自然推出，而不是让 AI 在表面上“演得更像角色”。
+
+当用户请求“评估这个 skill / 优化这个 skill / 用 Darwin 改进”时：
+
+```text
+1. 先读取 quality/darwin-adapter.md；
+2. 再读取 validators/darwin_quality_gate.md；
+3. 使用 test-prompts.json 作为实测提示词集合；
+4. 检查是否出现角色扮演漂移；
+5. 只在分数提升且所有领域门槛通过时保留改动；
+6. 将结果记录到 quality/results.tsv。
+```
+
+---
+
+## 15. 管理操作（继承 colleague）
 
 ```bash
 # 列出已创建的 persona
@@ -469,7 +502,7 @@ rm -rf personas/{slug}
 
 ---
 
-## 15. 诚实边界（继承 nuwa）
+## 16. 诚实边界（继承 nuwa）
 
 每个 persona 必须在自身 SKILL.md 中写明局限：
 - 这是基于虚构设定 / 历史转化的产物，不是、也不能被识别为任何现实政治人物；

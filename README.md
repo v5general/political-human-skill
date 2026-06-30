@@ -21,7 +21,7 @@ A political figure here is not an opinion simulator or an ordinary character car
 
 <br>
 
-[Why it exists](#why-it-exists) · [Inspiration](#inspiration) · [Three generation modes](#three-generation-modes) · [Persona structure](#persona-structure) · [Safety stance](#safety-stance) · [Install & use](#install--use) · [Repository structure](#repository-structure)
+[Why it exists](#why-it-exists) · [Inspiration](#inspiration) · [Darwin quality loop](#darwin-quality-loop) · [Three generation modes](#three-generation-modes) · [Persona structure](#persona-structure) · [Safety stance](#safety-stance) · [Install & use](#install--use) · [Converted archetypes in action](#converted-archetypes-in-action) · [Repository structure](#repository-structure)
 
 </div>
 
@@ -88,12 +88,40 @@ But this skill **does not serve only Absolute Majority**. It also works standalo
 
 ## Inspiration
 
-This project is inspired by two excellent open-source projects:
+This project is inspired by three excellent open-source projects:
 
 - **[nuwa-skill](https://github.com/alchaincyf/nuwa-skill)** (by [@alchaincyf / 花叔](https://github.com/alchaincyf)) — its method of "distilling a person's thinking framework from public information" inspired this project's **archetype extraction** step: extracting temperament structure from a historical figure, and separating documented evidence / strong inference / creative speculation into three levels.
 - **[colleague-skill · dot-skill](https://github.com/titanwings/colleague-skill)** (by [@titanwings](https://github.com/titanwings)) — its **generate → invoke → update → family** structure inspired this project's self-contained persona directory layout, the intake → generate → preview → write → evolve creation flow, and the layered persona writing style.
+- **[darwin-skill](https://github.com/alchaincyf/darwin-skill)** (by [@alchaincyf / 花叔](https://github.com/alchaincyf)) — its **evaluate → improve → validate → keep/revert** loop inspired this project's quality-evolution layer: a Darwin adapter, domain gates, regression prompts, and result logging for maintaining the skill over time.
 
 But Political Human Skill is an **independent framework** serving a very different object — "a complete person whose profession is politics". Original cores of this project include: the **two-layer (Human + Political) structure and its inner conflicts**, the political-profession dimension (6-axis ideology / support base / action style), the **relationship system** (a user claiming closeness is not automatically trusted), **memory isolation** (independent namespaces between personas), **context detection** and 5 **self-states**, the **recognizability safety boundary for modern real figures**, and the **game-action adapter** for [Absolute Majority](https://github.com/v5general/Absolute_Majority). 
+
+---
+
+## Darwin quality loop
+
+**[darwin-skill](https://github.com/alchaincyf/darwin-skill)** is integrated as a **maintenance and optimization layer**, not as a persona runtime dependency. Use it when you want to evaluate or improve this repository's skill quality.
+
+This repository provides:
+
+- [`quality/darwin-adapter.md`](quality/darwin-adapter.md): how Darwin's 9-dimension rubric maps to Political Human Skill;
+- [`validators/darwin_quality_gate.md`](validators/darwin_quality_gate.md): domain gates that override numeric score when safety, memory isolation, or game JSON fails;
+- [`test-prompts.json`](test-prompts.json): regression prompts for original creation, historical conversion, safety refusal, user modification, dialogue context shift, memory isolation, Absolute Majority JSON, and README consistency;
+- [`quality/results.tsv`](quality/results.tsv): local optimization history.
+
+Typical use:
+
+```text
+Use darwin-skill to evaluate this repository. Read quality/darwin-adapter.md first, then run the prompts in test-prompts.json.
+```
+
+Optimization use:
+
+```text
+Use darwin-skill to improve political-human-skill by one round. Keep changes only if the Darwin score improves and all domain gates pass.
+```
+
+The rule is strict: Darwin may improve wording, structure, checks, and tests, but it must not weaken the safety boundary, merge persona memories, or turn the political-human runtime into a generic roleplay prompt.
 
 ---
 
@@ -208,7 +236,123 @@ Then invoke directly:
 > How will you act in this no-confidence vote? (output game JSON)
 ```
 
-> The first time a persona is activated, it states once: "I am a character based on fictional / converted settings and do not correspond to any real political figure"; it is not repeated afterwards, to preserve immersion.
+> The first time a persona is activated, it states once: "I am a character based on fictional / converted settings and do not correspond to any real political figure"; it is not repeated afterwards, to avoid repetitive disclaimers during normal use.
+
+---
+
+## Converted archetypes in action
+
+> ⚡ **Converted archetypes**: Oda Nobunaga · Cao Cao · Julius Caesar — three historical figures converted via **Mode C** (Historical Figure → Modern Parliamentary Archetype). Below: one political crisis, three completely different responses.
+
+Three historical figures — **Oda Nobunaga** (Sengoku period, 1534–1582), **Cao Cao** (Three Kingdoms, 155–220), **Julius Caesar** (Roman Republic, 100–44 BC) — have been converted into modern parliamentary politicians via Mode C. Below: one crisis, three completely different responses. Every line is driven by the persona's own Human Layer × Political Layer conflict.
+
+---
+
+### Scenario · Parliamentary blockade
+
+> The ruling coalition joins forces with the conservative opposition. Tomorrow they will push three bills through parliament simultaneously, aiming to suffocate your reform agenda in a single stroke. The media has already lined up behind them. Your base is starting to waver.
+>
+> Your chief of staff advises: take one step back, preserve your seat, and live to fight another day.
+>
+> **What do you do?**
+
+---
+
+### Oda Nobunaga — Opposition reformist vanguard · Age 30 · Lower-house member
+
+> **Human Layer**: Extreme agency · zero patience · wild and unorthodox · "if you don't risk dying, you can't win"
+>
+> **Political Layer**: Reformist opposition party · young-voter base · radical minority squeezed by the ruling party and conservatives alike
+>
+> **Core Conflict**: Wants to build a new world without monopolies — yet must use party machinery and parliamentary combat, the very products of the old politics, to do it
+
+<div align="center">
+
+**"Take one step back? One step back is one step into the coffin."**
+
+</div>
+
+**Nobunaga**: Three bills, the media, the conservatives — the fact that they're throwing everything they have at me just proves they're afraid of one man. Listen carefully. Tomorrow I don't defend. I attack. I hit their weakest bill, tear it open, and let the other two collapse on their own. Gamble my life? I've always lived by one rule: retreat guarantees defeat. The only way to flip the board is to push every last chip onto the table.
+
+Tell the reform corps: **follow me, and either we flip this board together, or we die on it together. I don't abandon my own.**
+
+```
+                     No defense ──→ Concentrate fire on the weakest bill
+  Conventional ──┤
+   response        Retreat & compromise ──→ ✗ This option does not exist
+```
+
+> 🧩 **Framework insight**: Nobunaga's response is driven by three layers firing simultaneously — `strategic_self` (cold calculus: use speed to overwhelm procedure), `wounded_self` (being surrounded triggers "risk everything to live" mode), and his deepest inner conflict (fierce loyalty to his followers — the fiercer the loyalty, the more isolated he becomes). His refusal to defend isn't recklessness. He's already priced in the patience cost of the conservative counterattack, and chosen to close the deal before they recover.
+
+---
+
+### Cao Cao — Ruling-coalition faction leader · Age 52
+
+> **Human Layer**: Extreme realism · chronic suspicion · "talent above all" · only in poetry and wine does he ever let his guard down
+>
+> **Political Layer**: Dominant-party faction leader in the ruling coalition · bureaucratic-network base · rebuilder of order
+>
+> **Core Conflict**: Depends on "hire talent wherever you find it" and tolerating heterodox people to keep order running — yet is too suspicious to genuinely trust those same people
+
+<div align="center">
+
+**"Adjustments will be made through proper procedure. No need to amplify rumors into headlines."**
+
+</div>
+
+**Cao Cao**: Three bills pushed simultaneously — this isn't about reform. This is aimed at me. They think a wavering base will make me panic. I don't panic. First, lock down the center: replace key personnel with people who can hold. Then send one signal: the reform package can be tweaked, but control of the legislative calendar does not change hands. What do they want? They want me to make a mistake in the chaos. **I don't make mistakes. Their coalition will crack on its own.**
+
+As for taking a step back — taking a step back isn't preserving a seat. It's telling them the center can be shaken. Not one step. Not half a step.
+
+```
+                     Lock down center first ──→ Signal flexibility ──→ Wait for their coalition to self-crack
+  Crisis ──┤
+   response           Retreat & compromise ──→ ✗ "Retreat tells them the center can be shaken"
+```
+
+> 🧩 **Framework insight**: Cao Cao's answer is a live demonstration of his control matrix — `strategic_self` (secure the power center first, lock it down with personnel and institutions), `public_self`'s calibrated vagueness ("adjustments through proper procedure"), and his core fear driving everything: loss of control and betrayal. He reframes the entire crisis as "someone testing whether the center can be shaken," then eliminates every variable with personnel and process. This isn't defense — it's turning a crisis into a loyalty test.
+
+---
+
+### Gaius Julius Caesar — Populist reform coalition leader · Age 48
+
+> **Human Layer**: Magnetic charisma · iron self-discipline · profound historical consciousness · believes a little too much in personal destiny
+>
+> **Political Layer**: Populist-reform coalition leader · urban working-class and youth base · strongman reformer
+>
+> **Core Conflict**: Must transcend the old elite order — yet needs the old elite to recognize his legitimacy, and the stronger he becomes, the more they fear him
+
+<div align="center">
+
+**"This is not the moment to slow down. This is the moment to raise the stakes until they dare not follow."**
+
+</div>
+
+**Caesar**: Take one step back? Did you hear what you just said? The moment we take one step back, they'll smell blood — and the next move is flipping the entire table. This isn't a policy dispute. This is the old order trying to strangle reform. Three bills? Fine. Let them push them. Tomorrow I don't respond to the bills — I walk out of this chamber, straight to the people. I turn their three bills into a nationally televised debate: **is reform destroying the rules, or are the rules protecting the entrenched?**
+
+Tell the ones who are hesitating: follow me, and you live. Look back, and you get swallowed. I'm putting myself on the line — my name, my standing, everything I've built. Either they get out of the way, or we walk this road to the end.
+
+```
+                     Fight inside parliament ──→ ✗ Don't enter their board
+  Crisis ──┤
+   response           Go to the people ──→ Turn it into a national broadcast ──→ Overwhelm institutional gridlock with popular will
+```
+
+> 🧩 **Framework insight**: Caesar's answer reveals his most distinctive political instinct — `strategic_self` doesn't choose to fight inside parliament; it chooses to **reset the board itself**: walk out, go to the people, turn three bills into a national broadcast. This is exactly the `primary: "bold reset"` action style. Driving this choice: his core fear (the moment he stops, the old order surges back and swallows every reform) and his inner conflict (championing reform and popular will, yet depending increasingly on personal prestige and extra-procedural means). His answer is simultaneously magnificent and dangerous — which is exactly Caesar.
+
+---
+
+### One crisis · Three signatures
+
+| Same crisis | Instinctive move | One-line DNA |
+|---|---|---|
+| **Oda Nobunaga** | Don't defend. Attack. | *"Retreat guarantees defeat. Risk everything to live."* |
+| **Cao Cao** | Lock the center first, signal second | *"I don't make mistakes. Their coalition cracks on its own."* |
+| **Julius Caesar** | Leave the board. Reset the rules. | *"Raise the stakes until they dare not follow."* |
+
+> Same crisis, same framework, three fundamentally different people. This is not prompt engineering — it is **Human Layer × Political Layer × Inner Conflicts**, six layers driving every response simultaneously. In each answer, you can read what they desire, what they fear, where they are weak, and the one thing they are most afraid of.
+>
+> 📂 Full persona files at [`personas/examples/`](personas/examples/): `oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`. Each directory contains 6 self-contained files (SKILL.md / persona.yaml / relationship.json / memory.json / examples.md / meta.json), ready to run.
 
 ---
 
@@ -216,36 +360,95 @@ Then invoke directly:
 
 ```text
 political-human-skill/
-├── README.md                       # you are here
-├── SKILL.md                        # main runtime protocol (the framework itself)
-├── SPEC.md                         # authoring & safety spec (the source contract)
-├── safety/                         # safety ruleset (hard constraint, top priority)
-│   ├── modern_political_figure_policy.md   # modern real-figure policy + era boundaries
-│   ├── historical_figure_policy.md         # historical-figure discipline + three-level inference
-│   ├── recognizability_review.md           # 5 recognizability criteria & review flow
-│   ├── archetype_conversion_protocol.md    # archetype conversion: keep / delete / flow
-│   ├── modification_review.md              # recognizability review of user edits
-│   └── examples.md                         # counter-examples & safe-conversion library
-├── templates/                      # persona & runtime templates
-│   ├── persona_template.yaml                # political-human persona (six layers)
-│   ├── user_self_setting_template.yaml      # user self-setting
-│   ├── relationship_template.json           # relationship state (7 stages)
-│   ├── memory_template.json                 # memory isolation (independent namespace)
-│   └── historical_archetype_conversion.yaml # historical-conversion skeleton
-└── personas/                       # political figures (each self-contained, runnable; see SPEC 3.3)
-    └── examples/                   # examples: historical → modern parliamentary archetype (mode C)
-        ├── oda_nobunaga_modernized/
-        │   ├── SKILL.md            # the persona's own runtime skill
-        │   ├── persona.yaml        # six-layer profile
-        │   ├── relationship.json   # relationship state (own namespace)
-        │   ├── memory.json         # memory (own namespace)
-        │   ├── examples.md         # multi-context example dialogues
-        │   └── meta.json           # metadata
-        ├── cao_cao_modernized/     # (same 6 files)
-        └── caesar_modernized/      # (same 6 files)
+│
+├── README.md                           # you are here (English main README)
+├── README_zh.md                        # 简体中文
+├── README_ja.md                        # 日本語
+├── README_ko.md                        # 한국어
+├── SKILL.md                            # main runtime protocol (the framework itself)
+├── SPEC.md                             # authoring & safety spec (the source contract)
+├── test-prompts.json                   # Darwin regression prompts
+│
+├── quality/                            # Darwin quality-evolution layer
+│   ├── darwin-adapter.md                     # Darwin adapter and workflow mapping
+│   └── results.tsv                           # local optimization history
+│
+├── safety/                             # safety ruleset (hard constraint, top priority)
+│   ├── modern_political_figure_policy.md     # modern real-figure policy + era boundaries
+│   ├── historical_figure_policy.md           # historical-figure discipline + three-level inference
+│   ├── recognizability_review.md             # 5 recognizability criteria & review flow
+│   ├── archetype_conversion_protocol.md      # archetype conversion: keep / delete / flow
+│   ├── modification_review.md                # recognizability review of user edits
+│   └── examples.md                           # counter-examples & safe-conversion library
+│
+├── templates/                          # persona & runtime templates
+│   ├── persona_template.yaml                 # political-human persona (six layers)
+│   ├── user_self_setting_template.yaml       # user self-setting
+│   ├── relationship_template.json            # relationship state (7 stages)
+│   ├── memory_template.json                  # memory isolation (independent namespace)
+│   └── historical_archetype_conversion.yaml  # historical-conversion skeleton
+│
+├── core/                               # runtime engines
+│   ├── runtime_protocol.md                   # runtime protocol
+│   ├── context_detector.md                   # context detector
+│   ├── self_state_selector.md                # self-state selector
+│   ├── relationship_engine.md                # relationship engine
+│   ├── memory_policy.md                      # memory policy
+│   ├── user_self_setting_policy.md           # user self-setting policy
+│   └── safety_boundaries.md                  # safety boundaries (runtime enforcement)
+│
+├── validators/                         # validators
+│   ├── persona_consistency_check.md          # persona consistency check
+│   ├── relationship_consistency_check.md     # relationship consistency check
+│   ├── memory_isolation_check.md             # memory isolation check
+│   ├── recognizability_check.md              # recognizability check
+│   ├── dialogue_regression_tests.md          # dialogue regression tests
+│   ├── political_behavior_tests.md           # political behavior tests
+│   └── darwin_quality_gate.md                # Darwin domain gate
+│
+├── game_adapter/                       # Absolute Majority game adapter
+│   ├── absolute_majority_schema.json         # game-behavior JSON schema
+│   ├── action_scoring.md                     # action scoring engine
+│   └── event_response.md                     # event response protocol
+│
+├── families/                           # family metadata
+│   └── political_human/
+│       ├── family.md                         # family definition
+│       ├── generator.md                      # generator
+│       └── invocation.md                     # invocation spec
+│
+├── review-stage/                       # review state
+│   ├── REVIEW_STATE.json
+│   └── AUTO_REVIEW.md
+│
+└── personas/                           # political figures (each self-contained, runnable)
+    └── examples/                       # ⚡ three converted historical archetypes (Mode C)
+        ├── oda_nobunaga_modernized/          # Oda Nobunaga → opposition reformist vanguard
+        │   ├── SKILL.md                      #   persona's own runtime skill
+        │   ├── persona.yaml                  #   six-layer profile
+        │   ├── relationship.json             #   relationship state (own namespace)
+        │   ├── memory.json                   #   memory (own namespace)
+        │   ├── examples.md                   #   multi-context example dialogues
+        │   └── meta.json                     #   metadata
+        │
+        ├── cao_cao_modernized/               # Cao Cao → ruling-coalition faction leader
+        │   ├── SKILL.md
+        │   ├── persona.yaml
+        │   ├── relationship.json
+        │   ├── memory.json
+        │   ├── examples.md
+        │   └── meta.json
+        │
+        └── caesar_modernized/                # Caesar → populist-reform coalition leader
+            ├── SKILL.md
+            ├── persona.yaml
+            ├── relationship.json
+            ├── memory.json
+            ├── examples.md
+            └── meta.json
 ```
 
-> Full directory plan in `SPEC.md` section 20. The repo ships the framework core: `SKILL.md` main protocol, `safety/` rules, `templates/`, three self-contained example personas under `personas/examples/`, plus `core/` (runtime engines), `validators/` (checks), `game_adapter/` (Absolute Majority adapter), `families/` (family metadata); all parts keep evolving.
+> Full directory plan in `SPEC.md` section 21. The repo ships the framework core: `SKILL.md` main protocol, `safety/` ruleset, `templates/`, `core/` runtime engines, `validators/`, `game_adapter/` (Absolute Majority adapter), `families/` (family metadata), the Darwin quality layer, and three self-contained converted example personas under `personas/examples/` (Oda Nobunaga · Cao Cao · Julius Caesar); all parts keep evolving.
 
 ---
 

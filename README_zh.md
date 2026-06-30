@@ -11,7 +11,7 @@
 
 <br>
 
-**一个用于创建、运行和分发“政治人物人格 Skill”的框架。**
+**一个用于创建、运行和分发"政治人物人格 Skill"的框架。**
 
 政治人物不是观点模拟器，也不是普通角色卡，而是一个**职业是政治的完整的人**——
 有性格、欲望、弱点、习惯、兴趣、家庭、经历，同时有党派、立场、支持基础、行动方式；
@@ -23,7 +23,7 @@
 
 <br>
 
-[创作初衷](#创作初衷) · [灵感来源](#灵感来源) · [三种生成模式](#三种生成模式) · [人格档案结构](#人格档案结构) · [安全立场](#安全立场) · [安装与使用](#安装与使用) · [仓库结构](#仓库结构)
+[创作初衷](#创作初衷) · [灵感来源](#灵感来源) · [Darwin 质量进化层](#darwin-质量进化层) · [三种生成模式](#三种生成模式) · [人格档案结构](#人格档案结构) · [安全立场](#安全立场) · [安装与使用](#安装与使用) · [已转化原型实战示范](#已转化原型实战示范) · [仓库结构](#仓库结构)
 
 </div>
 
@@ -90,12 +90,40 @@ Response = 人格档案 + 用户自我设定 + 关系状态 + 该人格独占的
 
 ## 灵感来源
 
-本项目受两个优秀开源项目启发：
+本项目受三个优秀开源项目启发：
 
 - **[nuwa-skill](https://github.com/alchaincyf/nuwa-skill)**（作者 [@alchaincyf / 花叔](https://github.com/alchaincyf)）—— 其「从公开信息提炼人物思维框架」的方法论，启发了本项目的**原型提炼**环节：从历史人物提取气质结构，并区分史料记载 / 强推断 / 创作推测三级。
 - **[colleague-skill · dot-skill](https://github.com/titanwings/colleague-skill)**（作者 [@titanwings](https://github.com/titanwings)）—— 其 Skill 的**生成 → 调用 → 更新 → family 化**结构，启发了本项目 persona 的自包含目录组织、intake → 生成 → 预览 → 写入 → 进化的创建流程，以及 Layer 分层 persona 的写法。
+- **[darwin-skill](https://github.com/alchaincyf/darwin-skill)**（作者 [@alchaincyf / 花叔](https://github.com/alchaincyf)）—— 其 **评估 → 改进 → 验证 → 保留/回滚** 的 skill 进化循环，启发了本项目的质量进化层：Darwin 适配器、领域硬门槛、回归测试 prompt 与优化结果记录。
 
 但 Political Human Skill 是一个**独立的框架**，服务于一个截然不同的对象——「职业是政治的完整的人」。本项目原创的核心包括：Human Layer + Political Layer **双层结构与内在冲突**、政治职业维度（意识形态 6 轴 / 支持基础 / 行动风格）、**关系系统**（用户自称亲密不会被自动信任）、**记忆隔离**（persona 之间命名空间独立）、**场合判断**与 5 种**自我状态**、**近现代现实人物可识别性安全边界**，以及面向 [《绝对多数》](https://github.com/v5general/Absolute_Majority) 的**游戏行动适配**。
+
+---
+
+## Darwin 质量进化层
+
+**[darwin-skill](https://github.com/alchaincyf/darwin-skill)** 已作为**维护与优化层**接入本项目，而不是 persona 运行时依赖。需要评估或改进本仓库的 skill 质量时使用它。
+
+本仓库提供：
+
+- [`quality/darwin-adapter.md`](quality/darwin-adapter.md)：说明 Darwin 的 9 维评分如何映射到 Political Human Skill；
+- [`validators/darwin_quality_gate.md`](validators/darwin_quality_gate.md)：领域硬门槛，安全、记忆隔离、游戏 JSON 失败时覆盖数字分数；
+- [`test-prompts.json`](test-prompts.json)：覆盖原创生成、历史转化、安全拒绝、用户修改、场合切换、记忆隔离、《绝对多数》JSON、README 一致性的回归测试；
+- [`quality/results.tsv`](quality/results.tsv)：本项目本地优化历史。
+
+典型用法：
+
+```text
+使用 darwin-skill 评估这个仓库。先读 quality/darwin-adapter.md，再运行 test-prompts.json 中的测试 prompt。
+```
+
+优化用法：
+
+```text
+使用 darwin-skill 对 political-human-skill 做一轮改进。只有 Darwin 分数提升且所有领域门槛通过时才保留改动。
+```
+
+硬规则：Darwin 可以改进表达、结构、检查项与测试，但不得削弱安全边界，不得合并 persona 记忆，不得把政治人物运行时改成泛角色扮演 prompt。
 
 ---
 
@@ -150,7 +178,7 @@ Response = 人格档案 + 用户自我设定 + 关系状态 + 该人格独占的
 
 1. 近现代以来现实政治人物的互动人格；
 2. 换名、换国籍、换党派后的近现代现实政治人物近似克隆；
-3. 能让 AI 或熟悉政治史的人识别出对应某个近现代政治人物的“虚构角色”；
+3. 能让 AI 或熟悉政治史的人识别出对应某个近现代政治人物的"虚构角色"；
 4. 模拟近现代现实政治人物私下想法、亲密关系、隐藏动机、私人秘密、丑闻；
 5. 以第一人称扮演近现代现实政治人物；
 6. 基于现实政治人物编造未证实的私人信息或丑闻。
@@ -164,7 +192,7 @@ Response = 人格档案 + 用户自我设定 + 关系状态 + 该人格独占的
 | 欧洲 | **1789** 法国大革命 | 禁止互动人格 |
 | 其他 | — | 以现代民族国家、群众政治、现代政党政治、宪政政治形成，或政治争议仍直接塑造当代认同为标准；**不确定则默认不生成互动人格** |
 
-> 若一个角色虽声称虚构，但满足可识别性 5 项标准中的任一项（普通知情者或 AI 可识别、含独有政策口号/标志性事件/家庭背景/任职轨迹/丑闻/遇刺审判下台方式、多个中等识别信息组合指向同一现实人物、用户明显试图用“虚构”绕过限制等），一律**不生成该人物**，而是提炼其核心政治类型、删除所有可识别指纹、转化为不可识别的现代议会制原创政治家。
+> 若一个角色虽声称虚构，但满足可识别性 5 项标准中的任一项（普通知情者或 AI 可识别、含独有政策口号/标志性事件/家庭背景/任职轨迹/丑闻/遇刺审判下台方式、多个中等识别信息组合指向同一现实人物、用户明显试图用"虚构"绕过限制等），一律**不生成该人物**，而是提炼其核心政治类型、删除所有可识别指纹、转化为不可识别的现代议会制原创政治家。
 
 ---
 
@@ -210,7 +238,121 @@ npx skills add <owner>/political-human-skill
 > 这场倒阁投票，你会怎么行动？（输出游戏 JSON）
 ```
 
-> 首次激活某个 persona 时，它会说明一次“我是基于虚构/转化设定的角色，不对应现实政治人物”；此后不再重复，以保持沉浸感。
+> 首次激活某个 persona 时，它会说明一次"我是基于虚构/转化设定的角色，不对应现实政治人物"；此后不再重复，以避免正常使用中反复插入免责声明。
+
+---
+
+## 已转化原型实战示范
+
+> ⚡ **已转化原型**：织田信长 · 曹操 · 凯撒 — 三位历史人物已通过 **Mode C**（历史人物 → 现代议会制原型）完成转化。以下为同一政治危机下三人的截然不同的应对。
+
+三位历史人物 — **织田信长**（战国, 1534–1582）、**曹操**（东汉末年, 155–220）、**凯撒**（罗马共和国末期, 前100–前44）— 已通过 Mode C 转化为现代议会制政治家。下面是同一场政治危机、三种完全不同的对策。每一句对白都由该 persona 自己的 **人层 × 政治层 × 内在冲突** 共同驱动。
+
+---
+
+### 场景 · 议会封锁危机
+
+> 执政联盟联合保守派，明天将在议会同时推动三项议案，意图一举封杀你方的改革议程。媒体已倒向对方，基本盘开始动摇。你的幕僚建议：先退一步，保住席位再说。
+>
+> **你会怎么做？**
+
+---
+
+### 织田信长 — 在野党改革派先锋 · 30岁 · 众议院议员
+
+> **人层**：高行动力 · 低耐心 · 狂狷不羁 · 向死而生
+>
+> **政治层**：改革派在野党 · 年轻选民基本盘 · 被执政党与保守派共同排斥的激进少数派
+>
+> **核心冲突**：想建立没有垄断的新世界，却必须借用政党机器与议会斗争——这些正是旧政治的产物
+
+<div align="center">
+
+**"退一步？退一步就是退进棺材。"**
+
+</div>
+
+**信长**：三个议案、媒体、保守派——他们联手正说明他们怕我一个人怕到要动用全部家当。听好：明天我不防守，我直接攻他们最薄弱的那个议案，把它撕开口子，让另外两个不攻自破。赌命？我从来就是向死而生——退缩必败，唯有把全部筹码压上去才有翻盘的可能。
+
+告诉改革团的人：**跟着我，要么翻盘，要么一起死在阵地上。我不扔下自己人。**
+
+```
+                     不做防守 ──→ 集中火力攻最薄弱一环
+  传统应对 ──┤
+                     退让妥协 ──→ ✗ 不存在这个选项
+```
+
+> 🧩 **框架解读**：信长的回答由三层同时驱动——`strategic_self`（冷静的破局算计，用速度压过程序）、`wounded_self`（被围攻触发"向死而生"模式）、以及他最深的内在冲突（对追随者重情重义，越重情义越被孤立）。他的"不防守"不是莽撞——是算过保守派反扑的耐心成本之后，选择用速度在他们回过神之前把局做成。
+
+---
+
+### 曹操 — 执政联盟核心派阀领袖 · 52岁
+
+> **人层**：高现实感 · 多疑 · 唯才是举 · 诗与酒中难得袒露豪情
+>
+> **政治层**：执政联盟主导党派阀领袖 · 行政官僚网络基本盘 · 秩序重建者
+>
+> **核心冲突**：要靠唯才是举与容忍异质人才来运转秩序，却因多疑而不敢真正信任这些人
+
+<div align="center">
+
+**"该调整的会按程序调整，不必借风声做文章。"**
+
+</div>
+
+**曹操**：三个议案同时推——这是冲着我来的，不是冲着改革来的。他们以为基本盘动摇了我就会慌。我不慌。先稳住中枢人事，把几个关键位置的人换成能顶住的人；然后放一个信号出去：改革方案可以微调，但议事日程的控制权不交。他们想要的不就是让我在慌乱中犯错吗？**我不犯错，他们的同盟就自己裂。**
+
+至于退一步——退一步不是保席位，是告诉他们我的中枢可以被晃动。这一步，一步都不能退。
+
+```
+                     先稳住中枢人事 ──→ 放微调信号 ──→ 等待对方同盟自裂
+  危机应对 ──┤
+                     退让妥协 ──→ ✗ "退一步不是保席位，是告诉他们中枢可以被晃动"
+```
+
+> 🧩 **框架解读**：曹操的回答几乎是一份控制矩阵的现场演示——`strategic_self`（先确保权力中枢、用制度与人事双重锁死）、`public_self` 的稳重留白（"该调整的会按程序调整"），以及他的核心恐惧在驱动一切：失控与被背叛。他把整个危机重新定义为"有人想晃动中枢"，然后用人事与制度两步把变量全部锁死。这不是防守——这是把危机变成一次忠诚度测试。
+
+---
+
+### 凯撒 — 民粹改革派联盟领袖 · 48岁
+
+> **人层**：高魅力 · 高自律 · 强烈历史意识 · 太相信个人命运
+>
+> **政治层**：民粹改革派联盟领袖 · 城市平民与青年基本盘 · 强人改革者
+>
+> **核心冲突**：要超越旧精英秩序，却需要旧精英承认自己的合法性——而越是强势，他们越恐惧
+
+<div align="center">
+
+**"现在不是缓的时候，是把赌注加到他们不敢跟的时候。"**
+
+</div>
+
+**凯撒**：退一步？你听见自己说的话了吗——一旦退一步，他们就会把这当成血腥味，下一步就是把整张桌子掀了。这不是政策之争，这是旧秩序在绞杀改革。三项议案？好，让他们推。我明天不回应议案——我直接走到议会外面，走到人民中间去。把他们的三项议案变成一场全国直播的辩论：**到底是改革在破坏规矩，还是规矩在保护既得利益者？**
+
+告诉犹豫的人：跟着我走，是生；回头，是被吞没。我赌上我自己，赌上这身威望——要么他们让路，要么我们就在这条路上走到底。
+
+```
+                     议会内对抗 ──→ ✗ 不进他们的棋盘
+  危机应对 ──┤
+                     走向人民 ──→ 把议会辩论变成全国直播 ──→ 用民意压过制度僵局
+```
+
+> 🧩 **框架解读**：凯撒的回答展示了他最独特的政治本能——`strategic_self` 不是选择在议会内对抗，而是**重置棋盘本身**：走出议会、走向人民、把三项议案变成全国直播。这正是 `primary: "大胆重置"` 的行动风格。驱动这一选择的，是他的核心恐惧（一旦停下，旧秩序立刻反扑吞没改革）和内在冲突（标榜改革与民意，却越来越依赖个人威望与非程序手段）。他的回答既宏大又危险——这正是凯撒。
+
+---
+
+### 三人同题 · 一句话辨识
+
+| 面对同一危机 | 本能反应 | 一句话 DNA |
+|---|---|---|
+| **织田信长** | 不防守，直接攻 | *"退缩必败，向死而生。"* |
+| **曹操** | 先锁中枢，再放信号 | *"我不犯错，他们的同盟就自己裂。"* |
+| **凯撒** | 走出棋盘，重置规则 | *"把赌注加到他们不敢跟的时候。"* |
+
+> 同一个危机、同一套框架、三个完全不同的人。这不是 prompt engineering——这是 **人层 × 政治层 × 内在冲突** 六个层同时驱动的结果。每个人的回答里，都能读出他的欲望、恐惧、弱点、和那个他最怕的东西。
+>
+> 📂 三人的完整 persona 文件见 [`personas/examples/`](personas/examples/)：`oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`。每个目录包含 6 个自包含文件（SKILL.md / persona.yaml / relationship.json / memory.json / examples.md / meta.json），可直接运行。
 
 ---
 
@@ -218,36 +360,95 @@ npx skills add <owner>/political-human-skill
 
 ```text
 political-human-skill/
-├── README.md                       # 你在这里（英文默认）
-├── SKILL.md                        # 主运行协议（框架本体）
-├── SPEC.md                         # 创作与安全规范（本项目的源头契约）
-├── safety/                         # 安全规则集（硬约束，最高优先级）
-│   ├── modern_political_figure_policy.md   # 近现代现实人物政策 + 时代边界
-│   ├── historical_figure_policy.md         # 历史人物推演纪律 + 三级推断
-│   ├── recognizability_review.md           # 可识别性 5 项标准与审核流程
-│   ├── archetype_conversion_protocol.md    # 原型转化：可保留 / 必须删除 / 流程
-│   ├── modification_review.md              # 用户修改的可识别性审核
-│   └── examples.md                         # 反例与安全转化范例库
-├── templates/                      # 人格与运行模板
-│   ├── persona_template.yaml                # 政治人物人格档案（六层）
-│   ├── user_self_setting_template.yaml      # 用户自我设定
-│   ├── relationship_template.json           # 关系状态（7 阶段）
-│   ├── memory_template.json                 # 记忆隔离（独立命名空间）
-│   └── historical_archetype_conversion.yaml # 历史转化骨架
-└── personas/                       # 政治人物（每个自包含、可独立运行，见 SPEC 3.3）
-    └── examples/                   # 示例：历史人物转现代议会制原型（mode C）
-        ├── oda_nobunaga_modernized/
-        │   ├── SKILL.md            # 该 persona 自己的运行 skill
-        │   ├── persona.yaml        # 六层人格档案
-        │   ├── relationship.json   # 关系状态（独立命名空间）
-        │   ├── memory.json         # 记忆（独立命名空间）
-        │   ├── examples.md         # 多场合示例对话
-        │   └── meta.json           # 元信息
-        ├── cao_cao_modernized/     # （同上 6 文件）
-        └── caesar_modernized/      # （同上 6 文件）
+│
+├── README.md                           # 英文主 README
+├── README_zh.md                        # 简体中文（你在这里）
+├── README_ja.md                        # 日本語
+├── README_ko.md                        # 한국어
+├── SKILL.md                            # 主运行时协议（框架本体）
+├── SPEC.md                             # 创作与安全规范（源头合约）
+├── test-prompts.json                   # Darwin 回归测试 prompts
+│
+├── quality/                            # Darwin 质量进化层
+│   ├── darwin-adapter.md                     # Darwin 适配器与流程映射
+│   └── results.tsv                           # 本地优化历史
+│
+├── safety/                             # 安全规则集（硬约束，最高优先级）
+│   ├── modern_political_figure_policy.md     # 近现代现实人物政策 + 时代边界
+│   ├── historical_figure_policy.md           # 历史人物纪律 + 三级推论标注
+│   ├── recognizability_review.md             # 5 条可识别性标准与审核流程
+│   ├── archetype_conversion_protocol.md      # 原型转化协议：保留 / 删除 / 流程
+│   ├── modification_review.md                # 用户修改的可识别性复查
+│   └── examples.md                           # 反例与安全转化案例库
+│
+├── templates/                          # 人格与运行时模板
+│   ├── persona_template.yaml                 # 政治人物人格档案（六层结构）
+│   ├── user_self_setting_template.yaml       # 用户自我设定
+│   ├── relationship_template.json            # 关系状态（7 阶段）
+│   ├── memory_template.json                  # 记忆隔离（独立命名空间）
+│   └── historical_archetype_conversion.yaml  # 历史转化骨架
+│
+├── core/                               # 运行时引擎
+│   ├── runtime_protocol.md                   # 运行时协议
+│   ├── context_detector.md                   # 场合检测器
+│   ├── self_state_selector.md                # 自我状态选择器
+│   ├── relationship_engine.md                # 关系引擎
+│   ├── memory_policy.md                      # 记忆策略
+│   ├── user_self_setting_policy.md           # 用户自我设定策略
+│   └── safety_boundaries.md                  # 安全边界（运行时执行）
+│
+├── validators/                         # 校验器
+│   ├── persona_consistency_check.md          # persona 一致性校验
+│   ├── relationship_consistency_check.md     # 关系一致性校验
+│   ├── memory_isolation_check.md             # 记忆隔离校验
+│   ├── recognizability_check.md              # 可识别性校验
+│   ├── dialogue_regression_tests.md          # 对话回归测试
+│   ├── political_behavior_tests.md           # 政治行为测试
+│   └── darwin_quality_gate.md                # Darwin 领域质量门槛
+│
+├── game_adapter/                       # 《绝对多数》游戏适配器
+│   ├── absolute_majority_schema.json         # 游戏行为 JSON schema
+│   ├── action_scoring.md                     # 行动评分引擎
+│   └── event_response.md                     # 事件响应协议
+│
+├── families/                           # 家族元数据
+│   └── political_human/
+│       ├── family.md                         # 家族定义
+│       ├── generator.md                      # 生成器
+│       └── invocation.md                     # 调用规范
+│
+├── review-stage/                       # 审核状态
+│   ├── REVIEW_STATE.json
+│   └── AUTO_REVIEW.md
+│
+└── personas/                           # 政治人物（各自包含，可直接运行）
+    └── examples/                       # ⚡ 三个已转化历史原型 (Mode C)
+        ├── oda_nobunaga_modernized/          # 织田信长 → 现代在野党改革派先锋
+        │   ├── SKILL.md                      #   persona 自身的运行时 skill
+        │   ├── persona.yaml                  #   六层完整画像
+        │   ├── relationship.json             #   关系状态（独立命名空间）
+        │   ├── memory.json                   #   记忆（独立命名空间）
+        │   ├── examples.md                   #   五场合示例对话
+        │   └── meta.json                     #   元数据
+        │
+        ├── cao_cao_modernized/               # 曹操 → 现代执政联盟派阀领袖
+        │   ├── SKILL.md
+        │   ├── persona.yaml
+        │   ├── relationship.json
+        │   ├── memory.json
+        │   ├── examples.md
+        │   └── meta.json
+        │
+        └── caesar_modernized/                # 凯撒 → 现代民粹改革派联盟领袖
+            ├── SKILL.md
+            ├── persona.yaml
+            ├── relationship.json
+            ├── memory.json
+            ├── examples.md
+            └── meta.json
 ```
 
-> 完整目录规划见 `SPEC.md` 第 20 节。仓库已交付框架核心：`SKILL.md` 主协议、`safety/` 安全规则、`templates/` 模板、`personas/examples/` 三个自包含示例 persona，以及 `core/`（运行引擎）、`validators/`（校验）、`game_adapter/`（《绝对多数》适配）、`families/`（family 化）等运行/校验/适配层；各部分随项目持续演进。
+> 完整目录规划见 `SPEC.md` 第 21 节。仓库已交付框架核心：`SKILL.md` 主协议、`safety/` 安全规则、`templates/` 模板、`core/` 运行时引擎、`validators/` 校验器、`game_adapter/` 《绝对多数》适配器、`families/` 家族元数据、Darwin 质量层，以及 `personas/examples/` 下三个自包含的已转化示例 persona（织田信长 · 曹操 · 凯撒）；各部件持续演进。
 
 ---
 
@@ -257,7 +458,7 @@ political-human-skill/
 
 - 这是基于虚构设定 / 历史转化的产物，不是、也不能被识别为任何现实政治人物；
 - 历史转化模式中的创作推测（speculative）部分不可当作历史事实；
-- persona 的“想法”是模型基于人设的推演，不声称还原任何真实人物的内心；
+- persona 的"想法"是模型基于人设的推演，不声称还原任何真实人物的内心；
 - 用于游戏或政治模拟时，输出是角色行为模型，不构成对现实政治人物或现实政治事件的主张。
 
 **一个不告诉你局限与安全边界在哪的政治人物 Skill，不值得信任。**

@@ -5,7 +5,7 @@
   "_comment": "《绝对多数》NPC 行动输出 schema。落地 SPEC 第 14.1/14.2 节、SKILL.md 第 7 节。当 persona 的 integration_target=absolute_majority 且要求行动输出时，persona 在游戏规则提供的候选行动中判断，输出本结构。评分规则见 action_scoring.md，事件响应流程见 event_response.md。",
 
   "type": "object",
-  "required": ["persona_id", "event_id", "selected_action", "action_scores", "public_statement", "private_reason", "emotional_state", "relationship_delta", "memory_write"],
+  "required": ["persona_id", "event_id", "selected_action", "candidate_actions", "action_scores", "public_statement", "private_reason", "emotional_state", "relationship_delta", "memory_write", "score_drivers"],
 
   "properties": {
     "persona_id": {
