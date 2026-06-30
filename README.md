@@ -230,17 +230,20 @@ political-human-skill/
 │   ├── relationship_template.json           # 关系状态（7 阶段）
 │   ├── memory_template.json                 # 记忆隔离（独立命名空间）
 │   └── historical_archetype_conversion.yaml # 历史转化骨架
-└── personas/                       # 已创建的政治人物（每个自包含、可独立运行）
-    └── {slug}/
-        ├── SKILL.md            # 该 persona 自己的运行 skill
-        ├── persona.yaml
-        ├── relationship.json
-        ├── memory.json
-        ├── examples.md
-        └── meta.json
+└── personas/                       # 政治人物（每个自包含、可独立运行，见 SPEC 3.3）
+    └── examples/                   # 示例：历史人物转现代议会制原型（mode C）
+        ├── oda_nobunaga_modernized/
+        │   ├── SKILL.md            # 该 persona 自己的运行 skill
+        │   ├── persona.yaml        # 六层人格档案
+        │   ├── relationship.json   # 关系状态（独立命名空间）
+        │   ├── memory.json         # 记忆（独立命名空间）
+        │   ├── examples.md         # 多场合示例对话
+        │   └── meta.json           # 元信息
+        ├── cao_cao_modernized/     # （同上 6 文件）
+        └── caesar_modernized/      # （同上 6 文件）
 ```
 
-> 完整目录规划见 `SPEC.md` 第 20 节。本仓库当前为初始版本，交付框架的核心契约层（`SKILL.md` + `safety/` + `templates/`），`core/`（运行协议拆分）、`validators/`（一致性/可识别性/对话回归测试）、`game_adapter/`（《绝对多数》schema 与评分）、`families/`（family 化元信息）等其余部分随项目演进持续补全。
+> 完整目录规划见 `SPEC.md` 第 20 节。仓库已交付框架核心：`SKILL.md` 主协议、`safety/` 安全规则、`templates/` 模板、`personas/examples/` 三个自包含示例 persona，以及 `core/`（运行引擎）、`validators/`（校验）、`game_adapter/`（《绝对多数》适配）、`families/`（family 化）等运行/校验/适配层；各部分随项目持续演进。
 
 ---
 
