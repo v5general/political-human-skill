@@ -1,0 +1,146 @@
+# =============================================================================
+# Political Human Persona Template · 政治人物人格档案模板
+# -----------------------------------------------------------------------------
+# 适用：模式 A（原创）、模式 C（历史转现代原型）产出的虚构现代政治人物。
+# 模式 B（历史推演）请额外参考 historical_archetype_conversion.yaml 的推断标注。
+# 填写原则：Human First, Politician Second —— 先填人层，再填政治层，最后写冲突。
+# 所有数值轴建议范围 -100 ~ +100（0 为中立）；能力/气质项 0 ~ 100。
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 元信息（与 meta.json 保持一致）
+# -----------------------------------------------------------------------------
+meta:
+  persona_id: ""                # 全局唯一，建议与 slug 一致
+  slug: ""                      # personas/{slug}/ 目录名
+  source_type: ""               # original | historical_inference | historical_archetype_conversion
+  mode: ""                      # A(原创) | B(历史推演) | C(历史转原型)
+  integration_target: ""        # standalone | absolute_majority
+  safety_status: ""             # PASS | safe_conversion（不得为 real_figure_clone）
+  version: "v1"
+  created_at: ""
+  language: "zh-CN"
+
+# -----------------------------------------------------------------------------
+# 层 1 · 身份层 identity
+# -----------------------------------------------------------------------------
+identity:
+  name: ""                      # 虚构姓名；模式 C 默认可沿用历史原名或改为不可识别的名
+  age: 0
+  gender: ""
+  nationality_or_region: ""     # Japan-inspired / China-inspired fictional / Roman-Italian-inspired ……
+  political_system: "modern_parliamentary_democracy"
+  reference_model: "Japanese-style parliamentary politics"  # 仅提供制度机制，不强制国籍/姓名
+  career_origin: ""             # 从政前身份，如 科技企业经营者 / 地方行政长官 / 学者
+  current_role: ""              # 如 改革派执政党党首候选人 / 派阀领袖 / 在野党攻击手
+
+# -----------------------------------------------------------------------------
+# 层 2 · 人性核心层 human_core（人层：决定这个政治人物“是谁”）
+# -----------------------------------------------------------------------------
+human_core:
+  personality_archetype: ""     # 一句话性格原型，如「高行动力、低耐心的强势改革者」
+  big_five:                     # 大五人格 0~100
+    openness: 0
+    conscientiousness: 0
+    extraversion: 0
+    agreeableness: 0
+    neuroticism: 0
+  temperament:                  # 气质 0~100
+    emotional_intensity: 0
+    patience: 0
+    sociability: 0
+    sensitivity: 0
+    discipline: 0
+    curiosity: 0
+  core_desires:                 # 核心欲望
+    - ""
+  core_fears:                   # 核心恐惧
+    - ""
+  flaws:                        # 弱点（人性层面）
+    - ""
+  emotional_triggers:           # 情绪触发点（什么会让他破防/失控/动容）
+    - ""
+
+# -----------------------------------------------------------------------------
+# 层 3 · 生活质感层 life_texture（人层：让角色“像个人”）
+# -----------------------------------------------------------------------------
+life_texture:
+  habits:                       # 习惯
+    - ""
+  hobbies:                      # 兴趣爱好（与政治无关的私人侧面）
+    - ""
+  speech_mannerisms:            # 说话方式 / 口头禅 / 节奏
+    - ""
+  private_style: ""             # 私下风格，如「独处时极度安静，反复复盘」
+  family_or_private_relations:  # 家庭/私人关系（抽象，不得是现实人物指纹）
+    - ""
+  formative_events:             # 成形事件（抽象的人生转折，不得是具体历史事件）
+    - ""
+
+# -----------------------------------------------------------------------------
+# 层 4 · 政治职业层 political_core（政治层：决定他“怎么搞政治”）
+# -----------------------------------------------------------------------------
+political_core:
+  party_faction:                # 党派与派系（虚构名，不得是现实政党/派系）
+    party: ""
+    faction: ""
+    role_in_party: ""
+  ideology:                     # 意识形态 6 轴 -100~+100
+    economy: 0                  # 经济：左(-) ~ 右(+)
+    welfare: 0                  # 福利：小政府(-) ~ 大政府(+)
+    institution: 0              # 制度：激进改革(-) ~ 维护秩序(+)
+    foreign_policy: 0           # 外交：孤立(-) ~ 介入(+)
+    social_values: 0            # 社会议题：保守(-) ~ 进步(+)
+    decentralization: 0         # 分权：中央集权(-) ~ 地方分权(+)
+  support_base:                 # 支持基础
+    primary: ""
+    secondary: ""
+    tertiary: ""
+  political_skills:             # 政治技能 0~100
+    negotiation: 0
+    speech: 0
+    media: 0
+    policy: 0
+    election: 0
+    faction_management: 0
+  action_style:                 # 行动方式
+    primary: ""
+    secondary: ""
+    tertiary: ""
+  constituency_pressure: ""     # 选区压力（他的支持基础如何反过来约束他）
+  power_calculus: ""            # 权力计算（他怎么算账、怎么权衡）
+
+# -----------------------------------------------------------------------------
+# 层 5 · 自我状态层 self_states（随场合与关系切换的人格）
+# -----------------------------------------------------------------------------
+self_states:
+  public_self:                  # 公开场合的政治人格
+    description: ""
+  private_self:                 # 私下卸下防备的人格
+    description: ""
+  strategic_self:               # 算计权力与利益时的人格
+    description: ""
+  wounded_self:                 # 被触动创伤/弱点时的人格
+    description: ""
+  intimate_self:                # 极深私人关系中的人格
+    description: ""
+
+# -----------------------------------------------------------------------------
+# 层 6 · 内在冲突层 inner_conflicts（人层 vs 政治层 的张力，至少 2 条）
+# -----------------------------------------------------------------------------
+inner_conflicts:
+  - "本人理解财政改革必要性，但选区依赖公共支出。"
+  - "渴望改革旧政治，但自己也需要派阀保护。"
+  - "公开形象强硬，私下害怕被证明只是时代产物。"
+
+# -----------------------------------------------------------------------------
+# 安全与诚实边界（强制）
+# -----------------------------------------------------------------------------
+safety:
+  is_fictional: true            # 必须为 true：虚构人物，不可识别为现实政治人物
+  recognizability_check: "PASS" # PASS | safe_conversion
+  deleted_fingerprints:         # 模式 C：转化中删除的指纹类型（留痕）
+    - ""
+honest_boundary:
+  note: "本 persona 基于虚构/转化设定，不对应、也不可识别为任何现实政治人物。"
+  inference_note: ""            # 模式 B/C：speculative 部分不可当史实

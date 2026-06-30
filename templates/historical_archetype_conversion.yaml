@@ -1,0 +1,117 @@
+# =============================================================================
+# Historical Archetype Conversion Template · 历史人物转现代议会制原型骨架
+# -----------------------------------------------------------------------------
+# 适用：模式 B（历史推演）与模式 C（历史转现代原型）。
+# 落地 SPEC 第 5.3 / 15 / 16 节，字段约定见 safety/archetype_conversion_protocol.md 第 6 节。
+#
+# 流程（safety/archetype_conversion_protocol.md 第 7 节 10 步）：
+#   判断历史范围 → 检索可靠资料 → 三级区分 → 提炼人格结构 → 提炼欲望/恐惧/弱点
+#   → 提炼行为/领导/人际模式 → 删除历史事件与指纹 → 现代化 → 可识别性审核 → 输出
+#
+# ⚠️ 重要：本文件中的示例气质方向（激进改革型 / 现实主义秩序型 / 民粹魅力型）
+#    只用于说明格式与方向。若用户选择的任务与本仓库示例同名（如织田信长/曹操/凯撒），
+#    不得直接套用示例数值，必须基于当前资料与用户要求重新推算。
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 原型信息 source_archetype
+# -----------------------------------------------------------------------------
+source_archetype:
+  name: ""                      # 原型名；模式 C 默认沿用原名，可改
+  era: ""                       # 原型时代，如 日本战国 / 东汉末年 / 罗马共和国末期
+  region: ""                    # 地区，须在近现代分界之前（见 modern_political_figure_policy.md）
+  mode: "historical_archetype_conversion"   # 或 historical_inference（模式 B）
+  reliability_note: ""           # 可靠性说明：须区分史书 / 文学演义 / 后世评价
+
+# -----------------------------------------------------------------------------
+# 提炼的人格结构 extracted_human_pattern（safety 可保留清单的结构化）
+# -----------------------------------------------------------------------------
+extracted_human_pattern:
+  temperament:                  # 气质
+    - ""
+  desires:                      # 欲望结构
+    - ""
+  fears:                        # 恐惧（含私下恐惧类型）
+    - ""
+  flaws:                        # 弱点
+    - ""
+  relationship_pattern:         # 人际模式：用人 / 对敌 / 对盟友
+    - ""
+  leadership_style: ""          # 领导风格
+  crisis_behavior:              # 危机反应
+    - ""
+  organization_view: ""         # 组织观
+  power_view: ""                # 权力观
+  self_narrative: ""            # 自我叙事
+  speech_rhythm: ""             # 说话节奏
+  emotional_triggers:           # 情绪触发点
+    - ""
+
+# -----------------------------------------------------------------------------
+# 三级推断标注 inference_level（safety/historical_figure_policy.md 第 2 节）
+# -----------------------------------------------------------------------------
+inference_level:
+  documented:                   # 史料直接记载或本人文书明确表达
+    - ""
+  strongly_inferred:            # 多个可靠事实支持的合理推断
+    - ""
+  speculative:                  # 创作推演，不可当作历史事实
+    - ""
+
+# -----------------------------------------------------------------------------
+# 转化后的虚构现代政治人物 modern_fictional_persona
+# （必须删除具体历史事件与可识别指纹，见 archetype_conversion_protocol.md 第 3 节）
+# -----------------------------------------------------------------------------
+modern_fictional_persona:
+  name: ""                      # 默认沿用原名；可改为不可识别的名
+  age: 0
+  nationality_or_region: ""     # Japan-inspired / China-inspired fictional / Roman-Italian-inspired ……
+  political_system: "modern_parliamentary_democracy"
+  reference_model: "Japanese-style parliamentary politics"
+  role: ""                      # 如 改革派执政党党首候选人 / 执政联盟核心派阀领袖
+  career_origin: ""             # 从政前身份
+  public_image: ""              # 公开形象
+
+  party_faction:                # 虚构党派与派系（不得是现实政党/派系）
+    party: ""
+    faction: ""
+    role_in_party: ""
+
+  ideology:                     # 意识形态 6 轴 -100~+100
+    economy: 0
+    welfare: 0
+    institution: 0
+    foreign_policy: 0
+    social_values: 0
+    decentralization: 0
+
+  support_base:
+    primary: ""
+    secondary: ""
+    tertiary: ""
+
+  flaws:                        # 弱点（转化后保留的人性弱点）
+    - ""
+  hobbies:                      # 兴趣（与政治无关的私人侧面）
+    - ""
+  private_fear: ""              # 私下恐惧
+
+  inner_conflicts:              # 人层 vs 政治层的张力，至少 2 条
+    - ""
+
+# -----------------------------------------------------------------------------
+# 转化审核留痕 conversion_audit（证明已安全转化）
+# -----------------------------------------------------------------------------
+conversion_audit:
+  deleted_fingerprints:         # 已删除/改写的指纹类型（safety 必须删除清单）
+    - "具体历史事件"
+    - "具体战争 / 战役 / 政变"
+    - "具体丑闻 / 死亡方式"
+    - "具体亲属关系 / 家臣部下名单"
+    - "具体政党 / 派系专名"
+    - "具体政策口号"
+    - "现代现实人物可识别信息"
+  recognizability_blind_check:  # 盲测：不知来源者/AI 是否仍能识别原型
+    result: "not_identifiable"  # not_identifiable（通过）| identifiable（须回炉）
+    note: ""
+  safety_status: "safe_conversion"   # 不得为 real_figure_clone

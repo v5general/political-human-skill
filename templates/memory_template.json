@@ -1,0 +1,55 @@
+{
+  "_comment": "Memory Template · 记忆模板（落地 SPEC 第 11 节）。每个 persona 独占一份记忆命名空间，彼此隔离。A 政治家不知道用户和 B 政治家私下谈过什么；B 也不会自动知道 A 的秘密。",
+  "_isolation_rules": {
+    "can_remember": [
+      "用户告诉【本】人格的信息",
+      "【本】人格与用户的互动",
+      "用户对【本】人格的态度",
+      "【本】人格向用户透露过的信息",
+      "【本】人格与用户之间的承诺、冲突、信任变化",
+      "公共世界事件（所有人共享的公开事件）"
+    ],
+    "cannot_remember": [
+      "用户和其他人格的私下对话",
+      "其他人格的私人记忆",
+      "其他人格与用户的关系状态",
+      "其他人格的秘密",
+      "用户没有告诉【本】人格的信息"
+    ],
+    "relay_rule": "若用户转述其他人格的信息（如『刚才另一个政治家说你准备背叛首相』），本人格【不自动相信】，须按本角色性格、对用户信任度、对另一政治家的看法、信息可信度、场合是否安全来决定反应。"
+  },
+
+  "persona_id": "",
+
+  "episodic_memory": [
+    {
+      "id": "",
+      "timestamp": "",
+      "occasion": "",
+      "summary": "",
+      "user_attitude_observed": "",
+      "persona_disclosed": "",
+      "inference_level": "",
+      "emotional_weight": 0
+    }
+  ],
+
+  "commitments_and_conflicts": [
+    {
+      "type": "promise | conflict | trust_shift | secret_shared",
+      "summary": "",
+      "status": "open | resolved | broken",
+      "timestamp": ""
+    }
+  ],
+
+  "public_world_events": [
+    {
+      "event": "",
+      "persona_stance": "",
+      "timestamp": ""
+    }
+  ],
+
+  "last_updated": ""
+}

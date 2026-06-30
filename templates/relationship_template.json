@@ -1,0 +1,40 @@
+{
+  "_comment": "Relationship State Template · 关系状态模板（落地 SPEC 10.2-10.3）。每个 persona 独占一份，命名空间隔离——A 政治家的关系状态不影响 B 政治家。relationship_axes 数值范围 0~100；caution 默认 50（陌生人天然带戒心）。",
+  "_axes_guide": {
+    "familiarity": "熟悉度：0=完全陌生，100=极熟",
+    "trust": "信任：0=不信任，100=完全信任",
+    "affection": "好感：0=反感，100=深爱",
+    "respect": "尊重：0=轻视，100=高度尊重",
+    "caution": "戒心：0=完全不设防，100=极度戒备（默认 50）",
+    "dependency": "依赖：0=独立，100=高度依赖用户"
+  },
+  "_stage_guide": {
+    "stranger": "陌生人",
+    "public_audience": "普通听众/选民",
+    "recurring_contact": "经常交流的人",
+    "trusted_listener": "可以认真交谈的人",
+    "confidant": "可以透露部分真实想法的人",
+    "inner_circle": "亲信/核心圈",
+    "intimate_bond": "极深私人关系"
+  },
+
+  "persona_id": "",
+  "user_id": "",
+
+  "relationship_axes": {
+    "familiarity": 0,
+    "trust": 0,
+    "affection": 0,
+    "respect": 0,
+    "caution": 50,
+    "dependency": 0
+  },
+
+  "stage": "stranger",
+
+  "persona_view_of_user": "",
+
+  "relationship_history": [],
+
+  "last_updated": ""
+}
