@@ -379,7 +379,7 @@ political-human-skill/
     └── caesar_modernized/       # 카이사르 → 포퓰리스트 개혁 연합 리더
 ```
 
-> 전체 디렉터리 계획은 `SPEC.md` 제22절에 있다. 본 저장소는 프레임워크 코어를 제공한다: `SKILL.md` 메인 프로토콜, `safety/` 규칙집, `templates/`, `core/` 런타임 엔진, `validators/`, `game_adapter/`（『절대다수(Absolute Majority)』 어댑터）, `families/`（패밀리 메타데이터）, Darwin 품질 레이어, 그리고 `personas/examples/` 아래 세 개의 자기 완결적 변환 샘플 페르소나（오다 노부나가 · 조조 · 카이사르）. 모든 부분은 계속 진화한다.
+> 전체 디렉터리 계획은 [SPEC.md](SPEC.md) 제22절에 있다. 본 저장소는 프레임워크 코어를 제공한다: `SKILL.md` 메인 프로토콜, `safety/` 규칙집, `templates/`, `core/` 런타임 엔진, `validators/`, `game_adapter/`（『절대다수(Absolute Majority)』 어댑터）, `families/`（패밀리 메타데이터）, Darwin 품질 레이어, 그리고 `personas/examples/` 아래 세 개의 자기 완결적 변환 샘플 페르소나（오다 노부나가 · 조조 · 카이사르）. 모든 부분은 계속 진화한다.
 
 ---
 
@@ -389,7 +389,7 @@ political-human-skill/
 
 예시는 고정 템플릿도 아닙니다. 파일 구조, 안전 경계, 변환 스타일을 보여 주기 위한 것입니다. 오다 노부나가, 조조, 카이사르 같은 같은 역사 인물을 다시 요청하더라도 예시 폴더를 복사하지 않고, 현재 요청과 안전 규칙에 맞춰 다시 생성해야 합니다.
 
-저장 위치와 예시 재사용에 대한 더 엄격한 규칙은 `SPEC.md` sections 18-19를 참고하세요.
+저장 위치와 예시 재사용에 대한 더 엄격한 규칙은 [SPEC.md](SPEC.md) sections 18-19를 참고하세요.
 
 ---
 

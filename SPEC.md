@@ -123,23 +123,48 @@ User interaction with Persona A does not automatically affect Persona B. If the 
 
 ## 4. Regional Modern Boundaries
 
-Use regional modern boundaries to separate historical-persona use from modern real-figure restrictions.
+This project uses regional boundaries to separate historical figures that may be personified from modern or near-modern political figures that must not be personified.
 
-| Region | Modern boundary | Before boundary | Boundary and after |
-|---|---:|---|---|
-| China | 1840, First Opium War | May enter historical inference or safe conversion. | No interactive persona; public analysis or safe abstract conversion only. |
-| Japan | 1868, Meiji Restoration | Sengoku, Edo, and earlier figures may enter historical or conversion mode. | Meiji core figures, modern politicians, prewar and postwar politicians are prohibited as interactive personas. |
-| Europe | 1789, French Revolution | Ancient, medieval, and early modern figures may enter historical or conversion mode. | French Revolution, Napoleonic era, and later default to near-modern review. |
-| Other regions | Contextual | Use historical distance and continuity of political identity. | If uncertain, default to public analysis or safe abstract conversion. |
+### 4.1 China
 
-Modernity is not only a date. Also consider:
+Use **1840, the First Opium War**, as the modern boundary.
 
-- modern nation-state identity
-- mass politics
-- modern party politics
-- constitutional politics
-- continuing political controversy
-- recognizability to contemporary audiences
+- Figures before 1840 may, in principle, be used for historical inference or converted into fictional modern parliamentary politicians.
+- Figures from 1840 onward must not be turned into interactive personas. Use public-record analysis or abstract archetype conversion only.
+- If a figure before 1840 is heavily used as a symbol in contemporary politics, apply stricter recognizability review.
+
+### 4.2 Japan
+
+Use **1868, the Meiji Restoration**, as the modern boundary.
+
+- Figures before 1868 may, in principle, be used for historical inference or converted into fictional modern parliamentary politicians.
+- Figures from 1868 onward must not be turned into interactive personas. Use public-record analysis or abstract archetype conversion only.
+- Sengoku daimyo and Edo-period figures may enter historical mode or modern parliamentary conversion mode.
+- Core Meiji Restoration political figures, modern oligarchs, prewar politicians, and postwar politicians must not be generated as interactive personas.
+
+### 4.3 Europe
+
+Use **1789, the French Revolution**, as the default modern boundary.
+
+Rationale:
+
+- After the French Revolution, modern nation-states, mass politics, constitutional revolutionary narratives, left-right political spectra, and modern party politics enter a political lineage that remains directly recognizable today.
+- European political figures after 1789 are more likely to be directly tied to contemporary ideology and real political disputes.
+
+Rules:
+
+- Figures before 1789 may, in principle, be used for historical inference or converted into fictional modern parliamentary politicians.
+- Figures from 1789 onward must not be turned into interactive personas. Use public-record analysis or abstract archetype conversion only.
+- Ancient, medieval, and early modern figures may enter historical mode or modern parliamentary conversion mode.
+- Figures from the French Revolution, the Napoleonic era, and later default to the modern or near-modern political lineage and must not be generated as interactive personas.
+
+### 4.4 Other Regions
+
+If there is no explicit regional rule, use the following criteria:
+
+1. If the figure belongs to the period after modern nation-states, modern party politics, mass-media politics, or modern constitutional politics formed in that region, do not generate an interactive persona.
+2. If the figure's political controversy still directly shapes contemporary political identity, party conflict, national narratives, or real policy positions, do not generate an interactive persona.
+3. If uncertain, default to public analysis or abstract archetype conversion; do not generate an interactive persona.
 
 ## 5. Generation Modes
 

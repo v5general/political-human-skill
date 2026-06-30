@@ -379,7 +379,7 @@ political-human-skill/
     └── caesar_modernized/       # Caesar → populist-reform coalition leader
 ```
 
-> Full directory plan in `SPEC.md` section 22. The repo ships the framework core: `SKILL.md` main protocol, `safety/` ruleset, `templates/`, `core/` runtime engines, `validators/`, `game_adapter/` (Absolute Majority adapter), `families/` (family metadata), the Darwin quality layer, and three self-contained converted example personas under `personas/examples/` (Oda Nobunaga · Cao Cao · Julius Caesar); all parts keep evolving.
+> Full directory plan in [SPEC.md](SPEC.md) section 22. The repo ships the framework core: `SKILL.md` main protocol, `safety/` ruleset, `templates/`, `core/` runtime engines, `validators/`, `game_adapter/` (Absolute Majority adapter), `families/` (family metadata), the Darwin quality layer, and three self-contained converted example personas under `personas/examples/` (Oda Nobunaga · Cao Cao · Julius Caesar); all parts keep evolving.
 
 ---
 
@@ -389,7 +389,7 @@ political-human-skill/
 
 The examples are also not fixed templates. They show the file shape, safety boundaries, and conversion style. If you ask for a new Oda Nobunaga, Cao Cao, or Caesar conversion, the skill should generate it again from the current request and safety rules rather than copying the example folder.
 
-For the stricter storage and example reuse rules, see `SPEC.md` sections 18-19.
+For the stricter storage and example reuse rules, see [SPEC.md](SPEC.md) sections 18-19.
 
 ---
 
