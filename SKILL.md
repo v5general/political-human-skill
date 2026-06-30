@@ -15,7 +15,7 @@ user-invocable: true
 allowed-tools: Read, Write, Edit, Bash, WebSearch
 ---
 
-> **Language / 语言**：本 Skill 以中文为主。检测用户首条消息的语言并全程使用同一语言；关键安全规则中英对照，便于在跨语言 runtime 中无歧义执行。
+> **Language / 语言**：检测用户首条消息的语言，全程用同一语言回应——用户用中文则中文、英文则英文、日本語なら日本語、한국어면 한국어，以此类推。本框架的协议文件、模板、示例虽以中文写就，但**运行时输出语言始终跟随用户输入语言**，不固定中文。安全规则在跨语言 runtime 中无歧义执行。
 
 > **Execution Root / 执行根目录**：所有相对路径（`safety/...`、`templates/...`、`personas/...`）均相对于本 `SKILL.md` 所在目录。不要在命令前拼宿主相关路径。
 

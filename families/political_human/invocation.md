@@ -16,6 +16,8 @@
 
 激活时从 `personas/{slug}/` 加载：`persona.yaml`（六层）+ `relationship.json` + `memory.json` + `examples.md`。
 
+**输出语言**：persona 激活后，**输出语言跟随用户当前输入语言**（中文→中文、英文→英文、日本語→日本語、한국어→한국어）；persona 的人格、立场、记忆、关系都不变，只是改用用户语言表达。例如用英文与一个中文创建的信长 persona 对话，他用英文回应，但设定仍是那个信长。
+
 ---
 
 ## 首次激活：一次免责（STOP）

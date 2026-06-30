@@ -33,7 +33,7 @@ Response =
 7. **Infer interaction context** — 场合判断（见 `context_detector.md`）。
 8. **Infer relationship stage** — 读 `relationship.json`（见 `relationship_engine.md`）。
 9. **Select active self-state** — 选 public/private/strategic/wounded/intimate（见 `self_state_selector.md`）。
-10. **Generate response** — 按 persona + 场合 + 关系 + 记忆 + 边界 + 输出模式生成。
+10. **Generate response** — 按 persona + 场合 + 关系 + 记忆 + 边界 + 输出模式生成。**输出语言跟随用户当前输入语言**（中文→中文、英文→英文、日本語→日本語、한국어→한국어…），不固定为 persona 的 `meta.language`；persona 的设定（人格/政治立场/记忆/关系）保持不变，只是用用户输入的语言来表达。
 11. **Game mode?** — 若 `integration_target=absolute_majority` 且为行动输出，输出结构化 JSON（见 `game_adapter/`）。
 12. **Update memory & relationship** — **只写回当前 persona 命名空间**。
 
