@@ -360,92 +360,22 @@ npx skills add <owner>/political-human-skill
 
 ```text
 political-human-skill/
-│
-├── README.md                           # 영어 메인
-├── README_zh.md                        # 简体中文
-├── README_ja.md                        # 日本語
-├── README_ko.md                        # 한국어（이 파일）
-├── SKILL.md                            # 메인 런타임 프로토콜（프레임워크 자체）
-├── SPEC.md                             # 창작 및 안전 명세（원천 계약）
-├── test-prompts.json                   # Darwin 회귀 테스트 prompts
-│
-├── quality/                            # Darwin 품질 진화 레이어
-│   ├── darwin-adapter.md                     # Darwin 어댑터와 워크플로 매핑
-│   └── results.tsv                           # 로컬 최적화 이력
-│
-├── safety/                             # 안전 규칙집（강한 제약, 최우선）
-│   ├── modern_political_figure_policy.md     # 근현대 실존 인물 정책 + 시대 경계
-│   ├── historical_figure_policy.md           # 역사 인물 규율 + 3층위 추론
-│   ├── recognizability_review.md             # 5가지 식별 가능성 기준과 심사 흐름
-│   ├── archetype_conversion_protocol.md      # 아키타입 변환: 유지 / 삭제 / 흐름
-│   ├── modification_review.md                # 사용자 편집의 식별성 심사
-│   └── examples.md                           # 반례와 안전 변환 라이브러리
-│
-├── templates/                          # 페르소나와 런타임 템플릿
-│   ├── persona_template.yaml                 # 정치-인간 페르소나（6층）
-│   ├── user_self_setting_template.yaml       # 사용자 자기 설정
-│   ├── relationship_template.json            # 관계 상태（7단계）
-│   ├── memory_template.json                  # 메모리 격리（독립 네임스페이스）
-│   └── historical_archetype_conversion.yaml  # 역사 변환 스켈레톤
-│
-├── core/                               # 런타임 엔진
-│   ├── runtime_protocol.md                   # 런타임 프로토콜
-│   ├── context_detector.md                   # 맥락 감지기
-│   ├── self_state_selector.md                # 자기 상태 선택기
-│   ├── relationship_engine.md                # 관계 엔진
-│   ├── memory_policy.md                      # 메모리 정책
-│   ├── user_self_setting_policy.md           # 사용자 자기 설정 정책
-│   └── safety_boundaries.md                  # 안전 경계（런타임 집행）
-│
-├── validators/                         # 검증기
-│   ├── persona_consistency_check.md          # 페르소나 일관성 검증
-│   ├── relationship_consistency_check.md     # 관계 일관성 검증
-│   ├── memory_isolation_check.md             # 메모리 격리 검증
-│   ├── recognizability_check.md              # 식별 가능성 검증
-│   ├── dialogue_regression_tests.md          # 대화 회귀 테스트
-│   ├── political_behavior_tests.md           # 정치 행동 테스트
-│   └── darwin_quality_gate.md                # Darwin 도메인 품질 게이트
-│
-├── game_adapter/                       # 『절대다수(Absolute Majority)』 게임 어댑터
-│   ├── absolute_majority_schema.json         # 게임 행동 JSON 스키마
-│   ├── action_scoring.md                     # 행동 스코어링 엔진
-│   └── event_response.md                     # 이벤트 응답 프로토콜
-│
-├── families/                           # 패밀리 메타데이터
-│   └── political_human/
-│       ├── family.md                         # 패밀리 정의
-│       ├── generator.md                      # 제너레이터
-│       └── invocation.md                     # 호출 사양
-│
-├── review-stage/                       # 리뷰 상태
-│   ├── REVIEW_STATE.json
-│   └── AUTO_REVIEW.md
-│
-└── personas/                           # 정치인（각자 자기 완결적, 실행 가능）
-    └── examples/                       # ⚡ 세 개의 변환된 역사 아키타입（Mode C）
-        ├── oda_nobunaga_modernized/          # 오다 노부나가 → 야당 개혁파 선봉
-        │   ├── SKILL.md                      #   페르소나 자신의 런타임 스킬
-        │   ├── persona.yaml                  #   6층 프로필
-        │   ├── relationship.json             #   관계 상태（독립 네임스페이스）
-        │   ├── memory.json                   #   메모리（독립 네임스페이스）
-        │   ├── examples.md                   #   다중 맥락 예시 대화
-        │   └── meta.json                     #   메타데이터
-        │
-        ├── cao_cao_modernized/               # 조조 → 여당 연합 핵심 파벌 수장
-        │   ├── SKILL.md
-        │   ├── persona.yaml
-        │   ├── relationship.json
-        │   ├── memory.json
-        │   ├── examples.md
-        │   └── meta.json
-        │
-        └── caesar_modernized/                # 카이사르 → 포퓰리스트 개혁 연합 리더
-            ├── SKILL.md
-            ├── persona.yaml
-            ├── relationship.json
-            ├── memory.json
-            ├── examples.md
-            └── meta.json
+├── README.md / README_zh.md / README_ja.md / README_ko.md    # 4개 언어 README
+├── SKILL.md                                                    # 메인 런타임 프로토콜
+├── SPEC.md                                                     # 창작 및 안전 명세
+├── test-prompts.json                                           # Darwin 회귀 테스트 prompt
+├── quality/                     # Darwin 품질 진화 레이어（어댑터 + 결과）
+├── safety/                      # 안전 규칙집（6개 문서）
+├── templates/                   # 템플릿（5개 파일）
+├── core/                        # 런타임 엔진（7개 문서）
+├── validators/                  # 검증기（7개 문서）
+├── game_adapter/                # 『절대다수』 어댑터
+├── families/political_human/    # 패밀리 메타데이터
+├── review-stage/                # 리뷰 상태
+└── personas/examples/           # ⚡ Mode C 변환 페르소나（각 6개 파일）
+    ├── oda_nobunaga_modernized/ # 오다 노부나가 → 야당 개혁파 선봉
+    ├── cao_cao_modernized/      # 조조 → 여당 연합 파벌 수장
+    └── caesar_modernized/       # 카이사르 → 포퓰리스트 개혁 연합 리더
 ```
 
 > 전체 디렉터리 계획은 `SPEC.md` 제21절에 있다. 본 저장소는 프레임워크 코어를 제공한다: `SKILL.md` 메인 프로토콜, `safety/` 규칙집, `templates/`, `core/` 런타임 엔진, `validators/`, `game_adapter/`（『절대다수(Absolute Majority)』 어댑터）, `families/`（패밀리 메타데이터）, Darwin 품질 레이어, 그리고 `personas/examples/` 아래 세 개의 자기 완결적 변환 샘플 페르소나（오다 노부나가 · 조조 · 카이사르）. 모든 부분은 계속 진화한다.

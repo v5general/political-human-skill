@@ -360,92 +360,22 @@ npx skills add <owner>/political-human-skill
 
 ```text
 political-human-skill/
-│
-├── README.md                           # 英語版メイン
-├── README_zh.md                        # 簡体中国語
-├── README_ja.md                        # 日本語（このファイル）
-├── README_ko.md                        # 한국어
-├── SKILL.md                            # メインランタイムプロトコル（フレームワーク本体）
-├── SPEC.md                             # 創作・安全仕様（ソース契約）
-├── test-prompts.json                   # Darwin回帰テストprompt
-│
-├── quality/                            # Darwin品質進化レイヤー
-│   ├── darwin-adapter.md                     # Darwinアダプターとワークフロー対応
-│   └── results.tsv                           # ローカル最適化履歴
-│
-├── safety/                             # 安全ルールセット（強い制約、最優先）
-│   ├── modern_political_figure_policy.md     # 近現代実在人物ポリシーと時代境界
-│   ├── historical_figure_policy.md           # 歴史人物の規律と三層推論
-│   ├── recognizability_review.md             # 5つの識別性基準と審査フロー
-│   ├── archetype_conversion_protocol.md      # アーキタイプ変換：保持／削除／流れ
-│   ├── modification_review.md                # ユーザー編集の識別性審査
-│   └── examples.md                           # 反例と安全変換ライブラリ
-│
-├── templates/                          # ペルソナとランタイムのテンプレート
-│   ├── persona_template.yaml                 # 政治的人間ペルソナ（六層）
-│   ├── user_self_setting_template.yaml       # ユーザー自己設定
-│   ├── relationship_template.json            # 関係状態（7段階）
-│   ├── memory_template.json                  # メモリ隔離（独立名前空間）
-│   └── historical_archetype_conversion.yaml  # 歴史変換スケルトン
-│
-├── core/                               # ランタイムエンジン
-│   ├── runtime_protocol.md                   # ランタイムプロトコル
-│   ├── context_detector.md                   # 文脈検出器
-│   ├── self_state_selector.md                # 自己状態セレクター
-│   ├── relationship_engine.md                # 関係エンジン
-│   ├── memory_policy.md                      # メモリポリシー
-│   ├── user_self_setting_policy.md           # ユーザー自己設定ポリシー
-│   └── safety_boundaries.md                  # 安全境界（ランタイム適用）
-│
-├── validators/                         # バリデーター
-│   ├── persona_consistency_check.md          # ペルソナ一貫性チェック
-│   ├── relationship_consistency_check.md     # 関係一貫性チェック
-│   ├── memory_isolation_check.md             # メモリ隔離チェック
-│   ├── recognizability_check.md              # 識別性チェック
-│   ├── dialogue_regression_tests.md          # 対話回帰テスト
-│   ├── political_behavior_tests.md           # 政治行動テスト
-│   └── darwin_quality_gate.md                # Darwinドメイン品質ゲート
-│
-├── game_adapter/                       # 『絶対多数』ゲームアダプター
-│   ├── absolute_majority_schema.json         # ゲーム行動 JSON スキーマ
-│   ├── action_scoring.md                     # 行動スコアリングエンジン
-│   └── event_response.md                     # イベント応答プロトコル
-│
-├── families/                           # ファミリーメタデータ
-│   └── political_human/
-│       ├── family.md                         # ファミリー定義
-│       ├── generator.md                      # ジェネレーター
-│       └── invocation.md                     # 呼び出し仕様
-│
-├── review-stage/                       # レビュー状態
-│   ├── REVIEW_STATE.json
-│   └── AUTO_REVIEW.md
-│
-└── personas/                           # 政治人物（各自己完結・実行可能）
-    └── examples/                       # ⚡ 三者の変換済み歴史アーキタイプ (Mode C)
-        ├── oda_nobunaga_modernized/          # 織田信長 → 野党・改革派の急先鋒
-        │   ├── SKILL.md                      #   ペルソナ自身のランタイムスキル
-        │   ├── persona.yaml                  #   六層プロファイル
-        │   ├── relationship.json             #   関係状態（独立名前空間）
-        │   ├── memory.json                   #   メモリ（独立名前空間）
-        │   ├── examples.md                   #   多文脈の対話例
-        │   └── meta.json                     #   メタデータ
-        │
-        ├── cao_cao_modernized/               # 曹操 → 与党連合・中核派閥の領袖
-        │   ├── SKILL.md
-        │   ├── persona.yaml
-        │   ├── relationship.json
-        │   ├── memory.json
-        │   ├── examples.md
-        │   └── meta.json
-        │
-        └── caesar_modernized/                # カエサル → ポピュリスト改革連合リーダー
-            ├── SKILL.md
-            ├── persona.yaml
-            ├── relationship.json
-            ├── memory.json
-            ├── examples.md
-            └── meta.json
+├── README.md / README_zh.md / README_ja.md / README_ko.md    # 4言語 README
+├── SKILL.md                                                    # メインランタイムプロトコル
+├── SPEC.md                                                     # 創作・安全仕様
+├── test-prompts.json                                           # Darwin 回帰テスト prompt
+├── quality/                     # Darwin 品質進化レイヤー（アダプター + 結果）
+├── safety/                      # 安全ルールセット（6 文書）
+├── templates/                   # テンプレート（5 ファイル）
+├── core/                        # ランタイムエンジン（7 文書）
+├── validators/                  # バリデーター（7 文書）
+├── game_adapter/                # 『絶対多数』アダプター
+├── families/political_human/    # ファミリーメタデータ
+├── review-stage/                # レビュー状態
+└── personas/examples/           # ⚡ Mode C 変換済みペルソナ（各 6 ファイル）
+    ├── oda_nobunaga_modernized/ # 織田信長 → 野党改革派の急先鋒
+    ├── cao_cao_modernized/      # 曹操 → 与党連合中核派閥の領袖
+    └── caesar_modernized/       # カエサル → ポピュリスト改革連合リーダー
 ```
 
 > 完全なディレクトリ計画は `SPEC.md` 第21節にある。本リポジトリはフレームワークコアを提供する：`SKILL.md` メインプロトコル、`safety/` ルールセット、`templates/`、`core/` ランタイムエンジン、`validators/`、`game_adapter/`（『絶対多数』アダプター）、`families/`（ファミリーメタデータ）、Darwin品質レイヤー、そして `personas/examples/` 配下の三つの自己完結型・変換済みサンプルペルソナ（織田信長 · 曹操 · カエサル）。全構成要素は進化し続ける。

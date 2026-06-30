@@ -360,92 +360,22 @@ npx skills add <owner>/political-human-skill
 
 ```text
 political-human-skill/
-│
-├── README.md                           # 英文主 README
-├── README_zh.md                        # 简体中文（你在这里）
-├── README_ja.md                        # 日本語
-├── README_ko.md                        # 한국어
-├── SKILL.md                            # 主运行时协议（框架本体）
-├── SPEC.md                             # 创作与安全规范（源头合约）
-├── test-prompts.json                   # Darwin 回归测试 prompts
-│
-├── quality/                            # Darwin 质量进化层
-│   ├── darwin-adapter.md                     # Darwin 适配器与流程映射
-│   └── results.tsv                           # 本地优化历史
-│
-├── safety/                             # 安全规则集（硬约束，最高优先级）
-│   ├── modern_political_figure_policy.md     # 近现代现实人物政策 + 时代边界
-│   ├── historical_figure_policy.md           # 历史人物纪律 + 三级推论标注
-│   ├── recognizability_review.md             # 5 条可识别性标准与审核流程
-│   ├── archetype_conversion_protocol.md      # 原型转化协议：保留 / 删除 / 流程
-│   ├── modification_review.md                # 用户修改的可识别性复查
-│   └── examples.md                           # 反例与安全转化案例库
-│
-├── templates/                          # 人格与运行时模板
-│   ├── persona_template.yaml                 # 政治人物人格档案（六层结构）
-│   ├── user_self_setting_template.yaml       # 用户自我设定
-│   ├── relationship_template.json            # 关系状态（7 阶段）
-│   ├── memory_template.json                  # 记忆隔离（独立命名空间）
-│   └── historical_archetype_conversion.yaml  # 历史转化骨架
-│
-├── core/                               # 运行时引擎
-│   ├── runtime_protocol.md                   # 运行时协议
-│   ├── context_detector.md                   # 场合检测器
-│   ├── self_state_selector.md                # 自我状态选择器
-│   ├── relationship_engine.md                # 关系引擎
-│   ├── memory_policy.md                      # 记忆策略
-│   ├── user_self_setting_policy.md           # 用户自我设定策略
-│   └── safety_boundaries.md                  # 安全边界（运行时执行）
-│
-├── validators/                         # 校验器
-│   ├── persona_consistency_check.md          # persona 一致性校验
-│   ├── relationship_consistency_check.md     # 关系一致性校验
-│   ├── memory_isolation_check.md             # 记忆隔离校验
-│   ├── recognizability_check.md              # 可识别性校验
-│   ├── dialogue_regression_tests.md          # 对话回归测试
-│   ├── political_behavior_tests.md           # 政治行为测试
-│   └── darwin_quality_gate.md                # Darwin 领域质量门槛
-│
-├── game_adapter/                       # 《绝对多数》游戏适配器
-│   ├── absolute_majority_schema.json         # 游戏行为 JSON schema
-│   ├── action_scoring.md                     # 行动评分引擎
-│   └── event_response.md                     # 事件响应协议
-│
-├── families/                           # 家族元数据
-│   └── political_human/
-│       ├── family.md                         # 家族定义
-│       ├── generator.md                      # 生成器
-│       └── invocation.md                     # 调用规范
-│
-├── review-stage/                       # 审核状态
-│   ├── REVIEW_STATE.json
-│   └── AUTO_REVIEW.md
-│
-└── personas/                           # 政治人物（各自包含，可直接运行）
-    └── examples/                       # ⚡ 三个已转化历史原型 (Mode C)
-        ├── oda_nobunaga_modernized/          # 织田信长 → 现代在野党改革派先锋
-        │   ├── SKILL.md                      #   persona 自身的运行时 skill
-        │   ├── persona.yaml                  #   六层完整画像
-        │   ├── relationship.json             #   关系状态（独立命名空间）
-        │   ├── memory.json                   #   记忆（独立命名空间）
-        │   ├── examples.md                   #   五场合示例对话
-        │   └── meta.json                     #   元数据
-        │
-        ├── cao_cao_modernized/               # 曹操 → 现代执政联盟派阀领袖
-        │   ├── SKILL.md
-        │   ├── persona.yaml
-        │   ├── relationship.json
-        │   ├── memory.json
-        │   ├── examples.md
-        │   └── meta.json
-        │
-        └── caesar_modernized/                # 凯撒 → 现代民粹改革派联盟领袖
-            ├── SKILL.md
-            ├── persona.yaml
-            ├── relationship.json
-            ├── memory.json
-            ├── examples.md
-            └── meta.json
+├── README.md / README_zh.md / README_ja.md / README_ko.md    # 四语言 README
+├── SKILL.md                                                    # 主运行时协议
+├── SPEC.md                                                     # 创作与安全规范
+├── test-prompts.json                                           # Darwin 回归测试 prompt
+├── quality/                     # Darwin 品质进化层（适配器 + 结果）
+├── safety/                      # 安全规则集（6 篇文档）
+├── templates/                   # 模板（5 个文件：YAML + JSON）
+├── core/                        # 运行时引擎（7 篇文档）
+├── validators/                  # 校验器（7 篇文档）
+├── game_adapter/                # 《绝对多数》适配器
+├── families/political_human/    # 家族元数据
+├── review-stage/                # 审核状态
+└── personas/examples/           # ⚡ 三个 Mode C 转化 persona（各含 6 个自包含文件）
+    ├── oda_nobunaga_modernized/ # 织田信长 → 在野党改革派先锋
+    ├── cao_cao_modernized/      # 曹操 → 执政联盟派阀领袖
+    └── caesar_modernized/       # 凯撒 → 民粹改革派联盟领袖
 ```
 
 > 完整目录规划见 `SPEC.md` 第 21 节。仓库已交付框架核心：`SKILL.md` 主协议、`safety/` 安全规则、`templates/` 模板、`core/` 运行时引擎、`validators/` 校验器、`game_adapter/` 《绝对多数》适配器、`families/` 家族元数据、Darwin 质量层，以及 `personas/examples/` 下三个自包含的已转化示例 persona（织田信长 · 曹操 · 凯撒）；各部件持续演进。

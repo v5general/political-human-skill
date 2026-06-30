@@ -360,92 +360,22 @@ Tell the ones who are hesitating: follow me, and you live. Look back, and you ge
 
 ```text
 political-human-skill/
-│
-├── README.md                           # you are here (English main README)
-├── README_zh.md                        # 简体中文
-├── README_ja.md                        # 日本語
-├── README_ko.md                        # 한국어
-├── SKILL.md                            # main runtime protocol (the framework itself)
-├── SPEC.md                             # authoring & safety spec (the source contract)
-├── test-prompts.json                   # Darwin regression prompts
-│
-├── quality/                            # Darwin quality-evolution layer
-│   ├── darwin-adapter.md                     # Darwin adapter and workflow mapping
-│   └── results.tsv                           # local optimization history
-│
-├── safety/                             # safety ruleset (hard constraint, top priority)
-│   ├── modern_political_figure_policy.md     # modern real-figure policy + era boundaries
-│   ├── historical_figure_policy.md           # historical-figure discipline + three-level inference
-│   ├── recognizability_review.md             # 5 recognizability criteria & review flow
-│   ├── archetype_conversion_protocol.md      # archetype conversion: keep / delete / flow
-│   ├── modification_review.md                # recognizability review of user edits
-│   └── examples.md                           # counter-examples & safe-conversion library
-│
-├── templates/                          # persona & runtime templates
-│   ├── persona_template.yaml                 # political-human persona (six layers)
-│   ├── user_self_setting_template.yaml       # user self-setting
-│   ├── relationship_template.json            # relationship state (7 stages)
-│   ├── memory_template.json                  # memory isolation (independent namespace)
-│   └── historical_archetype_conversion.yaml  # historical-conversion skeleton
-│
-├── core/                               # runtime engines
-│   ├── runtime_protocol.md                   # runtime protocol
-│   ├── context_detector.md                   # context detector
-│   ├── self_state_selector.md                # self-state selector
-│   ├── relationship_engine.md                # relationship engine
-│   ├── memory_policy.md                      # memory policy
-│   ├── user_self_setting_policy.md           # user self-setting policy
-│   └── safety_boundaries.md                  # safety boundaries (runtime enforcement)
-│
-├── validators/                         # validators
-│   ├── persona_consistency_check.md          # persona consistency check
-│   ├── relationship_consistency_check.md     # relationship consistency check
-│   ├── memory_isolation_check.md             # memory isolation check
-│   ├── recognizability_check.md              # recognizability check
-│   ├── dialogue_regression_tests.md          # dialogue regression tests
-│   ├── political_behavior_tests.md           # political behavior tests
-│   └── darwin_quality_gate.md                # Darwin domain gate
-│
-├── game_adapter/                       # Absolute Majority game adapter
-│   ├── absolute_majority_schema.json         # game-behavior JSON schema
-│   ├── action_scoring.md                     # action scoring engine
-│   └── event_response.md                     # event response protocol
-│
-├── families/                           # family metadata
-│   └── political_human/
-│       ├── family.md                         # family definition
-│       ├── generator.md                      # generator
-│       └── invocation.md                     # invocation spec
-│
-├── review-stage/                       # review state
-│   ├── REVIEW_STATE.json
-│   └── AUTO_REVIEW.md
-│
-└── personas/                           # political figures (each self-contained, runnable)
-    └── examples/                       # ⚡ three converted historical archetypes (Mode C)
-        ├── oda_nobunaga_modernized/          # Oda Nobunaga → opposition reformist vanguard
-        │   ├── SKILL.md                      #   persona's own runtime skill
-        │   ├── persona.yaml                  #   six-layer profile
-        │   ├── relationship.json             #   relationship state (own namespace)
-        │   ├── memory.json                   #   memory (own namespace)
-        │   ├── examples.md                   #   multi-context example dialogues
-        │   └── meta.json                     #   metadata
-        │
-        ├── cao_cao_modernized/               # Cao Cao → ruling-coalition faction leader
-        │   ├── SKILL.md
-        │   ├── persona.yaml
-        │   ├── relationship.json
-        │   ├── memory.json
-        │   ├── examples.md
-        │   └── meta.json
-        │
-        └── caesar_modernized/                # Caesar → populist-reform coalition leader
-            ├── SKILL.md
-            ├── persona.yaml
-            ├── relationship.json
-            ├── memory.json
-            ├── examples.md
-            └── meta.json
+├── README.md / README_zh.md / README_ja.md / README_ko.md    # four-language READMEs
+├── SKILL.md                                                    # main runtime protocol
+├── SPEC.md                                                     # authoring & safety spec
+├── test-prompts.json                                           # Darwin regression prompts
+├── quality/                     # Darwin quality-evolution layer (adapter + results)
+├── safety/                      # safety ruleset (6 docs: policies, review flows, examples)
+├── templates/                   # persona & runtime templates (5 files: YAML + JSON)
+├── core/                        # runtime engines (7 docs: protocol, detectors, policies)
+├── validators/                  # validators (7 docs: consistency, isolation, regression tests)
+├── game_adapter/                # Absolute Majority adapter (schema, scoring, events)
+├── families/political_human/    # family metadata (definition, generator, invocation)
+├── review-stage/                # review state
+└── personas/examples/           # ⚡ three converted Mode C personas (each 6 self-contained files)
+    ├── oda_nobunaga_modernized/ # Oda Nobunaga → opposition reformist vanguard
+    ├── cao_cao_modernized/      # Cao Cao → ruling-coalition faction leader
+    └── caesar_modernized/       # Caesar → populist-reform coalition leader
 ```
 
 > Full directory plan in `SPEC.md` section 21. The repo ships the framework core: `SKILL.md` main protocol, `safety/` ruleset, `templates/`, `core/` runtime engines, `validators/`, `game_adapter/` (Absolute Majority adapter), `families/` (family metadata), the Darwin quality layer, and three self-contained converted example personas under `personas/examples/` (Oda Nobunaga · Cao Cao · Julius Caesar); all parts keep evolving.
