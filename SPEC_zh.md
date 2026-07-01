@@ -535,7 +535,7 @@ persona 可以从设定推断初始关系状态，但用户声称不被自动信
 
 ## 17. 历史转化流程
 
-对于模式 C，遵循 5.3.1 的转化原则（转译，而非照搬）：
+对于模式 C，遵循 `families/political_human/historical_persona_creation_workflow.md` 的完整工作流：**source grounding**（检索/浏览资料，产出 `historical_source_report.md`，区分史料事实 / 主流解释 / 争议 / 创作推断）→ **推断性气质提取**（`inferred_temperamental_pattern`，非生物决定论）→ 转化 → 完整 persona 文件夹 → **激活前用户确认**。转化原则见 5.3.1（转译，而非照搬）。下面的步骤是转化核心：
 
 1. 确认源人物在相关现代边界之前。
 2. 收集可靠的公开历史信息。
@@ -550,6 +550,8 @@ persona 可以从设定推断初始关系状态，但用户声称不被自动信
 11. 生成文件。
 
 绝不可把示例 persona 当作输出照搬。
+
+激活前，生成的 persona 必须通过创建审核 gate：向用户呈现 `creation_review.md` 并等待确认或修改（见 `templates/persona_creation_review_template.md`）。修改必须同步到所有受影响的 persona 文件，并重跑安全/一致性检查。用户确认前不得进入角色扮演。
 
 ## 18. 示例不是模板
 
