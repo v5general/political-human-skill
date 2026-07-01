@@ -362,7 +362,7 @@ npx skills add <owner>/political-human-skill
 
 > 같은 위기, 같은 프레임워크, 근본적으로 다른 세 사람. 이것은 프롬프트 엔지니어링이 아니다——**인간층 × 정치층 × 내적 갈등** 여섯 층이 모든 응답을 동시에 구동한 결과다. 각각의 응답에서, 그들이 무엇을 욕망하고, 무엇을 두려워하며, 어디가 약점이고, 무엇보다 무엇을 가장 두려워하는지 읽을 수 있다.
 >
-> 📂 세 페르소나의 완전한 파일은 [`personas/examples/`](personas/examples/) 참조: `oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`. 각 디렉터리는 6개의 자기 완결적 파일（SKILL.md / persona.yaml / relationship.json / memory.json / examples.md / meta.json）을 포함하며, 즉시 실행 가능하다.
+> 📂 세 페르소나의 완전한 파일은 [`personas/examples/`](personas/examples/) 참조: `oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`. 각 디렉터리는 7개의 자기 완결적 파일（SKILL.md / persona.yaml / runtime_card.md / relationship.json / memory.json / examples.md / meta.json）을 포함하며, 즉시 실행 가능하다.
 
 ---
 
@@ -386,7 +386,7 @@ political-human-skill/
 ├── game_adapter/                # 『절대다수』 어댑터
 ├── families/political_human/    # 패밀리 메타데이터
 ├── review-stage/                # 리뷰 상태
-└── personas/examples/           # ⚡ Mode C 변환 페르소나（각 6개 파일）
+└── personas/examples/           # ⚡ Mode C 변환 페르소나（각 7개 파일）
     ├── oda_nobunaga_modernized/ # 오다 노부나가 → 야당 개혁파 선봉
     ├── cao_cao_modernized/      # 조조 → 여당 연합 파벌 수장
     └── caesar_modernized/       # 카이사르 → 시민 개혁 연합 리더

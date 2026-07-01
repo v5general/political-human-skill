@@ -362,7 +362,7 @@ npx skills add <owner>/political-human-skill
 
 > 同じ危機、同じフレームワーク、根本的に異なる三人。これはプロンプトエンジニアリングではない——**人間レイヤー × 政治レイヤー × 内的葛藤** の六層が、すべての応答を同時に駆動しているのだ。それぞれの応答からは、彼らが何を欲し、何を恐れ、どこが弱く、何よりも何を最も懼れているかが読み取れる。
 >
-> 📂 三者各々の完全なペルソナファイルは [`personas/examples/`](personas/examples/) を参照：`oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`。各ディレクトリは 6 つの自己完結ファイル（SKILL.md / persona.yaml / relationship.json / memory.json / examples.md / meta.json）を含み、すぐに実行可能。
+> 📂 三者各々の完全なペルソナファイルは [`personas/examples/`](personas/examples/) を参照：`oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`。各ディレクトリは 7 つの自己完結ファイル（SKILL.md / persona.yaml / runtime_card.md / relationship.json / memory.json / examples.md / meta.json）を含み、すぐに実行可能。
 
 ---
 
@@ -386,7 +386,7 @@ political-human-skill/
 ├── game_adapter/                # 『絶対多数』アダプター
 ├── families/political_human/    # ファミリーメタデータ
 ├── review-stage/                # レビュー状態
-└── personas/examples/           # ⚡ Mode C 変換済みペルソナ（各 6 ファイル）
+└── personas/examples/           # ⚡ Mode C 変換済みペルソナ（各 7 ファイル）
     ├── oda_nobunaga_modernized/ # 織田信長 → 野党改革派の急先鋒
     ├── cao_cao_modernized/      # 曹操 → 与党連合中核派閥の領袖
     └── caesar_modernized/       # カエサル → 市民改革連合リーダー

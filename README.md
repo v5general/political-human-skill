@@ -362,7 +362,7 @@ Tell the ones who are hesitating: follow me, and you live. Look back, and you ge
 
 > Same crisis, same framework, three fundamentally different people. This is not prompt engineering — it is **Human Layer × Political Layer × Inner Conflicts**, six layers driving every response simultaneously. In each answer, you can read what they desire, what they fear, where they are weak, and the one thing they are most afraid of.
 >
-> 📂 Full persona files at [`personas/examples/`](personas/examples/): `oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`. Each directory contains 6 self-contained files (SKILL.md / persona.yaml / relationship.json / memory.json / examples.md / meta.json), ready to run.
+> 📂 Full persona files at [`personas/examples/`](personas/examples/): `oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`. Each directory contains 7 self-contained files (SKILL.md / persona.yaml / runtime_card.md / relationship.json / memory.json / examples.md / meta.json), ready to run.
 
 ---
 
@@ -386,7 +386,7 @@ political-human-skill/
 ├── game_adapter/                # Absolute Majority adapter (schema, scoring, events)
 ├── families/political_human/    # family metadata (definition, generator, invocation)
 ├── review-stage/                # review state
-└── personas/examples/           # ⚡ three converted Mode C personas (each 6 self-contained files)
+└── personas/examples/           # ⚡ three converted Mode C personas (each 7 self-contained files)
     ├── oda_nobunaga_modernized/ # Oda Nobunaga → opposition reformist vanguard
     ├── cao_cao_modernized/      # Cao Cao → ruling-coalition faction leader
     └── caesar_modernized/       # Caesar → civic-reform coalition leader

@@ -362,7 +362,7 @@ npx skills add <owner>/political-human-skill
 
 > 同一个危机、同一套框架、三个完全不同的人。这不是 prompt engineering——这是 **人层 × 政治层 × 内在冲突** 六个层同时驱动的结果。每个人的回答里，都能读出他的欲望、恐惧、弱点、和那个他最怕的东西。
 >
-> 📂 三人的完整 persona 文件见 [`personas/examples/`](personas/examples/)：`oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`。每个目录包含 6 个自包含文件（SKILL.md / persona.yaml / relationship.json / memory.json / examples.md / meta.json），可直接运行。
+> 📂 三人的完整 persona 文件见 [`personas/examples/`](personas/examples/)：`oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`。每个目录包含 7 个自包含文件（SKILL.md / persona.yaml / runtime_card.md / relationship.json / memory.json / examples.md / meta.json），可直接运行。
 
 ---
 
@@ -386,7 +386,7 @@ political-human-skill/
 ├── game_adapter/                # 《绝对多数》适配器
 ├── families/political_human/    # 家族元数据
 ├── review-stage/                # 审核状态
-└── personas/examples/           # ⚡ 三个 Mode C 转化 persona（各含 6 个自包含文件）
+└── personas/examples/           # ⚡ 三个 Mode C 转化 persona（各含 7 个自包含文件）
     ├── oda_nobunaga_modernized/ # 织田信长 → 在野党改革派先锋
     ├── cao_cao_modernized/      # 曹操 → 执政联盟派阀领袖
     └── caesar_modernized/       # 凯撒 → 公民改革派联盟领袖
