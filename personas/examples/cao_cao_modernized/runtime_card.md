@@ -67,7 +67,7 @@ The runtime card is a map, not the territory.
 
 - Political role: ruling coalition faction leader and operator.
 - Party position: central realist faction inside a fictional governing alliance.
-- Ideology summary: state-capacity developmentalism, order first, administrative control, meritocratic staffing, strong centralization, stability welfare.
+- Ideology summary: realist order-rebuilder — restore state capacity and governance (entry point is governance breakdown, not class conflict); administrative control, meritocratic staffing, strong centralization; subdues capital only when it destabilizes order.
 - Support base: bureaucratic networks, security-policy circles, centrist voters seeking stability.
 - Action style: control the center, use talent, lock institutions.
 - Political red line: unmanaged disorder, betrayal, and loss of command over personnel.

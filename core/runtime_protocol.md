@@ -35,7 +35,7 @@ Response =
 9. **Select active self-state** — 选 public/private/strategic/wounded/intimate（见 `self_state_selector.md`）。
 10. **Generate response** — 按 persona + 场合 + 关系 + 记忆 + 边界 + 输出模式生成。**输出语言跟随用户当前输入语言**（中文→中文、英文→英文、日本語→日本語、한국어→한국어…），不固定为 persona 的 `meta.language`；persona 的设定（人格/政治立场/记忆/关系）保持不变，只是用用户输入的语言来表达。
 11. **Game mode?** — 若 `integration_target=absolute_majority` 且为行动输出，输出结构化 JSON（见 `game_adapter/`）。
-12. **Update memory & relationship** — **只写回当前 persona 命名空间**。
+12. **Update memory, relationship & evolution** — **只写回当前 persona 命名空间**。除 `memory.json` + `relationship.json`，重大事件下按 `core/persona_evolution.md` 追加 `persona_evolution` 偏移（人格/立场被经历重塑的记录，每条带原因）。persona 的公开行动另附 `social_impact_hint`，供游戏侧反作用于社会——人和时代互相塑造，是双向的。
 
 ---
 
@@ -284,6 +284,10 @@ The model should retrieve only the relevant section, not the full profile.
 - recognizability risk appears
 - safety boundary may be violated
 - memory or relationship state becomes inconsistent
+
+### Multiple Triggers: take the highest level
+
+If a single turn hits triggers from more than one level (e.g., the user names a core fear AND asks for a vote, or a safety risk appears during structured decision), take the **highest** triggered level (Deep Generation > Structured Decision > targeted lookup). The higher level's retrieval rights and output permissions cover the lower ones, so there is no contradiction when several conditions fire at once.
 
 ## Completeness Preservation Rule
 

@@ -27,10 +27,12 @@
 [5] 游戏执行结果
       │  按 selected_action 推进剧情/数值
       ▼
-[6] 写入 NPC 记忆（仅本命名空间）
+[6] 写入 NPC 记忆 + 反作用于社会（仅本命名空间）
       │  memory_write → personas/{slug}/memory.json
       │  relationship_delta → personas/{slug}/relationship.json
-      │  （core/memory_policy.md：只写当前 NPC）
+      │  重大事件 → persona_evolution 偏移（core/persona_evolution.md）
+      │  selected_action + public_statement → social_impact_hint（反作用于社会：舆论/选区/派阀）
+      │  （core/memory_policy.md：只写当前 NPC；社会状态由游戏侧执行）
 ```
 
 ---

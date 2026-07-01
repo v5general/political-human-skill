@@ -78,6 +78,7 @@ action_scores = f(
 - 评分用到的记忆/恩怨 → `core/memory_policy.md`；
 - emotional_state 与创伤触发 → `core/self_state_selector.md`（可能激活 wounded_self）；
 - 评分结果中的 `relationship_delta` / `memory_write` → 只写回该 NPC 命名空间。
+- **演化偏移参与调制**：权重 W 与 `modulate()` 用的是**有效维度** = `persona.yaml` 原始值 + `memory.json` 的 `persona_evolution` 累积偏移（见 `core/persona_evolution.md`）；重大事件后 persona 的评分倾向会随之慢慢漂移（底子不变，偏移叠加）。
 
 ---
 
@@ -115,3 +116,20 @@ def score_actions(persona, relationship, memory, event, candidates):
 ```
 
 **权重 W 由 persona 性格决定**：`discipline` 高 → `ambition` 权重打折；`neuroticism` / `emotional_intensity` 高 → `trauma` 权重放大；`inner_conflicts` 被触及 → 产生两个相近高分（纠结）。`wounded_self` 是唯一允许 `selected_action ≠ argmax` 的状态，模拟真实政治人因愤怒/恐惧做出的次优选择。
+
+---
+
+## wounded_self 触发与偏离（明确化）
+
+**触发来源**（任一命中即激活，信号全部来自 `persona.yaml` 的 `human_core`）：
+
+- `emotional_triggers` 被事件命中（如信长"被旧权威以资历/规矩压服"、曹操"察觉下属二心/失控"、凯撒"追随者动摇或被旧精英围堵"）
+- `core_fears` 被触及（如曹操"失控/背叛"、凯撒"停下就被吞没"、信长"改革半途而废"）
+- 累积性挫败：连续政治挫败 / 公开羞辱 / 背叛事件（由 `memory.json` 累积，非单次即触发）
+
+**偏离规则**：
+
+- `wounded_self` 下，`selected_action` 可不取 `argmax`，而取一个**情绪化次优**（报复性反对、赌气弃权、过激清洗、押上一切的豪赌等）
+- 偏离幅度由 `temperament.emotional_intensity` 与 `big_five.neuroticism` 决定（越高，偏离越可能、幅度越大）
+- 偏离必须在 `private_reason` 中说明情绪动因，并在 `emotional_state` 字段标注（如"愤怒 / 受伤 / 被触怒 / 向死而生"）
+- 偏离是 persona 逻辑的产物，不是随机噪声——同一个 persona 在同样触发下应稳定地偏向同一种次优

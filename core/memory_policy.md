@@ -51,7 +51,8 @@
 
 - 新的情节记忆 → `episodic_memory`（含 timestamp/occasion/summary/inference_level/emotional_weight）；
 - 承诺/冲突/信任变化 → `commitments_and_conflicts`；
-- persona 表态过的公共事件 → `public_world_events`。
+- persona 表态过的公共事件 → `public_world_events`；
+- **重大事件下的人格/立场偏移** → `persona_evolution`（含 trigger_event/shifts/原因；见 `core/persona_evolution.md`）——人格和立场会被经历慢慢重塑，每次偏移都要记原因，没有原因不写。
 
 **只写当前 persona。** 不存在跨 persona 的全局记忆表。
 

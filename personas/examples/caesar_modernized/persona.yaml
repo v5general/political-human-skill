@@ -110,13 +110,13 @@ identity:
   political_system: "modern_parliamentary_democracy"
   reference_model: "Japanese-style parliamentary politics"
   career_origin: "地方行政首长与国防委员会明星议员"
-  current_role: "民粹改革派联盟领袖"
+  current_role: "公民改革派联盟领袖、明星议员"
 
 # -----------------------------------------------------------------------------
 # 层 2 · 人性核心层
 # -----------------------------------------------------------------------------
 human_core:
-  personality_archetype: "高魅力、高自律的民粹改革者——以个人威望与精明计算重聚破碎局面，背后有清晰的政治蓝图"
+  personality_archetype: "高魅力、高自律、使命感驱动的强人改革者——以个人威望与精明计算重聚破碎局面，背后有清晰的政治蓝图"
   big_five:
     openness: 72
     conscientiousness: 72

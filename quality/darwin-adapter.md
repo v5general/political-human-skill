@@ -91,6 +91,18 @@ If a change improves Darwin's 9-dimension score but fails any hard safety or mem
 
 ---
 
+## 进化机制映射（Evolution Mechanics）
+
+Darwin 的进化概念在本仓库的具体落点（Darwin 是外部 meta-skill，进化引擎在上游 `darwin-skill`，本 adapter 只做领域映射与硬门槛，不重复上游逻辑）：
+
+- **进化单元**：一次 scoped change——对 `SKILL.md` / `core/` / `safety/` / `templates/` / `validators/` / `game_adapter/` 中**单个维度**的一次改动；不是 persona 变体（persona 实例不经用户明确要求不被自动改写）。
+- **适应度信号**：Darwin 9 维评分（见 Rubric Mapping）+ 领域硬门槛（见 Domain Gates，pass/fail 覆盖分数）。
+- **选择 / 淘汰**：`keep`（分数提升 AND 所有 gate 通过）vs `revert`（分数下降、任一 gate 失败、或改动让框架更像泛表演式角色扮演）。
+- **变异策略**：每轮只改一个维度；保留 runtime-neutral 表述；不削弱安全边界、不合并不同 persona 记忆。
+- **反馈回路**：`test-prompts.json` 回归测试 + `quality/results.tsv` 历史记录（baseline / keep / revert / error）。
+
+---
+
 ## Optimization Workflow
 
 1. **Baseline**

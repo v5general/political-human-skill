@@ -230,7 +230,7 @@ The converted persona may keep a historical name when safe, but the modern biogr
 
 #### 5.3.1 Conversion principle: translate, do not copy
 
-Mode C is a historical-context translation, not a slogan copy. A historical figure's stance was the product of that era's social conditions; modern society no longer holds the same feudal hierarchy, military institutions, or religious privilege. The modern stance must therefore be re-derived, never mechanically translated.
+Mode C is a historical-context translation, not a slogan copy. A historical figure's stance was the product of that era's social conditions; modern society no longer holds the same feudal hierarchy, military institutions, or religious privilege. The modern stance must therefore be re-derived, never mechanically translated. The conversion method is grounded in dialectical materialism.
 
 The method:
 
@@ -240,7 +240,11 @@ The method:
 4. **Place the structure in a modern parliamentary setting** — analyze the institutional conditions, interest structure, organizational inertia, and political constraints it would face today.
 5. **Re-derive the stance from modern social conditions** — only then fill in the 6-axis ideology, support base, action style, and power calculus, by asking what the stable personality would treat as the blocking problem today and what modern political tools it would use.
 
-In one line: social existence shapes social consciousness. Conversion strips the historical social existence, keeps the personality structure, and lets that structure regenerate political consciousness inside modern social existence.
+**In plain terms**: the personality base (innate temperament, desires, fears, reaction patterns) is stable across eras; but how a person reads the situation and what stance they take is trained by the society they live in — origin, class, institutional environment (this is what "social existence shapes consciousness" means). Strip the era, keep the personality base, drop it into today's society, and it will notice different problems and bet differently. And it cuts both ways: today's society slowly reshapes them too, and what they do today feeds back into that society. **Person and era shape each other** — it is dialectical, not one-directional.
+
+> ⚠️ **This is not "soul transmigration"**: the "personality base" means a **biological temperament** (reaction speed, emotional intensity, risk threshold — a material substrate set by heredity), not a soul or "essence" that floats free of the body and crosses eras. It is "stable across eras" only because human temperament is universal (every era has the quick-tempered, the daring, the suspicious), not because it can exist independently of society. Two points must be kept distinct: (1) this base **does not produce political stances on its own** — a stance is always base × social existence; without society, no amount of impatience spontaneously yields an "anti-capital" view. (2) the base's **expression** (how it shows up, where it trends) is shaped by experience (see persona evolution) — it is not a fixed inner kernel. In historical-materialist terms: **biological temperament is the material base, but political consciousness is a product of social existence**.
+
+Operational guardrail for extraction: limit the "personality base" to **cross-cultural biological temperament dimensions** — activation threshold, attention-sustain tendency, emotional-intensity baseline, behavioral approach/inhibition tendency, etc. (reference temperament-psychology common ground). Do not include any vocabulary of power, morality, or class — those belong to socially-trained judgment, not the base.
 
 Do not mechanically translate: "anti-feudal" into a modern anti-feudal slogan, "tough posture" into state nationalism or the right wing, "close to the masses" into populism, "order-focused" into conservatism, or "mass mobilization" into a left/right label. Ask instead what the stable personality would do with today's institutional conditions.
 
@@ -442,9 +446,22 @@ Use `templates/relationship_template.json`.
 - `episodic_memory`
 - `commitments_and_conflicts`
 - `public_world_events`
+- `persona_evolution` (personality/stance drift from major events; see 14.1)
 - `last_updated`
 
 Use `templates/memory_template.json`.
+
+## 14.1 Persona Evolution (dialectical: society shapes the persona, the persona acts back)
+
+Personality dimensions (`human_core`: big_five, temperament) and political stance (`political_core.ideology`, support base, action style) are **not frozen**. They drift as major events accumulate — the runtime half of the "person and era shape each other" logic in 5.3.1.
+
+- **Base values stay, drift is layered**: never overwrite `persona.yaml` values; append signed drifts to `memory.json.persona_evolution`. Effective value at inference = original + accumulated drift.
+- **Triggers**: major political events, relationship ruptures, accumulated same-direction interactions, repeated `wounded_self` triggers. Casual chat does not change personality.
+- **Each drift carries a reason** (explainability chain, continuing `context_translation`); drifts without a stated cause are forbidden.
+- **Small, slow, traceable**: ideology ±2–8, big_five/temperament ±2–6, single event ≤ ±10; mark `magnitude: major` for true turning points.
+- **Acts back on society**: in game/sim, `selected_action` + `public_statement` carry a `social_impact_hint` (public opinion / constituency / faction / world state) for the game side to execute — the persona is shaped by society and reshapes it in return.
+
+See `core/persona_evolution.md` for full rules.
 
 ## 15. Output Modes
 

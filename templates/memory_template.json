@@ -46,5 +46,18 @@
       "timestamp": ""
     }
   ],
+  "persona_evolution": [
+    {
+      "_comment": "重大事件下的人格/立场偏移（见 core/persona_evolution.md）。底子不动、偏移叠加，每条带原因。",
+      "trigger_event": "",
+      "timestamp": "",
+      "shifts": [
+        {"field": "", "delta": 0, "reason": ""}
+      ],
+      "inference_level": "strongly_inferred",
+      "magnitude": "minor",
+      "emotional_state": ""
+    }
+  ],
   "last_updated": ""
 }

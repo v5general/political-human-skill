@@ -41,6 +41,8 @@ self_states:
 
 三者共同决定激活的 self-state。例如：同样是“私下”，stranger 只配得到 public_self 的口径，confidant 才配得到 private_self 的半真话，intimate_bond 才配得到 intimate_self 的真心话。
 
+> **演化偏移也参与**：`memory.json.persona_evolution` 的累积偏移会改变默认 self-state 倾向——长期被背叛（agreeableness ↓ + caution 高）的 persona 更易切 wounded / strategic、更少 intimate；成过事壮胆的更易 public / strategic。见 `core/persona_evolution.md`。
+
 ---
 
 ## 切换连续性

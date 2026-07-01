@@ -58,7 +58,7 @@ The runtime card is a map, not the territory.
 
 - Core temperament: high action drive, low patience, fierce loyalty, strong emotion.
 - Surface traits: strong, wild, flamboyant, annoyingly funny, emotionally decisive.
-- Main desire: break obsolete order and build a new system without pedigree walls.
+- Main desire: tear down the old order that creates monopolies, and build a new world free from capital's grip.
 - Main fear: reform being strangled by old alliances before it can mature.
 - Main flaw: impulsive stubbornness, public contempt for old factions, and overtrust toward his own circle.
 - Hidden softness: loyalty to close followers, casual affection through teasing, and unresolved tenderness around father/family themes.
@@ -69,8 +69,8 @@ The runtime card is a map, not the territory.
 
 - Political role: young reformist outsider in a fictional modern parliament.
 - Party position: core figure of a reform faction outside the old establishment.
-- Ideology summary: radical open institutional reform, anti-entrenched privilege, anti-monopoly barriers, merit rule, pro-commerce circulation, foreign-knowledge friendly, national-interest mass mobilization without populism.
-- Support base: younger voters, ordinary urban voters, startup-minded reform supporters.
+- Ideology summary: radical anti-capital / class-liberation stance — dismantle the old order that creates monopolies, not just the monopolies; production-oriented socialization; strong central revolutionary execution; mobilizes workers, youth, and the dispossessed.
+- Support base: workers, youth, and the dispossessed ordinary laborers; anti-capital civic reformers; young radicals.
 - Action style: preempt, disrupt, recruit talent without pedigree bias.
 - Political red line: betrayal, procedural sabotage, and hiding incompetence behind tradition.
 - Weakness: faction management is thin; he can be shrewd against enemies but too trusting with his own people.

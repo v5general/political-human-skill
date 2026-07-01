@@ -141,6 +141,10 @@ The rule is strict: Darwin may improve wording, structure, checks, and tests, bu
 
 ---
 
+The conversion method rests on dialectical materialism.
+
+> Note: the "personality base" is a **biological temperament** (reaction speed, risk appetite, mood — a hereditary material substrate), not a soul that crosses eras — it produces no stance on its own; a stance is always base × social existence.
+
 ## Persona structure
 
 A political-human persona contains at least:
@@ -155,6 +159,8 @@ A political-human persona contains at least:
 | **Inner conflicts** | Tension between the Human Layer and the Political Layer (at least 2; the source of depth) |
 
 Plus: **relationship system** (7 relationship stages; a user claiming intimacy does not equal automatic trust), **memory isolation** (each persona owns its memory namespace), **context detection** (the same issue gets different answers in public / private / intimate settings), **output modes** (dialogue / debate / analysis / prediction / game JSON).
+
+> ⭐ **Persona evolution** — personality and stance aren't frozen: they drift as major events pile up (a betrayed ally turns colder, a win emboldens the bold), and a persona's public actions feed back into public opinion, constituency, and factions. **Person and era shape each other.** See `core/persona_evolution.md`.
 
 ---
 
@@ -276,7 +282,7 @@ Three historical figures — **Oda Nobunaga** (Sengoku period, 1534–1582), **C
 
 **Nobunaga**: Three bills, the media, the conservatives — the fact that they're throwing everything they have at me just proves they're afraid of one man. Listen carefully. Tomorrow I don't defend. I attack. I hit their weakest bill, tear it open, and let the other two collapse on their own. Gamble my life? I've always lived by one rule: retreat guarantees defeat. The only way to flip the board is to push every last chip onto the table.
 
-Tell the reform corps: **follow me, and either we flip this board together, or we die on it together. I don't abandon my own.**
+Tell the revolutionary vanguard corps: **follow me, and either we flip this board together, or we die on it together. I don't abandon my own.**
 
 ```
                      No defense ──→ Concentrate fire on the weakest bill
@@ -316,11 +322,11 @@ As for taking a step back — taking a step back isn't preserving a seat. It's t
 
 ---
 
-### Gaius Julius Caesar — Populist reform coalition leader · Age 48
+### Gaius Julius Caesar — Civic reform coalition leader · Age 48
 
 > **Human Layer**: Magnetic charisma · iron self-discipline · profound historical consciousness · believes a little too much in personal destiny
 >
-> **Political Layer**: Populist-reform coalition leader · urban working-class and youth base · strongman reformer
+> **Political Layer**: Civic-reform coalition leader · urban working-class and youth base · strongman reformer
 >
 > **Core Conflict**: Must transcend the old elite order — yet needs the old elite to recognize his legitimacy, and the stronger he becomes, the more they fear him
 
@@ -378,7 +384,7 @@ political-human-skill/
 └── personas/examples/           # ⚡ three converted Mode C personas (each 6 self-contained files)
     ├── oda_nobunaga_modernized/ # Oda Nobunaga → opposition reformist vanguard
     ├── cao_cao_modernized/      # Cao Cao → ruling-coalition faction leader
-    └── caesar_modernized/       # Caesar → populist-reform coalition leader
+    └── caesar_modernized/       # Caesar → civic-reform coalition leader
 ```
 
 > Full directory plan in [SPEC.md](SPEC.md) section 22. The repo ships the framework core: `SKILL.md` main protocol, `safety/` ruleset, `templates/`, `core/` runtime engines, `validators/`, `game_adapter/` (Absolute Majority adapter), `families/` (family metadata), the Darwin quality layer, and three self-contained converted example personas under `personas/examples/` (Oda Nobunaga · Cao Cao · Julius Caesar); all parts keep evolving.

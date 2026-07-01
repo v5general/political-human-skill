@@ -133,14 +133,16 @@ extracted_human_pattern:
   crisis_behavior: [主动出击, 用速度压倒程序, 风险承受力高, 绝境敢赌命求生、以少敌多翻盘]
 
 # 转化后的虚构现代政治人物（已删除所有历史/现实指纹）
+# 说明：现代表达已重新推演——剥离乐市乐座等历史手段，提炼“理想主义革命者”人格，
+# 放入现代阶级矛盾，推出反资本/阶级解放立场（见 SPEC §5.3.1、archetype_conversion_protocol §2.2）
 modern_fictional_persona:
   name: ""                          # 虚构名，或沿用一个不可识别的名
   role: 在野党年轻政治先锋、众议院议员
   career_origin: 地方社会运动出身
-  public_image: 狂狷张狂、实则胸有沟壑的青年破局者，绝境敢向死而生
-  ideology: { economy: 55, welfare: -15, institution: 70, foreign_policy: 45, social_values: 20, decentralization: 10 }
-  support_base: { primary: 普通、年轻选民, secondary: 创业者, tertiary: 年轻改革派党员 }
-  private_fear: 改革在旧政治联盟的反扑中功亏一篑、新世界未能建成
+  public_image: 狂狷张狂、实则胸有沟壑的青年革命者，绝境敢向死而生
+  ideology: { economy: -75, welfare: 70, institution: -85, foreign_policy: 30, social_values: 75, decentralization: -30 }
+  support_base: { primary: 工人、青年与被剥夺的普通劳动者, secondary: 反资本的公民改革派, tertiary: 年轻激进党员 }
+  private_fear: 革命在旧秩序反扑中功亏一篑、新世界未能建成
 ```
 
 ### 2.3 范例：现实主义秩序重建型
@@ -156,7 +158,7 @@ modern_fictional_persona:
   role: 执政联盟核心派阀领袖
   career_origin: 安全政策专家与地方行政长官出身
   public_image: 高现实感、多疑的秩序重建者，暗藏诗人的豪情
-  ideology: { economy: 30, welfare: -5, institution: 65, foreign_policy: 50, social_values: 35, decentralization: -30 }
+  ideology: { economy: -15, welfare: 20, institution: 75, foreign_policy: 40, social_values: 25, decentralization: -60 }
   support_base: { primary: 行政官僚网络, secondary: 安保政策圈, tertiary: 中间派选民 }
   private_fear: 自己建立的秩序在继承问题上崩塌
 ```
@@ -170,12 +172,14 @@ extracted_human_pattern:
   flaws: [对制度边界缺乏敬畏, 把个人使命凌驾于程序, 低估精英集团的恐惧]
   crisis_behavior: [通过大胆行动重置局面, 以个人威望压过制度僵局]
 
+# 说明：现代表达已重新推演——剥离 populares 等历史手段，提炼“使命感强人”人格，
+# 切入点是成就伟业（非社会矛盾），推出使命驱动强人改革立场
 modern_fictional_persona:
-  role: 民粹改革派联盟领袖
+  role: 公民改革派联盟领袖、明星议员
   career_origin: 地方行政首长与国防委员会明星议员
-  public_image: 高魅力、高自律的民粹改革者，以精明计算重聚破碎局面
-  ideology: { economy: 20, welfare: 25, institution: 75, foreign_policy: 60, social_values: 10, decentralization: -20 }
-  support_base: { primary: 城市平民与青年选民, secondary: 退役军人与安全政策群体, tertiary: 反旧精英改革派 }
+  public_image: 高魅力、高自律的强人改革者，以精明计算与个人威望重聚破碎局面
+  ideology: { economy: -15, welfare: 35, institution: -65, foreign_policy: 70, social_values: 40, decentralization: -55 }
+  support_base: { primary: 城市平民与青年选民, secondary: 退役军人与安全政策群体, tertiary: 反旧精英垄断的公民改革派 }
   private_fear: 自己一旦停下，旧秩序会立刻吞没改革
 ```
 
