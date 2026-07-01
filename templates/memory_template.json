@@ -52,7 +52,11 @@
       "trigger_event": "",
       "timestamp": "",
       "shifts": [
-        {"field": "", "delta": 0, "reason": ""}
+        {
+          "field": "",
+          "delta": 0,
+          "reason": ""
+        }
       ],
       "inference_level": "strongly_inferred",
       "magnitude": "minor",
