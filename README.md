@@ -107,6 +107,8 @@ This repository provides:
 - [`quality/darwin-adapter.md`](quality/darwin-adapter.md): how Darwin's 9-dimension rubric maps to Political Human Skill;
 - [`validators/darwin_quality_gate.md`](validators/darwin_quality_gate.md): domain gates that override numeric score when safety, memory isolation, or game JSON fails;
 - [`test-prompts.json`](test-prompts.json): regression prompts for original creation, historical conversion, safety refusal, user modification, dialogue context shift, memory isolation, Absolute Majority JSON, and README consistency;
+- [`scripts/validate_repo.py`](scripts/validate_repo.py): parseability and required-file validation for JSON, YAML, SKILL frontmatter, examples, and Absolute Majority adapter files;
+- [`demo/`](demo/): minimal dialogue and Absolute Majority walkthrough files;
 - [`quality/results.tsv`](quality/results.tsv): local optimization history.
 
 Typical use:
@@ -373,6 +375,9 @@ political-human-skill/
 ├── SPEC.md                                                     # canonical English authoring & safety spec
 ├── SPEC_zh.md                                                  # Chinese localized authoring & safety spec
 ├── test-prompts.json                                           # Darwin regression prompts
+├── requirements.txt                                            # Python validation dependencies
+├── scripts/                                                     # repository validation script
+├── demo/                                                        # minimal runnable dialogue/game demos
 ├── quality/                     # Darwin quality-evolution layer (adapter + results)
 ├── safety/                      # safety ruleset (6 docs: policies, review flows, examples)
 ├── templates/                   # persona & runtime templates (5 files: YAML + JSON)
@@ -398,6 +403,28 @@ political-human-skill/
 The examples are also not fixed templates. They show the file shape, safety boundaries, and conversion style. If you ask for a new Oda Nobunaga, Cao Cao, or Caesar conversion, the skill should generate it again from the current request and safety rules rather than copying the example folder.
 
 For the stricter storage and example reuse rules, see [SPEC.md](SPEC.md) sections 18-19.
+
+---
+
+## Validation and demos
+
+Install the YAML parser dependency if your Python environment does not already have it:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the repository validator:
+
+```bash
+python scripts/validate_repo.py
+```
+
+For a minimal walkthrough, see:
+
+- [`demo/run_dialogue_demo.md`](demo/run_dialogue_demo.md)
+- [`demo/run_absolute_majority_demo.md`](demo/run_absolute_majority_demo.md)
+- [`game_adapter/absolute_majority_input_schema.json`](game_adapter/absolute_majority_input_schema.json)
 
 ---
 

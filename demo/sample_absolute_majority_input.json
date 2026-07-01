@@ -1,0 +1,40 @@
+{
+  "persona_id": "oda_nobunaga_modernized",
+  "event_id": "budget_reform_001",
+  "event_type": "budget_vote",
+  "policy_issue": "Fiscal reform bill reallocating subsidies from legacy districts to youth housing and transit",
+  "public_support_rate": 57,
+  "party_order": "Oppose the bill publicly until district guarantees are added.",
+  "faction_order": "Use the vote to force a rewrite rather than accept symbolic amendments.",
+  "district_pressure": "Local supporters want visible funds for transit and small business relief.",
+  "media_pressure": "National media frames the persona as reckless if he blocks the budget.",
+  "player_instruction": "Push for a bolder amendment, but avoid collapsing the coalition.",
+  "candidate_actions": [
+    "support_bill",
+    "oppose_bill",
+    "demand_revision",
+    "negotiate_budget",
+    "stay_silent"
+  ],
+  "current_relationship": {
+    "trust": 18,
+    "respect": 42,
+    "affection": 8,
+    "caution": 61,
+    "dependency": 5
+  },
+  "recent_memory": [
+    "The player previously backed a procedural delay but failed to warn him before speaking to the press."
+  ],
+  "parliament_context": {
+    "ruling_seats": 239,
+    "opposition_seats": 226,
+    "committee_stage": "budget_committee_final",
+    "vote_margin_estimate": 6
+  },
+  "party_context": {
+    "party_name": "Reform Vanguard",
+    "faction_name": "Forward Bloc",
+    "leadership_stability": 44
+  }
+}

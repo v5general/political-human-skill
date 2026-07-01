@@ -107,6 +107,8 @@
 - [`quality/darwin-adapter.md`](quality/darwin-adapter.md): Darwin의 9차원 rubric을 Political Human Skill에 매핑하는 방법.
 - [`validators/darwin_quality_gate.md`](validators/darwin_quality_gate.md): 안전, 메모리 격리, 게임 JSON 실패 시 숫자 점수보다 우선하는 도메인 게이트.
 - [`test-prompts.json`](test-prompts.json): 오리지널 생성, 역사 전환, 안전 거절, 사용자 수정, 맥락 전환, 메모리 격리, 절대다수 JSON, README 일관성 회귀 테스트.
+- [`scripts/validate_repo.py`](scripts/validate_repo.py): JSON, YAML, SKILL frontmatter, 예시 persona, Absolute Majority 어댑터 필수 파일을 검증하는 스크립트.
+- [`demo/`](demo/): 최소 실행 가능한 대화 demo와 Absolute Majority 구조화 의사결정 demo.
 - [`quality/results.tsv`](quality/results.tsv): 로컬 최적화 이력.
 
 일반적인 사용법:
@@ -373,6 +375,9 @@ political-human-skill/
 ├── SPEC.md                                                     # 영어 canonical 창작 및 안전 명세
 ├── SPEC_zh.md                                                  # 중국어 현지화 창작 및 안전 명세
 ├── test-prompts.json                                           # Darwin 회귀 테스트 prompt
+├── requirements.txt                                            # Python 검증 의존성
+├── scripts/                                                     # 저장소 검증 스크립트
+├── demo/                                                        # 최소 실행 가능 대화/게임 demo
 ├── quality/                     # Darwin 품질 진화 레이어（어댑터 + 결과）
 ├── safety/                      # 안전 규칙집（6개 문서）
 ├── templates/                   # 템플릿（5개 파일）
@@ -398,6 +403,28 @@ political-human-skill/
 예시는 고정 템플릿도 아닙니다. 파일 구조, 안전 경계, 변환 스타일을 보여 주기 위한 것입니다. 오다 노부나가, 조조, 카이사르 같은 같은 역사 인물을 다시 요청하더라도 예시 폴더를 복사하지 않고, 현재 요청과 안전 규칙에 맞춰 다시 생성해야 합니다.
 
 저장 위치와 예시 재사용에 대한 더 엄격한 규칙은 [SPEC.md](SPEC.md) sections 18-19를 참고하세요.
+
+---
+
+## 검증과 demo
+
+Python 환경에 YAML 파서가 없다면 먼저 의존성을 설치합니다.
+
+```bash
+pip install -r requirements.txt
+```
+
+저장소 검증 스크립트를 실행합니다.
+
+```bash
+python scripts/validate_repo.py
+```
+
+최소 demo 진입점:
+
+- [`demo/run_dialogue_demo.md`](demo/run_dialogue_demo.md)
+- [`demo/run_absolute_majority_demo.md`](demo/run_absolute_majority_demo.md)
+- [`game_adapter/absolute_majority_input_schema.json`](game_adapter/absolute_majority_input_schema.json)
 
 ---
 

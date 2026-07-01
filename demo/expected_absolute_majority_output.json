@@ -1,0 +1,39 @@
+{
+  "persona_id": "oda_nobunaga_modernized",
+  "event_id": "budget_reform_001",
+  "selected_action": "demand_revision",
+  "candidate_actions": [
+    "support_bill",
+    "oppose_bill",
+    "demand_revision",
+    "negotiate_budget",
+    "stay_silent"
+  ],
+  "action_scores": {
+    "support_bill": 38,
+    "oppose_bill": 59,
+    "demand_revision": 86,
+    "negotiate_budget": 72,
+    "stay_silent": 12
+  },
+  "public_statement": "I will not vote for a budget that protects old channels and calls that reform. Put the district guarantees in writing, or bring a sharper bill.",
+  "private_reason": "He sees a narrow vote as leverage. Supporting the bill now would make him look obedient; pure opposition would waste the moment. A forced revision lets him attack the old allocation map while keeping the coalition alive.",
+  "emotional_state": "impatient, combative, but not yet reckless",
+  "relationship_delta": {
+    "familiarity": 1,
+    "trust": 2,
+    "affection": 0,
+    "respect": 3,
+    "caution": 1,
+    "dependency": 0
+  },
+  "memory_write": [
+    "In budget_reform_001, the player asked for a bolder amendment without collapsing the coalition; he chose to demand written revisions instead of symbolic support."
+  ],
+  "score_drivers": {
+    "support_base_pressure": "District supporters need visible material guarantees.",
+    "faction_pressure": "The faction wants a rewrite, not a symbolic protest.",
+    "personal_ambition": "He wants to be seen as the one who breaks legacy budgeting.",
+    "relationship_context": "Low trust keeps him from fully following the player's instruction, but respect makes him use it as tactical input."
+  }
+}

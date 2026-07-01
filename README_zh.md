@@ -109,6 +109,8 @@ Response = 人格档案 + 用户自我设定 + 关系状态 + 该人格独占的
 - [`quality/darwin-adapter.md`](quality/darwin-adapter.md)：说明 Darwin 的 9 维评分如何映射到 Political Human Skill；
 - [`validators/darwin_quality_gate.md`](validators/darwin_quality_gate.md)：领域硬门槛，安全、记忆隔离、游戏 JSON 失败时覆盖数字分数；
 - [`test-prompts.json`](test-prompts.json)：覆盖原创生成、历史转化、安全拒绝、用户修改、场合切换、记忆隔离、《绝对多数》JSON、README 一致性的回归测试；
+- [`scripts/validate_repo.py`](scripts/validate_repo.py)：检查 JSON、YAML、SKILL frontmatter、示例 persona 与《绝对多数》适配文件是否可解析、结构是否齐全；
+- [`demo/`](demo/)：最小可运行的对话 demo 与《绝对多数》结构化决策 demo；
 - [`quality/results.tsv`](quality/results.tsv)：本项目本地优化历史。
 
 典型用法：
@@ -373,6 +375,9 @@ political-human-skill/
 ├── SPEC.md                                                     # 英文 canonical 创作与安全规范
 ├── SPEC_zh.md                                                  # 中文本地化创作与安全规范
 ├── test-prompts.json                                           # Darwin 回归测试 prompt
+├── requirements.txt                                            # Python 验证依赖
+├── scripts/                                                     # 仓库验证脚本
+├── demo/                                                        # 最小可运行对话与游戏 demo
 ├── quality/                     # Darwin 品质进化层（适配器 + 结果）
 ├── safety/                      # 安全规则集（6 篇文档）
 ├── templates/                   # 模板（5 个文件：YAML + JSON）
@@ -398,6 +403,28 @@ political-human-skill/
 示例也不是固定模板。它们展示文件结构、安全边界和转化风格。如果你要求重新生成织田信长、曹操或凯撒这类历史人物转化，Skill 应根据当前请求和安全规则重新生成，而不是复制示例文件夹。
 
 更严格的存放和示例复用规则见 [SPEC.md](SPEC_zh.md) 第 18-19 节。
+
+---
+
+## 验证与 demo
+
+如果你的 Python 环境尚未安装 YAML 解析器，先安装依赖：
+
+```bash
+pip install -r requirements.txt
+```
+
+运行仓库验证脚本：
+
+```bash
+python scripts/validate_repo.py
+```
+
+最小演示入口：
+
+- [`demo/run_dialogue_demo.md`](demo/run_dialogue_demo.md)
+- [`demo/run_absolute_majority_demo.md`](demo/run_absolute_majority_demo.md)
+- [`game_adapter/absolute_majority_input_schema.json`](game_adapter/absolute_majority_input_schema.json)
 
 ---
 

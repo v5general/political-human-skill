@@ -107,6 +107,8 @@
 - [`quality/darwin-adapter.md`](quality/darwin-adapter.md): Darwinの9次元rubricをPolitical Human Skillへ対応づける説明。
 - [`validators/darwin_quality_gate.md`](validators/darwin_quality_gate.md): 安全性、メモリ隔離、ゲームJSONが失敗した場合に数値スコアより優先されるドメインゲート。
 - [`test-prompts.json`](test-prompts.json): オリジナル生成、歴史変換、安全拒否、ユーザー編集、文脈切替、メモリ隔離、絶対多数JSON、README一貫性の回帰テスト。
+- [`scripts/validate_repo.py`](scripts/validate_repo.py): JSON、YAML、SKILL frontmatter、サンプルpersona、Absolute Majorityアダプターの必須ファイルを検証するスクリプト。
+- [`demo/`](demo/): 最小限の対話demoとAbsolute Majority構造化意思決定demo。
 - [`quality/results.tsv`](quality/results.tsv): ローカル最適化履歴。
 
 典型的な使い方：
@@ -373,6 +375,9 @@ political-human-skill/
 ├── SPEC.md                                                     # 英語 canonical 創作・安全仕様
 ├── SPEC_zh.md                                                  # 中国語ローカライズ版創作・安全仕様
 ├── test-prompts.json                                           # Darwin 回帰テスト prompt
+├── requirements.txt                                            # Python検証依存関係
+├── scripts/                                                     # リポジトリ検証スクリプト
+├── demo/                                                        # 最小実行可能な対話・ゲームdemo
 ├── quality/                     # Darwin 品質進化レイヤー（アダプター + 結果）
 ├── safety/                      # 安全ルールセット（6 文書）
 ├── templates/                   # テンプレート（5 ファイル）
@@ -398,6 +403,28 @@ political-human-skill/
 サンプルは固定テンプレートでもありません。ファイル構成、安全境界、変換の雰囲気を示すためのものです。織田信長、曹操、カエサルのような同じ歴史人物を新しく依頼された場合でも、サンプルフォルダをコピーせず、その時点の依頼内容と安全ルールに基づいて生成し直します。
 
 保存場所とサンプル再利用に関するより厳密なルールは [SPEC.md](SPEC.md) の sections 18-19 を参照してください。
+
+---
+
+## 検証とdemo
+
+Python環境にYAMLパーサーがない場合は、先に依存関係をインストールします。
+
+```bash
+pip install -r requirements.txt
+```
+
+リポジトリ検証スクリプトを実行します。
+
+```bash
+python scripts/validate_repo.py
+```
+
+最小demoの入口:
+
+- [`demo/run_dialogue_demo.md`](demo/run_dialogue_demo.md)
+- [`demo/run_absolute_majority_demo.md`](demo/run_absolute_majority_demo.md)
+- [`game_adapter/absolute_majority_input_schema.json`](game_adapter/absolute_majority_input_schema.json)
 
 ---
 

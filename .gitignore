@@ -26,6 +26,7 @@ desktop.ini
 # Python (for any future tooling under game_adapter/tools etc.)
 __pycache__/
 *.py[cod]
+.python-packages/
 
 # Node
 node_modules/

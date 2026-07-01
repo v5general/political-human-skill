@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "absolute_majority_input_schema.json",
+  "title": "Absolute Majority NPC Event Input",
+  "description": "Input passed from Absolute Majority into Political Human Skill for persona action selection.",
+  "type": "object",
+  "required": [
+    "persona_id",
+    "event_id",
+    "event_type",
+    "policy_issue",
+    "public_support_rate",
+    "party_order",
+    "faction_order",
+    "district_pressure",
+    "media_pressure",
+    "player_instruction",
+    "candidate_actions",
+    "current_relationship",
+    "recent_memory",
+    "parliament_context",
+    "party_context"
+  ],
+  "properties": {
+    "persona_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "event_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "policy_issue": {
+      "type": "string",
+      "minLength": 1
+    },
+    "public_support_rate": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "party_order": {
+      "type": "string"
+    },
+    "faction_order": {
+      "type": "string"
+    },
+    "district_pressure": {
+      "type": "string"
+    },
+    "media_pressure": {
+      "type": "string"
+    },
+    "player_instruction": {
+      "type": "string"
+    },
+    "candidate_actions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "current_relationship": {
+      "type": "object",
+      "required": [
+        "trust",
+        "respect",
+        "affection",
+        "caution",
+        "dependency"
+      ],
+      "properties": {
+        "trust": {
+          "type": "number"
+        },
+        "respect": {
+          "type": "number"
+        },
+        "affection": {
+          "type": "number"
+        },
+        "caution": {
+          "type": "number"
+        },
+        "dependency": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": true
+    },
+    "recent_memory": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "parliament_context": {
+      "type": "object",
+      "required": [
+        "ruling_seats",
+        "opposition_seats",
+        "committee_stage",
+        "vote_margin_estimate"
+      ],
+      "properties": {
+        "ruling_seats": {
+          "type": "number"
+        },
+        "opposition_seats": {
+          "type": "number"
+        },
+        "committee_stage": {
+          "type": "string"
+        },
+        "vote_margin_estimate": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": true
+    },
+    "party_context": {
+      "type": "object",
+      "required": [
+        "party_name",
+        "faction_name",
+        "leadership_stability"
+      ],
+      "properties": {
+        "party_name": {
+          "type": "string"
+        },
+        "faction_name": {
+          "type": "string"
+        },
+        "leadership_stability": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
