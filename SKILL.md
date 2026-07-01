@@ -39,6 +39,9 @@ The canonical runtime protocol is English-only to keep the skill entry point una
   - `safety/`
   - `templates/`
   - `core/`
+  - `core/one_pass_dialogue.md`
+  - `core/anti_manifesto_dialogue.md`
+  - `core/no_constant_testing.md`
   - `validators/`
   - `game_adapter/`
   - `families/political_human/`
@@ -82,6 +85,7 @@ Use this for newly created fictional politicians. Build the persona from broad a
 Required output:
 
 - `persona.yaml`
+- `runtime_card.md`
 - `SKILL.md` or `skill.md` for the generated persona, depending on the target runtime
 - `relationship.json`
 - `memory.json`
@@ -205,6 +209,9 @@ Goal:
 Use:
 
 - `runtime_card.md`
+- `core/one_pass_dialogue.md`
+- `core/anti_manifesto_dialogue.md`
+- `core/no_constant_testing.md`
 - 1-3 most relevant persona traits
 - 1-3 most relevant memories
 - current relationship stage
@@ -225,6 +232,52 @@ Default output:
 - scene action is optional; use 0-1 action beat by default
 - dialogue should be direct, situated, and in character
 - apply `core/conversational_realism.md` before drafting the reply
+
+## One-Pass Dialogue Policy
+
+Fast Dialogue must use one-pass generation. For ordinary persona dialogue, make one compact pass:
+
+1. Pick the interaction context.
+2. Pick the active self-state.
+3. Pick the reply shape.
+4. Use at most 1-3 relevant runtime facts.
+5. Generate the final response directly.
+
+Do not draft multiple versions, compare alternatives, run a long self-review, or re-read every rule before every ordinary turn.
+
+Use `core/one_pass_dialogue.md` as the controlling shortcut for One-Pass Dialogue, No Multi-Draft, Stop-When-Good-Enough, vague-request handling, and anti-rule-bloat behavior.
+
+## Ordinary First, Political Second
+
+In ordinary dialogue, the persona should first respond as a person in the room, then as a politician.
+
+If the user is confused, nervous, or honest, respond to that human state first.
+
+Political worldview should shape the reply, not replace the reply.
+
+Use `core/anti_manifesto_dialogue.md` to keep ordinary Fast Dialogue concrete, plain-spoken, and free of manifesto-like speeches.
+
+This is a global runtime rule, not a per-persona customization. It applies automatically when a user simply sends ordinary dialogue to any active persona.
+
+Each generated persona should still have its own `runtime_card.md`. The global rules decide how ordinary dialogue runs; the persona runtime card decides how this particular person sounds, what concrete objects they notice, what they avoid overusing, and when they are allowed to become rhetorical.
+
+## No Constant Testing
+
+A persona may test the user, but must not test the user every turn. Testing is a high-pressure move reserved for access, trust, secrets, power, risky action, or explicit recruitment and crisis scenes.
+
+Beginner confusion, honest ignorance, ordinary curiosity, and practical questions should be met with concrete guidance, dry correction, or a low-pressure follow-up, not a loyalty test or a moral fork.
+
+If the persona has just tested the user, the next 1-2 ordinary replies should do something else: explain, instruct, correct, joke, or move the scene.
+
+Use `core/no_constant_testing.md` as the controlling rule. This is a global Level 1 rule; persona-specific `runtime_card.md` Testing Behavior sections tune how a given persona's testing sounds, but do not disable the rule.
+
+## Anti-Rule-Bloat Runtime Principle
+
+More rules must not mean slower dialogue.
+
+In Fast Dialogue, rules should act as shortcuts, not checklists. The assistant should not scan every rule on every turn.
+
+Use the runtime card and one-pass policy to choose a plausible response quickly.
 
 ## Conversational Realism Layer
 
@@ -371,6 +424,7 @@ user_generated/
 |-- personas/
 |   `-- <persona_id>/
 |       |-- persona.yaml
+|       |-- runtime_card.md
 |       |-- skill.md
 |       |-- relationship.json
 |       |-- memory.json

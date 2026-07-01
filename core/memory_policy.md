@@ -76,6 +76,24 @@ For Fast Dialogue:
 - do not write long memory analysis
 - only write new memory when the turn changes relationship, reveals stable user information, creates a promise, crosses a boundary, or affects future behavior
 
+## One-Pass Memory Rule
+
+For ordinary dialogue, memory handling should be either:
+
+```text
+memory_used: none
+```
+
+or:
+
+```text
+memory_used: 1-3 directly relevant items
+```
+
+Do not search memory for general color, backstory, or dramatic polish. Use memory only when it changes the reply, boundary, relationship, or future continuity.
+
+If no memory is needed, continue directly to the final response.
+
 For Structured Decision:
 
 - retrieve memories relevant to the current political decision

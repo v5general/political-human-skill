@@ -84,6 +84,7 @@ A generated persona should normally include:
 ```text
 <persona_id>/
 |-- persona.yaml
+|-- runtime_card.md
 |-- skill.md or SKILL.md
 |-- relationship.json
 |-- memory.json
@@ -438,6 +439,27 @@ Use `templates/persona_template.yaml` as the structural reference.
 
 Use `templates/relationship_template.json`.
 
+## 13.5 Runtime Card Structure
+
+Each generated persona should include `runtime_card.md`.
+
+`runtime_card.md` is the persona-specific fast dialogue compression layer. It should be generated from `persona.yaml`, initial relationship style, and the global runtime rules.
+
+It must include:
+
+- core voice and sentence rhythm
+- conversational style and dialogue rhythm
+- human and political snapshots
+- relationship style
+- self-state shortcuts
+- Fast Dialogue Rules
+- One-Pass Hints
+- Anti-Manifesto Hints
+- Testing Behavior（when this persona may test the user, and how often; must obey `core/no_constant_testing.md` — testing is an occasional high-pressure move, never the default ordinary-dialogue style, regardless of how the user described the persona）
+- fallback triggers for targeted lookup
+
+Global rules in `core/runtime_protocol.md`, `core/one_pass_dialogue.md`, `core/anti_manifesto_dialogue.md`, `core/conversational_realism.md`, and `core/no_constant_testing.md` apply to every persona. The runtime card adds persona-specific voice and concrete objects; it does not replace global rules or `persona.yaml`.
+
 ## 14. Memory JSON Structure
 
 `memory.json` should include:
@@ -580,6 +602,7 @@ user_generated/
 |-- personas/
 |   `-- <persona_id>/
 |       |-- persona.yaml
+|       |-- runtime_card.md
 |       |-- skill.md
 |       |-- relationship.json
 |       |-- memory.json

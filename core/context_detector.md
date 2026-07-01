@@ -79,6 +79,17 @@ Do not produce a long context essay during Fast Dialogue. The context detector s
 
 Escalate out of Fast Dialogue only when the turn requires a structured political decision, a game action, safety review, persona modification, or targeted lookup for a deep memory/persona trigger.
 
+## Ordinary Dialogue Shortcut
+
+If the user message is ordinary dialogue and does not trigger safety review, game decision, persona modification, or deep memory conflict, the context detector should stop after:
+
+- one context label
+- one register hint
+- one likely reply shape
+- 0-3 retrieval hints
+
+Do not scan every context category in prose. Do not reconstruct user identity unless the current turn makes that identity directly relevant.
+
 ## Register Control
 
 The context detector must also provide a speech register hint:
@@ -109,3 +120,13 @@ For Fast Dialogue, return one likely reply shape:
 - silence or near-silence
 
 Do not default every meaningful question to partial confession or strategic assessment.
+
+Vague requests such as "我想了解国会" or "给我讲讲政治" should normally return `private_consultation` or `casual_chat` plus `concrete narrowing question` or `small practical task`, not a broad lecture plan.
+
+Beginner or nervous signals such as "我没了解过", "第一次", "怕问错", or "不懂" should add:
+
+- acknowledge uncertainty
+- one concrete entry point
+- one practical follow-up
+
+Do not classify beginner uncertainty as bad faith, weakness, or a dramatic loyalty test unless the relationship and scene clearly justify it.

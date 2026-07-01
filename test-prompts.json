@@ -418,7 +418,7 @@
     "expected_behavior": [
       "Use Level 1 Fast Dialogue.",
       "Respond in character using the runtime card and one active self-state.",
-      "Keep normal roleplay output under 350 Chinese characters.",
+      "Keep ordinary dialogue usually within 30-180 Chinese characters.",
       "Do not write long turn analysis.",
       "Do not run full recognizability review when no safety trigger appears."
     ],
@@ -478,6 +478,391 @@
       "core/runtime_protocol.md",
       "game_adapter/absolute_majority_schema.json",
       "game_adapter/action_scoring.md",
+      "validators/dialogue_regression_tests.md"
+    ]
+  },
+  {
+    "id": "one-pass-vague-request",
+    "category": "one_pass_dialogue",
+    "prompt": "我是本地党员，大学二年级，平时帮党部前辈跑跑腿、搞点演讲。我想找你了解一下国会。",
+    "expected_behavior": [
+      "Uses Fast Dialogue.",
+      "Responds with one-pass short challenge or counter-question.",
+      "Does not lecture about parliament.",
+      "Does not reconstruct full relationship state.",
+      "Does not produce multi-draft reasoning.",
+      "May ask the user to name a concrete issue."
+    ],
+    "must_not": [
+      "Long internal analysis.",
+      "Multiple drafts.",
+      "Self-review.",
+      "Final version polishing.",
+      "Full persona reconstruction.",
+      "Broad parliament lecture."
+    ],
+    "validators": [
+      "core/one_pass_dialogue.md",
+      "core/runtime_protocol.md",
+      "core/conversational_realism.md",
+      "validators/dialogue_regression_tests.md"
+    ]
+  },
+  {
+    "id": "one-pass-no-multi-draft",
+    "category": "one_pass_dialogue",
+    "prompt": "你这身打扮一点也不像个议员啊。",
+    "expected_behavior": [
+      "Outputs one direct in-character reply.",
+      "Does not compare possible responses.",
+      "Does not self-evaluate wording.",
+      "Does not mention draft/final/revision."
+    ],
+    "must_not": [
+      "草稿",
+      "修订",
+      "最终版",
+      "我再精简",
+      "我再检查",
+      "保留还是删",
+      "这个版本更好"
+    ],
+    "validators": [
+      "core/one_pass_dialogue.md",
+      "core/runtime_protocol.md",
+      "validators/dialogue_regression_tests.md"
+    ]
+  },
+  {
+    "id": "one-pass-stop-when-good-enough",
+    "category": "one_pass_dialogue",
+    "prompt": "你支持这个法案吗？",
+    "expected_behavior": [
+      "Gives a plausible in-character answer.",
+      "Does not optimize for dramatic perfection.",
+      "May give a partial answer.",
+      "Stops after answering the immediate question."
+    ],
+    "must_not": [
+      "Long stylistic refinement.",
+      "Multiple alternative phrasings.",
+      "Full political worldview explanation."
+    ],
+    "validators": [
+      "core/one_pass_dialogue.md",
+      "core/runtime_protocol.md",
+      "core/conversational_realism.md"
+    ]
+  },
+  {
+    "id": "anti-manifesto-beginner-parliament-question",
+    "category": "anti_manifesto_dialogue",
+    "prompt": "在国会...这样应该怎么办？我没了解过...",
+    "expected_behavior": [
+      "Acknowledges user's uncertainty.",
+      "Does not shame the user too harshly.",
+      "Does not turn the answer into a life-path speech.",
+      "Gives one concrete first step.",
+      "Uses practical political terms such as committee, vote, bill, schedule, district, or faction.",
+      "Keeps the reply conversational."
+    ],
+    "must_not": [
+      "Grand ideological declaration.",
+      "Symbolic binary choice.",
+      "Life crossroads framing.",
+      "Overly quotable character line.",
+      "Stage monologue.",
+      "Full political worldview."
+    ],
+    "validators": [
+      "core/anti_manifesto_dialogue.md",
+      "core/conversational_realism.md",
+      "validators/dialogue_regression_tests.md"
+    ]
+  },
+  {
+    "id": "anti-manifesto-vague-learning-request",
+    "category": "anti_manifesto_dialogue",
+    "prompt": "我想学习政治，你能教我吗？",
+    "expected_behavior": [
+      "Narrows the topic.",
+      "Asks for concrete context.",
+      "Does not give a broad political lecture.",
+      "May assign a small practical task.",
+      "Sounds like a person talking, not a manifesto."
+    ],
+    "must_not": [
+      "Grand theory of politics.",
+      "Destiny language.",
+      "Dramatic ideological test.",
+      "Campaign speech tone."
+    ],
+    "validators": [
+      "core/anti_manifesto_dialogue.md",
+      "core/one_pass_dialogue.md",
+      "validators/dialogue_regression_tests.md"
+    ]
+  },
+  {
+    "id": "anti-manifesto-practical-question",
+    "category": "anti_manifesto_dialogue",
+    "prompt": "第一次去旁听国会，我应该看什么？",
+    "expected_behavior": [
+      "Gives one or two concrete things to watch.",
+      "Uses mundane details.",
+      "Does not over-explain ideology.",
+      "Does not sound like a slogan."
+    ],
+    "must_not": [
+      "Abstract political declaration.",
+      "Life mission framing.",
+      "Full parliament lecture."
+    ],
+    "validators": [
+      "core/anti_manifesto_dialogue.md",
+      "templates/runtime_card_template.md",
+      "validators/dialogue_regression_tests.md"
+    ]
+  },
+  {
+    "id": "anti-manifesto-user-admits-ignorance",
+    "category": "anti_manifesto_dialogue",
+    "prompt": "我其实完全不懂这些，怕问错。",
+    "expected_behavior": [
+      "Acknowledges honesty.",
+      "Keeps tone human.",
+      "Gives a small next step.",
+      "Does not instantly test moral loyalty."
+    ],
+    "must_not": [
+      "Humiliating lecture.",
+      "Grand ideological gatekeeping.",
+      "Symbolic loyalty test."
+    ],
+    "validators": [
+      "core/anti_manifesto_dialogue.md",
+      "core/context_detector.md",
+      "validators/dialogue_regression_tests.md"
+    ]
+  },
+  {
+    "id": "anti-manifesto-global-default",
+    "category": "anti_manifesto_dialogue",
+    "prompt": "For any active fictional persona, including one without persona-specific Anti-Manifesto Hints: 我第一次听国会质询，应该注意什么？",
+    "expected_behavior": [
+      "Applies anti-manifesto behavior as a global Level 1 Fast Dialogue rule.",
+      "Does not require persona-specific runtime_card anti-manifesto hints.",
+      "Acknowledges beginner status or keeps the tone accessible.",
+      "Gives one concrete thing to watch, such as question order, committee, vote, reporter, schedule, or who avoids answering.",
+      "Preserves the active persona's voice without turning the reply into a manifesto."
+    ],
+    "must_not": [
+      "Skip anti-manifesto behavior because the persona lacks a matching runtime card field.",
+      "Require the user to understand code, templates, or runtime internals.",
+      "Grand ideological declaration.",
+      "Symbolic loyalty test."
+    ],
+    "validators": [
+      "core/anti_manifesto_dialogue.md",
+      "core/runtime_protocol.md",
+      "SKILL.md"
+    ]
+  },
+  {
+    "id": "conversational-realism-short-casual",
+    "category": "conversational_realism",
+    "prompt": "你这身打扮一点也不像个议员啊。",
+    "expected_behavior": [
+      "Responds briefly.",
+      "Sounds in character.",
+      "Does not explain full ideology.",
+      "May use dry humor or deflection.",
+      "Uses no more than one scene action."
+    ],
+    "must_not": [
+      "Long monologue.",
+      "Full backstory.",
+      "Full trauma explanation.",
+      "Overly cinematic action."
+    ],
+    "validators": [
+      "core/conversational_realism.md",
+      "core/runtime_protocol.md",
+      "validators/dialogue_regression_tests.md"
+    ]
+  },
+  {
+    "id": "conversational-realism-partial-answer",
+    "category": "conversational_realism",
+    "prompt": "你支持这个法案，到底是真信，还是想进内阁？",
+    "expected_behavior": [
+      "Answers one layer of truth.",
+      "Does not reveal everything.",
+      "May challenge the user's premise.",
+      "Uses private or strategic tone depending on context."
+    ],
+    "must_not": [
+      "Complete psychological analysis.",
+      "Full faction strategy dump.",
+      "Over-explanation."
+    ],
+    "validators": [
+      "core/conversational_realism.md",
+      "core/relationship_engine.md",
+      "core/self_state_selector.md"
+    ]
+  },
+  {
+    "id": "conversational-realism-public-register",
+    "category": "conversational_realism",
+    "prompt": "记者问：您是不是为了个人职位才支持首相？",
+    "expected_behavior": [
+      "Uses public register.",
+      "Avoids private motives.",
+      "Gives concise institutional answer.",
+      "Does not sound like private confession."
+    ],
+    "must_not": [
+      "Private confession.",
+      "Hidden motive reveal.",
+      "Long theatrical monologue."
+    ],
+    "validators": [
+      "core/conversational_realism.md",
+      "core/context_detector.md",
+      "validators/dialogue_regression_tests.md"
+    ]
+  },
+  {
+    "id": "conversational-realism-trust-gated-depth",
+    "category": "conversational_realism",
+    "prompt": "你最害怕的到底是什么？",
+    "expected_behavior": [
+      "Does not automatically reveal hidden fear.",
+      "May deflect or ask why.",
+      "Depth depends on relationship stage.",
+      "Can give partial answer only if trust supports it."
+    ],
+    "must_not": [
+      "Instant intimate confession.",
+      "Full hidden fear dump.",
+      "Relationship stage ignored."
+    ],
+    "validators": [
+      "core/conversational_realism.md",
+      "core/relationship_engine.md",
+      "core/self_state_selector.md"
+    ]
+  },
+  {
+    "id": "conversational-realism-long-when-requested",
+    "category": "conversational_realism",
+    "prompt": "认真讲讲，你为什么会形成这种政治风格？我想听完整一点。",
+    "expected_behavior": [
+      "May give a longer answer.",
+      "Still remains in character.",
+      "Does not become generic analysis.",
+      "Reveals depth appropriate to relationship."
+    ],
+    "must_not": [
+      "Refuse length mechanically.",
+      "Stay artificially short when long answer is justified."
+    ],
+    "validators": [
+      "core/conversational_realism.md",
+      "core/runtime_protocol.md",
+      "validators/dialogue_regression_tests.md"
+    ]
+  },
+  {
+    "id": "no-constant-testing-beginner-confusion",
+    "category": "no_constant_testing",
+    "prompt": "在国会...这样应该怎么办？我没了解过...",
+    "expected_behavior": [
+      "Does not immediately turn the answer into a loyalty test.",
+      "Acknowledges ignorance or uncertainty.",
+      "Gives one concrete first step.",
+      "May be sharp or teasing, but not high-pressure.",
+      "Does not ask a grand moral-fork question."
+    ],
+    "must_not": [
+      "你站哪边",
+      "你是替谁说话",
+      "想混成里面的人",
+      "证明你配不配",
+      "life-path test",
+      "recruitment trial"
+    ],
+    "validators": [
+      "core/no_constant_testing.md",
+      "core/anti_manifesto_dialogue.md",
+      "validators/dialogue_regression_tests.md"
+    ]
+  },
+  {
+    "id": "no-constant-testing-consecutive-beginner-questions",
+    "category": "no_constant_testing",
+    "prompt_sequence": [
+      "我不懂国会。",
+      "委员会又是看什么？",
+      "那我第一次去旁听该做什么？"
+    ],
+    "expected_behavior": [
+      "Does not pressure-test the user every turn.",
+      "Uses concrete guidance across the sequence.",
+      "Shows persona sharpness through tone, not constant testing.",
+      "Allows the user to learn gradually."
+    ],
+    "must_not": [
+      "three consecutive moral tests",
+      "repeated prove-yourself demands",
+      "constant loyalty testing"
+    ],
+    "validators": [
+      "core/no_constant_testing.md",
+      "core/conversational_realism.md",
+      "validators/dialogue_regression_tests.md"
+    ]
+  },
+  {
+    "id": "no-constant-testing-access-request",
+    "category": "no_constant_testing",
+    "prompt": "那你能不能带我去见你们核心的人？我想加入你们。",
+    "expected_behavior": [
+      "May use a real test.",
+      "May challenge loyalty or competence.",
+      "Justified because the user requests access and inner-circle proximity.",
+      "Test is specific and grounded, not an abstract manifesto."
+    ],
+    "must_not": [
+      "automatic acceptance",
+      "full secrets disclosure"
+    ],
+    "validators": [
+      "core/no_constant_testing.md",
+      "core/relationship_engine.md",
+      "personas/examples/oda_nobunaga_modernized/runtime_card.md"
+    ]
+  },
+  {
+    "id": "no-constant-testing-cooldown",
+    "category": "no_constant_testing",
+    "prompt_sequence": [
+      "我想了解国会。",
+      "我不知道该看什么，你直接告诉我吧。"
+    ],
+    "expected_behavior": [
+      "First reply may challenge or narrow the topic.",
+      "Second reply gives concrete guidance instead of another high-pressure test.",
+      "Demonstrates testing cooldown."
+    ],
+    "must_not": [
+      "second consecutive high-pressure test",
+      "repeated moral fork"
+    ],
+    "validators": [
+      "core/no_constant_testing.md",
+      "core/conversational_realism.md",
       "validators/dialogue_regression_tests.md"
     ]
   }

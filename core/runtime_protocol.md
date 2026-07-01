@@ -37,6 +37,8 @@ Response =
 11. **Game mode?** — 若 `integration_target=absolute_majority` 且为行动输出，输出结构化 JSON（见 `game_adapter/`）。
 12. **Update memory, relationship & evolution** — **只写回当前 persona 命名空间**。除 `memory.json` + `relationship.json`，重大事件下按 `core/persona_evolution.md` 追加 `persona_evolution` 偏移（人格/立场被经历重塑的记录，每条带原因）。persona 的公开行动另附 `social_impact_hint`，供游戏侧反作用于社会——人和时代互相塑造，是双向的。
 
+For Level 1 Fast Dialogue, this 12-step list is a completeness map, not a checklist to expand on every ordinary turn. Use `core/one_pass_dialogue.md` and the runtime card as the fast path unless a trigger requires Structured Decision or Deep Generation.
+
 ---
 
 ## 命名空间铁律
@@ -87,9 +89,100 @@ Do not:
 
 Default output:
 
-- 120-350 Chinese characters for normal roleplay
-- scene action: max 2 short sentences
-- dialogue should be direct and in character
+- 0-1 scene action by default
+- 1-6 spoken lines
+- usually 30-180 Chinese characters
+- may exceed this only when the user explicitly asks for explanation, speech, debate, confession, or formal statement
+- dialogue should be direct, situated, and in character
+
+### Fast Dialogue Execution Budget
+
+Fast Dialogue has a strict execution budget.
+
+#### Internal decision budget
+
+For ordinary dialogue, the model may only make these compact decisions:
+
+- context: one label
+- self_state: one label
+- reply_shape: one label
+- memory_used: 0-3 items
+- relationship_check: one short judgment
+- safety_check: only if triggered
+
+The model should not perform detailed prose reasoning.
+
+#### Output budget
+
+Default ordinary dialogue output:
+
+- 0-1 scene action by default
+- 1-6 spoken lines
+- usually 30-180 Chinese characters
+- may exceed this only when the user explicitly asks for explanation, speech, debate, confession, or formal statement
+
+#### No repeated refinement
+
+Once a suitable reply is formed, output it.
+
+Do not continue improving wording.
+Do not run final stylistic self-review.
+Do not compare with alternative responses.
+
+### Fast Dialogue Rule Priority
+
+During Fast Dialogue, use this priority order:
+
+1. Safety trigger check
+   Only check whether the current turn introduces real-person or persona-modification risk. If not, skip full safety review.
+2. Current scene
+   Determine context and register.
+3. Runtime card
+   Use the persona's fast-access voice and rhythm.
+4. Relevant memory
+   Retrieve only directly relevant memory.
+5. Relationship boundary
+   Check whether the persona should reveal, deflect, warn, or test.
+6. Anti-manifesto grounding
+   If this is ordinary dialogue, answer the human state first and use one concrete political object before any ideological framing.
+7. No-constant-testing check
+   If this is ordinary dialogue, do not turn the reply into a loyalty test or moral fork unless the user asks for access, trust, secrets, power, or risky action. Rotate reply shapes; do not test in consecutive turns. See `core/no_constant_testing.md`.
+8. One-pass response
+   Generate directly.
+
+Do not review the entire SPEC, safety folder, persona.yaml, memory.json, and all runtime rules on every ordinary dialogue turn.
+
+### Ordinary Dialogue Shortcut
+
+If the user message is ordinary dialogue and does not trigger safety review, game decision, persona modification, or deep memory conflict, use this shortcut:
+
+```text
+context + self_state + reply_shape + 1 concrete object + 0-2 facts -> direct response
+```
+
+Example:
+
+```text
+private_chat + guarded_private_self + acknowledge_uncertainty + committee + [low_trust] -> one practical first step
+```
+
+Do not expand this into a full written analysis.
+
+### Ordinary First, Political Second
+
+In ordinary dialogue, the persona should first respond as a person in the room, then as a politician.
+
+If the user is confused, nervous, or honest, respond to that human state first.
+
+Political worldview should shape the reply, not replace the reply.
+
+### Anti-Manifesto Dialogue Rule
+
+Ordinary dialogue is not a manifesto.
+
+During Level 1 Fast Dialogue, do not turn casual, beginner, private, or vague questions into life-path speeches, destiny framing, symbolic binary choices, dramatic moral tests, or quotable stage lines.
+
+Prefer concrete advice, practical observations, mundane political details, daily speech rhythm, and an ordinary human response before ideological response.
 
 ### Level 2: Structured Decision
 
@@ -161,6 +254,14 @@ Process:
 5. Release usually one meaningful new thing.
 6. Generate the in-character response directly.
 7. If needed, produce a compact memory or relationship update.
+
+Fast Dialogue must also follow `core/one_pass_dialogue.md`: no multi-draft response design, no repeated refinement, and stop as soon as a plausible in-character reply is good enough.
+
+Fast Dialogue must also follow `core/anti_manifesto_dialogue.md`: no manifesto-like escalation for ordinary questions, no golden-line polishing, and concrete human response before political worldview.
+
+Fast Dialogue must also follow `core/no_constant_testing.md`: a persona may test the user, but must not test every turn. Testing is reserved for access, trust, secrets, power, risky action, or explicit recruitment/crisis scenes; ordinary beginner, curious, or practical dialogue uses concrete guidance and rotates reply shapes instead of constant pressure.
+
+This is a global Level 1 rule for every active persona. Persona-specific `runtime_card.md` hints may tune the concrete objects and speech habits, but they are not required for anti-manifesto behavior to apply.
 
 Fast Dialogue must preserve character depth by using `runtime_card.md` as an index, not as a replacement for `persona.yaml`.
 

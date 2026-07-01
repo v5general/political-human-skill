@@ -232,6 +232,28 @@ def validate_oda_dialogue_samples(reporter: Reporter) -> None:
             reporter.fail(f"Oda dialogue sample missing: {rel(path)}")
 
 
+def validate_runtime_cards_testing_behavior(reporter: Reporter) -> None:
+    """Machine-check that every runtime_card.md in the repo carries a Testing Behavior section.
+
+    This turns the 'Testing Behavior is a required field' rule from a natural-language
+    self-check into a schema-level assertion: validate_repo.py FAILs if any shipped
+    runtime_card is missing it. Generated personas dropped into personas/examples/
+    (or anywhere under the repo) are held to the same bar.
+    """
+    found = False
+    for path in sorted(ROOT.rglob("runtime_card.md")):
+        if any(part in SKIP_DIRS for part in path.parts):
+            continue
+        found = True
+        text = path.read_text(encoding="utf-8")
+        if "## Testing Behavior" in text:
+            reporter.pass_(f"Testing Behavior section present: {rel(path)}")
+        else:
+            reporter.fail(f"runtime_card.md missing '## Testing Behavior' section: {rel(path)}")
+    if not found:
+        reporter.fail("No runtime_card.md found anywhere in the repo to validate Testing Behavior")
+
+
 def validate_input_payload(name: str, payload: Any, reporter: Reporter) -> None:
     if not isinstance(payload, dict):
         reporter.fail(f"{name} must be a JSON object")
@@ -411,6 +433,7 @@ def main() -> int:
     validate_skill_frontmatter(reporter)
     validate_example_personas(reporter)
     validate_oda_dialogue_samples(reporter)
+    validate_runtime_cards_testing_behavior(reporter)
     validate_prompt_files(reporter)
     validate_absolute_majority_files(reporter)
 

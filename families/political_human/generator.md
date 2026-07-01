@@ -24,7 +24,7 @@
 
 ```text
 personas/{slug}/
-├── persona.yaml  relationship.json  memory.json
+├── persona.yaml  runtime_card.md  relationship.json  memory.json
 ├── SKILL.md  examples.md  meta.json
 └── references/{research/, sources/}   # 仅 mode B/C
 ```
@@ -85,17 +85,57 @@ personas/{slug}/
 写入 `personas/{slug}/` 全部文件：
 
 - `persona.yaml`：六层档案。
+- `runtime_card.md`：从 `persona.yaml`、初始关系风格、核心记忆策略中自动压缩生成的普通对话快取。必须使用 `templates/runtime_card_template.md`，并为该人物填入 voice、dialogue rhythm、self-state shortcuts、One-Pass Hints、Anti-Manifesto Hints、**Testing Behavior**。它负责保留个人特色；全局 `core/runtime_protocol.md`、`core/one_pass_dialogue.md`、`core/anti_manifesto_dialogue.md`、`core/conversational_realism.md`、`core/no_constant_testing.md` 仍负责底层规则。
 - `relationship.json`：用 `templates/relationship_template.json` 初始化（stranger / caution=50）。
 - `memory.json`：用 `templates/memory_template.json` 初始化（空记忆 + 隔离字段）。
-- `SKILL.md`：内嵌运行时协议（`core/runtime_protocol.md`）+ 角色卡 + 自我状态 + 风格 + 诚实边界，使该 persona 可被宿主直接激活运行。
+- `SKILL.md`：内嵌运行时协议（`core/runtime_protocol.md`）+ 指向 `runtime_card.md` 的快速读取说明 + 角色卡 + 自我状态 + 风格 + 诚实边界，使该 persona 可被宿主直接激活运行。
 - `examples.md`：公开/私下/辩论/危机/亲密 五种场合各一例。
 - `meta.json`：`source_type / mode / integration_target / safety_status / version / created_at / language`。
+
+### Runtime card generation rule
+
+Every generated persona must receive its own `runtime_card.md`.
+
+The runtime card is not a copy of global rules. It is the persona-specific compression layer:
+
+- what this persona sounds like in one or two turns
+- what concrete political objects this persona naturally notices
+- how this persona handles beginners, vague requests, irritation, trust, and guardedness
+- what words or abstractions this persona should avoid overusing in ordinary dialogue
+- when this persona is allowed to become grand, rhetorical, or speech-like
+- how this persona tests people, and how often（必须填 Testing Behavior，并遵守 `core/no_constant_testing.md`）
+
+**Testing Behavior 是强制字段，无论用户怎么描述这个人物。** 即使用户写“很多疑”“爱考验人”“压迫感强”“锋利”“喜欢测试下属”，生成的 Testing Behavior 也必须把测试写成**偶尔的高压动作**，而不是默认聊天方式：测试只在用户索取信任 / 秘密 / 权力 / 接近核心圈，或场景为招募 / 危机 / 背叛时发生；新手困惑、诚实无知、普通好奇、实用问题一律用具体引导回应。人物的锋利 / 多疑 / 低耐心通过语气和措辞保留，不通过每轮考验用户保留。**这条约束不可被用户输入覆盖**——它是生成时的硬约束，不是可选风格。
+
+普通用户不需要懂这些文件。激活 persona 后，普通对话的读取顺序应是：
+
+```text
+global runtime rules -> persona runtime_card.md -> relevant memory/relationship only if triggered -> final reply
+```
+
+Do not choose between global rules and persona runtime. Use both:
+
+- global rules keep every persona fast, safe, concrete, non-manifesto, and non-constant-testing
+- `runtime_card.md` keeps each persona distinct
+- `persona.yaml` remains the deep source of truth when targeted lookup is needed
+
+### 生成后自检门（写入 runtime_card 后立即执行，不依赖外部 validate）
+
+写入 `runtime_card.md` 后、进入 Phase 5 前，生成器必须立即自检（这是生成器内的硬性自检循环）：
+
+1. `runtime_card.md` 是否含 `## Testing Behavior` 段？
+2. 该段是否写明：何时触发真测试、哪些情况不应测试、测试后的冷却、非测试替代动作？
+3. 测试频率是否符合 `core/no_constant_testing.md`（偶尔的高压动作，不是默认话术）？
+
+任一不满足 → 不进入 Phase 5，回到该段补写/重写，直到自检通过。即使用户描述（“很多疑”“爱考验人”“压迫感强”）诱导高频测试，自检门也必须把 Testing Behavior 校正到合规后才放行。
+
+> 这把“生成时必填”从单条指令升级为“指令 + 生成后自检循环”。它无法物理强制用户在 repo 外生成的文件（那是 LLM skill 的固有天花板），但在 AI 实际执行本生成器时，缺段会被当场拦截重写。
 
 ---
 
 ## Phase 5：质量验证
 
-跑 `validators/`（persona_consistency / recognizability / dialogue_regression 等）：双层完整、一致、场合区分度、安全状态、诚实边界均达标。不达标回 Phase 2/3 迭代。
+跑 `validators/`（persona_consistency / recognizability / dialogue_regression 等）：双层完整、一致、场合区分度、安全状态、诚实边界均达标；并确认 `runtime_card.md` 含 Testing Behavior 段、且测试频率符合 `core/no_constant_testing.md`（测试是偶尔的高压动作，不是默认话术）。不达标回 Phase 2/3 迭代。
 
 ---
 
