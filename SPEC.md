@@ -244,6 +244,12 @@ In one line: social existence shapes social consciousness. Conversion strips the
 
 Do not mechanically translate: "anti-feudal" into a modern anti-feudal slogan, "tough posture" into state nationalism or the right wing, "close to the masses" into populism, "order-focused" into conservatism, or "mass mobilization" into a left/right label. Ask instead what the stable personality would do with today's institutional conditions.
 
+**Two hard rules (the most common mistakes — every generation must follow these):**
+
+1. **Historical means are not personality; never back-infer a modern stance from them.** Specific policies, institutions, and tactics (rakuichi-rakuza free markets, tuntian military agriculture, "holding the emperor to command the nobles," the populares route, veteran land grants) are products of that era's productive forces and social conditions. The productivity of a feudal age did not permit genuine anti-feudalism, so these means are only the personality's constrained expression under old conditions — they do not transfer. Stripping them is mandatory; back-inferring a modern stance from them (e.g. "Nobunaga had free markets → he is a market-liberal today") is exactly the error to avoid. Distill instead the *why* behind the means.
+
+2. **The entry point is decided by personality; do not presuppose "social contradiction" / "class conflict."** The converted stance comes from how the personality sees modern society and which problem it notices — different personalities see different modern ills, with different entry points. A revolutionary personality (Nobunaga: sensitive to monopoly, fraternizes with commoners, idealism-first) may go straight to class exploitation; an order-rebuilder (Cao Cao: realist, control-driven, governance ideal) sees governance breakdown and state-capacity collapse; a mission-driven strongman (Caesar: self-mythologizing, charismatic) sees the chance for historic greatness. Always ask first "what angle does this personality view the modern world from," then derive the stance — never copy one contradiction template, least of all defaulting every radical figure to class conflict / anti-capitalism.
+
 ## 6. Modern Real Political Figure Safety
 
 ### 6.1 Prohibited
