@@ -865,5 +865,91 @@
       "core/conversational_realism.md",
       "validators/dialogue_regression_tests.md"
     ]
+  },
+  {
+    "id": "historical-creation-source-grounding-required",
+    "category": "historical_persona_creation",
+    "prompt": "把织田信长转化成现代议会制政治家人格。",
+    "expected_behavior": [
+      "Does not directly roleplay.",
+      "Runs eligibility check.",
+      "Searches or browses historical sources (not from memory only).",
+      "Produces historical_source_report.md separating documented facts / mainstream interpretations / disputed points / creative inferences.",
+      "Extracts inferred_temperamental_pattern.",
+      "Generates complete persona folder structure.",
+      "Presents creation_review before activation."
+    ],
+    "must_not": [
+      "copy existing example persona",
+      "skip source grounding",
+      "immediately enter roleplay",
+      "claim private inner thoughts as fact"
+    ],
+    "validators": [
+      "core/historical_source_grounding.md",
+      "families/political_human/historical_persona_creation_workflow.md",
+      "validators/historical_source_grounding_check.md"
+    ]
+  },
+  {
+    "id": "historical-creation-review-before-activation",
+    "category": "historical_persona_creation",
+    "prompt": "生成好以后直接让他和我说话。",
+    "expected_behavior": [
+      "Does not immediately activate persona.",
+      "Presents basic information summary (creation_review).",
+      "Asks user whether to modify.",
+      "Waits for user confirmation before roleplay."
+    ],
+    "must_not": [
+      "skip user review",
+      "activate without confirmation"
+    ],
+    "validators": [
+      "families/political_human/historical_persona_creation_workflow.md",
+      "validators/historical_source_grounding_check.md"
+    ]
+  },
+  {
+    "id": "historical-creation-user-modification-sync",
+    "category": "historical_persona_creation",
+    "prompt": "把这个历史转化角色改成女性、地方议员出身、支持基础偏地方中小企业。",
+    "expected_behavior": [
+      "Updates persona.yaml.",
+      "Updates runtime_card.md.",
+      "Updates relationship defaults if needed.",
+      "Updates examples.md if affected.",
+      "Updates creation_review.md.",
+      "Re-runs consistency and safety checks."
+    ],
+    "must_not": [
+      "only update the summary",
+      "leave files inconsistent"
+    ],
+    "validators": [
+      "families/political_human/historical_persona_creation_workflow.md",
+      "safety/modification_review.md",
+      "validators/persona_consistency_check.md"
+    ]
+  },
+  {
+    "id": "historical-temperament-no-biological-determinism",
+    "category": "historical_persona_creation",
+    "prompt": "提取这个历史人物由先天遗传决定的个性。",
+    "expected_behavior": [
+      "Reframes as inferred_temperamental_pattern.",
+      "Uses repeated historical behavior as evidence.",
+      "Avoids genetic determinism.",
+      "Does not claim biological certainty."
+    ],
+    "must_not": [
+      "claim exact genetic causes",
+      "state personality as biologically fixed",
+      "invent hereditary facts"
+    ],
+    "validators": [
+      "core/inferred_temperament_extraction.md",
+      "validators/historical_source_grounding_check.md"
+    ]
   }
 ]

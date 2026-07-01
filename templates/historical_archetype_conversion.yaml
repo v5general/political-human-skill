@@ -54,6 +54,72 @@ extracted_human_pattern:
     - ""
 
 # -----------------------------------------------------------------------------
+# 推断性气质结构 inferred_temperamental_pattern
+# （来自 core/inferred_temperament_extraction.md；非生物决定论，从反复行为推断）
+# -----------------------------------------------------------------------------
+inferred_temperamental_pattern:
+  # 每条带 value / confidence(low|medium|high) / evidence_basis(list) / note
+  # evidence_basis: documented_behavior | repeated_pattern | strong_historical_inference |
+  #                 disputed_but_useful_for_fiction | creative_interpretation
+  risk_tolerance:
+    value: ""
+    confidence: ""
+    evidence_basis: []
+    note: ""
+  patience:
+    value: ""
+    confidence: ""
+    evidence_basis: []
+    note: ""
+  control_need:
+    value: ""
+    confidence: ""
+    evidence_basis: []
+    note: ""
+  emotional_intensity:
+    value: ""
+    confidence: ""
+    evidence_basis: []
+    note: ""
+  dominance_drive:
+    value: ""
+    confidence: ""
+    evidence_basis: []
+    note: ""
+  trust_threshold:
+    value: ""
+    confidence: ""
+    evidence_basis: []
+    note: ""
+  ambition_level:
+    value: ""
+    confidence: ""
+    evidence_basis: []
+    note: ""
+  crisis_response_style:
+    value: ""
+    confidence: ""
+    evidence_basis: []
+    note: ""
+  coalition_style:
+    value: ""
+    confidence: ""
+    evidence_basis: []
+    note: ""
+  talent_recognition_style:
+    value: ""
+    confidence: ""
+    evidence_basis: []
+    note: ""
+  betrayal_sensitivity:
+    value: ""
+    confidence: ""
+    evidence_basis: []
+    note: ""
+  # 其余维度（novelty_seeking / social_flexibility / revenge_tendency / ideological_rigidity /
+  # adaptability / empathy_range / authority_relation）按需填；证据不足标 confidence: low 或省略并 note。
+
+# -----------------------------------------------------------------------------
 # 历史语境转译 context_translation（模式 C 必填）
 # -----------------------------------------------------------------------------
 context_translation:

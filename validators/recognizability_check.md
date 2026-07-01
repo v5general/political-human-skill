@@ -31,6 +31,7 @@
 
 ### 4. 历史来源不覆盖现代审核
 - [ ] 即便 persona 源于分界前的历史人物，其**现代设定**仍不可识别为近现代现实政治人物（SPEC 19.3 反例）。
+- [ ] 历史 persona 须先过 source grounding（`validators/historical_source_grounding_check.md`）：不得跳过资料检索、不得套用示例。source grounding **不削弱**可识别性审核——两者叠加，缺一不可。
 
 ---
 

@@ -537,7 +537,7 @@ Action scores should be derived from:
 
 ## 17. Historical Conversion Workflow
 
-For Mode C, follow the conversion principle in 5.3.1 (translate, do not copy):
+For Mode C, follow the full workflow in `families/political_human/historical_persona_creation_workflow.md`: **source grounding** (search/browse sources, produce `historical_source_report.md`, separate documented facts / mainstream interpretations / disputed points / creative inferences) → **inferred temperament extraction** (`inferred_temperamental_pattern`, not biological determinism) → conversion → complete persona folder → **user review before activation**. The conversion principle is 5.3.1 (translate, do not copy). The steps below are the conversion core:
 
 1. Confirm the source figure is before the relevant modern boundary.
 2. Gather reliable public historical information.
@@ -552,6 +552,8 @@ For Mode C, follow the conversion principle in 5.3.1 (translate, do not copy):
 11. Generate files.
 
 Never copy an example persona as the output.
+
+Before activation, the generated persona must pass a creation-review gate: present `creation_review.md` to the user and wait for confirmation or modification (see `templates/persona_creation_review_template.md`). Modifications must sync across all affected persona files and re-run safety/consistency checks. Do not enter roleplay until the user confirms.
 
 ## 18. Examples Are Not Templates
 

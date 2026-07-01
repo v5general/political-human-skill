@@ -226,6 +226,8 @@ inference_level:           # 三级标注（见 historical_figure_policy.md）
 
 ## 7. 历史人物转化 10 步流程（落实 SPEC 第 15 节）
 
+> 本 10 步是**转化核心**。完整端到端流程（含前置 source grounding、inferred temperament extraction、后置用户确认 gate）见 `families/political_human/historical_persona_creation_workflow.md` 与 `core/historical_source_grounding.md` / `core/inferred_temperament_extraction.md`。本节不取代、而是被那套工作流包含。
+
 当用户要求将历史人物转化为现代政治家时，执行：
 
 1. **判断是否属于允许历史范围**（地区分界之前；见 `modern_political_figure_policy.md` 第 4 节）；
@@ -241,6 +243,32 @@ inference_level:           # 三级标注（见 historical_figure_policy.md）
 11. **输出** `persona.yaml`、persona `SKILL.md`、`examples.md`（+ `references/` 留存提炼过程）。
 
 > 重要：若用户选择的任务与 SPEC 或本仓库示例同名（织田信长 / 曹操 / 凯撒），**不得直接套用示例**。必须基于当前资料、用户要求、所选模式重新推算与生成。示例只说明格式与方向。
+
+---
+
+## 7.5 Historical-to-Modern Conversion Steps（转化产出阶段细化）
+
+在 source grounding（`core/historical_source_grounding.md`）与 inferred temperament extraction（`core/inferred_temperament_extraction.md`）**之后**，按以下顺序把提炼出的人格结构转化为现代议会制虚构政治家（这是 §7 第 6–9 步的字段填充细化）：
+
+1. Identify core human pattern（核心人格模式）。
+2. Identify political behavior pattern（政治行为模式）。
+3. Identify leadership style（领导风格）。
+4. Identify relationship style（关系风格）。
+5. Identify crisis behavior（危机行为）。
+6. Identify likely modern parliamentary role（最可能的现代议会角色）。
+7. Select fictional modern career origin（虚构现代从政前身份）。
+8. Select fictional support base（虚构基本盘）。
+9. Select ideology axes（意识形态六轴——由人格 × 现代社会情况推演，不从气质直映）。
+10. Select political skills（政治技能）。
+11. Select action style（行动风格）。
+12. Select private fear and flaw（私下恐惧与弱点）。
+13. Select ordinary habits and hobbies（日常习惯与爱好——历史特色的现代等价物，非指纹）。
+14. Create modern fictional parliamentary persona（组装现代虚构议会制 persona）。
+15. Remove historical fingerprints that should not be directly copied（删除具体历史指纹，见 §3 清单）。
+16. Run recognizability and safety review（可识别性与安全审核，含盲测）。
+17. Generate complete persona files（生成完整 persona 文件夹，见 generator.md Phase 4）。
+
+> 这 17 步产出的现代 persona，仍须经过 generator.md Phase 5.5 的**用户确认 gate** 才能激活。
 
 ---
 

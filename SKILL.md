@@ -126,6 +126,16 @@ Remove:
 
 Mode C examples under `personas/examples/` demonstrate structure only. They are not canonical templates.
 
+## Historical Persona Creation
+
+When creating a persona from a historical figure, do not immediately roleplay and do not generate from memory or from examples.
+
+First perform source-grounded historical extraction: check eligibility, search/browse reliable sources, produce a `historical_source_report.md` (documented facts / mainstream interpretations / disputed points / creative inferences), and extract an `inferred_temperamental_pattern` (from repeated cross-context behavior, **not** biological determinism). Then run the modern parliamentary conversion, generate the complete persona folder, and present a `creation_review.md` summary to the user.
+
+Ask the user whether they want to modify the persona. Apply any modifications across all relevant persona files and re-run safety/consistency checks. **Only after the user confirms the generated persona should the skill enter active persona mode.**
+
+Full workflow: `families/political_human/historical_persona_creation_workflow.md`. Source grounding: `core/historical_source_grounding.md`. Temperament extraction: `core/inferred_temperament_extraction.md`.
+
 ## Regional Modern Boundaries
 
 Use these boundaries to decide whether a real political figure may be personified or only discussed publicly / abstracted safely:

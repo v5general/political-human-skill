@@ -26,6 +26,7 @@
 personas/{slug}/
 ├── persona.yaml  runtime_card.md  relationship.json  memory.json
 ├── SKILL.md  examples.md  meta.json
+├── historical_source_report.md  creation_review.md   # 仅 mode B/C（source grounding + 用户确认 gate）
 └── references/{research/, sources/}   # 仅 mode B/C
 ```
 
@@ -36,7 +37,7 @@ personas/{slug}/
 ## Phase 1：资料采集与原型提炼
 
 - **mode A**：以用户描述为主，必要时补宽泛政治类型画像。
-- **mode B/C**：史料采集（分轨落盘 `references/research/`），遵守 `safety/historical_figure_policy.md` 六条史料纪律与三级推断；信源黑名单（知乎/公众号/百度百科/内容农场）。
+- **mode B/C**：**必须先 source grounding**——主动检索/浏览可靠资料（不得只凭记忆、不得套用示例），产 `historical_source_report.md`（用 `templates/historical_source_report_template.md`），四级区分（史料事实 / 主流解释 / 争议 / 创作推断）；遵守 `core/historical_source_grounding.md` 与 `safety/historical_figure_policy.md` 六条史料纪律 + 三级推断；信源黑名单（知乎 / 公众号 / 百度百科 / 内容农场）。再按 `core/inferred_temperament_extraction.md` 推断 `inferred_temperamental_pattern`（非生物决定论）。完整端到端流程见 `families/political_human/historical_persona_creation_workflow.md`。
 - **mode C 历史语境转译**：不得直接套用历史人物原时代的政治立场。**记住逻辑**：立场 = 天生的性格底子（跨时代稳定的脾气、欲望、恐惧、反应方式）× 被社会训练出来的判断力（出身、阶层、制度环境塑造他怎么看世界——即社会存在塑造意识）。先理解其原时代主要矛盾、看清当时的社会怎么造就了他的立场；再剥离不可迁移的时代条件，提炼性格底子；最后把性格底子放进现代议会制社会，让它重新判断、推出新立场。现代社会也可能慢慢重塑性格底子，人物在现代的行动也会反作用于社会——人和时代互相塑造。
 
 > 同名历史人物任务**不得套用示例**，须基于当前资料重新推算（见 `safety/historical_figure_policy.md` 第 6 节）。
@@ -91,6 +92,8 @@ personas/{slug}/
 - `SKILL.md`：内嵌运行时协议（`core/runtime_protocol.md`）+ 指向 `runtime_card.md` 的快速读取说明 + 角色卡 + 自我状态 + 风格 + 诚实边界，使该 persona 可被宿主直接激活运行。
 - `examples.md`：公开/私下/辩论/危机/亲密 五种场合各一例。
 - `meta.json`：`source_type / mode / integration_target / safety_status / version / created_at / language`。
+- `historical_source_report.md`（仅 mode B/C）：source grounding 产物（Phase 1，用 `templates/historical_source_report_template.md`）。
+- `creation_review.md`（仅 mode B/C）：用户确认 gate 摘要（Phase 5.5，用 `templates/persona_creation_review_template.md`）。
 
 ### Runtime card generation rule
 
@@ -136,6 +139,19 @@ Do not choose between global rules and persona runtime. Use both:
 ## Phase 5：质量验证
 
 跑 `validators/`（persona_consistency / recognizability / dialogue_regression 等）：双层完整、一致、场合区分度、安全状态、诚实边界均达标；并确认 `runtime_card.md` 含 Testing Behavior 段、且测试频率符合 `core/no_constant_testing.md`（测试是偶尔的高压动作，不是默认话术）。不达标回 Phase 2/3 迭代。
+
+---
+
+## Phase 5.5：用户确认 gate（Creation Review Before Activation）
+
+**mode B/C 强制；mode A 强烈推荐。**
+
+生成 persona 文件夹并通过 Phase 5 验证后，**不得立即激活进入角色扮演**。必须先用 `templates/persona_creation_review_template.md` 生成 `creation_review.md`，并向用户呈现基本信息摘要，询问是否修改。
+
+- 用户提出修改 → 按 `families/political_human/historical_persona_creation_workflow.md` 的 User Modification Sync，**同步更新所有受影响文件**（persona.yaml / runtime_card.md / relationship.json / examples.md / creation_review.md / meta.json），重跑 validator 与 `safety/modification_review.md`，再回到本 gate。
+- 用户确认 → 才进入"交付与进化"，激活 persona。
+
+即使用户说"直接让他和我说话"，也必须先呈现 creation_review 并等待确认。这是 mode B/C 的硬性 gate，不可跳过。
 
 ---
 

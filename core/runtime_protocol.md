@@ -50,6 +50,8 @@ For Level 1 Fast Dialogue, this 12-step list is a completeness map, not a checkl
 ## 与创建流程的衔接
 
 - 创建阶段（生成新 persona）→ `families/political_human/generator.md` + `SKILL.md` 第 5 节。
+- 历史 persona 创建（mode B/C）→ 额外走 `families/political_human/historical_persona_creation_workflow.md`：强制 source grounding（`core/historical_source_grounding.md`）+ 推断气质（`core/inferred_temperament_extraction.md`）+ **用户确认 gate**。
+- **激活前置**：任何新生成的 persona（尤其 mode B/C），在用户确认 `creation_review.md` 之前，本运行协议不被调用——即不进入角色扮演。
 - 运行阶段（激活已存在 persona 回答用户）→ 本文件。
 - 两阶段共享同一套安全边界（`safety_boundaries.md`）与同一套模板（`templates/`）。
 

@@ -34,7 +34,10 @@
 ### 6. 历史转化特有（mode B/C）
 - [ ] `inference_level` 三级齐全（documented/strongly_inferred/speculative）；
 - [ ] speculative 项不混入事实性字段；
-- [ ] `conversion_audit.deleted_fingerprints` 非空，`recognizability_blind_check.result = not_identifiable`。
+- [ ] `conversion_audit.deleted_fingerprints` 非空，`recognizability_blind_check.result = not_identifiable`；
+- [ ] **source grounding 已完成**：`historical_source_report.md` 存在，四级区分（史料 / 主流解释 / 争议 / 创作），非凭记忆生成（见 `core/historical_source_grounding.md`、`validators/historical_source_grounding_check.md`）；
+- [ ] **`inferred_temperamental_pattern` 存在**且**无生物决定论声称**（不得写"遗传决定"；见 `core/inferred_temperament_extraction.md`）；
+- [ ] **用户确认 gate**：`meta.creation_review_status` 为 `confirmed` 才算可激活（见 `generator.md` Phase 5.5）。
 
 ---
 

@@ -17,6 +17,8 @@ meta:
   mode: ""                      # A(原创) | B(历史推演) | C(历史转原型)
   integration_target: ""        # standalone | absolute_majority
   safety_status: ""             # PASS | safe_conversion（不得为 real_figure_clone）
+  source_grounding_status: ""   # 仅 mode B/C：not_required | grounded | sparse_source（见 core/historical_source_grounding.md）
+  creation_review_status: ""    # 仅 mode B/C：pending | modified | confirmed（用户确认 gate，见 generator.md Phase 5.5）
   version: "v1"
   created_at: ""
   language: "zh-CN"

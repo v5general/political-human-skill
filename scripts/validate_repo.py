@@ -254,6 +254,38 @@ def validate_runtime_cards_testing_behavior(reporter: Reporter) -> None:
         reporter.fail("No runtime_card.md found anywhere in the repo to validate Testing Behavior")
 
 
+def validate_generated_historical_personas(reporter: Reporter) -> None:
+    """If personas/generated/ exists, check each mode B/C persona carries source-grounding
+    and creation-review artifacts. Does NOT touch personas/examples/ (those are built-in
+    structural demos, not full generated outputs — see SPEC §18)."""
+    gen_root = ROOT / "personas" / "generated"
+    if not gen_root.exists():
+        return  # no generated personas yet; nothing to check
+    checked = False
+    for d in sorted(p for p in gen_root.iterdir() if p.is_dir()):
+        is_historical = False
+        meta = d / "meta.json"
+        if meta.exists():
+            try:
+                m = json.loads(meta.read_text(encoding="utf-8"))
+                src = m.get("source_type") or ""
+                mode = m.get("mode") or ""
+                is_historical = src.startswith("historical") or mode in ("B", "C")
+            except Exception:  # noqa: BLE001
+                pass
+        if not is_historical:
+            continue
+        checked = True
+        for art in ("historical_source_report.md", "creation_review.md"):
+            p = d / art
+            if p.exists():
+                reporter.pass_(f"historical artifact present: {rel(p)}")
+            else:
+                reporter.fail(f"historical persona missing {art}: {rel(p)}")
+    if not checked:
+        reporter.pass_("personas/generated/ has no historical persona to check yet")
+
+
 def validate_input_payload(name: str, payload: Any, reporter: Reporter) -> None:
     if not isinstance(payload, dict):
         reporter.fail(f"{name} must be a JSON object")
@@ -434,6 +466,7 @@ def main() -> int:
     validate_example_personas(reporter)
     validate_oda_dialogue_samples(reporter)
     validate_runtime_cards_testing_behavior(reporter)
+    validate_generated_historical_personas(reporter)
     validate_prompt_files(reporter)
     validate_absolute_majority_files(reporter)
 
