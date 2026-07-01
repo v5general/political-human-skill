@@ -67,3 +67,21 @@
 - [ ] 回答内容不冒充/不编造现实人物私密？
 - [ ] 用户修改已过 `modification_review.md`？
 - [ ] `meta.safety_status` ∈ {PASS, safe_conversion}？
+
+---
+
+## Safety Review Trigger
+
+Full modern-political recognizability review is required only when:
+
+1. User creates a new persona.
+2. User modifies persona background.
+3. User requests a real political figure.
+4. User requests a near-clone or disguised modern political figure.
+5. User adds details that may identify a modern political figure.
+6. User asks for private secrets, scandals, hidden motives, or intimate relationship with a real political figure.
+7. User uses a historical figure name to package a modern political figure.
+
+Do not run full recognizability review for ordinary dialogue with an already approved fictional persona, unless the current turn introduces new real-person risk.
+
+During Fast Dialogue, perform only a trigger scan. If no trigger appears, preserve the approved fictional persona and answer normally inside existing safety boundaries.

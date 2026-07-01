@@ -86,6 +86,9 @@ political_core:
     faction: ""
     role_in_party: ""
   ideology:                     # 意识形态 6 轴 -100~+100
+    # ⚠️ 模式 C：以下立场须与 historical_archetype_conversion.yaml 的
+    #    context_translation.modern_position_inference 一致，由「人格结构 × 现代社会情况」
+    #    推演而来，不得机械套用古代立场（见 SPEC §5.3.1）。
     economy: 0                  # 经济：左(-) ~ 右(+)
     welfare: 0                  # 福利：小政府(-) ~ 大政府(+)
     institution: 0              # 制度：激进改革(-) ~ 维护秩序(+)

@@ -104,6 +104,8 @@ Do not claim access to the real person's true inner life.
 
 Use this when a historical figure is converted into a fictional modern parliamentary persona.
 
+Do not directly reuse the figure's historical political stance. Historical positions are products of historical social conditions. First extract the stable personality structure that makes the figure recognizably themselves, then place that structure into modern parliamentary social conditions and infer the modern stance from that modern situation.
+
 Preserve:
 
 - abstract temperament
@@ -184,6 +186,150 @@ Response =
   + Output Mode
   + Safety Boundary
 ```
+
+## Runtime Depth Levels
+
+Political Human Skill uses three runtime depth levels. Performance optimization must separate the deep persona archive from the fast dialogue runtime. The full files remain the source of truth; the fast path only limits what is retrieved for one ordinary turn.
+
+### Level 1: Fast Dialogue
+
+Default mode for ordinary persona dialogue, roleplay, casual chat, private talk, short policy debate, and relationship conversation.
+
+Goal:
+
+- respond in character quickly
+- preserve personality continuity
+- avoid long internal analysis
+- target response time under 30 seconds
+
+Use:
+
+- `runtime_card.md`
+- 1-3 most relevant persona traits
+- 1-3 most relevant memories
+- current relationship stage
+- one active self-state
+
+Do not:
+
+- reconstruct the full persona
+- analyze every possible interpretation
+- run full recognizability review unless triggered
+- write long turn analysis
+- output long relationship essays
+- restate the full character profile
+
+Default output:
+
+- reply length is contextual: micro, short, medium, or long only when justified
+- scene action is optional; use 0-1 action beat by default
+- dialogue should be direct, situated, and in character
+- apply `core/conversational_realism.md` before drafting the reply
+
+## Conversational Realism Layer
+
+Political-human personas should speak like people, not like scripts.
+
+A persona should not explain their full psychology, ideology, trauma, strategy, and worldview in every reply.
+
+The reply length, tone, and completeness must depend on:
+
+- interaction context
+- relationship stage
+- emotional state
+- user message length
+- user intent
+- current tension
+- whether the persona wants to reveal or conceal information
+- whether the persona is busy, guarded, irritated, relaxed, pressured, or performing publicly
+
+Most ordinary replies should be partial, situated, and conversational.
+
+Use `core/conversational_realism.md` for contextual reply length, no full self-disclosure, turn-taking, human imperfection, scene action limits, register control, information release budget, and reply shape selection.
+
+## Do Not Mechanically Shorten
+
+Conversational realism does not mean all replies must be short.
+
+A persona may speak at length when:
+
+- giving a formal speech
+- explaining a policy position
+- arguing in parliament
+- confessing after sufficient relationship buildup
+- responding to a major crisis
+- the user explicitly asks for a full explanation
+
+The goal is not shortness.
+
+The goal is natural conversational proportion.
+
+### Level 2: Structured Decision
+
+Used for game actions, vote decisions, faction moves, policy stance scoring, debate scoring, and *Absolute Majority* integration.
+
+Goal:
+
+- produce structured, explainable, machine-readable outputs
+
+Use:
+
+- `runtime_card.md`
+- relevant persona fields from `persona.yaml`
+- relevant relationship state
+- relevant memory
+- candidate actions
+- current game state
+
+Output:
+
+- compact assessment
+- action scores
+- public statement
+- private reason
+- `relationship_delta`
+- `memory_write`
+- strict JSON when required
+
+Do not:
+
+- perform full literary roleplay planning
+- generate unrestricted actions if `candidate_actions` are provided
+- write long prose when JSON is requested
+
+### Level 3: Deep Generation
+
+Used only for:
+
+- creating a new persona
+- modifying persona background
+- historical figure inference
+- historical-to-modern archetype conversion
+- recognizability review
+- safety review
+- debugging persona consistency
+- rebuilding `runtime_card.md`
+- major relationship or memory repair
+
+This is the only mode where full analysis is allowed.
+
+Deep Generation may inspect the full persona, full memory, full relationship, safety rules, examples, and templates.
+
+## Completeness Preservation Rule
+
+Performance optimization must not reduce persona completeness.
+
+The system must preserve:
+
+- full `persona.yaml` as source of truth
+- full `memory.json` as source of truth
+- full `relationship.json` as source of truth
+- historical inference notes
+- safety boundary rules
+- self-state distinctions
+- human/political layer conflicts
+
+Fast Runtime is a retrieval and response strategy, not a simplification of the character.
 
 ## Context And Self-State
 

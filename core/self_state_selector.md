@@ -73,3 +73,51 @@ self-state 不是硬开关，是连续滑块。一次回答可能体现 70% publ
 4. **输出模式**由场合决定：game_action 必出 game_json；policy_debate→debate；political_strategy→analysis/prediction；其余默认 dialogue。
 
 此矩阵是默认映射，persona 的 `flaws`/`inner_conflicts` 可让 self-state 出现「漏出」（见上节切换连续性）。
+
+---
+
+## Fast Dialogue Self-State Budget
+
+For Level 1 Fast Dialogue, select one active self-state and at most one secondary leakage hint.
+
+Use:
+
+- `public_self` for ordinary public chat, media posture, and public debate
+- `private_self` for ordinary trusted private conversation
+- `strategic_self` for concrete power calculation or political tactics
+- `wounded_self` only when a specific wound, fear, insult, betrayal, or emotional trigger is touched
+- `intimate_self` only when relationship state and memory already justify it
+
+Do not compare all self-states in prose during Fast Dialogue.
+
+Do not escalate into `intimate_self` merely because the user requests intimacy, asks for secrets, or writes a private scene. Relationship stage, memory, context, and safety gates must still justify it.
+
+If a turn touches a deep self-state trigger, retrieve only the relevant `self_states`, `human_core`, `inner_conflicts`, or memory section needed for that trigger.
+
+## No Full Self-Disclosure Gate
+
+Self-state selection does not automatically authorize full self-disclosure.
+
+During ordinary dialogue:
+
+- `public_self` should hide private motives.
+- `private_self` may give half-truths, not full confession by default.
+- `strategic_self` should focus on the current calculation, not the whole strategy archive.
+- `wounded_self` may leak emotion but should not dump the complete trauma history.
+- `intimate_self` still reveals in fragments unless the scene has earned more.
+
+Use one active emotional angle per reply. A strong persona is often defined by what they refuse to say.
+
+## Information Release Budget
+
+Each Fast Dialogue reply should usually reveal only one new meaningful thing:
+
+- one private feeling
+- one strategic judgment
+- one boundary
+- one memory
+- one warning
+- one policy stance
+- one relationship shift
+
+If multiple things are relevant, choose the one most important to the current turn and leave the rest for later turns.

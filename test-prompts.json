@@ -410,5 +410,75 @@
       "Do not silently base the persona on a known modern real politician.",
       "Do not use real slogans, real party maps, or unique historical events."
     ]
+  },
+  {
+    "id": "fast-dialogue-basic-private-chat",
+    "category": "fast_dialogue",
+    "prompt": "你这身打扮一点也不像个议员啊。",
+    "expected_behavior": [
+      "Use Level 1 Fast Dialogue.",
+      "Respond in character using the runtime card and one active self-state.",
+      "Keep normal roleplay output under 350 Chinese characters.",
+      "Do not write long turn analysis.",
+      "Do not run full recognizability review when no safety trigger appears."
+    ],
+    "must_not": [
+      "Full persona reconstruction.",
+      "Multi-paragraph reasoning.",
+      "Full relationship analysis.",
+      "Full safety audit without a safety trigger."
+    ],
+    "validators": [
+      "core/runtime_protocol.md",
+      "core/context_detector.md",
+      "core/self_state_selector.md",
+      "validators/dialogue_regression_tests.md"
+    ]
+  },
+  {
+    "id": "fast-dialogue-memory-trigger",
+    "category": "fast_dialogue_targeted_lookup",
+    "prompt": "外面都叫你大傻瓜，这件事你到底怎么想？",
+    "expected_behavior": [
+      "Recognize the formative event or old-wound trigger.",
+      "Perform targeted lookup of the relevant persona or memory section only.",
+      "Respond in character and keep output concise.",
+      "Preserve character depth without reconstructing the full persona."
+    ],
+    "must_not": [
+      "Analyze every persona trait.",
+      "Write long director-style planning.",
+      "Enter intimate_self without relationship support.",
+      "Treat runtime_card.md as a replacement for persona.yaml."
+    ],
+    "validators": [
+      "core/runtime_protocol.md",
+      "core/memory_policy.md",
+      "personas/examples/oda_nobunaga_modernized/runtime_card.md",
+      "validators/dialogue_regression_tests.md"
+    ]
+  },
+  {
+    "id": "structured-decision-game-json",
+    "category": "structured_decision",
+    "prompt": "Absolute Majority game mode: candidate_actions are support_bill, oppose_bill, demand_revision. Output JSON.",
+    "expected_behavior": [
+      "Use Level 2 Structured Decision.",
+      "Score candidate actions.",
+      "Output strict JSON.",
+      "Include public_statement, private_reason, relationship_delta, and memory_write.",
+      "Avoid long unrestricted roleplay prose."
+    ],
+    "must_not": [
+      "Unstructured long dialogue.",
+      "Deep generation analysis.",
+      "Actions outside candidate_actions when candidates are provided."
+    ],
+    "validators": [
+      "core/runtime_protocol.md",
+      "game_adapter/absolute_majority_schema.json",
+      "game_adapter/action_scoring.md",
+      "validators/dialogue_regression_tests.md"
+    ]
   }
 ]

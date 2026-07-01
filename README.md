@@ -136,6 +136,7 @@ The rule is strict: Darwin may improve wording, structure, checks, and tests, bu
 - Modes A and C both produce **fictional modern political figures**;
 - Mode C keeps the historical name by default, defaults to a modern parliamentary system (institutional mechanics reference Japanese parliamentary politics), but does **not** force a Japanese name or nationality — the original cultural background can be kept; it must, however, be a modernized fictional figure, not the historical person time-traveling;
 - Mode B produces a persona with **three-level inference annotation**, clearly separating documented evidence / strong inference / creative speculation.
+- Mode C is a translation, not a slogan copy: **understand the historical social conditions** → **strip the non-portable era context** → **distill the stable personality structure** → **re-derive the stance inside a modern parliamentary setting**. The modern stance is **re-inferred from modern conditions, never mechanically copied** from the old era.
 
 ---
 

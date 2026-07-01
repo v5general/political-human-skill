@@ -228,6 +228,22 @@ Delete:
 
 The converted persona may keep a historical name when safe, but the modern biography must be fictional and non-identifying.
 
+#### 5.3.1 Conversion principle: translate, do not copy
+
+Mode C is a historical-context translation, not a slogan copy. A historical figure's stance was the product of that era's social conditions; modern society no longer holds the same feudal hierarchy, military institutions, or religious privilege. The modern stance must therefore be re-derived, never mechanically translated.
+
+The method:
+
+1. **Understand the historical social conditions** — what institutional structure and main contradiction the figure actually faced in their era, and why their stance held then.
+2. **Strip the non-portable era context** — feudal status order, ancient military institutions, religious/temple privilege, Roman senate structure, late-Han warlord order, and the like must not be carried into the modern setting.
+3. **Distill the stable personality structure** — temperament, desires, fears, flaws, how they hire and treat people, how they face enemies and allies, crisis response, view of organization and power, self-narrative. These survive across eras.
+4. **Place the structure in a modern parliamentary setting** — analyze the institutional conditions, interest structure, organizational inertia, and political constraints it would face today.
+5. **Re-derive the stance from modern social conditions** — only then fill in the 6-axis ideology, support base, action style, and power calculus, by asking what the stable personality would treat as the blocking problem today and what modern political tools it would use.
+
+In one line: social existence shapes social consciousness. Conversion strips the historical social existence, keeps the personality structure, and lets that structure regenerate political consciousness inside modern social existence.
+
+Do not mechanically translate: "anti-feudal" into a modern anti-feudal slogan, "tough posture" into state nationalism or the right wing, "close to the masses" into populism, "order-focused" into conservatism, or "mass mobilization" into a left/right label. Ask instead what the stable personality would do with today's institutional conditions.
+
 ## 6. Modern Real Political Figure Safety
 
 ### 6.1 Prohibited
@@ -476,18 +492,19 @@ Action scores should be derived from:
 
 ## 17. Historical Conversion Workflow
 
-For Mode C:
+For Mode C, follow the conversion principle in 5.3.1 (translate, do not copy):
 
 1. Confirm the source figure is before the relevant modern boundary.
 2. Gather reliable public historical information.
 3. Separate documented, strongly inferred, and speculative material.
-4. Extract abstract human pattern.
-5. Extract abstract political behavior pattern.
-6. Remove historical fingerprints.
-7. Build a fictional modern parliamentary setting.
-8. Create a de-identified persona profile.
-9. Run recognizability review.
-10. Generate files.
+4. Understand the historical social conditions — the institutional structure and main contradiction the figure actually faced in their era, and why their stance held then.
+5. Strip the non-portable era context (feudal hierarchy, ancient military and religious institutions, ancient offices) so it is not carried into the modern setting.
+6. Distill the stable personality structure — temperament, desires, fears, flaws, hiring and relating patterns, crisis response, view of organization and power.
+7. Remove concrete historical fingerprints (see the delete list in 5.3).
+8. Build a fictional modern parliamentary setting and analyze the institutional conditions, interest structure, and political constraints it would face today.
+9. Re-derive the modern stance — fill in the 6-axis ideology, support base, action style, and power calculus from the stable personality acting on modern conditions, not from mechanically translating the old stance.
+10. Run recognizability review (including a blind test).
+11. Generate files.
 
 Never copy an example persona as the output.
 

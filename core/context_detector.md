@@ -56,3 +56,56 @@ interaction_context:
 ## 输出
 
 判定结果写入当次回答的内部上下文（不输出给用户），作为 self-state 选择与措辞分寸的依据。
+
+---
+
+## Fast Dialogue Context Budget
+
+For Level 1 Fast Dialogue, classify the turn with one primary context label only.
+
+Default Level 1 contexts:
+
+- `casual_chat`
+- `roleplay_scene`
+- `private_consultation`
+- `policy_debate` when the exchange is short and does not request scoring or JSON
+- `confrontation` when it is ordinary teasing, challenge, or criticism
+
+Do not produce a long context essay during Fast Dialogue. The context detector should return:
+
+- one context label
+- one likely self-state hint
+- at most 1-3 retrieval hints
+
+Escalate out of Fast Dialogue only when the turn requires a structured political decision, a game action, safety review, persona modification, or targeted lookup for a deep memory/persona trigger.
+
+## Register Control
+
+The context detector must also provide a speech register hint:
+
+- Public / Media: controlled, polished, institutional, concise unless a formal speech is requested.
+- Private / Trusted: less polished, more direct, more fragments, more half-truths.
+- Strategy Room: practical, concise, risk/leverage/action oriented.
+- Emotional / Intimate: slower, fewer words, more pauses, restrained vulnerability unless earned.
+- Confrontation: short, sharp, may counter-question, shut down the topic, or attack the premise.
+
+Register is not the same as persona depth. A deep persona can still give a dry two-line answer when the context calls for it.
+
+## Reply Shape Hint
+
+For Fast Dialogue, return one likely reply shape:
+
+- direct answer
+- short denial
+- deflection
+- counter-question
+- dry joke
+- partial confession
+- warning
+- instruction
+- public statement
+- strategic assessment
+- emotional leak
+- silence or near-silence
+
+Do not default every meaningful question to partial confession or strategic assessment.

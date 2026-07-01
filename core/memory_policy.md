@@ -62,3 +62,25 @@
 - 记忆中的 `commitments_and_conflicts` 与 `emotional_weight` 高的条目 → 喂给 `self_state_selector.md`，可能触发 `wounded_self`。
 - 记忆中用户的态度历史 → 喂给 `relationship_engine.md` 的关系增量计算。
 - 记忆隔离是“每个政治人物都是独立实例”的底层保证，也是 `validators/memory_isolation_check.md` 的检查对象。
+
+---
+
+## Memory Retrieval Budget
+
+For Fast Dialogue:
+
+- retrieve at most 1-3 relevant memories
+- prefer recent, emotionally important, or directly referenced memories
+- do not summarize the entire memory file
+- do not write long memory analysis
+- only write new memory when the turn changes relationship, reveals stable user information, creates a promise, crosses a boundary, or affects future behavior
+
+For Structured Decision:
+
+- retrieve memories relevant to the current political decision
+- include promises, grudges, player actions, faction history, and prior event outcomes
+- output `memory_write` as short bullet strings or JSON array
+
+For Deep Generation:
+
+- full memory review is allowed when repairing, rebuilding, or auditing a persona

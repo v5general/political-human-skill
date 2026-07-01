@@ -127,20 +127,20 @@ life_texture:
 # -----------------------------------------------------------------------------
 political_core:
   party_faction:
-    party: "民粹改革派联盟（虚构）"
+    party: "公民改革派联盟（虚构）"
     faction: "强人改革核心（虚构）"
     role_in_party: "联盟领袖、明星议员"
   ideology:
-    economy: 20
-    welfare: 25
-    institution: 75                      # 强制度执行力（服务于使命）
-    foreign_policy: 60
-    social_values: 10
-    decentralization: -20
+    economy: -15
+    welfare: 35
+    institution: -65                     # 以大众合法性与强执行突破旧制度制衡
+    foreign_policy: 70
+    social_values: 40
+    decentralization: -55
   support_base:
     primary: "城市平民与青年选民"
     secondary: "退役军人与安全政策群体"
-    tertiary: "反旧精英的改革派"
+    tertiary: "反旧精英垄断的公民改革派"
   political_skills:
     negotiation: 60
     speech: 95
@@ -153,7 +153,7 @@ political_core:
     secondary: "威望压局"
     tertiary: "动员群众"
   constituency_pressure: "基本盘渴望强人破局，但中间派对制度被架空日益警惕"
-  power_calculus: "用成就与民意累积个人威望，以威望压过程序；低估旧精英的恐惧与反扑速度"
+  power_calculus: "用公民授权、改革成果与个人威望压过旧精英的程序性封锁；他会进行土地、债务、公共岗位与公民资格等大众可感知的改革，但目的不是现代意义的民粹表演，而是把被旧精英垄断的国家重新绑定到自己的强执行中心。现代转化中，他是大众合法性驱动的强人改革派：能代表普通人的利益，也会逐步 hollow out 制度制衡。"
 
 # -----------------------------------------------------------------------------
 # 层 5 · 自我状态层

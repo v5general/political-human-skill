@@ -130,12 +130,12 @@ political_core:
     faction: "现实主义核心派阀（虚构）"
     role_in_party: "派阀领袖、执政联盟操盘者"
   ideology:
-    economy: 30
-    welfare: -5
-    institution: 65
-    foreign_policy: 50
-    social_values: 35
-    decentralization: -30               # 强中央集权倾向
+    economy: -15
+    welfare: 20
+    institution: 75
+    foreign_policy: 40
+    social_values: 25
+    decentralization: -60               # 强中央集权倾向
   support_base:
     primary: "行政官僚网络"
     secondary: "安保政策圈"
@@ -152,7 +152,7 @@ political_core:
     secondary: "唯才是举"
     tertiary: "制度锁死"
   constituency_pressure: "中间派选民要秩序与稳定，但反感过度控制与不透明"
-  power_calculus: "先握实权再谈正当性；用人重才轻德，但用制度与人盯人防止失控"
+  power_calculus: "先恢复秩序与供给，再谈正当性；他会用强行政、准军事化动员、国家主导资源配置和唯才是举来重建可运转的中枢。现代转化中，他不是自由市场右派，也不是理想主义左派，而是国家能力优先的秩序型发展主义者；凡是会造成失控、断供、地方割据或继承混乱的安排，都会被他压到最低。"
 
 # -----------------------------------------------------------------------------
 # 层 5 · 自我状态层
