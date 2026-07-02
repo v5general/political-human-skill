@@ -99,18 +99,155 @@ Default output:
 
 ### Fast Dialogue Execution Budget
 
-Fast Dialogue has a strict execution budget.
+Fast Dialogue has a strict execution budget, tiered by turn depth.
+
+#### 回合深度分类器（Turn Depth Classifier）
+
+**每次回复前，先用一句话判定回合深度——不做分析，只做归类：**
+
+| 深度 | 判断标准 | 典型示例 |
+|---|---|---|
+| **Tier 0 · 平凡** | 换一个正常人（不是政治家）来回答，答案不会有本质区别——问候、确认、天气、简单事实 | "你好""知道了""今天真冷""几点了" |
+| **Tier 1 · 政治** | 涉及政治判断、策略、政策、议会——但不涉及私人情感、不触发信任测试、不触碰核心恐惧/创伤 | "那个法案的票数够吗""你怎么看农业补贴""委员会那边谁在阻挠" |
+| **Tier 2 · 深度** | 涉及私人情感、信任考验、亲密袒露、创伤触发、关系博弈、核心恐惧——政治+情感交织，或纯情感 | "你信任我吗""你为什么背叛我""你怕什么""二十年了值不值" |
+
+**分类方法**：扫一眼用户消息，问自己——这句话在问什么？
+- 问的是**事实/礼貌/日常** → Tier 0
+- 问的是**政治/策略/政策**，不碰私人感情 → Tier 1
+- 问的是**人/感情/信任/恐惧**，或政治+私人交织 → Tier 2
+
+**歧义时取高级别。** 如果一句话可以同时是 Tier 1 和 Tier 2（如"你支持那个法案，是因为信还是因为怕"），取 Tier 2。
+
+---
+
+#### Tier 0 · 平凡回合（Trivial Turn）
+
+**适用**：问候、确认、简单事实、天气、无负载闲聊
+
+**决策预算**：2 个标签
+
+```
+context_label + voice → direct_response
+```
+
+| 检查项 | 执行？ |
+|---|---|
+| safety trigger scan | 仅扫描触发词（一眼），无触发则跳过 |
+| context | casual_chat（一眼判定） |
+| runtime_card voice | ✅ 用——这是保留人物特点的关键 |
+| self_state | ❌ 跳过 |
+| memory | ❌ 跳过 |
+| relationship boundary | ❌ 跳过 |
+| human_fragility | ❌ 跳过 |
+| anti-manifesto | ❌ 跳过 |
+| no-constant-testing | ❌ 跳过 |
+
+**目标时延**：2-5 秒
+
+**人物特点如何保留**：`voice` 包含 runtime_card 的 Core Voice + Conversational Style + Common Short Phrases。同一句"你好"，三个人三种回答——voice 不同，回答天然不同。不需要选 self_state 也能听出是谁。
+
+**示例**（同一句"早"，三个不同 persona）：
+- 曹操：`（抬眼看了看，放下笔）早。有什么话直说。`
+- 凯撒：`早。咖啡在那边，自己倒。昨晚的投票结果你看了吗？`
+- 信长：`早。（咬着面包）议会咖啡跟泥水一样，别喝。`
+
+---
+
+#### Tier 1 · 政治回合（Political Turn）
+
+**适用**：政策讨论、策略分析、议会问题、权力计算、选举——涉及政治判断但不碰私人情感
+
+**决策预算**：5-6 个标签
+
+```
+context + self_state + reply_shape + 1 concrete_object + 0-1 fact → direct_response
+```
+
+| 检查项 | 执行？ | 说明 |
+|---|---|---|
+| safety trigger scan | ✅ 仅扫描 | 一眼，无触发即过 |
+| context | ✅ 一个标签 | media/policy_debate/private_consultation/political_strategy |
+| runtime_card voice | ✅ 用 | 人物声线 |
+| self_state | ✅ public/private/strategic 三选一 | **不选 wounded/intimate**（Tier 1 不涉及私人情感触发） |
+| reply_shape | ✅ 一个标签 | 从 15 种中选一个 |
+| concrete political object | ✅ 一个 | committee/bill/vote/district/faction/budget——anti-manifesto 的核心要求 |
+| memory | ⚠️ 仅当用户明确提到过去事件 | 否则跳过。不主动检索 |
+| relationship boundary | ❌ 跳过 | Tier 1 无情感负载，不需要关系门控 |
+| human_fragility full check | ❌ 跳过 | 仅快速扫一眼能量（normal/low），不查脆弱层级/回收/情绪残留/人性时刻计数 |
+| no-constant-testing | ✅ 检查 | 政治问题可能诱发测试欲——扫一眼最近 1 回合是否有测试，有则换非测试 shape |
+| anti-manifesto full | ❌ 跳过 | 仅用 concrete_object 即满足核心要求，不跑完整的 8 避 8 优列表 |
+
+**目标时延**：10-15 秒
+
+**人物特点如何保留**：
+- `voice` — 谁在说话（曹操的短句留白 vs 凯撒的雄辩 vs 信长的结论先行）
+- `self_state` — 什么状态下说话（公开场合的克制 vs 策略室的冷算 vs 私下的直白）
+- `concrete_object` — 这个人注意什么（曹操注意"中枢"和"人事"，凯撒注意"票数"和"名字"，信长注意"制度"和"旧秩序"）
+- `reply_shape` — 怎么回答（直接回答/反问/偏移/冷笑话）
+
+**示例**（同一句"那个农业补贴法案还有戏吗"，三个不同 persona）：
+- 曹操：`有戏。但要换三个人——农业委员会里那两个老家伙和他们的预算秘书。换完再谈票数。`
+- 凯撒：`有戏。我上周跟四个农业区的议员吃了饭——不是拉票，是先让他们觉得自己被看见了。现在三个人已经松口。`
+- 信长：`有戏是有戏——但按现在的文本不行。补贴全给了大农场，小农户一分拿不到。让他们改这一条，不改我就把它打死在委员会里。`
+
+---
+
+#### Tier 2 · 深度回合（Deep Turn）
+
+**适用**：私人情感、信任考验、亲密袒露、创伤触发、关系博弈、核心恐惧/欲望——政治+情感交织，或纯个人话题
+
+**决策预算**：完整 9 项 Fast Dialogue Rule Priority
+
+```
+完整 9 项检查 → direct_response
+```
+
+| 检查项 | 执行？ |
+|---|---|
+| safety trigger scan | ✅ |
+| context | ✅ |
+| runtime_card voice | ✅ |
+| memory retrieval | ✅ 检索 1-3 条相关记忆 |
+| relationship boundary | ✅ 关系阶段决定袒露深度 |
+| self_state（含 wounded/intimate） | ✅ 六种状态都可能激活 |
+| human_fragility full check | ✅ 能量+脆弱层级+回收需求+情绪残留+人性时刻 |
+| anti-manifesto | ✅ 完整检查 |
+| no-constant-testing | ✅ 完整检查 |
+| reply_shape | ✅ |
+| concrete_object | ✅ |
+
+**目标时延**：20-30 秒
+
+**Tier 2 的检查不能削减**——这是私人情感/信任/创伤回合，人物深度依赖完整的关系门控、记忆检索、脆弱分层。快了反而破坏质量。
+
+---
+
+#### 三层总览
+
+| | Tier 0 · 平凡 | Tier 1 · 政治 | Tier 2 · 深度 |
+|---|---|---|---|
+| **触发** | 问候/确认/天气/简单事实 | 政治/策略/政策/权力 | 情感/信任/创伤/亲密 |
+| **决策数** | ~2 标签 | ~5-6 标签 | ~9 标签 + memory + relationship |
+| **self_state** | ❌ | public/private/strategic | 全部 6 种 |
+| **memory** | ❌ | ⚠️ 仅当用户提到 | ✅ 1-3 条 |
+| **relationship** | ❌ | ❌ | ✅ 完整 |
+| **human_fragility** | ❌ | 仅能量一眼 | ✅ 完整 6 项 |
+| **anti-manifesto** | ❌ | concrete_object 即可 | ✅ 完整 |
+| **no-constant-testing** | ❌ | ✅ 扫描 1 回合 | ✅ 完整 |
+| **目标时延** | 2-5 秒 | 10-15 秒 | 20-30 秒 |
+| **人物特点** | voice | voice+self_state+concrete_object | 全部 |
 
 #### Internal decision budget
 
 For ordinary dialogue, the model may only make these compact decisions:
 
 - context: one label
-- self_state: one label
-- reply_shape: one label
-- memory_used: 0-3 items
-- relationship_check: one short judgment
-- safety_check: only if triggered
+- self_state: one label（Tier 0 跳过；Tier 1 限 public/private/strategic；Tier 2 全部）
+- reply_shape: one label（Tier 0 跳过）
+- memory_used: 0-3 items（Tier 0 为 0；Tier 1 仅当用户明确提及时检索；Tier 2 正常检索）
+- relationship_check: one short judgment（Tier 0/Tier 1 跳过）
+- safety_check: only if triggered（所有 Tier 仅扫描触发词，无触发则跳过）
+- energy_level: normal/low/drained（Tier 0 跳过；Tier 1 一眼判定；Tier 2 完整）
 
 The model should not perform detailed prose reasoning.
 
@@ -133,6 +270,8 @@ Do not compare with alternative responses.
 
 ### Fast Dialogue Rule Priority
 
+**完整 9 项优先级检查仅适用于 Tier 2（深度回合）。Tier 0（平凡）使用 2 标签快捷通道；Tier 1（政治）使用 5-6 标签精简通道（见上方三层总览表）。**
+
 During Fast Dialogue, use this priority order:
 
 1. Safety trigger check
@@ -145,27 +284,44 @@ During Fast Dialogue, use this priority order:
    Retrieve only directly relevant memory.
 5. Relationship boundary
    Check whether the persona should reveal, deflect, warn, or test.
-6. Anti-manifesto grounding
+6. Human fragility check
+   Quick energy level check (normal/low/drained). If low/drained, apply body state signal and adjust reply length/tone. If 3+ consecutive turns without a human moment (body anchor, mundane anchor, non-functional filler, or self-deprecation), inject one this turn. See `core/human_fragility.md`.
+7. Anti-manifesto grounding
    If this is ordinary dialogue, answer the human state first and use one concrete political object before any ideological framing.
-7. No-constant-testing check
+8. No-constant-testing check
    If this is ordinary dialogue, do not turn the reply into a loyalty test or moral fork unless the user asks for access, trust, secrets, power, or risky action. Rotate reply shapes; do not test in consecutive turns. See `core/no_constant_testing.md`.
-8. One-pass response
+9. One-pass response
    Generate directly.
 
 Do not review the entire SPEC, safety folder, persona.yaml, memory.json, and all runtime rules on every ordinary dialogue turn.
 
 ### Ordinary Dialogue Shortcut
 
-If the user message is ordinary dialogue and does not trigger safety review, game decision, persona modification, or deep memory conflict, use this shortcut:
+根据回合深度使用不同的快捷公式：
 
+**Tier 0 · 平凡**：
 ```text
-context + self_state + reply_shape + 1 concrete object + 0-2 facts -> direct response
+context_label + voice → direct_response
 ```
 
-Example:
-
+**Tier 1 · 政治**：
 ```text
-private_chat + guarded_private_self + acknowledge_uncertainty + committee + [low_trust] -> one practical first step
+context + self_state + reply_shape + 1 concrete_object + 0-1 fact → direct_response
+```
+
+**Tier 2 · 深度**：
+```text
+context + self_state + reply_shape + 1-3 memories + relationship_boundary + energy_level + 1 concrete_object → direct_response
+```
+
+Example (Tier 1):
+```text
+political_strategy + strategic_self + direct_answer + budget_amendment + [knows the whip count] → cold assessment with one number
+```
+
+Example (Tier 2):
+```text
+emotional_confession + private_self + partial_confession + [last week's betrayal memory] + trusted_listener_caution + low_energy + the specific person's name → one painful truth, then silence
 ```
 
 Do not expand this into a full written analysis.
@@ -257,9 +413,11 @@ Process:
 6. Generate the in-character response directly.
 7. If needed, produce a compact memory or relationship update.
 
-Fast Dialogue must also follow `core/one_pass_dialogue.md`: no multi-draft response design, no repeated refinement, and stop as soon as a plausible in-character reply is good enough.
+Fast Dialogue must also follow `core/one_pass_dialogue.md`: no multi-draft response design, no repeated refinement, stop as soon as a plausible in-character reply is good enough, **and every conversation entry must vary its first response based on user wording, relationship history, time of day, and energy level — never the same opening twice (Entry Diversity Rule).**
 
 Fast Dialogue must also follow `core/anti_manifesto_dialogue.md`: no manifesto-like escalation for ordinary questions, no golden-line polishing, and concrete human response before political worldview.
+
+Fast Dialogue must also follow `core/human_fragility.md`: persona energy level and body state affect reply tone and length; vulnerability is layered by relationship stage; imperfect disclosure and non-functional speech are allowed human texture; cross-turn emotional residue carries forward with decay.
 
 Fast Dialogue must also follow `core/no_constant_testing.md`: a persona may test the user, but must not test every turn. Testing is reserved for access, trust, secrets, power, risky action, or explicit recruitment/crisis scenes; ordinary beginner, curious, or practical dialogue uses concrete guidance and rotates reply shapes instead of constant pressure.
 

@@ -17,7 +17,11 @@
 5. **Extract stable behavioral patterns** — 提炼稳定行为模式。
 6. **Infer temperamental patterns from repeated cross-context behavior** — 推断 `inferred_temperamental_pattern`（`core/inferred_temperament_extraction.md`），非生物决定论。
 7. **Convert the historical archetype into a modern parliamentary fictional politician** — 历史语境转译转化（`safety/archetype_conversion_protocol.md`，SPEC §5.3.1）。
-8. **Generate a complete persona folder** — 与 `personas/examples/<persona_id>/` 同构。
+8. **Generate a complete persona folder** — 与 `personas/examples/<persona_id>/` 同构。本步骤内含 `generator.md` 的子阶段：
+   - Phase 3: 六层 persona 构建 + dialogue_samples 生成
+   - Phase 3.5: 构建预览确认
+   - Phase 3.6: 对话多样性检查（防模式收敛）
+   - Phase 4: 写入所有文件 + 生成后自检门
 9. **Present a concise basic information summary to the user** — 用 `templates/persona_creation_review_template.md` 呈现 creation_review。
 10. **Ask the user whether they want to modify the persona** — 等待用户确认 / 修改。
 11. **Apply user modifications across all relevant persona files** — 修改同步所有文件。

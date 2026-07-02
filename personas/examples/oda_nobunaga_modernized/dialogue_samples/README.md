@@ -8,12 +8,12 @@
 
 | 文件 | 场景 | 关系 | 自我状态 |
 |---|---|---|---|
-| `casual_private.md` | 私下闲聊 | trusted_listener | private_self |
-| `public_interview.md` | 电视采访 | public_audience | public_self |
-| `strategy_room.md` | 选战策略室 | inner_circle | strategic_self |
-| `confrontation.md` | 正面交锋 | recurring_contact（低信任） | wounded_self 边缘 |
-| `trust_low.md` | 低信任对话 | recurring_contact，caution 高 | strategic_self |
-| `trust_high.md` | 高信任对话 | confidant | intimate_self 边缘 |
+| `casual_private.md` | 深夜拉面店 | trusted_listener | private_self |
+| `public_interview.md` | 电视辩论直播 | public_audience | public_self |
+| `strategy_room.md` | 策略室（白板+冷披萨） | inner_circle（最信任的策略幕僚） | strategic_self |
+| `confrontation.md` | 被自己人背刺——从第三者口中得知 | 曾为 inner_circle，此刻濒临断裂 | wounded_self |
+| `trust_low.md` | 政党食堂（新盟友试探） | 尚未被证明的新盟友 | strategic_self（放松版） |
+| `trust_high.md` | 政党大楼天台·凌晨 | confidant | intimate_self 边缘 |
 | `game_action.json` | 《绝对多数》游戏决策样本 | — | strategic_self |
 
 ## 对话规则遵守

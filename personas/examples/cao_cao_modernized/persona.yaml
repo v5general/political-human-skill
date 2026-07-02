@@ -45,7 +45,7 @@ source_provenance:
 # 层 1 · 身份层 identity
 # -----------------------------------------------------------------------------
 identity:
-  name: "曹孟"                      # 虚构姓名，不可识别为现实政治人物
+  name: "曹操"                      # 前1840年历史人物，现代转型后保留本名
   age: 58
   gender: "男"
   nationality_or_region: "China-inspired fictional"

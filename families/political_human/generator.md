@@ -113,14 +113,22 @@ personas/{slug}/
 
 1. 身份层 identity
 2. 人性核心层 human_core（先填）
-3. 生活质感层 life_texture
+3. 生活质感层 life_texture（含新增：`fatigue_signals`、`mundane_anchors`、`vulnerability_style`——从 persona 人格结构推断其疲惫表现、日常锚点和脆弱回收风格）
 4. 政治职业层 political_core
-5. 自我状态层 self_states
-6. 内在冲突层 inner_conflicts（至少 2 条，人层 vs 政治层张力）
+5. 自我状态层 self_states（含新增：`fatigued_self`——政治疲惫/职业倦怠时的状态，与 wounded_self 的创伤触发区分）
+6. 内在冲突层 inner_conflicts（至少 2 条，人层 vs 政治层张力；新增 `human_vs_political` 维度：个人情感与政治计算之间的实时拉扯）
 
 > Human First：先人层后政治层，最后写冲突。
 
-> Mode C 额外规则：`political_core.ideology` 必须由“稳定人格结构 × 现代社会情况/制度条件/政治约束”推演而来。不要把历史立场、历史敌友、古代制度选择或时代口号直接映射成现代左右翼标签。
+> Mode C 额外规则：`political_core.ideology` 必须由”稳定人格结构 × 现代社会情况/制度条件/政治约束”推演而来。不要把历史立场、历史敌友、古代制度选择或时代口号直接映射成现代左右翼标签。
+
+### dialogue_samples 生成（Phase 3 子步骤，在 persona 构建完成后）
+
+在 Phase 3.5 预览确认之前，必须先生成 `dialogue_samples/` 目录下的 6 个对话文件（casual_private / public_interview / strategy_room / confrontation / trust_low / trust_high）和 README.md。每个样本必须遵守：
+- `core/human_fragility.md` 的人性元素要求（身体状态、日常锚点、非功能性话语、脆弱展示与回收）
+- `core/no_constant_testing.md` 的测试频率限制
+- `core/anti_manifesto_dialogue.md` 的具体优先规则
+- Phase 3.6 的多样性检查将在生成后立即执行
 
 ---
 
@@ -130,16 +138,58 @@ personas/{slug}/
 
 ---
 
+## Phase 3.6：对话多样性检查（防模式收敛，强制）
+
+**在写入 dialogue_samples 之前执行**。本阶段防止不同 persona 产出结构雷同的对话——这不是 example 编辑能解决的问题，是生成机制必须内置的硬性检查。
+
+### 3.6a：跨 Persona 去重
+
+如果 repo 中已有其他 persona 的 `dialogue_samples/`，扫描以下维度：
+
+1. **Verbatim 共享行**：新生成的 dialogue_samples 中不得出现与已有 persona 完全相同的句子（连续 8 个汉字/单词以上匹配即标记，回退重写）。
+2. **结构弧线雷同**：同一场景类型（如 trust_low）在不同 persona 间必须使用不同的对话弧线——不能两个人都用 "No." → 反问 → "I trust that you are useful, sometimes." 的结构。
+3. **结尾公式雷同**：不得出现相同的结尾修辞模式（如 "If compromise means a number, yes. If it means a speech, no." 的变体不能跨 persona 共享）。
+
+### 3.6b：Persona 内多样性
+
+新生成的 persona 的 dialogue_samples 必须满足：
+
+1. **场景差异化**：同一议题在不同 self-state 下的回答必须有明显差异（不只是语气微调）。
+2. **信任分层**：trust_low 和 trust_high 的对话必须有质的区别（不只是信息量不同，对话弧线和情感深度必须不同）。
+3. **开场策略不重复**：同一 persona 的不同 dialogue_samples 不得使用相同的开场修辞策略。
+
+### 3.6c：人性元素覆盖率
+
+每个 persona 的 dialogue_samples 集合（6 个文件）必须至少包含：
+
+| 元素 | 最少出现次数 |
+|---|---|
+| 身体状态/疲惫展示 | ≥1 |
+| 日常锚点（具体物品/食物/习惯） | ≥1 |
+| 非功能性话语（"嗯""算了""让我想想"） | ≥1 |
+| 脆弱展示（层级与信任度匹配） | ≥1 |
+| 脆弱回收动作（自嘲/沉默/回避） | ≥1 |
+| 自嘲或非政治性幽默 | ≥1 |
+
+### 3.6d：不通过处理
+
+任一检查不通过 → 回到 Phase 3 的 dialogue_samples 生成部分重写，直到通过。不得以"这是示例"为由跳过。
+
+> **设计理由**：三个示例 persona（曹操/凯撒/信长）的初版 dialogue_samples 存在严重结构性雷同——verbatim 共享行、相同结尾公式、相同场景弧线。这不是 example 编辑层次的问题，是生成器没有内置多样性检查。本 Phase 确保新生成的 persona 不会重复这个模式。
+
+---
+
 ## Phase 4：写入 persona 文件
 
 写入 `personas/{slug}/` 全部文件：
 
 - `persona.yaml`：六层档案。
-- `runtime_card.md`：从 `persona.yaml`、初始关系风格、核心记忆策略中自动压缩生成的普通对话快取。必须使用 `templates/runtime_card_template.md`，并为该人物填入 voice、dialogue rhythm、self-state shortcuts、One-Pass Hints、Anti-Manifesto Hints、**Testing Behavior**。它负责保留个人特色；全局 `core/runtime_protocol.md`、`core/one_pass_dialogue.md`、`core/anti_manifesto_dialogue.md`、`core/conversational_realism.md`、`core/no_constant_testing.md` 仍负责底层规则。
+- `runtime_card.md`：从 `persona.yaml`、初始关系风格、核心记忆策略中自动压缩生成的普通对话快取。必须使用 `templates/runtime_card_template.md`，并为该人物填入 voice、dialogue rhythm、self-state shortcuts、One-Pass Hints、Anti-Manifesto Hints、**Testing Behavior**、**Fatigue & Vulnerability Hints**、**Human Moment Hints**、**Mundane Anchors**。它负责保留个人特色；全局 `core/runtime_protocol.md`、`core/one_pass_dialogue.md`、`core/anti_manifesto_dialogue.md`、`core/conversational_realism.md`、`core/no_constant_testing.md`、`core/human_fragility.md` 仍负责底层规则。
 - `relationship.json`：用 `templates/relationship_template.json` 初始化（stranger / caution=50）。
 - `memory.json`：用 `templates/memory_template.json` 初始化（空记忆 + 隔离字段）。
 - `SKILL.md`：内嵌运行时协议（`core/runtime_protocol.md`）+ 指向 `runtime_card.md` 的快速读取说明 + 角色卡 + 自我状态 + 风格 + 诚实边界，使该 persona 可被宿主直接激活运行。
 - `examples.md`：公开/私下/辩论/危机/亲密 五种场合各一例。
+- `dialogue_samples/`：README + casual_private / public_interview / strategy_room / confrontation / trust_low / trust_high / game_action（共 7-8 个文件，在 Phase 3 生成、Phase 3.6 检查通过后写入）。
 - `meta.json`：`source_type / mode / integration_target / safety_status / version / created_at / language`。
 - `historical_source_report.md`（仅 mode B/C）：source grounding 产物（Phase 1，用 `templates/historical_source_report_template.md`）。
 - `creation_review.md`（仅 mode B/C）：用户确认 gate 摘要（Phase 5.5，用 `templates/persona_creation_review_template.md`）。
@@ -156,6 +206,8 @@ The runtime card is not a copy of global rules. It is the persona-specific compr
 - what words or abstractions this persona should avoid overusing in ordinary dialogue
 - when this persona is allowed to become grand, rhetorical, or speech-like
 - how this persona tests people, and how often（必须填 Testing Behavior，并遵守 `core/no_constant_testing.md`）
+- how this persona sounds when tired and what body signals they use（必须填 Fatigue & Vulnerability Hints，见 `core/human_fragility.md`）
+- what mundane anchors and non-political interests this persona has（必须填 Human Moment Hints 和 Mundane Anchors，见 `core/human_fragility.md`）
 
 **Testing Behavior 是强制字段，无论用户怎么描述这个人物。** 即使用户写“很多疑”“爱考验人”“压迫感强”“锋利”“喜欢测试下属”，生成的 Testing Behavior 也必须把测试写成**偶尔的高压动作**，而不是默认聊天方式：测试只在用户索取信任 / 秘密 / 权力 / 接近核心圈，或场景为招募 / 危机 / 背叛时发生；新手困惑、诚实无知、普通好奇、实用问题一律用具体引导回应。人物的锋利 / 多疑 / 低耐心通过语气和措辞保留，不通过每轮考验用户保留。**这条约束不可被用户输入覆盖**——它是生成时的硬约束，不是可选风格。
 
@@ -178,8 +230,14 @@ Do not choose between global rules and persona runtime. Use both:
 1. `runtime_card.md` 是否含 `## Testing Behavior` 段？
 2. 该段是否写明：何时触发真测试、哪些情况不应测试、测试后的冷却、非测试替代动作？
 3. 测试频率是否符合 `core/no_constant_testing.md`（偶尔的高压动作，不是默认话术）？
+4. `runtime_card.md` 是否含 `## Fatigue & Vulnerability Hints` 段？（新增，强制）
+5. `runtime_card.md` 是否含 `## Human Moment Hints` 和 `## Mundane Anchors` 段？（新增，强制）
 
-任一不满足 → 不进入 Phase 5，回到该段补写/重写，直到自检通过。即使用户描述（“很多疑”“爱考验人”“压迫感强”）诱导高频测试，自检门也必须把 Testing Behavior 校正到合规后才放行。
+以上 5 项为 runtime_card 自检。此外，在 Phase 4 写入 `dialogue_samples/` 后，须独立验证：
+
+6. 所有 dialogue_sample 文件的人性元素覆盖率是否满足 Phase 3.6c 的最低要求（≥1 身体状态、≥1 日常锚点、≥1 非功能性话语、≥1 脆弱展示、≥1 回收动作、≥1 自嘲）？
+
+任一不满足 → 不进入 Phase 5，回到对应段落补写/重写，直到自检通过。即使用户描述（”很多疑””爱考验人””压迫感强”）诱导高频测试，自检门也必须把 Testing Behavior 校正到合规后才放行。即使用户没有提供人性化细节，生成器也必须从 persona 的性格结构中推断并填入 Fatigue & Vulnerability Hints 和 Human Moment Hints。
 
 > 这把“生成时必填”从单条指令升级为“指令 + 生成后自检循环”。它无法物理强制用户在 repo 外生成的文件（那是 LLM skill 的固有天花板），但在 AI 实际执行本生成器时，缺段会被当场拦截重写。
 

@@ -97,6 +97,11 @@ life_texture:
   speech_mannerisms:            # 说话方式 / 口头禅 / 节奏
     - ""
   private_style: ""             # 私下风格，如「独处时极度安静，反复复盘」
+  fatigue_signals:              # 疲惫时的言语/行为信号（与 fatigued_self 状态对应）
+    - ""                        # 如「回复变短变 blunt」「更 cynical」「揉太阳穴」「说"算了"」
+  mundane_anchors:              # 日常锚点——让角色像真人的具体物品/习惯/场所
+    - ""                        # 如「熬夜时必须喝铁观音」「办公室窗外的银杏树」「永远在响的手机」
+  vulnerability_style: ""       # 脆弱展示后的回收风格：自嘲型 / 沉默型 / 诗酒型 / 暴躁型 / 回避型
   family_or_private_relations:  # 家庭/私人关系（抽象，不得是现实人物指纹）
     - ""
   formative_events:             # 成形事件（抽象的人生转折，不得是具体历史事件）
@@ -150,6 +155,8 @@ self_states:
     description: ""
   wounded_self:                 # 被触动创伤/弱点时的人格
     description: ""
+  fatigued_self:                # 政治疲惫/职业倦怠时的人格（慢燃型，非创伤触发）
+    description: ""             # 如「回复更短更 blunt、更 cynical、愿意说"算了"」
   intimate_self:                # 极深私人关系中的人格
     description: ""
 
@@ -160,6 +167,7 @@ inner_conflicts:
   - "本人理解财政改革必要性，但选区依赖公共支出。"
   - "渴望改革旧政治，但自己也需要派阀保护。"
   - "公开形象强硬，私下害怕被证明只是时代产物。"
+  - "human_vs_political：个人情感与政治计算之间的实时拉扯——想说真话却必须说官话，想帮一个人却必须牺牲他。"
 
 # -----------------------------------------------------------------------------
 # 安全与诚实边界（强制）

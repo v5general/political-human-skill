@@ -1,4 +1,4 @@
-# Persona Creation Review: 曹孟（cao_cao_modernized）
+# Persona Creation Review: 曹操（cao_cao_modernized）
 
 > 本文件是模式 C（历史人物转现代议会制原型）persona 创建工作流的产物，呈现给用户确认。**用户确认前不得激活该 persona。**
 >
@@ -7,7 +7,7 @@
 ## Basic Information
 
 - Persona ID: cao_cao_modernized
-- Display Name: 曹孟（曹操现代原型）
+- Display Name: 曹操（历史人物现代转型）
 - Source Historical Figure: 曹操（Cao Cao）
 - Source Type: historical_archetype_conversion
 - Modernized: yes
@@ -70,7 +70,7 @@
 ## Safety Notes
 
 - Modern political figure risk: 无——虚构现代原型，不对应任何现实政治人物。
-- Recognizability risk: safe_conversion。已删除指纹：汉末/三国朝代年号、战役、地名、家臣谋士姓名、挟天子/屯田/唯才是举令等历史具体制度、可识别现实政党/人物特征。虚构姓名「曹孟」保留姓氏气质而非历史原名。
+- Recognizability risk: safe_conversion。已删除指纹：汉末/三国朝代年号、战役、地名、家臣谋士姓名、挟天子/屯田/唯才是举令等历史具体制度、可识别现实政党/人物特征。因曹操为前1840年历史人物（155-220），保留本名不构成现代政治人物识别风险。
 - Fictionalization notes: 派阀/选区/hobbies 为创作推测；temperament 自史料推断非生物决定论；政治立场由人格 × 现代社会推演非历史手段反推。
 
 ## Generated Files

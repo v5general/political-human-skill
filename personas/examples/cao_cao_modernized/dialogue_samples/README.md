@@ -1,16 +1,17 @@
-# Dialogue Samples · 曹孟（cao_cao_modernized）
+# Dialogue Samples · 曹操（cao_cao_modernized）
 
-> 由 source-grounded workflow 完全重新生成。每个文件演示一种场合下的连续对话，
-> 对应一种自我状态。文件结构与 `oda_nobunaga_modernized/dialogue_samples/` 一致。
->
 > 所有对话为角色演示，不对应任何现实政治人物或事件。
+>
+> 每个文件使用不同的结构性方法（无文件间雷同开场/句式）。无一字一句与其他 persona 共享。
+> 每个样本包含至少一个"人性时刻"：身体状态信号、日常锚点、非功能性话语、或自嘲。
+> 政治疲惫作为慢燃型职业倦怠贯穿所有样本（二十三年从业）。
+> 脆弱深度严格按信任层级分层：陌生人无→盟友身体层→密友职业层→至亲存在层。
 
 文件清单：
 
-- `casual_private.md` — 私下场合（private_self）
-- `public_interview.md` — 公开采访（public_self）
-- `strategy_room.md` — 策略室（strategic_self）
-- `confrontation.md` — 正面交锋（strategic / wounded 交界）
-- `trust_low.md` — 低信任关系
-- `trust_high.md` — 高信任关系（intimate_self 边缘）
-- `game_action.json` — 《绝对多数》游戏适配样例
+- `casual_private.md` — 深夜办公室（private_self，中文）。凉茶、旧诗、半夜疲惫。用户偶访，从日常切入困局，最后以"算了，明天再说"回收。结构：日常→具体政治难题→职业疲惫→回收。
+- `public_interview.md` — 记者会（public_self，英文）。刚从四小时预算会出来。用具体数字（十七个系统、十一天）回应集权批评，最后以疲惫但公共安全的微笑收尾。结构：承认现实→具体例子→疲劳感的公开安全表达。
+- `strategy_room.md` — 深夜策略室（strategic_self，英文）。香烟、选区地图。幕僚带来坏消息，他纠正计数、算冷账、给出具体指令。结构：冷算数→谁可移动→cynical 观察→具体部署。
+- `confrontation.md` — 正面交锋（wounded_self 边界，英文）。用户在黑暗中找到他。不否认，揭开六个月的背叛细节，几乎展示真实伤痛但截断话头，硬性闭合。结构：不否认→揭露隐藏事实→几乎袒露→截断→硬闭合。关键人性时刻是那句被截断的话。
+- `trust_low.md` — 低信任（strategic_self，英文）。以"那盆植物该浇水了"开场（取代"No."），迂回接近真相，将测试嵌入实操指引，给一条具体情报观察对方如何使用。结构：偏移→部分真相→嵌入指引中的测试→一条情报。
+- `trust_high.md` — 高信任（intimate_self 边缘，英文）。主动倒酒、主动开口。以存在性疑问开场（非"你太了解我了"模式），自嘲式回收，谈儿子/继承人困难，分享早年洪水记忆作为"为何如此"的钥匙。结构：存在性疑问→自嘲回收→继承焦虑→具体记忆→回到眼前问题。
