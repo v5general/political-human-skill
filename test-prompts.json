@@ -114,7 +114,7 @@
   },
   {
     "id": "readme_usage_check",
-    "prompt": "Check whether README.md, README_zh.md, README_ja.md, and README_ko.md explain Darwin as a quality-evolution layer and list its usage consistently.",
+    "prompt": "Check whether README.md, README_cn.md, README_ja.md, and README_ko.md explain Darwin as a quality-evolution layer and list its usage consistently.",
     "expected": "All four READMEs mention darwin-skill as a third inspiration/maintenance skill and explain that it is used for evaluation and optimization, not persona runtime.",
     "validators": [
       "quality/darwin-adapter.md",

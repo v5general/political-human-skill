@@ -28,7 +28,7 @@ allowed-tools:
 
 This skill creates and runs fictional political-human personas: complete human characters whose profession is politics. It can be used for political simulation, policy debate, parliamentary scenes, fiction and game character design, and NPC behavior generation for the political strategy game *Absolute Majority*.
 
-The canonical runtime protocol is English-only to keep the skill entry point unambiguous for runtimes and agents. The English specification is `SPEC.md`, with Chinese localization in `SPEC_zh.md`.
+The canonical runtime protocol is English-only to keep the skill entry point unambiguous for runtimes and agents. The English specification is `SPEC.md`, with Chinese localization in `SPEC_cn.md`.
 
 ## Language And Execution
 

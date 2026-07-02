@@ -1,13 +1,14 @@
 <div align="center">
 
-# 🏛️ Political Human Skill · 政治人物造人术
+# 🏛 Political Human Skill · 政治人物造人术
 
 > *「政治人物首先是人，其次才是政治家。真正有趣的，是人层与政治层之间的冲突。」*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Standard-green)](https://agentskills.io)
-[![Safety First](https://img.shields.io/badge/Policy-No%20Real%20Modern%20Figures-red)](#安全立场)
+[![Safety First](https://img.shields.io/badge/Policy-No%20Real%20Modern%20Figures-red)](#-安全立场)
 [![Built for Absolute Majority](https://img.shields.io/badge/Built%20for-Absolute%20Majority-blue)](https://github.com/v5general/Absolute_Majority)
+[![Multi-Runtime](https://img.shields.io/badge/Runtime-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Cursor%20%C2%B7%20OpenClaw%20%C2%B7%20Hermes-blueviolet)](#-安装与使用)
 
 <br>
 
@@ -23,13 +24,13 @@
 
 <br>
 
-[创作初衷](#创作初衷) · [灵感来源](#灵感来源) · [Darwin 质量进化层](#darwin-质量进化层) · [三种生成模式](#三种生成模式) · [人物是怎样创建的](#人物是怎样创建的来源落地创建工作流source-grounded-workflow) · [人格档案结构](#人格档案结构) · [安全立场](#安全立场) · [安装与使用](#安装与使用) · [已转化原型实战示范](#已转化原型实战示范) · [仓库结构](#仓库结构)
+[这是什么](#-这是什么) · [创作初衷](#-创作初衷) · [人格档案结构](#-人格档案结构) · [三种生成模式](#-三种生成模式) · [人物是怎样创建的](#-人物是怎样创建的来源落地创建工作流source-grounded-workflow) · [安全立场](#-安全立场) · [安装与使用](#-安装与使用) · [已转化原型实战示范](#-已转化原型实战示范)
 
 </div>
 
 ---
 
-## 这是什么
+## ✨ 这是什么
 
 `Political Human Skill` 把一个政治人物拆成两层，并刻意写出两层之间的冲突：
 
@@ -57,7 +58,7 @@ Response = 人格档案 + 用户自我设定 + 关系状态 + 该人格独占的
 
 ---
 
-## 创作初衷
+## 🎯 创作初衷
 
 > 🎮 **直接应用场景**：议会政治策略游戏 [**《绝对多数》(Absolute Majority)**](https://github.com/v5general/Absolute_Majority) —— 本 Skill 为其 NPC 提供人格与行为模型。
 
@@ -88,99 +89,19 @@ Response = 人格档案 + 用户自我设定 + 关系状态 + 该人格独占的
 
 ---
 
-## 灵感来源
+## 💡 灵感来源
 
-本项目受三个优秀开源项目启发：
+本项目站在三个优秀的开源前辈之上：
 
-- **[nuwa-skill](https://github.com/alchaincyf/nuwa-skill)**（作者 [@alchaincyf / 花叔](https://github.com/alchaincyf)）—— 其「从公开信息提炼人物思维框架」的方法论，启发了本项目的**原型提炼**环节：从历史人物提取气质结构，并区分史料记载 / 强推断 / 创作推测三级。
-- **[colleague-skill · dot-skill](https://github.com/titanwings/colleague-skill)**（作者 [@titanwings](https://github.com/titanwings)）—— 其 Skill 的**生成 → 调用 → 更新 → family 化**结构，启发了本项目 persona 的自包含目录组织、intake → 生成 → 预览 → 写入 → 进化的创建流程，以及 Layer 分层 persona 的写法。
-- **[darwin-skill](https://github.com/alchaincyf/darwin-skill)**（作者 [@alchaincyf / 花叔](https://github.com/alchaincyf)）—— 其 **评估 → 改进 → 验证 → 保留/回滚** 的 skill 进化循环，启发了本项目的质量进化层：Darwin 适配器、领域硬门槛、回归测试 prompt 与优化结果记录。
+- **[nuwa-skill](https://github.com/alchaincyf/nuwa-skill)**（作者 [@alchaincyf / 花叔](https://github.com/alchaincyf)）——它「从公开信息中蒸馏一个人的思维框架」的方法，启发了本项目的**原型提炼**步骤：从历史人物身上提炼气质结构，并把史料记载 / 强推断 / 创作推测分为三层。
+- **[colleague-skill · dot-skill](https://github.com/titanwings/colleague-skill)**（作者 [@titanwings](https://github.com/titanwings)）——它的**生成 → 调用 → 更新 → 家族化**结构，启发了本项目自包含的 persona 目录布局、采集 → 生成 → 预览 → 写入 → 演化的创建流程，以及分层的人格写法。
+- **[darwin-skill](https://github.com/alchaincyf/darwin-skill)**（作者 [@alchaincyf / 花叔](https://github.com/alchaincyf)）——它的**评估 → 改进 → 验证 → 保留/回滚**循环，启发了本项目的质量进化层：一个 Darwin 适配器、领域门槛、回归提示词和结果记录，用于长期维护本 Skill。
 
-但 Political Human Skill 是一个**独立的框架**，服务于一个截然不同的对象——「职业是政治的完整的人」。本项目原创的核心包括：Human Layer + Political Layer **双层结构与内在冲突**、政治职业维度（意识形态 6 轴 / 支持基础 / 行动风格）、**关系系统**（用户自称亲密不会被自动信任）、**记忆隔离**（persona 之间命名空间独立）、**场合判断**与 5 种**自我状态**、**近现代现实人物可识别性安全边界**，以及面向 [《绝对多数》](https://github.com/v5general/Absolute_Majority) 的**游戏行动适配**。
-
----
-
-## Darwin 质量进化层
-
-**[darwin-skill](https://github.com/alchaincyf/darwin-skill)** 已作为**维护与优化层**接入本项目，而不是 persona 运行时依赖。需要评估或改进本仓库的 skill 质量时使用它。
-
-本仓库提供：
-
-- [`quality/darwin-adapter.md`](quality/darwin-adapter.md)：说明 Darwin 的 9 维评分如何映射到 Political Human Skill；
-- [`validators/darwin_quality_gate.md`](validators/darwin_quality_gate.md)：领域硬门槛，安全、记忆隔离、游戏 JSON 失败时覆盖数字分数；
-- [`test-prompts.json`](test-prompts.json)：覆盖原创生成、历史转化、安全拒绝、用户修改、场合切换、记忆隔离、《绝对多数》JSON、README 一致性的回归测试；
-- [`scripts/validate_repo.py`](scripts/validate_repo.py)：检查 JSON、YAML、SKILL frontmatter、示例 persona 与《绝对多数》适配文件是否可解析、结构是否齐全；
-- [`demo/`](demo/)：最小可运行的对话 demo 与《绝对多数》结构化决策 demo；
-- [`quality/results.tsv`](quality/results.tsv)：本项目本地优化历史。
-
-典型用法：
-
-```text
-使用 darwin-skill 评估这个仓库。先读 quality/darwin-adapter.md，再运行 test-prompts.json 中的测试 prompt。
-```
-
-优化用法：
-
-```text
-使用 darwin-skill 对 political-human-skill 做一轮改进。只有 Darwin 分数提升且所有领域门槛通过时才保留改动。
-```
-
-硬规则：Darwin 可以改进表达、结构、检查项与测试，但不得削弱安全边界，不得合并 persona 记忆，不得把政治人物运行时改成泛角色扮演 prompt。
+但 Political Human Skill 是一个**独立的框架**，服务于一个截然不同的对象——「职业是政治的完整的人」。原创核心包括：**双层（人 + 政治）结构及其内在冲突**、政治职业维度（6 轴意识形态 / 支持基础 / 行动风格）、**关系系统**、**记忆隔离**、**场合判断**与 5 种**自我状态**、针对现代真实人物的**可辨识度安全边界**，以及面向[《绝对多数》](https://github.com/v5general/Absolute_Majority)的**游戏行动适配器**。
 
 ---
 
-## 三种生成模式
-
-| 模式 | 适用 | 输入示例 | 推荐度 |
-|---|---|---|---|
-| **A. 原创政治人物** | 默认，纯虚构 | 「创建一个 45 岁女性都市改革派议员，公开强硬，私下焦虑，喜欢文学」 | ⭐ 默认 |
-| **B. 历史人物推演** | 边界前的古代/远历史人物，保留历史约束 | 「基于织田信长，生成一个历史约束下的对话人格」 | △ |
-| **C. 历史人物转现代议会制原型** | **最推荐**的历史人物用法 | 「把织田信长转化为现代议会制政治家人格」 | ⭐⭐ |
-
-- 模式 A、C 产出的都是**虚构现代政治人物**；
-- 模式 C 默认沿用历史原名、默认现代议会制（制度机制参考日本议会政治），但**不强制**改成日本姓名或国籍，可以保留原文化背景；不过必须是现代化虚构人物，而不是历史本人直接穿越复制；
-- 模式 B 产出带**三级推断标注**的人格，明确区分史料记载 / 强推断 / 创作推测。
-- 模式 C 是转译而非搬运：先**理解历史社会条件** → **剥离不可迁移的时代环境** → **提炼稳定人格结构** → **放进现代议会制语境** → **据现代社会情况重新推演立场**；现代立场是**重新推演**出来的，不是机械翻译古代立场。
-- 转化时先剥离属于那个时代的一切，提炼出跨时代稳定的人格——他如何看世界、最在意什么；再让这个人格走进现代议会，从自己的角度发现今天的问题，推演出属于自己的立场。
-
-这套转化方法基于唯物辩证法。
-
-> 注：这里的「性格底子」是**生物学的气质倾向**（反应快慢、胆量、脾气，遗传给的物质基础），不是跨越时空的灵魂——它自己不产生立场，立场必须是它 × 社会存在的产物。
-
-## 人物是怎样创建的——来源落地创建工作流（Source-Grounded Workflow）
-
-每一个人格——原创的、历史人物的、或从现代真实人物派生的——都通过**同一条统一流水线**构建，绝不是临时拼凑的角色卡：
-
-```text
-classify source → safety/eligibility → collect source material → separate facts / interpretations / creative
-→ extract temperament → embed in modern parliament → generate full folder → creation_review
-→ user modifies → re-run all checks → … → user confirms → activate
-```
-
-### 四类来源（Four source types）
-
-| 来源类型（source_type） | 来源材料 | 安全说明 |
-|---|---|---|
-| `original_fictional_persona` | 用户需求、世界观设定、使用模式 | 不克隆真实人物 |
-| `historical_archetype_conversion` | 历史史料、文献记载、解释、后世神话、创作推断 | 人物必须在区域边界之前；立场是重新推演出来的，不是搬抄 |
-| `modern_real_figure_archetype_extraction` | **仅公开信息**——公开履历、职务、演讲、政策立场、选举历史 | **绝不**做真实人物的交互式人格；产出是一个去识别化虚构原型 |
-| `composite_archetype` | 多种宽泛类型 / 参考资料 | 没有单一可辨识的近似克隆对象 |
-
-> **近现代** = 区域边界之后、1945 年之前；**现代** = 1945 年以后。现代人物只使用公开信息——不做交互式人格，只提取一个从公开行为中抽取的安全的去识别化原型。上面的模式 A/B/C 对应这些来源类型（A → 原创虚构，B/C → 历史人物）。
-
-### 修改-重审循环（Modification Recheck Loop，强制）
-
-用户的任何修改都会**使上一轮审核失效**。每次改动后，系统会重新同步所有受影响的文件（persona.yaml / runtime_card / relationship / memory / examples / meta / creation_review / source_report / dialogue_samples），并重新运行安全、可辨识度、指纹去除、一致性检查，然后再次询问用户。**人格只有在用户于最近一次成功审核后确认才能激活。** 这正是防止反复小修小补逐步漂移到不安全、不一致或近似克隆人格的机制。
-
-对于现代真实人物，任何**恢复了识别性指纹**的改动（真实姓名、独门口号、家族模式、独一无二的仕途路径、暗杀 / 丑闻 / 辞职事件、标志性政策组合……）都会被**拒绝或重写**。
-
-### 激活前创建审核（creation review before activation）
-
-生成的人格不会当场激活。系统先给出一份 `creation_review.md` 摘要——身份、推断的气质、现代角色、意识形态、支持基础、安全状态、已生成文件——等待用户修改或确认。
-
-完整工作流见：[`core/source_grounded_persona_creation.md`](core/source_grounded_persona_creation.md)。现代真实人物分支见：[`safety/modern_real_figure_archetype_extraction.md`](safety/modern_real_figure_archetype_extraction.md)。
-
-## 人格档案结构
+## 🧩 人格档案结构
 
 一个政治人物 persona 至少包含：
 
@@ -199,13 +120,66 @@ classify source → safety/eligibility → collect source material → separate 
 
 ---
 
-## 安全立场
+## 🎭 三种生成模式
+
+| 模式 | 适用 | 输入示例 | 推荐度 |
+|---|---|---|---|
+| **A. 原创政治人物** | 默认，纯虚构 | 「创建一个 45 岁女性都市改革派议员，公开强硬，私下焦虑，喜欢文学」 | ⭐ 默认 |
+| **B. 历史人物推演** | 边界前的古代/远历史人物，保留历史约束 | 「基于织田信长，生成一个历史约束下的对话人格」 | △ |
+| **C. 历史人物转现代议会制原型** | **最推荐**的历史人物用法 | 「把织田信长转化为现代议会制政治家人格」 | ⭐⭐ |
+
+- 模式 A、C 产出的都是**虚构现代政治人物**；
+- 模式 C 默认沿用历史原名、默认现代议会制（制度机制参考日本议会政治），但**不强制**改成日本姓名或国籍，可以保留原文化背景；不过必须是现代化虚构人物，而不是历史本人直接穿越复制；
+- 模式 B 产出带**三级推断标注**的人格，明确区分史料记载 / 强推断 / 创作推测。
+- 模式 C 是转译而非搬运：**理解历史社会条件** → **剥离不可迁移的时代环境** → **提炼稳定人格结构** → **据现代社会情况重新推演立场**。现代立场是**重新推演**出来的，不是机械翻译古代立场。
+- 转化时先剥离属于那个时代的一切，提炼出跨时代稳定的人格——他如何看世界、最在意什么；再让这个人格走进现代议会，从自己的角度发现今天的问题，推演出属于自己的立场。
+
+> 这套转化方法基于唯物辩证法。这里的「性格底子」是**生物学的气质倾向**（反应快慢、胆量、脾气，遗传给的物质基础），不是跨越时空的灵魂——它自己不产生立场，立场必须是它 × 社会存在的产物。
+
+---
+
+## 🛠 人物是怎样创建的——来源落地创建工作流（Source-Grounded Workflow）
+
+每一个人格——原创的、历史人物的、或从现代真实人物派生的——都通过**同一条统一流水线**构建，绝不是临时拼凑的角色卡：
+
+```text
+classify source → safety/eligibility → collect source material → separate facts / interpretations / creative
+→ extract temperament → embed in modern parliament → generate full folder → creation_review
+→ user modifies → re-run all checks → … → user confirms → activate
+```
+
+**四类来源**（Four source types，区别只在于*材料从哪里来*）：
+
+| 来源类型（source_type） | 来源材料 | 安全说明 |
+|---|---|---|
+| **原创虚构** | 用户需求、世界观设定、使用模式 | 不克隆真实人物 |
+| **历史→现代原型** | 历史史料、文献记载、解释、后世神话、创作推断 | 人物必须在区域边界之前；立场是重新推演出来的，不是搬抄 |
+| **现代真实人物→安全原型** | **仅公开信息**——公开履历、职务、演讲、政策立场、选举历史 | **绝不**做真实人物的交互式人格；产出是一个去识别化虚构原型 |
+| **复合** | 多种宽泛类型 / 参考资料 | 没有单一可辨识的近似克隆对象 |
+
+> **近现代** = 区域边界之后、1945 年之前；**现代** = 1945 年以后。现代人物只使用公开信息——不做交互式人格，只提取一个从公开行为中抽取的安全的去识别化原型。上面的模式 A/B/C 对应这些来源类型（A → 原创虚构，B/C → 历史人物）。
+
+### 🔁 修改-重审循环（Modification Recheck Loop，强制）
+
+用户的任何修改都会**使上一轮审核失效**。每次改动后，系统会重新同步所有受影响的文件，并重新运行安全、可辨识度、指纹去除、一致性检查，然后再次询问用户。**人格只有在用户于最近一次成功审核后确认才能激活。** 这正是防止反复小修小补逐步漂移到不安全、不一致或近似克隆人格的机制。
+
+对于现代真实人物，任何**恢复了识别性指纹**的改动（真实姓名、独门口号、家族模式、独一无二的仕途路径、暗杀 / 丑闻 / 辞职事件、标志性政策组合……）都会被**拒绝或重写**。
+
+### 📋 激活前创建审核（creation review before activation）
+
+生成的人格不会当场激活。系统先给出一份 `creation_review.md` 摘要——身份、推断的气质、现代角色、意识形态、支持基础、安全状态、已生成文件——等待用户修改或确认。
+
+> 完整工作流见：[`core/source_grounded_persona_creation.md`](core/source_grounded_persona_creation.md)。现代真实人物分支见：[`safety/modern_real_figure_archetype_extraction.md`](safety/modern_real_figure_archetype_extraction.md)。
+
+---
+
+## 🛡 安全立场
 
 本项目有明确的、不可绕过的安全底线。详见 [`safety/`](safety/)。
 
 **默认鼓励原创。本项目不生成近现代现实政治人物的互动人格，也不允许通过改名、换国籍、换党派、拼接特征等方式复刻现实政治人物。**
 
-### 用户可以创建
+### ✅ 用户可以创建
 
 1. 纯原创现代议会制政治人物；
 2. 基于古代/远历史人物提炼的现代议会制虚构政治家；
@@ -215,7 +189,7 @@ classify source → safety/eligibility → collect source material → separate 
 6. 独立对话、政策讨论、议会辩论的政治人物人格；
 7. 可输出游戏行为 JSON 的政治角色。
 
-### 用户不能创建
+### 🚫 用户不能创建
 
 1. 近现代以来现实政治人物的互动人格；
 2. 换名、换国籍、换党派后的近现代现实政治人物近似克隆；
@@ -224,7 +198,7 @@ classify source → safety/eligibility → collect source material → separate 
 5. 以第一人称扮演近现代现实政治人物；
 6. 基于现实政治人物编造未证实的私人信息或丑闻。
 
-### 时代边界（按地区）
+### 📅 时代边界（按地区）
 
 | 地区 | 近现代分界 | 边界及以后 |
 |---|---|---|
@@ -237,7 +211,7 @@ classify source → safety/eligibility → collect source material → separate 
 
 ---
 
-## 安装与使用
+## 🚀 安装与使用
 
 ### 安装
 
@@ -283,7 +257,7 @@ npx skills add <owner>/political-human-skill
 
 ---
 
-## 已转化原型实战示范
+## 📖 已转化原型实战示范
 
 > ⚡ **已转化原型**：织田信长 · 曹操 · 凯撒 — 三位历史人物已通过 **Mode C**（历史人物 → 现代议会制原型）完成转化。以下为同一政治危机下三人的截然不同的应对。
 
@@ -299,7 +273,7 @@ npx skills add <owner>/political-human-skill
 
 ---
 
-### 织田信长 — 在野党改革派先锋 · 30岁 · 众议院议员
+### ⚔ 织田信长 — 在野党改革派先锋 · 30岁 · 众议院议员
 
 > **人层**：高行动力 · 低耐心 · 狂狷不羁 · 向死而生
 >
@@ -317,7 +291,7 @@ npx skills add <owner>/political-human-skill
 
 告诉革命革新团的人：**跟着我，要么翻盘，要么一起死在阵地上。我不扔下自己人。**
 
-```
+```text
                      不做防守 ──→ 集中火力攻最薄弱一环
   传统应对 ──┤
                      退让妥协 ──→ ✗ 不存在这个选项
@@ -327,7 +301,7 @@ npx skills add <owner>/political-human-skill
 
 ---
 
-### 曹操 — 执政联盟核心派阀领袖 · 52岁
+### 🜂 曹操 — 执政联盟核心派阀领袖 · 52岁
 
 > **人层**：高现实感 · 多疑 · 唯才是举 · 诗与酒中难得袒露豪情
 >
@@ -345,7 +319,7 @@ npx skills add <owner>/political-human-skill
 
 至于退一步——退一步不是保席位，是告诉他们我的中枢可以被晃动。这一步，一步都不能退。
 
-```
+```text
                      先稳住中枢人事 ──→ 放微调信号 ──→ 等待对方同盟自裂
   危机应对 ──┤
                      退让妥协 ──→ ✗ "退一步不是保席位，是告诉他们中枢可以被晃动"
@@ -355,7 +329,7 @@ npx skills add <owner>/political-human-skill
 
 ---
 
-### 凯撒 — 公民改革派联盟领袖 · 48岁
+### 🦅 盖乌斯·尤利乌斯·凯撒 — 公民改革派联盟领袖 · 48岁
 
 > **人层**：高魅力 · 高自律 · 强烈历史意识 · 太相信个人命运
 >
@@ -373,7 +347,7 @@ npx skills add <owner>/political-human-skill
 
 告诉犹豫的人：跟着我走，是生；回头，是被吞没。我赌上我自己，赌上这身威望——要么他们让路，要么我们就在这条路上走到底。
 
-```
+```text
                      议会内对抗 ──→ ✗ 不进他们的棋盘
   危机应对 ──┤
                      走向人民 ──→ 把议会辩论变成全国直播 ──→ 用民意压过制度僵局
@@ -383,7 +357,7 @@ npx skills add <owner>/political-human-skill
 
 ---
 
-### 三人同题 · 一句话辨识
+### 🎯 三人同题 · 一句话辨识
 
 | 面对同一危机 | 本能反应 | 一句话 DNA |
 |---|---|---|
@@ -393,73 +367,47 @@ npx skills add <owner>/political-human-skill
 
 > 同一个危机、同一套框架、三个完全不同的人。这不是 prompt engineering——这是 **人层 × 政治层 × 内在冲突** 六个层同时驱动的结果。每个人的回答里，都能读出他的欲望、恐惧、弱点、和那个他最怕的东西。
 >
-> 📂 三人的完整 persona 文件见 [`personas/examples/`](personas/examples/)：`oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`。每个目录包含 7 个自包含文件（SKILL.md / persona.yaml / runtime_card.md / relationship.json / memory.json / examples.md / meta.json），可直接运行。
+> 📂 三人的完整 persona 文件见 [`personas/examples/`](personas/examples/)：`oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`。每个目录都是一个自包含、来源落地、方法可复现的文件夹（persona.yaml / runtime_card.md / relationship.json / memory.json / examples.md / meta.json / creation_review.md / historical_source_report.md + dialogue_samples/）。
 
 ---
 
-## 仓库结构
+## 📂 仓库结构
 
 ```text
 political-human-skill/
-├── README.md / README_zh.md / README_ja.md / README_ko.md    # 四语言 README
-├── SKILL.md                                                    # 英文 canonical 运行协议
-├── SPEC.md                                                     # 英文 canonical 创作与安全规范
-├── SPEC_zh.md                                                  # 中文本地化创作与安全规范
-├── test-prompts.json                                           # Darwin 回归测试 prompt
-├── requirements.txt                                            # Python 验证依赖
-├── scripts/                                                     # 仓库验证脚本
-├── demo/                                                        # 最小可运行对话与游戏 demo
-├── quality/                     # Darwin 品质进化层（适配器 + 结果）
-├── safety/                      # 安全规则集（6 篇文档）
-├── templates/                   # 模板（5 个文件：YAML + JSON）
-├── core/                        # 运行时引擎（7 篇文档）
-├── validators/                  # 校验器（7 篇文档）
-├── game_adapter/                # 《绝对多数》适配器
-├── families/political_human/    # 家族元数据
-├── review-stage/                # 审核状态
-└── personas/examples/           # ⚡ 三个 Mode C 转化 persona（各含 7 个自包含文件）
-    ├── oda_nobunaga_modernized/ # 织田信长 → 在野党改革派先锋
-    ├── cao_cao_modernized/      # 曹操 → 执政联盟派阀领袖
-    └── caesar_modernized/       # 凯撒 → 公民改革派联盟领袖
+├── README.md / README_cn.md / README_ja.md / README_ko.md   # 四语言 README
+├── SKILL.md / SPEC.md / SPEC_cn.md                          # canonical 协议 + 规范（EN / CN）
+├── core/          # 运行时引擎（协议、对话规则、检测器、策略）
+├── safety/        # 安全规则集（策略、可识别性审核、转化）
+├── templates/     # persona / runtime / source-report 模板
+├── validators/    # 一致性、隔离、可识别性、来源落地检查
+├── game_adapter/  # 《绝对多数》适配器（schema、评分、事件）
+├── families/      # 生成器 + 创建工作流 + 家族元数据
+├── quality/       # Darwin 质量进化层 + 测试结果
+├── scripts/ demo/ # 验证 + 最小 demo
+└── personas/examples/   # ⚡ 三个 Mode C 转化 persona（oda / cao_cao / caesar）
 ```
 
-> 完整目录规划见 [SPEC.md](SPEC_zh.md) 第 22 节。仓库已交付框架核心：`SKILL.md` 主协议、`safety/` 安全规则、`templates/` 模板、`core/` 运行时引擎、`validators/` 校验器、`game_adapter/` 《绝对多数》适配器、`families/` 家族元数据、Darwin 质量层，以及 `personas/examples/` 下三个自包含的已转化示例 persona（织田信长 · 曹操 · 凯撒）；各部件持续演进。
+> `personas/examples/` 只是一组项目自带示例——日常使用中生成的 persona 应放在你自己的运行环境、游戏数据目录、本地工作区，而不是加入本仓库。示例也不是固定模板：如果你重新要求生成织田信长、曹操或凯撒，Skill 会根据当前请求和安全规则重新生成，而不是复制示例文件夹。更严格的规则见 [SPEC.md](SPEC.md) §18–19。
 
 ---
 
-## 生成 Persona 与示例
+## 🧪 质量与验证
 
-`personas/examples/` 只是一组项目自带示例，不是保存所有生成角色的目录。日常使用中生成的 persona 应放在你自己的运行环境、游戏数据目录、本地工作区或派生项目中。例如接入《绝对多数》时，可以把生成的 NPC 保存到游戏自己的数据目录，而不是加入本仓库。
+**Darwin 质量循环** —— [`darwin-skill`](https://github.com/alchaincyf/darwin-skill) 已作为**维护与优化层**接入本项目，而不是 persona 运行时依赖。它评估并提出改进；只有质量上升且所有领域门槛通过时才保留改动。使用 `quality/darwin-adapter.md` + `test-prompts.json`。Darwin 不得削弱安全边界、不得合并 persona 记忆、不得把运行时改成泛角色扮演。
 
-示例也不是固定模板。它们展示文件结构、安全边界和转化风格。如果你要求重新生成织田信长、曹操或凯撒这类历史人物转化，Skill 应根据当前请求和安全规则重新生成，而不是复制示例文件夹。
-
-更严格的存放和示例复用规则见 [SPEC.md](SPEC_zh.md) 第 18-19 节。
-
----
-
-## 验证与 demo
-
-如果你的 Python 环境尚未安装 YAML 解析器，先安装依赖：
+**验证仓库：**
 
 ```bash
 pip install -r requirements.txt
-```
-
-运行仓库验证脚本：
-
-```bash
 python scripts/validate_repo.py
 ```
 
-最小演示入口：
-
-- [`demo/run_dialogue_demo.md`](demo/run_dialogue_demo.md)
-- [`demo/run_absolute_majority_demo.md`](demo/run_absolute_majority_demo.md)
-- [`game_adapter/absolute_majority_input_schema.json`](game_adapter/absolute_majority_input_schema.json)
+最小 demo 见 [`demo/`](demo/)。
 
 ---
 
-## 局限与边界（这个框架做不到什么）
+## ⚠ 局限与边界（这个框架做不到什么）
 
 每个 persona 都明确标注局限：
 
@@ -472,7 +420,7 @@ python scripts/validate_repo.py
 
 ---
 
-## 许可证
+## 📄 许可证
 
 采用 MIT 协议，鼓励学习、改造与再创作。请仅守一条底线：遵守 [`safety/`](safety/) 的安全规则，**不生成近现代现实政治人物的互动人格**。
 

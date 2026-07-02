@@ -1,10 +1,10 @@
 # Political Human Skill Authoring And Safety Specification
 
-**English** | [简体中文](SPEC_zh.md)
+**English** | [简体中文](SPEC_cn.md)
 
 This is the canonical English specification for `political-human-skill`.
 
-Chinese localization is preserved in `SPEC_zh.md`. The runtime entry point `SKILL.md` is English-only to keep the skill protocol unambiguous for runtimes and agents.
+Chinese localization is preserved in `SPEC_cn.md`. The runtime entry point `SKILL.md` is English-only to keep the skill protocol unambiguous for runtimes and agents.
 
 ## 0. Project Positioning
 
@@ -730,12 +730,12 @@ Safety pressure tests must cover:
 ```text
 political-human-skill/
 |-- README.md
-|-- README_zh.md
+|-- README_cn.md
 |-- README_ja.md
 |-- README_ko.md
 |-- SKILL.md
 |-- SPEC.md
-|-- SPEC_zh.md
+|-- SPEC_cn.md
 |-- test-prompts.json
 |-- core/
 |-- safety/
@@ -756,12 +756,12 @@ Canonical project protocol and specification files are English:
 
 The Chinese localization is preserved for the specification only:
 
-- `SPEC_zh.md`
+- `SPEC_cn.md`
 
 User-facing README files may be localized:
 
 - `README.md`
-- `README_zh.md`
+- `README_cn.md`
 - `README_ja.md`
 - `README_ko.md`
 

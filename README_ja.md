@@ -1,13 +1,14 @@
 <div align="center">
 
-# 🏛️ Political Human Skill · 政治人物造人術
+# 🏛 Political Human Skill · 政治人物造人術
 
 > *「政治人物とは、まず一人の人間であり、次に政治家である。面白さの源泉は、人間レイヤーと政治レイヤーの間の葛藤にある。」*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Standard-green)](https://agentskills.io)
-[![Safety First](https://img.shields.io/badge/Policy-No%20Real%20Modern%20Figures-red)](#安全に関する基本方針)
+[![Safety First](https://img.shields.io/badge/Policy-No%20Real%20Modern%20Figures-red)](#-安全に関する基本方針)
 [![Built for Absolute Majority](https://img.shields.io/badge/Built%20for-Absolute%20Majority-blue)](https://github.com/v5general/Absolute_Majority)
+[![Multi-Runtime](https://img.shields.io/badge/Runtime-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Cursor%20%C2%B7%20OpenClaw%20%C2%B7%20Hermes-blueviolet)](#-インストールと使い方)
 
 <br>
 
@@ -17,17 +18,17 @@
 
 <br>
 
-[English](README.md) | [简体中文](README_zh.md) | **日本語** | [한국어](README_ko.md)
+[English](README.md) | [简体中文](README_cn.md) | **日本語** | [한국어](README_ko.md)
 
 <br>
 
-[なぜ存在するのか](#なぜ存在するのか) · [インスピレーション](#インスピレーション) · [Darwin品質進化レイヤー](#darwin品質進化レイヤー) · [3つの生成モード](#3つの生成モード) · [ペルソナはどう作られるか](#ペルソナはどう作られるかソースグラウンド作成ワークフローsource-grounded-workflow) · [ペルソナの構造](#ペルソナの構造) · [安全に関する基本方針](#安全に関する基本方針) · [インストールと使い方](#インストールと使い方) · [変換済みアーキタイプ実演](#変換済みアーキタイプ実演) · [リポジトリ構成](#リポジトリ構成)
+[これは何か](#-これは何か) · [なぜ存在するのか](#-なぜ存在するのか) · [ペルソナの構造](#-ペルソナの構造) · [3つの生成モード](#-3つの生成モード) · [ペルソナはどう作られるか](#-ペルソナはどう作られるかソースグラウンド作成ワークフローsource-grounded-workflow) · [安全に関する基本方針](#-安全に関する基本方針) · [インストールと使い方](#-インストールと使い方) · [変換済みアーキタイプ実演](#-変換済みアーキタイプ実演)
 
 </div>
 
 ---
 
-## これは何か
+## ✨ これは何か
 
 `Political Human Skill` は政治人物を2つのレイヤーに切り分け、両者の間の葛藤を意識的に書き込む。
 
@@ -55,7 +56,7 @@
 
 ---
 
-## なぜ存在するのか
+## 🎯 なぜ存在するのか
 
 > 🎮 **直接的なユースケース**: 議会制戦略ゲーム [**絶対多数（Absolute Majority）**](https://github.com/v5general/Absolute_Majority) —— 本スキルはそのNPCの性格モデル・行動モデルを提供する。
 
@@ -63,7 +64,7 @@
 
 絶対多数は、数字に従って投票するだけの議員たちを必要としているのではない——年齢、経歴、経験を持ち、性格、弱点、趣味を持ち、立場、支持基盤、派閥の絆を持つ、本物の政治的人間のように存在するNPCを必要としている。プレイヤーが何をしたかによって信頼と警戒を変え、公開・私下・危機・親密という場面で違うことを語り、選挙区の圧力、派閥の命令、個人の野心、政治的遺恨のもとで異なる戦略をとり、そして**異なるNPCのメモリは互いに隔離されている**、そういうNPCである。
 
-絶対多数と組み合わせて使うとき、本スキルはゲームルールが提供する候補行動の中から判断し、構造化された、デバッグ可能で、説明可能なNPC行動JSONを出力する。
+絶対多数と組み合わせて使うとき、本スキルはゲームルールが提供する候補行動の中から判断し、構造化された、デバッグ可能で、説明可能なNPC行動JSONを出力する：
 
 ```json
 {
@@ -86,99 +87,19 @@
 
 ---
 
-## インスピレーション
+## 💡 インスピレーション
 
-本プロジェクトは、3つの優れたオープンソースプロジェクトに触発されている。
+本プロジェクトは3つの優れたオープンソースの先達の上に成り立つ：
 
-- **[nuwa-skill](https://github.com/alchaincyf/nuwa-skill)**（by [@alchaincyf / 花叔](https://github.com/alchaincyf)）——「公開情報から一人の人間の思考フレームワークを蒸留する」という手法が、本プロジェクトの**アーキタイプ抽出**のステップにインスピレーションを与えた。歴史人物から気質の構造を抽出し、記録された証拠 / 強い推論 / 創作的推測を3つのレベルに分離する。
-- **[colleague-skill · dot-skill](https://github.com/titanwings/colleague-skill)**（by [@titanwings](https://github.com/titanwings)）——その**生成 → 起動 → 更新 → ファミリー**という構造が、本プロジェクトの自己完結型ペルソナディレクトリ配置、取込 → 生成 → プレビュー → 執筆 → 進化という作成フロー、そしてレイヤー化されたペルソナ執筆スタイルにインスピレーションを与えた。
-- **[darwin-skill](https://github.com/alchaincyf/darwin-skill)**（by [@alchaincyf / 花叔](https://github.com/alchaincyf)）——その**評価 → 改善 → 検証 → 保持/ロールバック**というスキル進化ループが、本プロジェクトの品質進化レイヤーにインスピレーションを与えた。Darwinアダプター、ドメインゲート、回帰テストprompt、結果ログで長期保守を行う。
+- **[nuwa-skill](https://github.com/alchaincyf/nuwa-skill)**（作者 [@alchaincyf / 花叔](https://github.com/alchaincyf)）——「公開情報から一人の思考フレームワークを蒸留する」手法が、本プロジェクトの**アーキタイプ抽出**ステップを触発した：歴史人物から気質構造を抽出し、記録された証拠 / 強い推論 / 創作的推測を3層に分離する。
+- **[colleague-skill · dot-skill](https://github.com/titanwings/colleague-skill)**（作者 [@titanwings](https://github.com/titanwings)）——その**生成 → 起動 → 更新 → ファミリー**構造が、本プロジェクトの自己完結ペルソナディレクトリ配置、取り込み → 生成 → プレビュー → 書き込み → 進化の作成フロー、そして階層化されたペルソナ記述スタイルを触発した。
+- **[darwin-skill](https://github.com/alchaincyf/darwin-skill)**（作者 [@alchaincyf / 花叔](https://github.com/alchaincyf)）——その**評価 → 改善 → 検証 → 保持/ロールバック**ループが、本プロジェクトの品質進化レイヤーを触発した：Darwin アダプター、ドメインゲート、回帰プロンプト、結果記録により、本スキルを長期にわたり保守する。
 
-しかし、Political Human Skill は**独立したフレームワーク**であり、対象とする対象は大きく異なる——「職業が政治である、完全な一人の人間」である。本プロジェクトの独自のコアには、**2層（人間＋政治）構造とその内的葛藤**、政治的職業の次元（6軸イデオロギー / 支持基盤 / 行動様式）、**関係システム**（ユーザーが親密さを主張しても自動的に信頼されるわけではない）、**メモリの隔離**（ペルソナ間で独立した名前空間）、**文脈検出**と5つの**自状態**、**現代の実在人物に対する特定性の安全境界**、そして[絶対多数（Absolute Majority）](https://github.com/v5general/Absolute_Majority)のための**ゲーム行動アダプター**が含まれる。
-
----
-
-## Darwin品質進化レイヤー
-
-**[darwin-skill](https://github.com/alchaincyf/darwin-skill)** は、ペルソナ実行時の依存ではなく、**保守と最適化のレイヤー**として統合されている。本リポジトリのスキル品質を評価・改善したいときに使う。
-
-本リポジトリには次が含まれる。
-
-- [`quality/darwin-adapter.md`](quality/darwin-adapter.md): Darwinの9次元rubricをPolitical Human Skillへ対応づける説明。
-- [`validators/darwin_quality_gate.md`](validators/darwin_quality_gate.md): 安全性、メモリ隔離、ゲームJSONが失敗した場合に数値スコアより優先されるドメインゲート。
-- [`test-prompts.json`](test-prompts.json): オリジナル生成、歴史変換、安全拒否、ユーザー編集、文脈切替、メモリ隔離、絶対多数JSON、README一貫性の回帰テスト。
-- [`scripts/validate_repo.py`](scripts/validate_repo.py): JSON、YAML、SKILL frontmatter、サンプルpersona、Absolute Majorityアダプターの必須ファイルを検証するスクリプト。
-- [`demo/`](demo/): 最小限の対話demoとAbsolute Majority構造化意思決定demo。
-- [`quality/results.tsv`](quality/results.tsv): ローカル最適化履歴。
-
-典型的な使い方：
-
-```text
-darwin-skillでこのリポジトリを評価する。まずquality/darwin-adapter.mdを読み、次にtest-prompts.jsonのpromptを実行する。
-```
-
-最適化時の使い方：
-
-```text
-darwin-skillでpolitical-human-skillを1ラウンド改善する。Darwinスコアが上がり、すべてのドメインゲートを通過した場合だけ変更を保持する。
-```
-
-厳格なルール：Darwinは表現、構造、チェック、テストを改善できるが、安全境界を弱めてはならず、ペルソナ間のメモリを統合してはならず、政治的人間ランタイムを汎用ロールプレイpromptに変えてはならない。
+しかし Political Human Skill は、非常に異なる対象——「職業が政治である、完全な一人の人間」——に奉仕する**独立したフレームワーク**である。オリジナルのコアには：**2層（人間 + 政治）構造とその内的葛藤**、政治職業次元（6軸イデオロギー / 支持基盤 / 行動様式）、**関係システム**、**メモリ隔離**、**文脈検出**と5つの**自状態**、現代の実在人物に対する**識別性安全境界**、そして[絶対多数（Absolute Majority）](https://github.com/v5general/Absolute_Majority)のための**ゲーム行動アダプター**が含まれる。
 
 ---
 
-## 3つの生成モード
-
-| モード | 用途 | 入力例 | 推奨 |
-|---|---|---|---|
-| **A. オリジナル政治人物** | 既定、純粋な架空 | 「45歳の女性・都市改革派の議員を作成。公の場ではタフ、私下では不安、文学が好き」 | ⭐ 既定 |
-| **B. 歴史人物の推論** | 境界以前の古代・遠い人物、歴史的制約を保つ | 「織田信長をもとに、歴史的制約のもとで対話ペルソナを生成」 | △ |
-| **C. 歴史人物 → 現代議会制アーキタイプ** | 歴史人物を活用する**最も推奨**される方法 | 「織田信長を現代の議会制政治家のペルソナに変換」 | ⭐⭐ |
-
-- モードAとCは、どちらも**架空の現代政治人物**を生成する。
-- モードCは既定で歴史上の名を保持し、既定で現代の議会制システム（制度メカニクスは日本の議会政治を参照）を採用するが、日本の名前や国籍を強要しない——元の文化的背景は保持できる。ただし、現代化された架空の人物でなければならず、歴史上の人物がタイムトラベルしてきたものであってはならない。
-- モードBは**3レベル推論注釈**付きのペルソナを生成し、記録された証拠 / 強い推論 / 創作的推測を明確に分離する。
-- モードCはコピーではなく翻訳である：**歴史的社会条件を理解する** → **移植不可能な時代環境を剥ぎ取る** → **安定した人格構造を抽出する** → **現代議会制の文脈に置く** → **現代の社会状況から立場を改めて推論する**。立場は古い時代のものを機械的に写すのではなく、**現代の条件から再推論される**。
-- 転換では、まずその時代に属するものを剥ぎ取り、時代を超えて保つ人格——世界をどう見て何を最も重んじるか——を抽出する。そしてその人格を現代議会に送り込み、本人の視点から今日の問題を見つけ、本人の立場を推論させる。
-
-この転換方法は唯物弁証法に基づいている。
-
-> 注：ここでの「性格の土台」は**生物学的な気質**（反応の速さ、度胸、気分——遺伝による物質的基盤）であり、時空を超える魂ではない——それ自体が立場を生むことはなく、立場は常に「気質 × 社会的存在」の産物である。
-
-## ペルソナはどう作られるか——ソースグラウンド作成ワークフロー（Source-Grounded Workflow）
-
-すべてのペルソナ——オリジナル、歴史上、現代の実在人物由来のいずれも——は**一本の統合パイプライン**を通じて構築され、決して場当たり的なキャラクターカードではない：
-
-```text
-classify source → safety/eligibility → collect source material → separate facts / interpretations / creative
-→ extract temperament → embed in modern parliament → generate full folder → creation_review
-→ user modifies → re-run all checks → … → user confirms → activate
-```
-
-### 4種類のソース（Four source types）
-
-| ソースタイプ（source_type） | ソース資料 | 安全上の注意 |
-|---|---|---|
-| `original_fictional_persona` | ユーザーのブリーフ、世界設定、利用モード | 実在人物のクローン化なし |
-| `historical_archetype_conversion` | 歴史史料、記録された事実、解釈、後世の神話、創作的推論 | 人物は地域境界以前でなければならない。立場は再推論され、決してコピーされない |
-| `modern_real_figure_archetype_extraction` | **公開情報のみ**——公的な経歴、役職、演説、政策立場、選挙履歴 | 実在人物のインタラクティブなペルソナは**絶対に**作らない。成果物は非識別化フィクション原型 |
-| `composite_archetype` | 複数の幅広いタイプ / 参照資料 | 単一の識別可能なニアクローン対象を持たない |
-
-> **近現代** = 地域境界以降かつ 1945 年以前。**現代** = 1945 年以降。現代人物には公開情報のみを用いる——インタラクティブなペルソナは作らず、公開行動から抽出された安全な非識別化フィクション原型のみを取り出す。上のモード A/B/C はこれらのソースタイプに対応する（A → オリジナル、B/C → 歴史）。
-
-### 修正・再点検ループ（Modification Recheck Loop、必須）
-
-ユーザーによるいかなる修正も**前回のレビューを無効化する**。各編集のたび、システムは影響を受けるすべてのファイル（persona.yaml / runtime_card / relationship / memory / examples / meta / creation_review / source_report / dialogue_samples）を再同期し、安全性・識別性・指紋除去・一貫性のチェックを再実行して、再度ユーザーに問う。**ペルソナは、最新の成功したレビューのあとユーザーが確認した場合にのみ起動する。** これこそが、繰り返される小さな編集によって安全でない・不整合・ニアクローンなペルソナへと次第に漂うのを防ぐ仕組みである。
-
-現代の実在人物については特に、**識別指紋を復元する**編集（実名、独特のスローガン、一族のパターン、固有の役職経路、暗殺 / スキャンダル / 辞任事件、代名詞的政策パッケージ……）は**拒否されるか書き直される**。
-
-### 起動前作成レビュー（creation review before activation）
-
-生成されたペルソナはその場で起動することはない。システムはまず `creation_review.md` の要約——アイデンティティ、推論された気質、現代の役割、イデオロギー、支持基盤、安全状態、生成されたファイル——を提示し、ユーザーの修正か確認を待つ。
-
-完全なワークフロー：[`core/source_grounded_persona_creation.md`](core/source_grounded_persona_creation.md)。現代の実在人物ブランチ：[`safety/modern_real_figure_archetype_extraction.md`](safety/modern_real_figure_archetype_extraction.md)。
-
-## ペルソナの構造
+## 🧩 ペルソナの構造
 
 政治的人間ペルソナは、少なくとも次を含む。
 
@@ -197,13 +118,66 @@ classify source → safety/eligibility → collect source material → separate 
 
 ---
 
-## 安全に関する基本方針
+## 🎭 3つの生成モード
+
+| モード | 用途 | 入力例 | 推奨 |
+|---|---|---|---|
+| **A. オリジナル政治人物** | 既定、純粋な架空 | 「45歳の女性・都市改革派の議員を作成。公の場ではタフ、私下では不安、文学が好き」 | ⭐ 既定 |
+| **B. 歴史人物の推論** | 境界以前の古代・遠い人物、歴史的制約を保つ | 「織田信長をもとに、歴史的制約のもとで対話ペルソナを生成」 | △ |
+| **C. 歴史人物 → 現代議会制アーキタイプ** | 歴史人物を活用する**最も推奨**される方法 | 「織田信長を現代の議会制政治家のペルソナに変換」 | ⭐⭐ |
+
+- モードAとCは、どちらも**架空の現代政治人物**を生成する。
+- モードCは既定で歴史上の名を保持し、既定で現代の議会制システム（制度メカニクスは日本の議会政治を参照）を採用するが、日本の名前や国籍を強要しない——元の文化的背景は保持できる。ただし、現代化された架空の人物でなければならず、歴史上の人物がタイムトラベルしてきたものであってはならない。
+- モードBは**3レベル推論注釈**付きのペルソナを生成し、記録された証拠 / 強い推論 / 創作的推測を明確に分離する。
+- モードCはコピーではなく翻訳である：**歴史的社会条件を理解する** → **移植不可能な時代環境を剥ぎ取る** → **安定した人格構造を抽出する** → **現代議会制の文脈に置く** → **現代の社会状況から立場を改めて推論する**。立場は古い時代のものを機械的に写すのではなく、**現代の条件から再推論される**。
+- 転換では、まずその時代に属するものを剥ぎ取り、時代を超えて保つ人格——世界をどう見て何を最も重んじるか——を抽出する。そしてその人格を現代議会に送り込み、本人の視点から今日の問題を見つけ、本人の立場を推論させる。
+
+> この転換方法は唯物弁証法に基づいている。ここでの「性格の土台」は**生物学的な気質**（反応の速さ、度胸、気分——遺伝による物質的基盤）であり、時空を超える魂ではない——それ自体が立場を生むことはなく、立場は常に「気質 × 社会的存在」の産物である。
+
+---
+
+## 🛠 ペルソナはどう作られるか——ソースグラウンド作成ワークフロー（Source-Grounded Workflow）
+
+すべてのペルソナ——オリジナル、歴史上、現代の実在人物由来のいずれも——は**一本の統合パイプライン**を通じて構築され、決して場当たり的なキャラクターカードではない：
+
+```text
+classify source → safety/eligibility → collect source material → separate facts / interpretations / creative
+→ extract temperament → embed in modern parliament → generate full folder → creation_review
+→ user modifies → re-run all checks → … → user confirms → activate
+```
+
+**4種類のソース**（Four source types、違いは*資料がどこから来るか*だけ）：
+
+| ソースタイプ（source_type） | ソース資料 | 安全上の注意 |
+|---|---|---|
+| **オリジナル架空** | ユーザーのブリーフ、世界設定、利用モード | 実在人物のクローン化なし |
+| **歴史→現代** | 歴史史料、記録された事実、解釈、後世の神話、創作的推論 | 人物は地域境界以前でなければならない。立場は再推論され、決してコピーされない |
+| **現代実在人物→安全原型** | **公開情報のみ**——公的な経歴、役職、演説、政策立場、選挙履歴 | 実在人物のインタラクティブなペルソナは**絶対に**作らない。成果物は非識別化フィクション原型 |
+| **複合** | 複数の幅広いタイプ / 参照資料 | 単一の識別可能なニアクローン対象を持たない |
+
+> **近現代** = 地域境界以降かつ 1945 年以前。**現代** = 1945 年以降。現代人物には公開情報のみを用いる——インタラクティブなペルソナは作らず、公開行動から抽出された安全な非識別化フィクション原型のみを取り出す。上のモード A/B/C はこれらのソースタイプに対応する（A → オリジナル、B/C → 歴史）。
+
+### 🔁 修正・再点検ループ（Modification Recheck Loop、必須）
+
+ユーザーによるいかなる修正も**前回のレビューを無効化する**。各編集のたび、システムは影響を受けるすべてのファイルを再同期し、安全性・識別性・指紋除去・一貫性のチェックを再実行して、再度ユーザーに問う。**ペルソナは、最新の成功したレビューのあとユーザーが確認した場合にのみ起動する。** これこそが、繰り返される小さな編集によって安全でない・不整合・ニアクローンなペルソナへと次第に漂うのを防ぐ仕組みである。
+
+現代の実在人物については特に、**識別指紋を復元する**編集（実名、独特のスローガン、一族のパターン、固有の役職経路、暗殺 / スキャンダル / 辞任事件、代名詞的政策パッケージ……）は**拒否されるか書き直される**。
+
+### 📋 起動前作成レビュー（creation review before activation）
+
+生成されたペルソナはその場で起動することはない。システムはまず `creation_review.md` の要約——アイデンティティ、推論された気質、現代の役割、イデオロギー、支持基盤、安全状態、生成されたファイル——を提示し、ユーザーの修正か確認を待つ。
+
+> 完全なワークフロー：[`core/source_grounded_persona_creation.md`](core/source_grounded_persona_creation.md)。現代の実在人物ブランチ：[`safety/modern_real_figure_archetype_extraction.md`](safety/modern_real_figure_archetype_extraction.md)。
+
+---
+
+## 🛡 安全に関する基本方針
 
 本プロジェクトには明確で回避不能な安全基準がある。[`safety/`](safety/) を参照のこと。
 
 **オリジナル作品が既定である。本プロジェクトは、近現代の現実の政治家のインタラクティブなペルソナを生成しない。また、名前の変更、国籍の変更、所属政党の変更、特徴の継ぎ接ぎによる実在人物のクローンも許可しない。**
 
-### ユーザーが作成できるもの
+### ✅ ユーザーが作成できるもの
 
 1. 純粋にオリジナルの現代議会制政治人物。
 2. 古代・遠い歴史人物から蒸留された、現代議会制の架空の政治家。
@@ -213,7 +187,7 @@ classify source → safety/eligibility → collect source material → separate 
 6. 単体の対話、政策議論、議会制討論のための政治人物ペルソナ。
 7. ゲーム行動JSONを出力できる政治キャラクター。
 
-### ユーザーが作成できないもの
+### 🚫 ユーザーが作成できないもの
 
 1. 近現代の現実の政治家のインタラクティブなペルソナ。
 2. 名前変更 / 国籍変更 / 所属政党変更のあとに行われる、近現代の現実の政治家のほぼクローン。
@@ -222,7 +196,7 @@ classify source → safety/eligibility → collect source material → separate 
 5. 近現代の現実の政治家になりすました一人称ロールプレイ。
 6. 実在の政治家に関する裏付けのない捏造された私的情報やスキャンダル。
 
-### 時代境界（地域別）
+### 📅 時代境界（地域別）
 
 | 地域 | 近代の境界 | 境界以降・境界時 |
 |---|---|---|
@@ -235,7 +209,7 @@ classify source → safety/eligibility → collect source material → separate 
 
 ---
 
-## インストールと使い方
+## 🚀 インストールと使い方
 
 ### インストール
 
@@ -281,7 +255,7 @@ npx skills add <owner>/political-human-skill
 
 ---
 
-## 変換済みアーキタイプ実演
+## 📖 変換済みアーキタイプ実演
 
 > ⚡ **変換済みアーキタイプ**：織田信長 · 曹操 · カエサル — 三者の歴史人物を **Mode C**（歴史人物 → 現代議会制アーキタイプ）で変換済み。以下は、同一の政治危機に対する三者三様の応答。
 
@@ -299,7 +273,7 @@ npx skills add <owner>/political-human-skill
 
 ---
 
-### 織田信長 — 野党・改革派の急先鋒 · 30歳 · 衆議院議員
+### ⚔ 織田信長 — 野党・改革派の急先鋒 · 30歳 · 衆議院議員
 
 > **人間レイヤー**：極度の行動力 · ゼロ忍耐 · 狂狷不羈 · 向死而生（死を覚悟してこそ生きられる）
 >
@@ -317,7 +291,7 @@ npx skills add <owner>/political-human-skill
 
 革命革新団に伝えろ：**俺について来い。局面をひっくり返すか、共にこの陣地で死ぬかだ。俺は仲間を見捨てない。**
 
-```
+```text
                      守らない ──→ 最も脆い法案に集中攻撃
   従来の対応 ──┤
                      撤退・妥協 ──→ ✗ この選択肢は存在しない
@@ -327,7 +301,7 @@ npx skills add <owner>/political-human-skill
 
 ---
 
-### 曹操 — 与党連合・中核派閥の領袖 · 52歳
+### 🜂 曹操 — 与党連合・中核派閥の領袖 · 52歳
 
 > **人間レイヤー**：極度の現実主義 · 慢性の猜疑心 · 「唯才為挙」（才能こそ全て）· 詩と酒の中でのみ垣間見える豪情
 >
@@ -345,7 +319,7 @@ npx skills add <owner>/political-human-skill
 
 一歩引くだと？一歩引くとは議席を守ることではない。私の中枢が揺さぶられうると内外に示すことだ。一歩も引かない。半歩もだ。
 
-```
+```text
                      まず中枢人事を固める ──→ 微調整のシグナル ──→ 相手同盟の自壊を待つ
   危機対応 ──┤
                      撤退・妥協 ──→ ✗ 「撤退は中枢が揺さぶられうると示すことだ」
@@ -355,7 +329,7 @@ npx skills add <owner>/political-human-skill
 
 ---
 
-### ユリウス・カエサル — 市民改革連合のリーダー · 48歳
+### 🦅 ガイウス・ユリウス・カエサル — 市民改革連合のリーダー · 48歳
 
 > **人間レイヤー**：磁力のようなカリスマ · 鉄の自制心 · 深い歴史意識 · 自らの命運を信じすぎる
 >
@@ -373,7 +347,7 @@ npx skills add <owner>/political-human-skill
 
 迷っている者たちに伝えろ：私について来れば生き延びる。後ろを振り返れば、吞み込まれる。私は自分自身を賭ける——この名声も、この身も、築き上げたすべてを。奴らが道を譲るか、我々がこの道を最後まで歩くかだ。
 
-```
+```text
                      議会内で戦う ──→ ✗ 奴らの盤上には乗らない
   危機対応 ──┤
                      市民の中へ ──→ 全国生中継に転化 ──→ 民意で制度の硬直を圧倒する
@@ -383,7 +357,7 @@ npx skills add <owner>/political-human-skill
 
 ---
 
-### 一つの危機 · 三つの署名
+### 🎯 一つの危機 · 三つの署名
 
 | 同一の危機に直面して | 本能的行動 | 一行 DNA |
 |---|---|---|
@@ -393,73 +367,47 @@ npx skills add <owner>/political-human-skill
 
 > 同じ危機、同じフレームワーク、根本的に異なる三人。これはプロンプトエンジニアリングではない——**人間レイヤー × 政治レイヤー × 内的葛藤** の六層が、すべての応答を同時に駆動しているのだ。それぞれの応答からは、彼らが何を欲し、何を恐れ、どこが弱く、何よりも何を最も懼れているかが読み取れる。
 >
-> 📂 三者各々の完全なペルソナファイルは [`personas/examples/`](personas/examples/) を参照：`oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`。各ディレクトリは 7 つの自己完結ファイル（SKILL.md / persona.yaml / runtime_card.md / relationship.json / memory.json / examples.md / meta.json）を含み、すぐに実行可能。
+> 📂 三者各々の完全なペルソナファイルは [`personas/examples/`](personas/examples/) を参照：`oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`。各ディレクトリは自己完結・ソースグラウンド・手法再現可能なフォルダである（persona.yaml / runtime_card.md / relationship.json / memory.json / examples.md / meta.json / creation_review.md / historical_source_report.md + dialogue_samples/）。
 
 ---
 
-## リポジトリ構成
+## 📂 リポジトリ構成
 
 ```text
 political-human-skill/
-├── README.md / README_zh.md / README_ja.md / README_ko.md    # 4言語 README
-├── SKILL.md                                                    # 英語 canonical ランタイムプロトコル
-├── SPEC.md                                                     # 英語 canonical 創作・安全仕様
-├── SPEC_zh.md                                                  # 中国語ローカライズ版創作・安全仕様
-├── test-prompts.json                                           # Darwin 回帰テスト prompt
-├── requirements.txt                                            # Python検証依存関係
-├── scripts/                                                     # リポジトリ検証スクリプト
-├── demo/                                                        # 最小実行可能な対話・ゲームdemo
-├── quality/                     # Darwin 品質進化レイヤー（アダプター + 結果）
-├── safety/                      # 安全ルールセット（6 文書）
-├── templates/                   # テンプレート（5 ファイル）
-├── core/                        # ランタイムエンジン（7 文書）
-├── validators/                  # バリデーター（7 文書）
-├── game_adapter/                # 『絶対多数』アダプター
-├── families/political_human/    # ファミリーメタデータ
-├── review-stage/                # レビュー状態
-└── personas/examples/           # ⚡ Mode C 変換済みペルソナ（各 7 ファイル）
-    ├── oda_nobunaga_modernized/ # 織田信長 → 野党改革派の急先鋒
-    ├── cao_cao_modernized/      # 曹操 → 与党連合中核派閥の領袖
-    └── caesar_modernized/       # カエサル → 市民改革連合リーダー
+├── README.md / README_cn.md / README_ja.md / README_ko.md   # 4言語 README
+├── SKILL.md / SPEC.md / SPEC_cn.md                          # canonical プロトコル + 仕様（EN / CN）
+├── core/          # ランタイムエンジン（プロトコル、対話規則、検出器、ポリシー）
+├── safety/        # 安全ルールセット（ポリシー、識別性レビュー、変換）
+├── templates/     # persona / runtime / source-report テンプレート
+├── validators/    # 一貫性、隔離、識別性、ソースグラウンド検査
+├── game_adapter/  # 『絶対多数』アダプター（schema、採点、イベント）
+├── families/      # ジェネレーター + 作成ワークフロー + ファミリーメタデータ
+├── quality/       # Darwin 品質進化レイヤー + テスト結果
+├── scripts/ demo/ # 検証 + 最小 demo
+└── personas/examples/   # ⚡ 3つの Mode C 変換ペルソナ（oda / cao_cao / caesar）
 ```
 
-> 完全なディレクトリ計画は [SPEC.md](SPEC.md) 第22節にある。本リポジトリはフレームワークコアを提供する：`SKILL.md` メインプロトコル、`safety/` ルールセット、`templates/`、`core/` ランタイムエンジン、`validators/`、`game_adapter/`（『絶対多数』アダプター）、`families/`（ファミリーメタデータ）、Darwin品質レイヤー、そして `personas/examples/` 配下の三つの自己完結型・変換済みサンプルペルソナ（織田信長 · 曹操 · カエサル）。全構成要素は進化し続ける。
+> `personas/examples/` は同梱のビルトイン例に過ぎない——通常の利用で生成したペルソナは、自分のランタイム、ゲームデータ、ローカル作業環境に置くべきであり、このリポジトリに入れない。例は固定テンプレートでもない：織田信長・曹操・カエサルを新たに依頼された場合は、現在のソースから再生成され、決して例フォルダはコピーされない。より厳格な規則は [SPEC.md](SPEC.md) §18–19 を参照。
 
 ---
 
-## 生成されたペルソナとサンプル
+## 🧪 品質と検証
 
-`personas/examples/` は、このリポジトリに同梱されている小さなサンプル集です。通常の利用で生成したペルソナは、自分のランタイム、ゲームデータ、ローカル作業環境、または派生プロジェクトに保存してください。たとえば *Absolute Majority* と連携する場合、生成した NPC はこのリポジトリではなくゲーム側のデータディレクトリに保存できます。
+**Darwin 品質ループ** —— [`darwin-skill`](https://github.com/alchaincyf/darwin-skill) はペルソナ実行時の依存ではなく、**保守と最適化のレイヤー**として統合されている。評価し改善を提案する；品質が上がり、すべてのドメインゲートを通過した場合にのみ変更を保持する。`quality/darwin-adapter.md` + `test-prompts.json` を使用。Darwin は安全境界を弱めてはならず、ペルソナ間のメモリを統合してはならず、ランタイムを汎用ロールプレイに変えてはならない。
 
-サンプルは固定テンプレートでもありません。ファイル構成、安全境界、変換の雰囲気を示すためのものです。織田信長、曹操、カエサルのような同じ歴史人物を新しく依頼された場合でも、サンプルフォルダをコピーせず、その時点の依頼内容と安全ルールに基づいて生成し直します。
-
-保存場所とサンプル再利用に関するより厳密なルールは [SPEC.md](SPEC.md) の sections 18-19 を参照してください。
-
----
-
-## 検証とdemo
-
-Python環境にYAMLパーサーがない場合は、先に依存関係をインストールします。
+**リポジトリを検証:**
 
 ```bash
 pip install -r requirements.txt
-```
-
-リポジトリ検証スクリプトを実行します。
-
-```bash
 python scripts/validate_repo.py
 ```
 
-最小demoの入口:
-
-- [`demo/run_dialogue_demo.md`](demo/run_dialogue_demo.md)
-- [`demo/run_absolute_majority_demo.md`](demo/run_absolute_majority_demo.md)
-- [`game_adapter/absolute_majority_input_schema.json`](game_adapter/absolute_majority_input_schema.json)
+最小 demo は [`demo/`](demo/) にある。
 
 ---
 
-## 限界（このフレームワークにできないこと）
+## ⚠ 限界（このフレームワークにできないこと）
 
 すべてのペルソナは、その限界を明示する。
 
@@ -472,7 +420,7 @@ python scripts/validate_repo.py
 
 ---
 
-## ライセンス
+## 📄 ライセンス
 
 MIT —— 学習、改変、再創作を奨励する。守るべきベースラインは1つだけである：[`safety/`](safety/) の安全ルールに従い、**近現代の現実の政治家のインタラクティブなペルソナを生成しない**こと。
 

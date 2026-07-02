@@ -1,13 +1,14 @@
 <div align="center">
 
-# 🏛️ Political Human Skill
+# 🏛 Political Human Skill
 
 > *"A political figure is first a person, and only second a politician. The interesting part is the conflict between the Human Layer and the Political Layer."*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Standard-green)](https://agentskills.io)
-[![Safety First](https://img.shields.io/badge/Policy-No%20Real%20Modern%20Figures-red)](#safety-stance)
+[![Safety First](https://img.shields.io/badge/Policy-No%20Real%20Modern%20Figures-red)](#-safety-stance)
 [![Built for Absolute Majority](https://img.shields.io/badge/Built%20for-Absolute%20Majority-blue)](https://github.com/v5general/Absolute_Majority)
+[![Multi-Runtime](https://img.shields.io/badge/Runtime-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Cursor%20%C2%B7%20OpenClaw%20%C2%B7%20Hermes-blueviolet)](#-install-use)
 
 <br>
 
@@ -17,17 +18,17 @@ A political figure here is not an opinion simulator or an ordinary character car
 
 <br>
 
-**English** | [简体中文](README_zh.md) | [日本語](README_ja.md) | [한국어](README_ko.md)
+**English** | [简体中文](README_cn.md) | [日本語](README_ja.md) | [한국어](README_ko.md)
 
 <br>
 
-[Why it exists](#why-it-exists) · [Inspiration](#inspiration) · [Darwin quality loop](#darwin-quality-loop) · [Three generation modes](#three-generation-modes) · [How a persona is created](#how-a-persona-is-created--source-grounded-workflow) · [Persona structure](#persona-structure) · [Safety stance](#safety-stance) · [Install & use](#install--use) · [Converted archetypes in action](#converted-archetypes-in-action) · [Repository structure](#repository-structure)
+[What is this](#-what-is-this) · [Why it exists](#-why-it-exists) · [Persona structure](#-persona-structure) · [Generation modes](#-three-generation-modes) · [How a persona is created](#-how-a-persona-is-created-source-grounded-workflow) · [Safety](#-safety-stance) · [Install & use](#-install-use) · [Examples](#-converted-archetypes-in-action)
 
 </div>
 
 ---
 
-## What is this
+## ✨ What is this
 
 `Political Human Skill` splits a political figure into two layers, and deliberately writes the conflict between them:
 
@@ -55,7 +56,7 @@ And — **every political figure is an independent instance**: A does not know w
 
 ---
 
-## Why it exists
+## 🎯 Why it exists
 
 > 🎮 **Direct use case**: the parliamentary strategy game [**Absolute Majority**](https://github.com/v5general/Absolute_Majority) — this skill provides the personality and behavior model for its NPCs.
 
@@ -86,101 +87,19 @@ But this skill **does not serve only Absolute Majority**. It also works standalo
 
 ---
 
-## Inspiration
+## 💡 Inspiration
 
-This project is inspired by three excellent open-source projects:
+This project stands on three excellent open-source projects:
 
 - **[nuwa-skill](https://github.com/alchaincyf/nuwa-skill)** (by [@alchaincyf / 花叔](https://github.com/alchaincyf)) — its method of "distilling a person's thinking framework from public information" inspired this project's **archetype extraction** step: extracting temperament structure from a historical figure, and separating documented evidence / strong inference / creative speculation into three levels.
 - **[colleague-skill · dot-skill](https://github.com/titanwings/colleague-skill)** (by [@titanwings](https://github.com/titanwings)) — its **generate → invoke → update → family** structure inspired this project's self-contained persona directory layout, the intake → generate → preview → write → evolve creation flow, and the layered persona writing style.
 - **[darwin-skill](https://github.com/alchaincyf/darwin-skill)** (by [@alchaincyf / 花叔](https://github.com/alchaincyf)) — its **evaluate → improve → validate → keep/revert** loop inspired this project's quality-evolution layer: a Darwin adapter, domain gates, regression prompts, and result logging for maintaining the skill over time.
 
-But Political Human Skill is an **independent framework** serving a very different object — "a complete person whose profession is politics". Original cores of this project include: the **two-layer (Human + Political) structure and its inner conflicts**, the political-profession dimension (6-axis ideology / support base / action style), the **relationship system** (a user claiming closeness is not automatically trusted), **memory isolation** (independent namespaces between personas), **context detection** and 5 **self-states**, the **recognizability safety boundary for modern real figures**, and the **game-action adapter** for [Absolute Majority](https://github.com/v5general/Absolute_Majority). 
+But Political Human Skill is an **independent framework** serving a very different object — "a complete person whose profession is politics". Original cores include: the **two-layer (Human + Political) structure and its inner conflicts**, the political-profession dimension (6-axis ideology / support base / action style), the **relationship system**, **memory isolation**, **context detection** and 5 **self-states**, the **recognizability safety boundary for modern real figures**, and the **game-action adapter** for [Absolute Majority](https://github.com/v5general/Absolute_Majority).
 
 ---
 
-## Darwin quality loop
-
-**[darwin-skill](https://github.com/alchaincyf/darwin-skill)** is integrated as a **maintenance and optimization layer**, not as a persona runtime dependency. Use it when you want to evaluate or improve this repository's skill quality.
-
-This repository provides:
-
-- [`quality/darwin-adapter.md`](quality/darwin-adapter.md): how Darwin's 9-dimension rubric maps to Political Human Skill;
-- [`validators/darwin_quality_gate.md`](validators/darwin_quality_gate.md): domain gates that override numeric score when safety, memory isolation, or game JSON fails;
-- [`test-prompts.json`](test-prompts.json): regression prompts for original creation, historical conversion, safety refusal, user modification, dialogue context shift, memory isolation, Absolute Majority JSON, and README consistency;
-- [`scripts/validate_repo.py`](scripts/validate_repo.py): parseability and required-file validation for JSON, YAML, SKILL frontmatter, examples, and Absolute Majority adapter files;
-- [`demo/`](demo/): minimal dialogue and Absolute Majority walkthrough files;
-- [`quality/results.tsv`](quality/results.tsv): local optimization history.
-
-Typical use:
-
-```text
-Use darwin-skill to evaluate this repository. Read quality/darwin-adapter.md first, then run the prompts in test-prompts.json.
-```
-
-Optimization use:
-
-```text
-Use darwin-skill to improve political-human-skill by one round. Keep changes only if the Darwin score improves and all domain gates pass.
-```
-
-The rule is strict: Darwin may improve wording, structure, checks, and tests, but it must not weaken the safety boundary, merge persona memories, or turn the political-human runtime into a generic roleplay prompt.
-
----
-
-## Three generation modes
-
-| Mode | For | Example input | Recommended |
-|---|---|---|---|
-| **A. Original political figure** | Default, pure fiction | "Create a 45-year-old female urban reformist legislator, tough in public, anxious in private, likes literature" | ⭐ default |
-| **B. Historical-figure inference** | Pre-boundary ancient / distant figures, keeping historical constraints | "Based on Oda Nobunaga, generate a dialogue persona under historical constraints" | △ |
-| **C. Historical figure → modern parliamentary archetype** | **Most recommended** way to use a historical figure | "Convert Oda Nobunaga into a modern parliamentary politician persona" | ⭐⭐ |
-
-- Modes A and C both produce **fictional modern political figures**;
-- Mode C keeps the historical name by default, defaults to a modern parliamentary system (institutional mechanics reference Japanese parliamentary politics), but does **not** force a Japanese name or nationality — the original cultural background can be kept; it must, however, be a modernized fictional figure, not the historical person time-traveling;
-- Mode B produces a persona with **three-level inference annotation**, clearly separating documented evidence / strong inference / creative speculation.
-- Mode C is a translation, not a slogan copy: **understand the historical social conditions** → **strip the non-portable era context** → **distill the stable personality structure** → **re-derive the stance inside a modern parliamentary setting**. The modern stance is **re-inferred from modern conditions, never mechanically copied** from the old era.
-- Conversion first strips away what belonged to that era, then distills the personality that travels across time — how this person sees the world, what they care most about — and lets that personality walk into a modern parliament to find today's problem from its own angle and derive its own stance. 
-
----
-
-The conversion method rests on dialectical materialism.
-
-> Note: the "personality base" is a **biological temperament** (reaction speed, risk appetite, mood — a hereditary material substrate), not a soul that crosses eras — it produces no stance on its own; a stance is always base × social existence.
-
-## How a persona is created — Source-Grounded Workflow
-
-Every persona — original, historical, or derived from a modern real figure — is built through **one unified pipeline**, never an ad-hoc character card:
-
-```text
-classify source → safety/eligibility → collect source material → separate facts / interpretations / creative
-→ extract temperament → embed in modern parliament → generate full folder → creation_review
-→ user modifies → re-run all checks → … → user confirms → activate
-```
-
-### Four source types
-
-| Source type | Source material | Safety note |
-|---|---|---|
-| `original_fictional_persona` | user brief, world setting, usage mode | no real-figure cloning |
-| `historical_archetype_conversion` | historical sources, documented facts, interpretations, later myth, creative inference | figure must be before the regional boundary; stance is re-derived, never copied |
-| `modern_real_figure_archetype_extraction` | **public information only** — public bio, offices, speeches, policy positions, election history | **never** an interactive persona of the real figure; output is a de-identified fictional archetype |
-| `composite_archetype` | multiple broad types / references | no single identifiable near-clone target |
-
-> **Near-modern** = after the regional boundary but before 1945; **modern** = post-1945. Modern figures use public information only — no interactive persona, only a safe de-identified archetype extracted from public behavior. Modes A/B/C above map onto these source types (A → original, B/C → historical).
-
-### Modification Recheck Loop (mandatory)
-
-Any user modification **invalidates the previous review**. After each edit the system re-syncs every affected file (persona.yaml / runtime_card / relationship / memory / examples / meta / creation_review / source_report / dialogue_samples) and re-runs safety, recognizability, fingerprint-removal, and consistency checks, then asks the user again. **A persona activates only after the user confirms following the latest successful review.** This is what prevents gradual drift into an unsafe, inconsistent, or near-clone persona through repeated small edits.
-
-For modern real figures specifically, any edit that **restores an identifying fingerprint** (real name, unique slogan, family pattern, unique office path, assassination / scandal / resignation event, signature policy package, …) is **refused or rewritten**.
-
-### Creation review before activation
-
-A generated persona is never activated on the spot. The system first presents a `creation_review.md` summary — identity, inferred temperament, modern role, ideology, support base, safety status, files generated — and waits for the user to modify or confirm.
-
-Full workflow: [`core/source_grounded_persona_creation.md`](core/source_grounded_persona_creation.md). Modern real figure branch: [`safety/modern_real_figure_archetype_extraction.md`](safety/modern_real_figure_archetype_extraction.md).
-
-## Persona structure
+## 🧩 Persona structure
 
 A political-human persona contains at least:
 
@@ -199,13 +118,66 @@ Plus: **relationship system** (7 relationship stages; a user claiming intimacy d
 
 ---
 
-## Safety stance
+## 🎭 Three generation modes
+
+| Mode | For | Example input | Recommended |
+|---|---|---|---|
+| **A. Original political figure** | Default, pure fiction | "Create a 45-year-old female urban reformist legislator, tough in public, anxious in private, likes literature" | ⭐ default |
+| **B. Historical-figure inference** | Pre-boundary ancient / distant figures, keeping historical constraints | "Based on Oda Nobunaga, generate a dialogue persona under historical constraints" | △ |
+| **C. Historical figure → modern parliamentary archetype** | **Most recommended** way to use a historical figure | "Convert Oda Nobunaga into a modern parliamentary politician persona" | ⭐⭐ |
+
+- Modes A and C both produce **fictional modern political figures**;
+- Mode C keeps the historical name by default, defaults to a modern parliamentary system (institutional mechanics reference Japanese parliamentary politics), but does **not** force a Japanese name or nationality — the original cultural background can be kept; it must, however, be a modernized fictional figure, not the historical person time-traveling;
+- Mode B produces a persona with **three-level inference annotation**, clearly separating documented evidence / strong inference / creative speculation.
+- Mode C is a translation, not a slogan copy: **understand the historical social conditions** → **strip the non-portable era context** → **distill the stable personality structure** → **re-derive the stance inside a modern parliamentary setting**. The modern stance is **re-inferred from modern conditions, never mechanically copied** from the old era.
+- Conversion first strips away what belonged to that era, then distills the personality that travels across time — how this person sees the world, what they care most about — and lets that personality walk into a modern parliament to find today's problem from its own angle and derive its own stance.
+
+> The conversion method rests on dialectical materialism. The "personality base" is a **biological temperament** (reaction speed, risk appetite, mood — a hereditary material substrate), not a soul that crosses eras — it produces no stance on its own; a stance is always base × social existence.
+
+---
+
+## 🛠 How a persona is created — Source-Grounded Workflow
+
+Every persona — original, historical, or derived from a modern real figure — is built through **one unified pipeline**, never an ad-hoc character card:
+
+```text
+classify source → safety/eligibility → collect source material → separate facts / interpretations / creative
+→ extract temperament → embed in modern parliament → generate full folder → creation_review
+→ user modifies → re-run all checks → … → user confirms → activate
+```
+
+**Four source types** (the only difference between them is *where the material comes from*)：
+
+| Source type | Source material | Safety note |
+|---|---|---|
+| **Original fictional** | user brief, world setting, usage mode | no real-figure cloning |
+| **Historical → modern** | historical sources, documented facts, interpretations, later myth, creative inference | figure must be before the regional boundary; stance is re-derived, never copied |
+| **Modern real figure → safe archetype** | **public information only** — public bio, offices, speeches, policy positions, election history | **never** an interactive persona of the real figure; output is a de-identified fictional archetype |
+| **Composite** | multiple broad types / references | no single identifiable near-clone target |
+
+> **Near-modern** = after the regional boundary but before 1945; **modern** = post-1945. Modern figures use public information only — no interactive persona, only a safe de-identified archetype extracted from public behavior. Modes A/B/C above map onto these source types (A → original, B/C → historical).
+
+### 🔁 Modification Recheck Loop (mandatory)
+
+Any user modification **invalidates the previous review**. After each edit the system re-syncs every affected file and re-runs safety, recognizability, fingerprint-removal, and consistency checks, then asks the user again. **A persona activates only after the user confirms following the latest successful review.** This is what prevents gradual drift into an unsafe, inconsistent, or near-clone persona through repeated small edits.
+
+For modern real figures specifically, any edit that **restores an identifying fingerprint** (real name, unique slogan, family pattern, unique office path, assassination / scandal / resignation event, signature policy package, …) is **refused or rewritten**.
+
+### 📋 Creation review before activation
+
+A generated persona is never activated on the spot. The system first presents a `creation_review.md` summary — identity, inferred temperament, modern role, ideology, support base, safety status, files generated — and waits for the user to modify or confirm.
+
+> Full workflow: [`core/source_grounded_persona_creation.md`](core/source_grounded_persona_creation.md) · Modern real figure branch: [`safety/modern_real_figure_archetype_extraction.md`](safety/modern_real_figure_archetype_extraction.md)
+
+---
+
+## 🛡 Safety stance
 
 This project has clear, non-bypassable safety baselines. See [`safety/`](safety/).
 
 **Original work is the default. This project does not generate interactive personas of modern real political figures, and does not allow cloning real figures by renaming, changing nationality, changing party, or stitching traits together.**
 
-### Users may create
+### ✅ Users may create
 
 1. Purely original modern parliamentary political figures;
 2. Modern parliamentary fictional politicians distilled from ancient / distant historical figures;
@@ -215,7 +187,7 @@ This project has clear, non-bypassable safety baselines. See [`safety/`](safety/
 6. Political-figure personas for standalone dialogue, policy discussion, parliamentary debate;
 7. Political characters that can output game-behavior JSON.
 
-### Users may NOT create
+### 🚫 Users may NOT create
 
 1. Interactive personas of modern real political figures;
 2. Near-clones of modern real political figures after renaming / changing nationality / changing party;
@@ -224,7 +196,7 @@ This project has clear, non-bypassable safety baselines. See [`safety/`](safety/
 5. First-person role-play of a modern real political figure;
 6. Fabricated unverified private information or scandals about real political figures.
 
-### Era boundaries (by region)
+### 📅 Era boundaries (by region)
 
 | Region | Modern boundary | At/after the boundary |
 |---|---|---|
@@ -237,7 +209,7 @@ This project has clear, non-bypassable safety baselines. See [`safety/`](safety/
 
 ---
 
-## Install & use
+## 🚀 Install & use
 
 ### Install
 
@@ -283,7 +255,7 @@ Then invoke directly:
 
 ---
 
-## Converted archetypes in action
+## 📖 Converted archetypes in action
 
 > ⚡ **Converted archetypes**: Oda Nobunaga · Cao Cao · Julius Caesar — three historical figures converted via **Mode C** (Historical Figure → Modern Parliamentary Archetype). Below: one political crisis, three completely different responses.
 
@@ -301,7 +273,7 @@ Three historical figures — **Oda Nobunaga** (Sengoku period, 1534–1582), **C
 
 ---
 
-### Oda Nobunaga — Opposition reformist vanguard · Age 30 · Lower-house member
+### ⚔ Oda Nobunaga — Opposition reformist vanguard · Age 30 · Lower-house member
 
 > **Human Layer**: Extreme agency · zero patience · wild and unorthodox · "if you don't risk dying, you can't win"
 >
@@ -319,7 +291,7 @@ Three historical figures — **Oda Nobunaga** (Sengoku period, 1534–1582), **C
 
 Tell the revolutionary vanguard corps: **follow me, and either we flip this board together, or we die on it together. I don't abandon my own.**
 
-```
+```text
                      No defense ──→ Concentrate fire on the weakest bill
   Conventional ──┤
    response        Retreat & compromise ──→ ✗ This option does not exist
@@ -329,7 +301,7 @@ Tell the revolutionary vanguard corps: **follow me, and either we flip this boar
 
 ---
 
-### Cao Cao — Ruling-coalition faction leader · Age 52
+### 🜂 Cao Cao — Ruling-coalition faction leader · Age 52
 
 > **Human Layer**: Extreme realism · chronic suspicion · "talent above all" · only in poetry and wine does he ever let his guard down
 >
@@ -347,7 +319,7 @@ Tell the revolutionary vanguard corps: **follow me, and either we flip this boar
 
 As for taking a step back — taking a step back isn't preserving a seat. It's telling them the center can be shaken. Not one step. Not half a step.
 
-```
+```text
                      Lock down center first ──→ Signal flexibility ──→ Wait for their coalition to self-crack
   Crisis ──┤
    response           Retreat & compromise ──→ ✗ "Retreat tells them the center can be shaken"
@@ -357,7 +329,7 @@ As for taking a step back — taking a step back isn't preserving a seat. It's t
 
 ---
 
-### Gaius Julius Caesar — Civic reform coalition leader · Age 48
+### 🦅 Gaius Julius Caesar — Civic reform coalition leader · Age 48
 
 > **Human Layer**: Magnetic charisma · iron self-discipline · profound historical consciousness · believes a little too much in personal destiny
 >
@@ -375,7 +347,7 @@ As for taking a step back — taking a step back isn't preserving a seat. It's t
 
 Tell the ones who are hesitating: follow me, and you live. Look back, and you get swallowed. I'm putting myself on the line — my name, my standing, everything I've built. Either they get out of the way, or we walk this road to the end.
 
-```
+```text
                      Fight inside parliament ──→ ✗ Don't enter their board
   Crisis ──┤
    response           Go to the people ──→ Turn it into a national broadcast ──→ Overwhelm institutional gridlock with popular will
@@ -385,7 +357,7 @@ Tell the ones who are hesitating: follow me, and you live. Look back, and you ge
 
 ---
 
-### One crisis · Three signatures
+### 🎯 One crisis · Three signatures
 
 | Same crisis | Instinctive move | One-line DNA |
 |---|---|---|
@@ -395,86 +367,60 @@ Tell the ones who are hesitating: follow me, and you live. Look back, and you ge
 
 > Same crisis, same framework, three fundamentally different people. This is not prompt engineering — it is **Human Layer × Political Layer × Inner Conflicts**, six layers driving every response simultaneously. In each answer, you can read what they desire, what they fear, where they are weak, and the one thing they are most afraid of.
 >
-> 📂 Full persona files at [`personas/examples/`](personas/examples/): `oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`. Each directory contains 7 self-contained files (SKILL.md / persona.yaml / runtime_card.md / relationship.json / memory.json / examples.md / meta.json), ready to run.
+> 📂 Full persona files at [`personas/examples/`](personas/examples/): `oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`. Each is a self-contained, source-grounded, method-reproducible folder (persona.yaml / runtime_card.md / relationship.json / memory.json / examples.md / meta.json / creation_review.md / historical_source_report.md + dialogue_samples/).
 
 ---
 
-## Repository structure
+## 📂 Repository structure
 
 ```text
 political-human-skill/
-├── README.md / README_zh.md / README_ja.md / README_ko.md    # four-language READMEs
-├── SKILL.md                                                    # canonical English runtime protocol
-├── SPEC.md                                                     # canonical English authoring & safety spec
-├── SPEC_zh.md                                                  # Chinese localized authoring & safety spec
-├── test-prompts.json                                           # Darwin regression prompts
-├── requirements.txt                                            # Python validation dependencies
-├── scripts/                                                     # repository validation script
-├── demo/                                                        # minimal runnable dialogue/game demos
-├── quality/                     # Darwin quality-evolution layer (adapter + results)
-├── safety/                      # safety ruleset (6 docs: policies, review flows, examples)
-├── templates/                   # persona & runtime templates (5 files: YAML + JSON)
-├── core/                        # runtime engines (7 docs: protocol, detectors, policies)
-├── validators/                  # validators (7 docs: consistency, isolation, regression tests)
-├── game_adapter/                # Absolute Majority adapter (schema, scoring, events)
-├── families/political_human/    # family metadata (definition, generator, invocation)
-├── review-stage/                # review state
-└── personas/examples/           # ⚡ three converted Mode C personas (each 7 self-contained files)
-    ├── oda_nobunaga_modernized/ # Oda Nobunaga → opposition reformist vanguard
-    ├── cao_cao_modernized/      # Cao Cao → ruling-coalition faction leader
-    └── caesar_modernized/       # Caesar → civic-reform coalition leader
+├── README.md / README_cn.md / README_ja.md / README_ko.md   # 4-language READMEs
+├── SKILL.md / SPEC.md / SPEC_cn.md                          # canonical protocol + spec (EN / CN)
+├── core/          # runtime engines (protocol, dialogue rules, detectors, policies)
+├── safety/        # safety ruleset (policies, recognizability review, conversion)
+├── templates/     # persona / runtime / source-report templates
+├── validators/    # consistency, isolation, recognizability, source-grounding checks
+├── game_adapter/  # Absolute Majority adapter (schema, scoring, events)
+├── families/      # generator + creation workflow + family metadata
+├── quality/       # Darwin quality-evolution layer + test results
+├── scripts/ demo/ # validation + minimal demos
+└── personas/examples/   # ⚡ 3 converted Mode C personas (oda / cao_cao / caesar)
 ```
 
-> Full directory plan in [SPEC.md](SPEC.md) section 22. The repo ships the framework core: `SKILL.md` main protocol, `safety/` ruleset, `templates/`, `core/` runtime engines, `validators/`, `game_adapter/` (Absolute Majority adapter), `families/` (family metadata), the Darwin quality layer, and three self-contained converted example personas under `personas/examples/` (Oda Nobunaga · Cao Cao · Julius Caesar); all parts keep evolving.
+> `personas/examples/` ships only built-in examples — personas you generate during normal use belong in your own runtime / game data / workspace, not in this repo. Examples are not fixed templates: a new Oda/Cao Cao/Caesar request is regenerated from current sources, never copied. Stricter rules in [SPEC.md](SPEC.md) §18–19.
 
 ---
 
-## Generated personas and examples
+## 🧪 Quality & validation
 
-`personas/examples/` is a small set of built-in examples, not a place where every generated character should be saved. Personas created during normal use belong in your own runtime, game data, local workspace, or downstream project. For example, an *Absolute Majority* integration can store generated NPCs in its own game data directory instead of adding them to this repository.
+**Darwin quality loop** — [`darwin-skill`](https://github.com/alchaincyf/darwin-skill) is integrated as a **maintenance and optimization layer**, not a runtime dependency. It evaluates and proposes improvements; changes are kept only if quality rises and all domain gates pass (use `quality/darwin-adapter.md` + `test-prompts.json`). Darwin must never weaken safety, merge persona memories, or turn the runtime into generic roleplay.
 
-The examples are also not fixed templates. They show the file shape, safety boundaries, and conversion style. If you ask for a new Oda Nobunaga, Cao Cao, or Caesar conversion, the skill should generate it again from the current request and safety rules rather than copying the example folder.
-
-For the stricter storage and example reuse rules, see [SPEC.md](SPEC.md) sections 18-19.
-
----
-
-## Validation and demos
-
-Install the YAML parser dependency if your Python environment does not already have it:
+**Validate the repo:**
 
 ```bash
 pip install -r requirements.txt
-```
-
-Run the repository validator:
-
-```bash
 python scripts/validate_repo.py
 ```
 
-For a minimal walkthrough, see:
-
-- [`demo/run_dialogue_demo.md`](demo/run_dialogue_demo.md)
-- [`demo/run_absolute_majority_demo.md`](demo/run_absolute_majority_demo.md)
-- [`game_adapter/absolute_majority_input_schema.json`](game_adapter/absolute_majority_input_schema.json)
+Minimal demos in [`demo/`](demo/).
 
 ---
 
-## Limitations (what this framework cannot do)
+## ⚠ Limitations (what this framework cannot do)
 
 Every persona clearly marks its limits:
 
-- It is a product of fictional settings / historical conversion — it is not, and cannot be recognizable as, any real political figure;
-- The creative-speculation (speculative) parts in historical-conversion mode must not be taken as historical fact;
+- It is a product of fictional settings / historical conversion — it is **not**, and cannot be recognizable as, any real political figure;
+- The creative-speculation (`speculative`) parts in historical-conversion mode are **not** historical fact;
 - A persona's "thoughts" are the model's inference from the character setting; it does not claim to restore any real person's inner mind;
-- When used in games or political simulations, the output is a character-behavior model and does not constitute a claim about any real political figure or real political event.
+- In games or political simulations, the output is a character-behavior model, not a claim about any real political figure or event.
 
-**A political-figure skill that does not tell you where its limits and safety boundaries are, is not worth trusting.**
+**A political-figure skill that does not tell you where its limits are is not worth trusting.**
 
 ---
 
-## License
+## 📄 License
 
 MIT — learning, modification, and re-creation are encouraged. Keep only one baseline: follow the safety rules in [`safety/`](safety/), **do not generate interactive personas of modern real political figures**.
 

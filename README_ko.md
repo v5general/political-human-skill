@@ -1,13 +1,14 @@
 <div align="center">
 
-# 🏛️ Political Human Skill · 정치인물 조인술
+# 🏛 Political Human Skill · 정치인물 조인술
 
 > *"정치인은 우선 한 사람의 인간이고, 그 다음에서야 정치인이다. 흥미로운 부분은 인간층(Human Layer)과 정치층(Political Layer) 사이의 갈등이다."*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Standard-green)](https://agentskills.io)
-[![Safety First](https://img.shields.io/badge/Policy-No%20Real%20Modern%20Figures-red)](#안전-입장safety-stance)
+[![Safety First](https://img.shields.io/badge/Policy-No%20Real%20Modern%20Figures-red)](#-안전-입장)
 [![Built for Absolute Majority](https://img.shields.io/badge/Built%20for-Absolute%20Majority-blue)](https://github.com/v5general/Absolute_Majority)
+[![Multi-Runtime](https://img.shields.io/badge/Runtime-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Cursor%20%C2%B7%20OpenClaw%20%C2%B7%20Hermes-blueviolet)](#-설치와-사용)
 
 <br>
 
@@ -17,17 +18,17 @@
 
 <br>
 
-[English](README.md) | [简体中文](README_zh.md) | [日本語](README_ja.md) | **한국어**
+[English](README.md) | [简体中文](README_cn.md) | [日本語](README_ja.md) | **한국어**
 
 <br>
 
-[왜 존재하는가](#왜-존재하는가) · [영감을 받은 곳](#영감을-받은-곳) · [Darwin 품질 진화 레이어](#darwin-품질-진화-레이어) · [세 가지 생성 모드](#세-가지-생성-모드) · [페르소나는 어떻게 만들어지는가](#페르소나는-어떻게-만들어지는가소스-그라운디드-생성-워크플로source-grounded-workflow) · [페르소나 구조](#페르소나-구조) · [안전 입장](#안전-입장safety-stance) · [설치와 사용](#설치와-사용install--use) · [변환된 아키타입 실연](#변환된-아키타입-실연) · [저장소 구조](#저장소-구조)
+[이것은 무엇인가](#-이것은-무엇인가) · [왜 존재하는가](#-왜-존재하는가) · [페르소나 구조](#-페르소나-구조) · [세 가지 생성 모드](#-세-가지-생성-모드) · [페르소나는 어떻게 만들어지는가](#-페르소나는-어떻게-만들어지는가소스-그라운딩-생성-워크플로source-grounded-workflow) · [안전 입장](#-안전-입장) · [설치와 사용](#-설치와-사용) · [변환된 아키타입 실연](#-변환된-아키타입-실연)
 
 </div>
 
 ---
 
-## 이것은 무엇인가
+## ✨ 이것은 무엇인가
 
 `Political Human Skill`은 정치인을 두 개의 층으로 나누고, 그 둘 사이의 갈등을 의도적으로 부각해 작성한다.
 
@@ -55,7 +56,7 @@
 
 ---
 
-## 왜 존재하는가
+## 🎯 왜 존재하는가
 
 > 🎮 **직접적인 활용 사례**: 의회제 전략 게임 [**절대다수(Absolute Majority)**](https://github.com/v5general/Absolute_Majority) — 이 스킬은 해당 게임 NPC들의 인격과 행동 모델을 제공한다.
 
@@ -63,15 +64,15 @@
 
 절대다수(Absolute Majority)에는 숫자만으로 투표하는 의원들이 필요하지 않다. 진짜 정치인처럼 존재하는 NPC가 필요하다. 나이와 배경과 경험이 있고; 인격과 약점과 취미가 있으며; 입장과 지지 기반과 파벌 관계가 있는 NPC. 플레이어가 한 일에 따라 신뢰와 경계심이 변하고; 공개석상·사석·위기·친밀한 상황에서 각기 다른 말을 하며; 선거구 압력·파벌 지시·개인적 야심·정치적 원한 아래에서 각기 다른 전략을 취하는 NPC. 나아가 **서로 다른 NPC의 메모리가 서로 격리되는** NPC.
 
-절대다수(Absolute Majority)와 함께 사용할 때, 이 스킬은 게임 규칙이 제공한 후보 행동들 가운데 하나를 판단·선택하고, 구조화되고 디버깅 가능하며 설명 가능한 NPC 행동 JSON을 출력한다.
+절대다수(Absolute Majority)와 함께 사용할 때, 이 스킬은 게임 규칙이 제공한 후보 행동들 가운데 하나를 판단·선택하고, 구조화되고 디버깅 가능하며 설명 가능한 NPC 행동 JSON을 출력한다:
 
 ```json
 {
-  "selected_action": "예산 협상",
-  "action_scores": { "법안 지지": 58, "예산 협상": 86, "반란 가담": 27 },
+  "selected_action": "negotiate_budget",
+  "action_scores": { "support_bill": 58, "negotiate_budget": 86, "join_rebellion": 27 },
   "public_statement": "정책의 방향은 이해할 수 있지만, 지역 경제의 감당 능력에는 더 신중한 제도적 설계가 필요하다.",
   "private_reason": "지지 기반은 지역 공공지출에 의존하며, 직접 지지하면 선거구 관계가 훼손된다.",
-  "relationship_delta": { "신뢰": 1, "존중": 2, "경계": 1 },
+  "relationship_delta": { "trust": 1, "respect": 2, "caution": 1 },
   "memory_write": ["플레이어가 재정개혁 이벤트에서 이 NPC에게 법안 지지를 요청했지만, 지역 예산 보상은 제시하지 않았다."]
 }
 ```
@@ -86,99 +87,19 @@
 
 ---
 
-## 영감을 받은 곳
+## 💡 영감
 
-이 프로젝트는 세 훌륭한 오픈소스 프로젝트에서 영감을 받았다.
+이 프로젝트는 세 개의 훌륭한 오픈소스 선배 위에 서 있다:
 
-- **[nuwa-skill](https://github.com/alchaincyf/nuwa-skill)** (by [@alchaincyf / 花叔](https://github.com/alchaincyf)) — "공개 정보에서 한 사람의 사고 체계를 증류해 내는" 방법이 이 프로젝트의 **아키타입 추출** 단계에 영감을 주었다. 역사적 인물에서 기질 구조를 추출하고, 문헌 증거 / 강한 추론 / 창작적 상상을 세 가지 층위로 분리하는 것이다.
-- **[colleague-skill · dot-skill](https://github.com/titanwings/colleague-skill)** (by [@titanwings](https://github.com/titanwings)) — 그 **생성 → 호출 → 갱신 → 패밀리(generate → invoke → update → family)** 구조가 이 프로젝트의 자기 완결적 페르소나 디렉터리 배치, 인테이크 → 생성 → 미리보기 → 작성 → 진화(intake → generate → preview → write → evolve)의 생성 흐름, 그리고 층위화된 페르소나 작성 스타일에 영감을 주었다.
-- **[darwin-skill](https://github.com/alchaincyf/darwin-skill)** (by [@alchaincyf / 花叔](https://github.com/alchaincyf)) — 그 **평가 → 개선 → 검증 → 유지/되돌리기** 스킬 진화 루프가 이 프로젝트의 품질 진화 레이어에 영감을 주었다. Darwin 어댑터, 도메인 게이트, 회귀 테스트 prompt, 결과 로그를 통해 장기적으로 스킬을 유지한다.
+- **[nuwa-skill](https://github.com/alchaincyf/nuwa-skill)**（작자 [@alchaincyf / 花叔](https://github.com/alchaincyf)）——"공개 정보에서 한 사람의 사고 체계를 증류하는" 방법이 이 프로젝트의 **아키타입 추출** 단계를 영감했다: 역사 인물에서 기질 구조를 추출하고, 문헌 증거 / 강한 추론 / 창작적 상상을 세 층위로 분리하는 것.
+- **[colleague-skill · dot-skill](https://github.com/titanwings/colleague-skill)**（작자 [@titanwings](https://github.com/titanwings)）——그 **생성 → 호출 → 갱신 → 패밀리** 구조가 이 프로젝트의 자기 완결 페르소나 디렉터리 배치, 수집 → 생성 → 미리보기 → 기록 → 진화의 생성 흐름, 그리고 계층화된 페르소나 작법에 영감을 주었다.
+- **[darwin-skill](https://github.com/alchaincyf/darwin-skill)**（작자 [@alchaincyf / 花叔](https://github.com/alchaincyf)）——그 **평가 → 개선 → 검증 → 유지/되돌리기** 루프가 이 프로젝트의 품질 진화 레이어를 영감했다: Darwin 어댑터, 도메인 게이트, 회귀 프롬프트, 결과 기록으로 이 스킬을 장기적으로 유지보수한다.
 
-그러나 Political Human Skill은 매우 다른 대상 — "정치를 직업으로 삼는 온전한 한 사람" — 을 다루는 **독립적인 프레임워크**다. 이 프로젝트의 독자적 핵심에는 다음이 포함된다. **두 층(인간 + 정치) 구조와 그 내적 갈등**, 정치-직업 차원(6축 이념 / 지지 기반 / 행동 양식), **관계 시스템**(사용자가 친밀함을 주장한다고 해서 자동으로 신뢰하지 않는다), **메모리 격리**(페르소나 사이의 독립된 네임스페이스), **맥락 감지**와 5가지 **자아 상태**, **현대 실존 인물에 대한 식별 가능성 안전 경계**, 그리고 [절대다수(Absolute Majority)](https://github.com/v5general/Absolute_Majority)를 위한 **게임 행동 어댑터**.
-
----
-
-## Darwin 품질 진화 레이어
-
-**[darwin-skill](https://github.com/alchaincyf/darwin-skill)** 은 페르소나 런타임 의존성이 아니라 **유지보수와 최적화 레이어**로 통합되어 있다. 이 저장소의 스킬 품질을 평가하거나 개선할 때 사용한다.
-
-이 저장소는 다음을 제공한다.
-
-- [`quality/darwin-adapter.md`](quality/darwin-adapter.md): Darwin의 9차원 rubric을 Political Human Skill에 매핑하는 방법.
-- [`validators/darwin_quality_gate.md`](validators/darwin_quality_gate.md): 안전, 메모리 격리, 게임 JSON 실패 시 숫자 점수보다 우선하는 도메인 게이트.
-- [`test-prompts.json`](test-prompts.json): 오리지널 생성, 역사 전환, 안전 거절, 사용자 수정, 맥락 전환, 메모리 격리, 절대다수 JSON, README 일관성 회귀 테스트.
-- [`scripts/validate_repo.py`](scripts/validate_repo.py): JSON, YAML, SKILL frontmatter, 예시 persona, Absolute Majority 어댑터 필수 파일을 검증하는 스크립트.
-- [`demo/`](demo/): 최소 실행 가능한 대화 demo와 Absolute Majority 구조화 의사결정 demo.
-- [`quality/results.tsv`](quality/results.tsv): 로컬 최적화 이력.
-
-일반적인 사용법:
-
-```text
-darwin-skill로 이 저장소를 평가한다. 먼저 quality/darwin-adapter.md를 읽고, test-prompts.json의 prompt를 실행한다.
-```
-
-최적화 사용법:
-
-```text
-darwin-skill로 political-human-skill을 한 라운드 개선한다. Darwin 점수가 오르고 모든 도메인 게이트를 통과한 경우에만 변경을 유지한다.
-```
-
-엄격한 규칙: Darwin은 표현, 구조, 체크, 테스트를 개선할 수 있지만 안전 경계를 약화해서는 안 되고, 페르소나 간 메모리를 합쳐서는 안 되며, 정치-인간 런타임을 일반 롤플레이 prompt로 바꾸어서는 안 된다.
+그러나 Political Human Skill은 매우 다른 대상——"정치를 직업으로 삼는 온전한 한 사람"——에 봉사하는 **독립적인 프레임워크**다. 오리지널 코어에는: **2층(인간 + 정치) 구조와 그 내적 갈등**, 정치 직업 차원(6축 이데올로기 / 지지 기반 / 행동 양식), **관계 시스템**, **메모리 격리**, **맥락 감지**와 5가지 **자아 상태**, 현대 실존 인물에 대한 **식별성 안전 경계**, 그리고 [절대다수(Absolute Majority)](https://github.com/v5general/Absolute_Majority)를 위한 **게임 행동 어댑터**가 포함된다.
 
 ---
 
-## 세 가지 생성 모드
-
-| 모드 | 용도 | 예시 입력 | 추천 |
-|---|---|---|---|
-| **A. 오리지널 정치인** | 기본값, 순수 허구 | "45세 여성 도시 개혁파 의원을 만들어줘. 공개석상에서는 강하고, 사석에서는 불안해하며, 문학을 좋아한다" | ⭐ 기본값 |
-| **B. 역사적 인물 추론** | 경계 이전의 고대/원역사 인물, 역사적 제약 유지 | "오다 노부나가를 바탕으로, 역사적 제약 아래 대화 페르소나를 생성해줘" | △ |
-| **C. 역사적 인물 → 현대 의회 아키타입** | 역사적 인물을 활용하는 **가장 추천하는** 방식 | "오다 노부나가를 현대 의회 정치인 페르소나로 전환해줘" | ⭐⭐ |
-
-- 모드 A와 C는 모두 **허구의 현대 정치인**을 산출한다.
-- 모드 C는 기본적으로 역사적 이름을 유지하고, 현대 의회제(제도적 메커니즘은 일본 의회정치를 참고)를 기본값으로 삼되, 일본식 이름이나 국적을 강제하지 **않는다**. 원래의 문화적 배경을 유지해도 된다. 단, 그것은 현대화된 허구의 인물이어야 하며, 역사적 인물이 시간 여행을 한 것이어서는 안 된다.
-- 모드 B는 **3층위 추론 주석**이 붙은 페르소나를 산출하여, 문헌 증거 / 강한 추론 / 창작적 상상을 명확히 분리한다.
-- 모드 C는 복사가 아니라 번역이다: **역사적 사회 조건을 이해한다** → **이식 불가능한 시대 환경을 걷어낸다** → **안정적인 인격 구조를 증류한다** → **현대 의회제 맥락에 놓는다** → **현대 사회 상황에 맞춰 입장을 다시 도출한다**. 입장은 옛 시대 것을 기계적으로 옮기는 것이 아니라, **현대 조건에서 재추론된다**.
-- 전환은 먼저 그 시대에 속한 것을 걷어내고, 시대를 초월해 유지되는 인격——세상을 어떻게 보고 무엇을 가장 중시하는지——을 증류한다. 그런 다음 그 인격을 현대 의회로 보내, 본인의 시각에서 오늘의 문제를 찾고 본인의 입장을 도출하게 한다.
-
-이 전환 방법은 유물변증법에 기반한다.
-
-> 주: 여기서 '성격 밑바탕'은 **생물학적 기질**(반응 속도, 배짱, 성격——유전이 정한 물질적 기반)이지, 시공을 넘는 영혼이 아니다——그 자체로 입장을 낳지 않으며, 입장은 항상 '기질 × 사회적 존재'의 산물이다.
-
-## 페르소나는 어떻게 만들어지는가——소스 그라운디드 생성 워크플로（Source-Grounded Workflow）
-
-모든 페르소나——오리지널, 역사적 인물, 현대 실재 인물에서 파생된 것까지——는 **하나의 통합 파이프라인**을 통해 구축되며, 결코 임기응변의 캐릭터 카드가 아니다:
-
-```text
-classify source → safety/eligibility → collect source material → separate facts / interpretations / creative
-→ extract temperament → embed in modern parliament → generate full folder → creation_review
-→ user modifies → re-run all checks → … → user confirms → activate
-```
-
-### 네 가지 소스 유형（Four source types）
-
-| 소스 유형（source_type） | 소스 자료 | 안전 메모 |
-|---|---|---|
-| `original_fictional_persona` | 사용자 브리프, 세계관 설정, 사용 모드 | 실재 인물 클로닝 없음 |
-| `historical_archetype_conversion` | 역사 사료, 문헌상 사실, 해석, 후세의 신화, 창작적 추론 | 인물은 지역 경계 이전이어야 한다. 입장은 재도출되며 결코 복사되지 않는다 |
-| `modern_real_figure_archetype_extraction` | **공개 정보만**——공개 이력, 직위, 연설, 정책 입장, 선거 이력 | 실재 인물의 대화형 페르소나는 **절대** 만들지 않는다. 산출물은 비식별화 허구 원형이다 |
-| `composite_archetype` | 여러 폭넓은 유형 / 참고 자료 | 단일 식별 가능한 근접 클론 대상이 없어야 한다 |
-
-> **근현대** = 지역 경계 이후이자 1945년 이전. **현대** = 1945년 이후. 현대 인물에는 공개 정보만 사용한다——대화형 페르소나를 만들지 않고, 공개 행동에서 추출한 안전한 비식별화 허구 원형만 꺼낸다. 위의 모드 A/B/C는 이 소스 유형들에 대응한다（A → 오리지널, B/C → 역사）.
-
-### 수정 재점검 루프（Modification Recheck Loop, 필수）
-
-사용자의 어떤 수정도 **이전 리뷰를 무효화**한다. 매 편집마다 시스템은 영향 받은 모든 파일(persona.yaml / runtime_card / relationship / memory / examples / meta / creation_review / source_report / dialogue_samples)을 다시 동기화하고, 안전·식별성·지문 제거·일관성 검사를 재실행한 뒤 다시 사용자에게 묻는. **페르소나는 가장 최근의 성공한 리뷰 이후 사용자가 확인할 때만 활성화된다.** 이것이 반복된 작은 편집이 점차 불안전·불일치·근접 클론 페르소나로 표류하는 것을 막는 장치이다.
-
-현대 실재 인물의 경우, 특히 **식별 지문을 복원**하는 편집(실명, 고유 구호, 가문 패턴, 고유한 직위 경로, 암살 / 스캔들 / 사퇴 사건, 대표적 정책 패키지……)은 **거부되거나 다시 쓰여진다**.
-
-### 활성 전 생성 리뷰（creation review before activation）
-
-생성된 페르소나는 그 자리에서 활성화되지 않는다. 시스템은 먼저 `creation_review.md` 요약——정체성, 추론된 기질, 현대 역할, 이데올로기, 지지 기반, 안전 상태, 생성된 파일——을 제시하고, 사용자의 수정이나 확인을 기다린다.
-
-전체 워크플로: [`core/source_grounded_persona_creation.md`](core/source_grounded_persona_creation.md). 현대 실재 인물 분기: [`safety/modern_real_figure_archetype_extraction.md`](safety/modern_real_figure_archetype_extraction.md).
-
-## 페르소나 구조
+## 🧩 페르소나 구조
 
 정치-인간 페르소나는 적어도 다음을 포함한다.
 
@@ -197,13 +118,66 @@ classify source → safety/eligibility → collect source material → separate 
 
 ---
 
-## 안전 입장(Safety stance)
+## 🎭 세 가지 생성 모드
+
+| 모드 | 용도 | 예시 입력 | 추천 |
+|---|---|---|---|
+| **A. 오리지널 정치인** | 기본값, 순수 허구 | "45세 여성 도시 개혁파 의원을 만들어줘. 공개석상에서는 강하고, 사석에서는 불안해하며, 문학을 좋아한다" | ⭐ 기본값 |
+| **B. 역사적 인물 추론** | 경계 이전의 고대/원역사 인물, 역사적 제약 유지 | "오다 노부나가를 바탕으로, 역사적 제약 아래 대화 페르소나를 생성해줘" | △ |
+| **C. 역사적 인물 → 현대 의회 아키타입** | 역사적 인물을 활용하는 **가장 추천하는** 방식 | "오다 노부나가를 현대 의회 정치인 페르소나로 전환해줘" | ⭐⭐ |
+
+- 모드 A와 C는 모두 **허구의 현대 정치인**을 산출한다.
+- 모드 C는 기본적으로 역사적 이름을 유지하고, 현대 의회제(제도적 메커니즘은 일본 의회정치를 참고)를 기본값으로 삼되, 일본식 이름이나 국적을 강제하지 **않는다**. 원래의 문화적 배경을 유지해도 된다. 단, 그것은 현대화된 허구의 인물이어야 하며, 역사적 인물이 시간 여행을 한 것이어서는 안 된다.
+- 모드 B는 **3층위 추론 주석**이 붙은 페르소나를 산출하여, 문헌 증거 / 강한 추론 / 창작적 상상을 명확히 분리한다.
+- 모드 C는 복사가 아니라 번역이다: **역사적 사회 조건을 이해한다** → **이식 불가능한 시대 환경을 걷어낸다** → **안정적인 인격 구조를 증류한다** → **현대 의회제 맥락에 놓는다** → **현대 사회 상황에 맞춰 입장을 다시 도출한다**. 입장은 옛 시대 것을 기계적으로 옮기는 것이 아니라, **현대 조건에서 재추론된다**.
+- 전환은 먼저 그 시대에 속한 것을 걷어내고, 시대를 초월해 유지되는 인격——세상을 어떻게 보고 무엇을 가장 중시하는지——을 증류한다. 그런 다음 그 인격을 현대 의회로 보내, 본인의 시각에서 오늘의 문제를 찾고 본인의 입장을 도출하게 한다.
+
+> 이 전환 방법은 유물변증법에 기반한다. 여기서 '성격 밑바탕'은 **생물학적 기질**(반응 속도, 배짱, 성격——유전이 정한 물질적 기반)이지, 시공을 넘는 영혼이 아니다——그 자체로 입장을 낳지 않으며, 입장은 항상 '기질 × 사회적 존재'의 산물이다.
+
+---
+
+## 🛠 페르소나는 어떻게 만들어지는가——소스 그라운딩 생성 워크플로（Source-Grounded Workflow）
+
+모든 페르소나——오리지널, 역사적 인물, 현대 실재 인물에서 파생된 것까지——는 **하나의 통합 파이프라인**을 통해 구축되며, 결코 임기응변의 캐릭터 카드가 아니다:
+
+```text
+classify source → safety/eligibility → collect source material → separate facts / interpretations / creative
+→ extract temperament → embed in modern parliament → generate full folder → creation_review
+→ user modifies → re-run all checks → … → user confirms → activate
+```
+
+**네 가지 소스 유형**（Four source types, 차이는 *자료가 어디서 오는가*뿐）：
+
+| 소스 유형（source_type） | 소스 자료 | 안전 메모 |
+|---|---|---|
+| **오리지널 허구** | 사용자 브리프, 세계관 설정, 사용 모드 | 실재 인물 클로닝 없음 |
+| **역사→현대** | 역사 사료, 문헌상 사실, 해석, 후세의 신화, 창작적 추론 | 인물은 지역 경계 이전이어야 한다. 입장은 재도출되며 결코 복사되지 않는다 |
+| **현대 실존 인물→안전 원형** | **공개 정보만**——공개 이력, 직위, 연설, 정책 입장, 선거 이력 | 실재 인물의 대화형 페르소나는 **절대** 만들지 않는다. 산출물은 비식별화 허구 원형이다 |
+| **복합** | 여러 폭넓은 유형 / 참고 자료 | 단일 식별 가능한 근접 클론 대상이 없어야 한다 |
+
+> **근현대** = 지역 경계 이후이자 1945년 이전. **현대** = 1945년 이후. 현대 인물에는 공개 정보만 사용한다——대화형 페르소나를 만들지 않고, 공개 행동에서 추출한 안전한 비식별화 허구 원형만 꺼낸다. 위의 모드 A/B/C는 이 소스 유형들에 대응한다（A → 오리지널, B/C → 역사）.
+
+### 🔁 수정 재점검 루프（Modification Recheck Loop, 필수）
+
+사용자의 어떤 수정도 **이전 리뷰를 무효화**한다. 매 편집마다 시스템은 영향 받은 모든 파일을 다시 동기화하고, 안전·식별성·지문 제거·일관성 검사를 재실행한 뒤 다시 사용자에게 묻는다. **페르소나는 가장 최근의 성공한 리뷰 이후 사용자가 확인할 때만 활성화된다.** 이것이 반복된 작은 편집이 점차 불안전·불일치·근접 클론 페르소나로 표류하는 것을 막는 장치이다.
+
+현대 실재 인물의 경우, 특히 **식별 지문을 복원**하는 편집(실명, 고유 구호, 가문 패턴, 고유한 직위 경로, 암살 / 스캔들 / 사퇴 사건, 대표적 정책 패키지……)은 **거부되거나 다시 쓰여진다**.
+
+### 📋 활성 전 생성 리뷰（creation review before activation）
+
+생성된 페르소나는 그 자리에서 활성화되지 않는다. 시스템은 먼저 `creation_review.md` 요약——정체성, 추론된 기질, 현대 역할, 이데올로기, 지지 기반, 안전 상태, 생성된 파일——을 제시하고, 사용자의 수정이나 확인을 기다린다.
+
+> 전체 워크플로: [`core/source_grounded_persona_creation.md`](core/source_grounded_persona_creation.md). 현대 실재 인물 분기: [`safety/modern_real_figure_archetype_extraction.md`](safety/modern_real_figure_archetype_extraction.md).
+
+---
+
+## 🛡 안전 입장
 
 이 프로젝트에는 명확하고 우회할 수 없는 안전 기준이 있다. [`safety/`](safety/)를 참고하라.
 
 **오리지널 작업이 기본값이다. 이 프로젝트는 근현대 실존 정치인의 인터랙티브 페르소나를 생성하지 않는다. 또한 이름 바꾸기, 국적 변경, 정당 변경, 특성 봉합으로 실존 인물을 복제하는 것을 허용하지 않는다.**
 
-### 사용자가 생성할 수 있는 것
+### ✅ 사용자가 생성할 수 있는 것
 
 1. 순수 오리지널 현대 의회 정치인;
 2. 고대/원역사 인물에서 증류한 현대 의회 허구 정치인;
@@ -213,7 +187,7 @@ classify source → safety/eligibility → collect source material → separate 
 6. 독립적 대화, 정책 논의, 의회 토론을 위한 정치인 페르소나;
 7. 게임 행동 JSON을 출력할 수 있는 정치 캐릭터.
 
-### 사용자가 생성할 수 없는 것
+### 🚫 사용자가 생성할 수 없는 것
 
 1. 근현대 실존 정치인의 인터랙티브 페르소나;
 2. 이름/국적/정당을 바꾼 뒤의 근현대 실존 정치인의 사실상 복제;
@@ -222,7 +196,7 @@ classify source → safety/eligibility → collect source material → separate 
 5. 근현대 실존 정치인의 1인칭 롤플레이;
 6. 실존 정치인에 대한 검증되지 않은 조작된 사적 정보나 스캔들.
 
-### 시대 경계(지역별)
+### 📅 시대 경계(지역별)
 
 | 지역 | 근대 경계 | 경계 시점 및 이후 |
 |---|---|---|
@@ -235,7 +209,7 @@ classify source → safety/eligibility → collect source material → separate 
 
 ---
 
-## 설치와 사용(Install & use)
+## 🚀 설치와 사용
 
 ### 설치
 
@@ -281,7 +255,7 @@ npx skills add <owner>/political-human-skill
 
 ---
 
-## 변환된 아키타입 실연
+## 📖 변환된 아키타입 실연
 
 > ⚡ **변환된 아키타입**：오다 노부나가 · 조조 · 카이사르 — 세 역사 인물을 **Mode C**（역사 인물 → 현대 의회제 아키타입）로 변환 완료. 아래는 동일한 정치 위기에 대한 세 사람의 완전히 다른 대응.
 
@@ -299,7 +273,7 @@ npx skills add <owner>/political-human-skill
 
 ---
 
-### 오다 노부나가 — 야당 개혁파 선봉 · 30세 · 중의원 의원
+### ⚔ 오다 노부나가 — 야당 개혁파 선봉 · 30세 · 중의원 의원
 
 > **인간층**：극도의 실행력 · 제로 인내 · 광견불기 · 향사향생（죽음을 각오해야 살 수 있다）
 >
@@ -317,7 +291,7 @@ npx skills add <owner>/political-human-skill
 
 혁명혁신파단에게 전해라: **나를 따르라. 판을 뒤집든, 함께 이 진지에서 죽든. 나는 내 사람들을 버리지 않는다.**
 
-```
+```text
                      방어하지 않는다 ──→ 가장 취약한 법안에 집중 공격
   기존의 대응 ──┤
                      후퇴·타협 ──→ ✗ 이 선택지는 존재하지 않는다
@@ -327,7 +301,7 @@ npx skills add <owner>/political-human-skill
 
 ---
 
-### 조조 — 여당 연합 핵심 파벌 수장 · 52세
+### 🜂 조조 — 여당 연합 핵심 파벌 수장 · 52세
 
 > **인간층**：극도의 현실주의 · 만성적 의심 · "유재시거"（재능만 있다면 누구든 쓴다）· 시와 술 속에서만 잠시 드러나는 호방함
 >
@@ -345,7 +319,7 @@ npx skills add <owner>/political-human-skill
 
 한 걸음 물러선다고? 물러선다는 건 의석을 지키는 게 아니다. 내 중추가 흔들릴 수 있다고 대내외에 보여주는 거다. 한 걸음도, 반 걸음도 물러서지 않는다.
 
-```
+```text
                      먼저 중추 인사 확고히 ──→ 미세 조정 시그널 ──→ 상대 연합의 자체 균열을 기다린다
   위기 대응 ──┤
                      후퇴·타협 ──→ ✗ "후퇴는 중추가 흔들릴 수 있다고 보여주는 것이다"
@@ -355,7 +329,7 @@ npx skills add <owner>/political-human-skill
 
 ---
 
-### 율리우스 카이사르 — 시민 개혁 연합 리더 · 48세
+### 🦅 가이우스 율리우스 카이사르 — 시민 개혁 연합 리더 · 48세
 
 > **인간층**：자석 같은 카리스마 · 철의 자기 절제 · 깊은 역사 의식 · 자신의 운명을 너무 믿는다
 >
@@ -373,7 +347,7 @@ npx skills add <owner>/political-human-skill
 
 망설이는 자들에게 전해라: 나를 따르면 살아남는다. 뒤를 돌아보면, 삼켜진다. 나는 나 자신을 건다——이 명성도, 이 몸도, 쌓아올린 모든 것을. 놈들이 길을 비키든가, 우리가 이 길을 끝까지 걷든가.
 
-```
+```text
                      의회 안에서 싸운다 ──→ ✗ 놈들의 판 위에서는 놀지 않는다
   위기 대응 ──┤
                      시민들 속으로 ──→ 전국 생중계로 전환 ──→ 민의로 제도 경직을 압도한다
@@ -383,7 +357,7 @@ npx skills add <owner>/political-human-skill
 
 ---
 
-### 하나의 위기 · 세 개의 서명
+### 🎯 하나의 위기 · 세 개의 서명
 
 | 동일한 위기 앞에서 | 본능적 행동 | 한 줄 DNA |
 |---|---|---|
@@ -393,73 +367,47 @@ npx skills add <owner>/political-human-skill
 
 > 같은 위기, 같은 프레임워크, 근본적으로 다른 세 사람. 이것은 프롬프트 엔지니어링이 아니다——**인간층 × 정치층 × 내적 갈등** 여섯 층이 모든 응답을 동시에 구동한 결과다. 각각의 응답에서, 그들이 무엇을 욕망하고, 무엇을 두려워하며, 어디가 약점이고, 무엇보다 무엇을 가장 두려워하는지 읽을 수 있다.
 >
-> 📂 세 페르소나의 완전한 파일은 [`personas/examples/`](personas/examples/) 참조: `oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`. 각 디렉터리는 7개의 자기 완결적 파일（SKILL.md / persona.yaml / runtime_card.md / relationship.json / memory.json / examples.md / meta.json）을 포함하며, 즉시 실행 가능하다.
+> 📂 세 페르소나의 완전한 파일은 [`personas/examples/`](personas/examples/) 참조: `oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`. 각 디렉터리는 자기 완결·소스 그라운딩·방법 재현 가능한 폴더다（persona.yaml / runtime_card.md / relationship.json / memory.json / examples.md / meta.json / creation_review.md / historical_source_report.md + dialogue_samples/）.
 
 ---
 
-## 저장소 구조
+## 📂 저장소 구조
 
 ```text
 political-human-skill/
-├── README.md / README_zh.md / README_ja.md / README_ko.md    # 4개 언어 README
-├── SKILL.md                                                    # 영어 canonical 런타임 프로토콜
-├── SPEC.md                                                     # 영어 canonical 창작 및 안전 명세
-├── SPEC_zh.md                                                  # 중국어 현지화 창작 및 안전 명세
-├── test-prompts.json                                           # Darwin 회귀 테스트 prompt
-├── requirements.txt                                            # Python 검증 의존성
-├── scripts/                                                     # 저장소 검증 스크립트
-├── demo/                                                        # 최소 실행 가능 대화/게임 demo
-├── quality/                     # Darwin 품질 진화 레이어（어댑터 + 결과）
-├── safety/                      # 안전 규칙집（6개 문서）
-├── templates/                   # 템플릿（5개 파일）
-├── core/                        # 런타임 엔진（7개 문서）
-├── validators/                  # 검증기（7개 문서）
-├── game_adapter/                # 『절대다수』 어댑터
-├── families/political_human/    # 패밀리 메타데이터
-├── review-stage/                # 리뷰 상태
-└── personas/examples/           # ⚡ Mode C 변환 페르소나（각 7개 파일）
-    ├── oda_nobunaga_modernized/ # 오다 노부나가 → 야당 개혁파 선봉
-    ├── cao_cao_modernized/      # 조조 → 여당 연합 파벌 수장
-    └── caesar_modernized/       # 카이사르 → 시민 개혁 연합 리더
+├── README.md / README_cn.md / README_ja.md / README_ko.md   # 4개 언어 README
+├── SKILL.md / SPEC.md / SPEC_cn.md                          # canonical 프로토콜 + 명세（EN / CN）
+├── core/          # 런타임 엔진（프로토콜, 대화 규칙, 감지기, 정책）
+├── safety/        # 안전 규칙집（정책, 식별성 리뷰, 전환）
+├── templates/     # persona / runtime / source-report 템플릿
+├── validators/    # 일관성, 격리, 식별성, 소스 그라운딩 검사
+├── game_adapter/  # 『절대다수』 어댑터（schema, 채점, 이벤트）
+├── families/      # 생성기 + 생성 워크플로 + 패밀리 메타데이터
+├── quality/       # Darwin 품질 진화 레이어 + 테스트 결과
+├── scripts/ demo/ # 검증 + 최소 demo
+└── personas/examples/   # ⚡ 3개의 Mode C 변환 페르소나（oda / cao_cao / caesar）
 ```
 
-> 전체 디렉터리 계획은 [SPEC.md](SPEC.md) 제22절에 있다. 본 저장소는 프레임워크 코어를 제공한다: `SKILL.md` 메인 프로토콜, `safety/` 규칙집, `templates/`, `core/` 런타임 엔진, `validators/`, `game_adapter/`（『절대다수(Absolute Majority)』 어댑터）, `families/`（패밀리 메타데이터）, Darwin 품질 레이어, 그리고 `personas/examples/` 아래 세 개의 자기 완결적 변환 샘플 페르소나（오다 노부나가 · 조조 · 카이사르）. 모든 부분은 계속 진화한다.
+> `personas/examples/`는 빌트인 예시일 뿐이다——일반적으로 생성한 페르소나는 자신의 런타임, 게임 데이터, 로컬 작업 공간에 두어야 하며, 이 저장소에 넣지 않는다. 예시는 고정 템플릿도 아니다: 오다 노부나가·조조·카이사르를 새로 요청하면 현재 소스에서 다시 생성되며, 예시 폴더를 복사하지 않는다. 더 엄격한 규칙은 [SPEC.md](SPEC.md) §18–19를 참고하라.
 
 ---
 
-## 생성된 페르소나와 예시
+## 🧪 품질 및 검증
 
-`personas/examples/`는 이 저장소에 포함된 작은 예시 모음입니다. 일반적으로 생성한 페르소나는 자신의 런타임, 게임 데이터, 로컬 작업 공간, 또는 파생 프로젝트에 저장하는 것이 좋습니다. 예를 들어 *Absolute Majority*와 연동한다면, 생성된 NPC는 이 저장소가 아니라 게임 쪽 데이터 디렉터리에 저장할 수 있습니다.
+**Darwin 품질 루프** —— [`darwin-skill`](https://github.com/alchaincyf/darwin-skill)은 페르소나 런타임 의존성이 아니라 **유지보수와 최적화 레이어**로 통합되어 있다. 평가하고 개선을 제안한다; 품질이 오르고 모든 도메인 게이트를 통과한 경우에만 변경을 유지한다. `quality/darwin-adapter.md` + `test-prompts.json`을 사용. Darwin은 안전 경계를 약화해서는 안 되고, 페르소나 간 메모리를 합쳐서는 안 되며, 런타임을 일반 롤플레이로 바꾸어서는 안 된다.
 
-예시는 고정 템플릿도 아닙니다. 파일 구조, 안전 경계, 변환 스타일을 보여 주기 위한 것입니다. 오다 노부나가, 조조, 카이사르 같은 같은 역사 인물을 다시 요청하더라도 예시 폴더를 복사하지 않고, 현재 요청과 안전 규칙에 맞춰 다시 생성해야 합니다.
-
-저장 위치와 예시 재사용에 대한 더 엄격한 규칙은 [SPEC.md](SPEC.md) sections 18-19를 참고하세요.
-
----
-
-## 검증과 demo
-
-Python 환경에 YAML 파서가 없다면 먼저 의존성을 설치합니다.
+**저장소 검증:**
 
 ```bash
 pip install -r requirements.txt
-```
-
-저장소 검증 스크립트를 실행합니다.
-
-```bash
 python scripts/validate_repo.py
 ```
 
-최소 demo 진입점:
-
-- [`demo/run_dialogue_demo.md`](demo/run_dialogue_demo.md)
-- [`demo/run_absolute_majority_demo.md`](demo/run_absolute_majority_demo.md)
-- [`game_adapter/absolute_majority_input_schema.json`](game_adapter/absolute_majority_input_schema.json)
+최소 demo는 [`demo/`](demo/)에 있다.
 
 ---
 
-## 한계(이 프레임워크가 할 수 없는 것)
+## ⚠ 한계(이 프레임워크가 할 수 없는 것)
 
 모든 페르소나는 자신의 한계를 명확히 표시한다.
 
@@ -472,7 +420,7 @@ python scripts/validate_repo.py
 
 ---
 
-## 라이선스
+## 📄 라이선스
 
 MIT — 학습, 수정, 재창작을 권장한다. 단 하나의 기준만 지켜라. [`safety/`](safety/)의 안전 규칙을 따르고, **근현대 실존 정치인의 인터랙티브 페르소나를 생성하지 않는다**.
 

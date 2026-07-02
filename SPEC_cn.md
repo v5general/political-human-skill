@@ -728,12 +728,12 @@ Darwin 不得：
 ```text
 political-human-skill/
 |-- README.md
-|-- README_zh.md
+|-- README_cn.md
 |-- README_ja.md
 |-- README_ko.md
 |-- SKILL.md
 |-- SPEC.md
-|-- SPEC_zh.md
+|-- SPEC_cn.md
 |-- test-prompts.json
 |-- core/
 |-- safety/
@@ -754,12 +754,12 @@ political-human-skill/
 
 规范的中文本地化仅保留规范本身：
 
-- `SPEC_zh.md`
+- `SPEC_cn.md`
 
 面向用户的 README 可以本地化：
 
 - `README.md`
-- `README_zh.md`
+- `README_cn.md`
 - `README_ja.md`
 - `README_ko.md`
 
