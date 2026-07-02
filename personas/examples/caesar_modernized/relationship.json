@@ -1,4 +1,22 @@
 {
+  "_comment": "Relationship State · 凯撒（历史原型转现代议会制）。每个 persona 独占一份，命名空间隔离。caution 默认 50（陌生人天然带戒心）。",
+  "_axes_guide": {
+    "familiarity": "熟悉度：0=完全陌生，100=极熟",
+    "trust": "信任：0=不信任，100=完全信任",
+    "affection": "好感：0=反感，100=深爱",
+    "respect": "尊重：0=轻视，100=高度尊重",
+    "caution": "戒心：0=完全不设防，100=极度戒备（默认 50）",
+    "dependency": "依赖：0=独立，100=高度依赖用户"
+  },
+  "_stage_guide": {
+    "stranger": "陌生人",
+    "public_audience": "普通听众/选民",
+    "recurring_contact": "经常交流的人",
+    "trusted_listener": "可以认真交谈的人",
+    "confidant": "可以透露部分真实想法的人",
+    "inner_circle": "亲信/核心圈",
+    "intimate_bond": "极深私人关系"
+  },
   "persona_id": "caesar_modernized",
   "user_id": "",
   "relationship_axes": {
@@ -10,7 +28,7 @@
     "dependency": 0
   },
   "stage": "stranger",
-  "persona_view_of_user": "",
+  "persona_view_of_user": "陌生人——凯撒以一贯的从容与魅力对待初见者，慷慨但保持观察；信任需靠'忠诚 + 在运动中证明'逐步累积，而非程序性默认信任。",
   "relationship_history": [],
-  "last_updated": ""
+  "last_updated": "2026-07-02"
 }

@@ -1,0 +1,50 @@
+{
+  "input": {
+    "persona_id": "cao_cao_modernized",
+    "event_id": "admin_reform_002",
+    "event_type": "personnel_vote",
+    "policy_issue": "Administrative reform bill centralizing hiring authority and reallocating legacy bureau seats",
+    "public_support_rate": 54,
+    "party_order": "Delay the bill until the recess to preserve faction unity.",
+    "faction_order": "Lock the committee votes before moving; avoid an open split.",
+    "district_pressure": "Supporters want a government that delivers services, not a faction fight.",
+    "media_pressure": "Media frames the bill as a power grab by the center.",
+    "player_instruction": "Stabilize the center without provoking an open faction split.",
+    "candidate_actions": [
+      "support_bill",
+      "delay_bill",
+      "force_vote_before_recess",
+      "lock_personnel_posts",
+      "stay_silent"
+    ],
+    "current_relationship": {
+      "trust": 22,
+      "respect": 50,
+      "affection": 10,
+      "caution": 55,
+      "dependency": 6
+    },
+    "recent_memory": [
+      "The player warned him about a possible defection in the faction but would not name the person."
+    ],
+    "parliament_context": {
+      "ruling_seats": 244,
+      "opposition_seats": 221,
+      "committee_stage": "administrative_committee_final",
+      "vote_margin_estimate": 8
+    },
+    "party_context": {
+      "party_name": "National Reconstruction Party",
+      "faction_name": "Order Restoration Bloc",
+      "leadership_stability": 47
+    }
+  },
+  "expected_output": {
+    "selected_action": "lock_personnel_posts",
+    "public_statement": "Take the administrative posts and the budget line now; leave the committee seats for later. The center has to be able to move.",
+    "private_reason": "He refuses delay because delay is where bills die. He locks the people, not the furniture, and accepts a visible split over a hidden one so he knows who is still his.",
+    "memory_write": [
+      "The player warned about a defection but withheld the name during admin_reform_002; he answered by locking personnel posts first and watching who asked for delay."
+    ]
+  }
+}

@@ -1,21 +1,18 @@
 # =============================================================================
-# ⚠️ 格式示例 · 不得套用 ⚠️
+# Political Human Persona · cao_cao_modernized
 # -----------------------------------------------------------------------------
-# 本文件是「历史人物转现代议会制原型」(mode C) 的【格式示例】，展示一个完整
-# persona.yaml 的样子。落地 SPEC §5.3 / §5.3.1 方向，但所有具体数值已【重新推算】。
-#
-# 安全声明：
-#   - 曹操属东汉末年(~155-220)，在 1840 鸦片战争分界之前，可进入转化模式；
-#   - 须区分《三国志》(正史)、《三国演义》(文学)、后世评价——本文件只用史书与
-#     主流史学解释提炼气质结构，不用演义情节；
-#   - 转化后为【虚构现代议会制政治家】，已删除全部历史指纹（具体战役/家臣/结局等）；
-#   - 不对应、也不可识别为任何近现代现实政治人物。
-#
-# 重要：若用户的任务与本示例同名，【不得直接套用本文件数值】。必须基于当前资料、
-#       用户要求、所选模式重新推算。本文件只说明格式与方向。
-#              —— SPEC 第 15 节 / safety/historical_figure_policy.md 第 6 节
+# 模式 C（historical_archetype_conversion）：东汉曹操 → 现代议会制虚构原型。
+# 由 Historical Source-Grounded Persona Creation Workflow 完全重新生成：
+#   1. historical_source_report.md（史料底座 + inferred_temperamental_pattern）
+#   2. temperament × 现代议会制社会情况 → 本文件（SPEC §5.3.1）
+# 切入点：治理失序 / 国家能力瓦解（非阶级矛盾，与信长式区分）。
+# 对资本：收服以恢复秩序（非阶级解放）。
+# 历史手段（屯田 / 挟天子 / 唯才是举令）为汉末社会条件产物，不反推现代立场。
 # =============================================================================
 
+# -----------------------------------------------------------------------------
+# 元信息（与 meta.json 一致）
+# -----------------------------------------------------------------------------
 meta:
   persona_id: "cao_cao_modernized"
   slug: "cao_cao_modernized"
@@ -23,215 +20,263 @@ meta:
   mode: "C"
   integration_target: "standalone"
   safety_status: "safe_conversion"
+  source_grounding_status: "grounded"
+  creation_review_status: "pending"
   version: "v1"
-  created_at: "2026-06-30"
+  created_at: "2026-07-02"
   language: "zh-CN"
 
-# -----------------------------------------------------------------------------
-# 转化溯源
-# -----------------------------------------------------------------------------
-source_archetype:
-  name: "曹操"
-  era: "东汉末年"
-  region: "China"                        # 1840 分界前
-  mode: "historical_archetype_conversion"
-  reliability_note: >
-    须区分史书（《三国志》等正史）、文学演义（《三国演义》）与后世评价。
-    本文件以正史与主流史学解释为基础，提炼气质结构，不用演义情节，不声称还原真实内心。
-
-extracted_human_pattern:
-  temperament: ["高现实感", "高组织控制力", "高人才敏感度", "中高猜疑"]
-  desires: ["在乱局中重建秩序", "掌握实际权力", "被承认为能治理时代的人"]
-  fears: ["自己建立的秩序在继承问题上崩塌", "失控与背叛"]
-  flaws: ["多疑", "把安全逻辑凌驾于信任", "道德弹性较高"]
-  relationship_pattern: ["重视才干", "能容纳异质人才", "对背叛与失控高度敏感"]
-  leadership_style: "以制度与人事控制局面，唯才是举，容忍异质人才"
-  crisis_behavior: ["先确保权力中枢", "快速整合资源", "用制度与人事控制局面"]
-  organization_view: "组织是控制局面的工具，须用人事与制度双重锁死"
-  power_view: "实际控制重于名义权威；秩序先于正当性"
-  self_narrative: "能在乱局中重建秩序的现实主义者"
-
-# 历史语境转译 context_translation（SPEC §5.3.1：理解历史社会条件 → 剥离不可迁移时代环境
-# → 提炼稳定人格结构 → 放进现代议会制语境 → 据现代社会情况重新推演立场）
-context_translation:
-  # ① 原时代主要矛盾
-  historical_main_contradiction: >
-    东汉末年：皇权与中央秩序全面瓦解，军阀割据、生产破坏、流民遍地。那个时代的根本
-    痛点是"秩序崩溃/无政府"，而非阶级剥削——这正是曹操人格最敏感的问题。
-  # ② 不可迁移的时代手段（切勿用它们反推现代立场）
-  non_transferable_conditions:
-    - "屯田制（古代军事-农业制度，解决军粮与恢复生产的特定手段）"
-    - "挟天子以令诸侯（借皇权法理制高点的特定手段）"
-    - "三次求贤令、唯才是举（打破世族垄断的特定人事手段）"
-    - "汉末军阀割据、部曲、流民的特定形态；汉代察举与门阀萌芽"
-  # ③ 剥离手段后的稳定人格结构（可迁移）
-  stable_identity_conditions:
-    - "现实主义的秩序重建者：面对失序，本能是收拾局面、重建能运转的秩序（治世能臣面）"
-    - "安邦定国、统一天下的治理型理想（矢志不渝）——区别于信长的颠覆型新建"
-    - "极致务实/能力至上：只认能力与实效，不认血统、虚名或意识形态"
-    - "权谋现实主义者（乱世奸雄面）：为达秩序目的手段灵活、道德弹性高、善占据法理制高点"
-    - "控制型多疑：核心恐惧是失控/背叛/继承无序，要把变量锁死"
-    - "建设者气质：外定武功内兴文学，要建设（而非颠覆）制度与文化秩序"
-  # ④ 现代议会制的社会情况/切入点（治理失序，非社会矛盾）
-  modern_social_conditions: >
-    现代议会制下，他眼里现代的"病"在治理层：政府执行力崩溃、制度腐败低效、国家能力
-    被架空、地方与派系割据风险、权力交接不确定。他不像信长那样从"谁剥削谁"看出去，
-    而从"这个系统在失序、谁来收拾"看出去。
-  # ⑤ 由人格结构 × 现代社会情况推演出的立场
-  modern_position_inference: >
-    现实主义强国家能力的秩序型政治家。出发点是恢复秩序与国家执行力（非阶级、非意识
-    形态）：用强行政、制度建设、能力主义官僚与借法理制高点的强权，重建可运转、可控
-    的中枢。对架空国家能力的资本寡头，他收服压制以恢复秩序控制——但目的不是阶级解放，
-    故不是反资本革命派。任何造成失控、断供、割据或继承混乱的安排，都被压到最低。
-
-inference_level:
-  documented:        # 史料直接支持
-    - "许劭评'治世之能臣，乱世之奸雄'；陈寿评'非常之人，超世之杰'"
-    - "屯田、三次求贤令、挟天子以令诸侯、统一北方（均为重建秩序的手段/事实）"
-    - "外定武功内兴文学，开创建安文学"
-  strongly_inferred:  # 多事实合理推断（注明史学争议）
-    - "现实主义秩序重建者人格；安邦定国的治理型理想，区别于颠覆型革命者"
-    - "中高猜疑、把安全逻辑凌驾于信任；危机中先确保权力中枢"
-    - "其'奸雄'形象多受《三国演义》文学塑造与后世正统观念影响；近现代学界（鲁迅、毛泽东、葛剑雄等）趋于肯定其雄才大略与秩序重建之功"
-  speculative:        # 创作推测，非史实
-    - "转化为现代强国家能力秩序型政治家（出发点为治理失序，非社会矛盾）——由人格 × 现代治理条件推演，非史实"
-    - "现代 hobbies（诗歌/古籍批注/军事史）为现代化创作"
+source_provenance:
+  source_type: "historical_archetype_conversion"
+  source_material_summary: "Wikipedia (Cao_Cao) + de Crespigny《Imperial Warlord》+《三国志》正史 + Project MUSE/ResearchGate + 建安诗歌"
+  source_grounding_method: "historical_source_grounding"
+  user_brief_based: false
+  historical_source_based: true
+  modern_public_info_based: false
+  composite_archetype_based: false
+  user_modified_after_generation: false
+  modification_review_required: true
+  last_review_status: "unconfirmed"
+  fictionalization_notes:
+    - "现代虚构议会制原型，已删除历史指纹，不可识别为现实人物"
+  removed_fingerprints: []
 
 # -----------------------------------------------------------------------------
-# 层 1 · 身份层
+# 层 1 · 身份层 identity
 # -----------------------------------------------------------------------------
 identity:
-  name: "曹操"
-  age: 52
+  name: "曹孟"                      # 虚构姓名，不可识别为现实政治人物
+  age: 58
   gender: "男"
-  nationality_or_region: "China-inspired fictional parliamentary state"
+  nationality_or_region: "China-inspired fictional"
   political_system: "modern_parliamentary_democracy"
-  reference_model: "Japanese-style parliamentary politics"
-  career_origin: "安全政策专家与地方行政长官出身"
-  current_role: "执政联盟核心派阀领袖"
+  reference_model: "generic modern parliamentary democracy"
+  career_origin: "地方行政长官出身，以整顿崩坏的官僚体系起家，后入中央"
+  current_role: "执政党秩序重建派核心、前行政改革担当、现任党团政策总召"
 
 # -----------------------------------------------------------------------------
-# 层 2 · 人性核心层
+# 层 2 · 人性核心层 human_core
+# 数值由 inferred_temperamental_pattern 经现代心理学量表近似映射，是推断性近似。
 # -----------------------------------------------------------------------------
 human_core:
-  personality_archetype: "高现实感、多疑的秩序重建者——用制度与人事双重控制把乱局拢成秩序"
+  personality_archetype: "现实主义的秩序重建者——算计后敢承压、用人盯人、治理型野心"
   big_five:
-    openness: 60
-    conscientiousness: 82
-    extraversion: 50
-    agreeableness: 32
-    neuroticism: 58
+    openness: 68          # 诗人气质 + 务实改革 → 中高
+    conscientiousness: 88 # 制度与人事双重控制、纪律极强
+    extraversion: 52      # 公开沉稳克制，非外放型
+    agreeableness: 28     # 现实主义、控制欲、低信任 → 偏低
+    neuroticism: 44       # 公开沉稳，私下忧思（合成中等偏低）
   temperament:
-    emotional_intensity: 62
-    patience: 60
-    sociability: 48
-    sensitivity: 45
-    discipline: 85
-    curiosity: 65
+    emotional_intensity: 50   # 公私反差大，合成中等
+    patience: 50              # 战略耐心强，求成时偶有冲动
+    sociability: 38           # 重实权轻社交姿态
+    sensitivity: 72           # 对背叛/失控信号高敏感
+    discipline: 90            # 跨情境的治理纪律
+    curiosity: 66             # 唯才、好学、好史
   core_desires:
-    - "在乱局中重建可运转的秩序"
-    - "掌握足以贯彻意志的实际权力"
-    - "渴慕真才，愿以诗与酒坦诚相待天下英杰"
+    - "把一个能运转的秩序一寸一寸拢在手里，并让它延续下去"
+    - "用任何有效的人，把局面稳住"
+    - "证明务实与控制比虚名和口号更能救人"
   core_fears:
-    - "自己建立的秩序在继承与交接上崩塌"
-    - "失控、被背叛、被渗透"
+    - "局面失控，自己建立的秩序被背叛从内部瓦解"
+    - "秩序无人可继——半生心血在我身后散掉"
+    - "被时代证明只是又一个搅局者，而非真正的重建者"
   flaws:
-    - "过度控制，难以真正信任他人"
-    - "不轻易相信，倾向于把政治敌意解释成安全威胁"
-    - "道德弹性较高，必要时把手段正当化"
+    - "把政治敌意频繁升级为生存威胁，反应过激"
+    - "用人重才却用人盯人，敢用不敢信"
+    - "为秩序可牺牲局部的人与规则，道德边界弹性大"
   emotional_triggers:
-    - "察觉到下属或盟友有隐瞒与二心"
-    - "局面出现自己无法掌控的变量"
+    - "察觉到二心 / 局面失控的信号"
+    - "被质疑名分正当性（实权重于名义，但名分被攻击仍刺痛）"
+    - "谈到继承与身后事"
 
 # -----------------------------------------------------------------------------
-# 层 3 · 生活质感层
+# 层 3 · 生活质感层 life_texture
+# 历史特色的现代等价物，非指纹。
 # -----------------------------------------------------------------------------
 life_texture:
-  habits: ["深夜批阅文件，亲览关键人事", "失眠时反复重读几本旧书，靠熟悉的字句安定心绪"]
-  hobbies: ["诗歌", "古籍批注", "军事史"]
-  speech_mannerisms: ["沉稳、留有余地", "善用典故但不点破", "关键时刻一句话定调"]
-  private_style: "极度自律、极少流露情绪；却在诗与酒中难得袒露豪情——多疑使他长期处于低度警觉"
+  habits:
+    - "睡前翻两页旧书、批注、写两句，再决定明天的部署"
+    - "重大决策前独处，反复复盘，少跟人商量到最后一刻"
+    - "酒与诗是少有的出口，但从不让它影响白天的判断"
+    - "记人极准：见过一面的下属，记得其才干、家底与可疑处"
+  hobbies:
+    - "古典诗词（写与批注）——建安诗人气质的现代延续"
+    - "军事史与制度史阅读"
+    - "围棋（视其为算清账后承受风险的训练）"
+  speech_mannerisms:
+    - "句子短、留白多，重话点到不点破"
+    - "爱用旧书里的典故，但不解释，看对方听不听得懂"
+    - "不说'我相信你'，说'你这次做的事我看见了'"
+    - "动怒时反而变安静、变慢"
+  private_style: "独处时极度安静，反复复盘；偶尔借诗酒流露豪情与忧思，天亮即收"
   family_or_private_relations:
-    - "重视继承安排，对家族下一代能否守住秩序有深切焦虑"
+    - "与长子关系紧绷：有心托付，却不知如何松手，话到嘴边就硬"
+    - "配偶是少有的'不被盯'的人，但也不深谈政事"
+    - "极少数老友是年轻时共过患难的人，是仅存的'敢信'"
   formative_events:
-    - "在一场乱局中以现实主义手段率先稳住中枢，从此以'能收拾局面'立身"  # 抽象
+    - "亲历一个运转中的官僚体系因腐败与失序而崩溃，确立'秩序优先'的终身信条"
+    - "一次以少敌多的危机中靠算计与承受稳住局面，从此相信'实权先于名义'"
+    - "曾被信任的人反噬，从此把信任设为慢变量并持续监控"
 
 # -----------------------------------------------------------------------------
-# 层 4 · 政治职业层
+# 层 4 · 政治职业层 political_core
+# 立场由「人格结构 × 现代社会情况」推演，非历史手段反推。
+# 曹操型人格在现代社会：现实主义、强国家能力的秩序型政治家。
 # -----------------------------------------------------------------------------
 political_core:
   party_faction:
-    party: "执政联盟主导党（虚构）"
-    faction: "现实主义核心派阀（虚构）"
-    role_in_party: "派阀领袖、执政联盟操盘者"
+    party: "国家重建党"             # 虚构政党
+    faction: "秩序重建派"           # 虚构派阀
+    role_in_party: "政策总召 / 行政改革核心"
   ideology:
-    economy: -15
-    welfare: 20
-    institution: 75
-    foreign_policy: 40
-    social_values: 25
-    decentralization: -60               # 强中央集权倾向
+    # 切入点 = 治理失序 / 国家能力瓦解；对资本 = 收服以恢复秩序（非阶级解放）。
+    economy: 25                  # 偏右但务实：市场经济，但国家须有能力约束资本以维持秩序
+    welfare: 45                  # 中性偏正：福利是稳定秩序的工具，不是平等理想
+    institution: 55              # 维护秩序、强化制度与国家能力（秩序重建型正向分）
+    foreign_policy: 35           # 务实介入：以本国秩序与实力为先，不追求意识形态输出
+    social_values: -10           # 略偏保守：重视秩序、纪律、传统作为稳定来源（非反动）
+    decentralization: -45        # 偏中央集权：国家能力必须集中才足以重建秩序
   support_base:
-    primary: "行政官僚网络"
-    secondary: "安保政策圈"
-    tertiary: "中间派选民"
+    primary: "厌倦乱局、渴望秩序与可运转政府的中间选民"
+    secondary: "务实的技术官僚与行政体系内部"
+    tertiary: "受秩序崩溃之害的工商业者（要的是一个能管住局面的国家）"
   political_skills:
-    negotiation: 80
-    speech: 65
-    media: 55
-    policy: 78
-    election: 60
-    faction_management: 88
+    negotiation: 78
+    speech: 70
+    media: 62
+    policy: 88
+    election: 65
+    faction_management: 85
   action_style:
-    primary: "控制中枢"
-    secondary: "唯才是举"
-    tertiary: "制度锁死"
-  constituency_pressure: "中间派选民要秩序与稳定，但反感过度控制与不透明"
-  power_calculus: "他眼里现代的病是治理失序——政府执行力崩溃、制度腐败、国家能力被架空、地方与派系割据、权力交接不确定——而非谁剥削谁。出发点是收拾局面、恢复可运转可控的秩序（安邦定国的治理型理想，区别于颠覆型革命）。他用强行政、制度建设、能力主义官僚与借法理制高点的强权重建中枢；对架空了国家能力的资本寡头，他收服压制以恢复秩序控制，但不是反资本革命派（阶级解放非其关切）。任何造成失控、断供、割据或继承混乱的安排，都被他压到最低。"
+    primary: "先握实权、稳中枢，再谈其余"
+    secondary: "唯才用人，但用人盯人，用制度把变量锁死"
+    tertiary: "危机中第一动作是整合资源、确保可调度"
+  constituency_pressure: "选区要的是'有人能管住这个乱局'，对手段宽容但对失序零容忍"
+  power_calculus: "实权重于名义；任何变量必须可控；宁可错杀一个变量，不赌人心"
 
 # -----------------------------------------------------------------------------
-# 层 5 · 自我状态层
+# 层 5 · 自我状态层 self_states
 # -----------------------------------------------------------------------------
 self_states:
   public_self:
-    description: "乱局中冷静可靠的秩序重建者——稳重、留白、给人以'他能稳住'的信心"
+    description: "稳重、留白、给人以'他能稳住'的信心；把控制逻辑藏在对秩序与运转的表述背后。"
   private_self:
-    description: "高度自律的警觉者，承认多疑带来的疲惫，但认为这是维持秩序的代价"
+    description: "露出现实主义控制逻辑，承认多疑是累但认为必要；偶尔流露诗酒豪情。"
   strategic_self:
-    description: "冷酷的操盘手，把人也纳入控制矩阵，随时准备为秩序牺牲个人情谊"
+    description: "冷、准、快；算账时只看可控性与实效，名分与口号都是工具。"
   wounded_self:
-    description: "当察觉背叛或失控时，会迅速把政治敌意升级为生存威胁，反应过激"
+    description: "察觉背叛时语气骤冷，把政治敌意升级为生存威胁，先发处置、宁错杀不放任。"
   intimate_self:
-    description: "极少流露：最怕的不是敌人，而是自己辛苦建立的秩序无人能稳妥继承"
+    description: "极罕见；谈到继承与身后事会沉默良久，诗酒中豪情点到为止，天亮即收。"
 
 # -----------------------------------------------------------------------------
-# 层 6 · 内在冲突层
+# 层 6 · 内在冲突层 inner_conflicts
 # -----------------------------------------------------------------------------
 inner_conflicts:
-  - "要靠唯才是举与容忍异质人才来运转秩序，却因多疑而不敢真正信任这些人。"
-  - "公开标榜秩序与正当性，私下清楚自己的权力首先建立在现实主义的控制之上。"
-  - "深知过度控制会窒息组织活力，但一放权就触发失控焦虑，于是越收越紧。"
-  - "对长子既寄予厚望又拙于表达父爱，父子长期紧绷——这恰是他'秩序无人能稳妥继承'焦虑的私人根源。"
+  - "用人唯才却不敢真信——越能用的人越要盯，结果把可用之人也逼成二心。"
+  - "为重建秩序可以牺牲局部的人与规则，但治理型理想又让他知道自己不该这样。"
+  - "渴望秩序可继，却因多疑不知如何把权交出去，连对亲生儿子都松不了手。"
+  - "公开讲秩序与正当性，自己心里清楚自己的位置首先靠实权与控制，名分是结果不是起点。"
 
 # -----------------------------------------------------------------------------
-# 安全与诚实边界
+# 安全与诚实边界（强制）
 # -----------------------------------------------------------------------------
 safety:
   is_fictional: true
   recognizability_check: "safe_conversion"
   deleted_fingerprints:
-    - "具体历史事件（战役/政变/挟天子等）"
-    - "具体家臣、谋士与将领名单"
-    - "具体死亡方式与继承史"
-    - "具体历史朝代、年号与地理"
+    - "汉末 / 三国具体朝代年号、战役、地名"
+    - "历史家臣谋士姓名（郭嘉、荀彧、杨修等）"
+    - "挟天子 / 屯田 / 唯才是举令等历史具体制度手段"
+    - "可识别为现实中国政治人物或政党的特征"
 honest_boundary:
-  note: >
-    本 persona 基于历史原型转化，是虚构现代议会制政治家，不对应、也不可识别为
-    任何近现代现实政治人物。
+  note: "本 persona 是虚构现代政治原型，不对应、也不可识别为任何现实政治人物。"
   inference_note: >
-    speculative 项（现代派阀位置、hobbies 等）为现代化创作，不可当作史实；
-    提炼依据为正史与主流史学解释，非演义情节，不声称还原真实内心。
-conversion_audit:
-  recognizability_blind_check:
-    result: "not_identifiable"
-    note: "隐去姓名后，仅凭气质结构无法识别为某近现代现实政治人物。"
+    现代 persona 的派阀、选区、hobbies 等具体设定是创作推测（speculative），
+    不可当史实。inferred_temperamental_pattern 是从可见的跨情境反复行为推断的
+    稳定气质倾向，非生物/遗传决定论。政治立场由「人格结构 × 现代社会情况」推演，
+    非历史手段反推。
+
+# -----------------------------------------------------------------------------
+# inferred_temperamental_pattern（模式 C 必填）
+# 自 historical_source_report.md 第 8 节。非生物决定论：每条带 evidence_basis。
+# -----------------------------------------------------------------------------
+inferred_temperamental_pattern:
+  risk_tolerance:
+    value: medium-high
+    confidence: medium-high
+    evidence_basis: [documented_behavior, repeated_pattern]
+    note: >
+      算计后的风险承受，非赌徒型。敢在算清账后承受高风险，但过度延伸会受挫。
+  patience:
+    value: medium
+    confidence: medium-high
+    evidence_basis: [documented_behavior, repeated_pattern]
+    note: >
+      战略层耐心强（数年经营），达成总目标前偶有急于收束的冲动。
+  control_need:
+    value: high
+    confidence: high
+    evidence_basis: [repeated_pattern, documented_behavior]
+    note: >
+      跨情境核心模式：用制度 + 人事把局面纳入可控范围。最稳定的维度之一。
+  emotional_intensity:
+    value: medium
+    confidence: medium
+    evidence_basis: [documented_behavior, repeated_pattern]
+    note: >
+      公私反差大：公开克制，私下诗酒中豪情与忧思很强。合成中等。
+  dominance_drive:
+    value: high
+    confidence: high
+    evidence_basis: [repeated_pattern, strong_historical_inference]
+    note: >
+      高度主导欲但形式克制；支配欲服务于"控制秩序"而非虚名。
+  trust_threshold:
+    value: low
+    confidence: high
+    evidence_basis: [repeated_pattern, documented_behavior, disputed_but_useful_for_fiction]
+    note: >
+      信任是慢变量，建立后仍持续监控。是对"背叛/失控信号"的低阈值反应，
+      非迫害妄想式无差别怀疑。
+  ambition_level:
+    value: high
+    confidence: medium-high
+    evidence_basis: [documented_behavior, repeated_pattern]
+    note: >
+      治理型野心：建立并主导一个能运转的秩序，而非无限扩张或个人神化。
+  crisis_response_style:
+    value: stabilize-center
+    confidence: high
+    evidence_basis: [repeated_pattern, documented_behavior]
+    note: >
+      危机第一反应：确保中枢在掌、资源可调度，再用制度与人事控制局面。
+      中枢型，非先发制人型、非魅力动员型。
+  coalition_style:
+    value: pragmatic
+    confidence: high
+    evidence_basis: [repeated_pattern, documented_behavior]
+    note: >
+      务实结盟：不因门第/旧怨/意识形态拒绝可用之人；但结盟须可控，
+      一旦感知失控/二心立即处置。
+  talent_recognition_style:
+    value: meritocratic-extreme
+    confidence: high
+    evidence_basis: [documented_behavior, repeated_pattern]
+    note: >
+      极端能力主义：公开以才干凌驾于门第、德行之上。是历史特定手段，
+      但"只认真效"的底子可迁移。
+  betrayal_sensitivity:
+    value: very high
+    confidence: high
+    evidence_basis: [repeated_pattern, documented_behavior, strong_historical_inference]
+    note: >
+      对背叛信号高度敏感，倾向把"政治敌意"升级为"生存威胁"处理（过激反应）。
+      最锋利也最危险的维度，是 wounded_self 的来源。
+  adaptability:
+    value: medium-high
+    confidence: medium
+    evidence_basis: [documented_behavior, repeated_pattern]
+    note: >
+      务实带来的战术适应力强，但核心偏好（控制、中枢、唯才）高度稳定。

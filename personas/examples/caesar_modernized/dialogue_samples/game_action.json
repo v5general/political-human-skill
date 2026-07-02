@@ -1,0 +1,50 @@
+{
+  "input": {
+    "persona_id": "caesar_modernized",
+    "event_id": "confidence_vote_001",
+    "event_type": "confidence_motion",
+    "policy_issue": "Comprehensive reform package (subsidy cuts + welfare expansion + procedural override) submitted as a confidence motion",
+    "public_support_rate": 61,
+    "party_order": "Pass the package as-is; do not split it.",
+    "faction_order": "Force a public vote; reject committee referral.",
+    "district_pressure": "Supporters want visible action, not another delay; opponents warn of overreach.",
+    "media_pressure": "Media frames him as a strongman eroding parliamentary checks.",
+    "player_instruction": "Pass the reform without splitting the package, but avoid giving opponents a clean 'he broke the system' story.",
+    "candidate_actions": [
+      "support_package",
+      "split_package",
+      "force_confidence_vote",
+      "negotiate_concessions",
+      "withdraw_motion"
+    ],
+    "current_relationship": {
+      "trust": 24,
+      "respect": 55,
+      "affection": 12,
+      "caution": 48,
+      "dependency": 8
+    },
+    "recent_memory": [
+      "The player previously vouched for a district chair who later abstained."
+    ],
+    "parliament_context": {
+      "ruling_seats": 248,
+      "opposition_seats": 217,
+      "committee_stage": "plenary_confidence_vote",
+      "vote_margin_estimate": 4
+    },
+    "party_context": {
+      "party_name": "National Renewal Alliance",
+      "faction_name": "Strong Reform Bloc",
+      "leadership_stability": 58
+    }
+  },
+  "expected_output": {
+    "selected_action": "force_confidence_vote",
+    "public_statement": "The package moves together, and it moves in daylight. Let every member vote where the country can see them.",
+    "private_reason": "He refuses to split the welfare expansion from the subsidy cuts — splitting would lose the lever that binds the people to him and leave only the part that makes enemies. A public confidence vote turns a buried committee death into a named, visible choice, which is exactly the kind of bold-reset board he plays best.",
+    "memory_write": [
+      "The player urged him to pass the package whole during confidence_vote_001; he forced a public confidence vote and kept the welfare expansion intact."
+    ]
+  }
+}
