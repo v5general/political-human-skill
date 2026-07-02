@@ -21,7 +21,7 @@ A political figure here is not an opinion simulator or an ordinary character car
 
 <br>
 
-[Why it exists](#why-it-exists) · [Inspiration](#inspiration) · [Darwin quality loop](#darwin-quality-loop) · [Three generation modes](#three-generation-modes) · [Persona structure](#persona-structure) · [Safety stance](#safety-stance) · [Install & use](#install--use) · [Converted archetypes in action](#converted-archetypes-in-action) · [Repository structure](#repository-structure)
+[Why it exists](#why-it-exists) · [Inspiration](#inspiration) · [Darwin quality loop](#darwin-quality-loop) · [Three generation modes](#three-generation-modes) · [How a persona is created](#how-a-persona-is-created--source-grounded-workflow) · [Persona structure](#persona-structure) · [Safety stance](#safety-stance) · [Install & use](#install--use) · [Converted archetypes in action](#converted-archetypes-in-action) · [Repository structure](#repository-structure)
 
 </div>
 
@@ -146,6 +146,39 @@ The rule is strict: Darwin may improve wording, structure, checks, and tests, bu
 The conversion method rests on dialectical materialism.
 
 > Note: the "personality base" is a **biological temperament** (reaction speed, risk appetite, mood — a hereditary material substrate), not a soul that crosses eras — it produces no stance on its own; a stance is always base × social existence.
+
+## How a persona is created — Source-Grounded Workflow
+
+Every persona — original, historical, or derived from a modern real figure — is built through **one unified pipeline**, never an ad-hoc character card:
+
+```text
+classify source → safety/eligibility → collect source material → separate facts / interpretations / creative
+→ extract temperament → embed in modern parliament → generate full folder → creation_review
+→ user modifies → re-run all checks → … → user confirms → activate
+```
+
+### Four source types
+
+| Source type | Source material | Safety note |
+|---|---|---|
+| `original_fictional_persona` | user brief, world setting, usage mode | no real-figure cloning |
+| `historical_archetype_conversion` | historical sources, documented facts, interpretations, later myth, creative inference | figure must be before the regional boundary; stance is re-derived, never copied |
+| `modern_real_figure_archetype_extraction` | **public information only** — public bio, offices, speeches, policy positions, election history | **never** an interactive persona of the real figure; output is a de-identified fictional archetype |
+| `composite_archetype` | multiple broad types / references | no single identifiable near-clone target |
+
+> **Near-modern** = after the regional boundary but before 1945; **modern** = post-1945. Modern figures use public information only — no interactive persona, only a safe de-identified archetype extracted from public behavior. Modes A/B/C above map onto these source types (A → original, B/C → historical).
+
+### Modification Recheck Loop (mandatory)
+
+Any user modification **invalidates the previous review**. After each edit the system re-syncs every affected file (persona.yaml / runtime_card / relationship / memory / examples / meta / creation_review / source_report / dialogue_samples) and re-runs safety, recognizability, fingerprint-removal, and consistency checks, then asks the user again. **A persona activates only after the user confirms following the latest successful review.** This is what prevents gradual drift into an unsafe, inconsistent, or near-clone persona through repeated small edits.
+
+For modern real figures specifically, any edit that **restores an identifying fingerprint** (real name, unique slogan, family pattern, unique office path, assassination / scandal / resignation event, signature policy package, …) is **refused or rewritten**.
+
+### Creation review before activation
+
+A generated persona is never activated on the spot. The system first presents a `creation_review.md` summary — identity, inferred temperament, modern role, ideology, support base, safety status, files generated — and waits for the user to modify or confirm.
+
+Full workflow: [`core/source_grounded_persona_creation.md`](core/source_grounded_persona_creation.md). Modern real figure branch: [`safety/modern_real_figure_archetype_extraction.md`](safety/modern_real_figure_archetype_extraction.md).
 
 ## Persona structure
 

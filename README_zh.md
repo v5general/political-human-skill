@@ -23,7 +23,7 @@
 
 <br>
 
-[创作初衷](#创作初衷) · [灵感来源](#灵感来源) · [Darwin 质量进化层](#darwin-质量进化层) · [三种生成模式](#三种生成模式) · [人格档案结构](#人格档案结构) · [安全立场](#安全立场) · [安装与使用](#安装与使用) · [已转化原型实战示范](#已转化原型实战示范) · [仓库结构](#仓库结构)
+[创作初衷](#创作初衷) · [灵感来源](#灵感来源) · [Darwin 质量进化层](#darwin-质量进化层) · [三种生成模式](#三种生成模式) · [人物是怎样创建的](#人物是怎样创建的来源落地创建工作流source-grounded-workflow) · [人格档案结构](#人格档案结构) · [安全立场](#安全立场) · [安装与使用](#安装与使用) · [已转化原型实战示范](#已转化原型实战示范) · [仓库结构](#仓库结构)
 
 </div>
 
@@ -147,7 +147,38 @@ Response = 人格档案 + 用户自我设定 + 关系状态 + 该人格独占的
 
 > 注：这里的「性格底子」是**生物学的气质倾向**（反应快慢、胆量、脾气，遗传给的物质基础），不是跨越时空的灵魂——它自己不产生立场，立场必须是它 × 社会存在的产物。
 
----
+## 人物是怎样创建的——来源落地创建工作流（Source-Grounded Workflow）
+
+每一个人格——原创的、历史人物的、或从现代真实人物派生的——都通过**同一条统一流水线**构建，绝不是临时拼凑的角色卡：
+
+```text
+classify source → safety/eligibility → collect source material → separate facts / interpretations / creative
+→ extract temperament → embed in modern parliament → generate full folder → creation_review
+→ user modifies → re-run all checks → … → user confirms → activate
+```
+
+### 四类来源（Four source types）
+
+| 来源类型（source_type） | 来源材料 | 安全说明 |
+|---|---|---|
+| `original_fictional_persona` | 用户需求、世界观设定、使用模式 | 不克隆真实人物 |
+| `historical_archetype_conversion` | 历史史料、文献记载、解释、后世神话、创作推断 | 人物必须在区域边界之前；立场是重新推演出来的，不是搬抄 |
+| `modern_real_figure_archetype_extraction` | **仅公开信息**——公开履历、职务、演讲、政策立场、选举历史 | **绝不**做真实人物的交互式人格；产出是一个去识别化虚构原型 |
+| `composite_archetype` | 多种宽泛类型 / 参考资料 | 没有单一可辨识的近似克隆对象 |
+
+> **近现代** = 区域边界之后、1945 年之前；**现代** = 1945 年以后。现代人物只使用公开信息——不做交互式人格，只提取一个从公开行为中抽取的安全的去识别化原型。上面的模式 A/B/C 对应这些来源类型（A → 原创虚构，B/C → 历史人物）。
+
+### 修改-重审循环（Modification Recheck Loop，强制）
+
+用户的任何修改都会**使上一轮审核失效**。每次改动后，系统会重新同步所有受影响的文件（persona.yaml / runtime_card / relationship / memory / examples / meta / creation_review / source_report / dialogue_samples），并重新运行安全、可辨识度、指纹去除、一致性检查，然后再次询问用户。**人格只有在用户于最近一次成功审核后确认才能激活。** 这正是防止反复小修小补逐步漂移到不安全、不一致或近似克隆人格的机制。
+
+对于现代真实人物，任何**恢复了识别性指纹**的改动（真实姓名、独门口号、家族模式、独一无二的仕途路径、暗杀 / 丑闻 / 辞职事件、标志性政策组合……）都会被**拒绝或重写**。
+
+### 激活前创建审核（creation review before activation）
+
+生成的人格不会当场激活。系统先给出一份 `creation_review.md` 摘要——身份、推断的气质、现代角色、意识形态、支持基础、安全状态、已生成文件——等待用户修改或确认。
+
+完整工作流见：[`core/source_grounded_persona_creation.md`](core/source_grounded_persona_creation.md)。现代真实人物分支见：[`safety/modern_real_figure_archetype_extraction.md`](safety/modern_real_figure_archetype_extraction.md)。
 
 ## 人格档案结构
 
