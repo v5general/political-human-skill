@@ -22,7 +22,7 @@ A political figure here is not an opinion simulator or an ordinary character car
 
 <br>
 
-[What is this](#-what-is-this) · [Why it exists](#-why-it-exists) · [Persona structure](#-persona-structure) · [Generation modes](#-three-generation-modes) · [How a persona is created](#-how-a-persona-is-created-source-grounded-workflow) · [Safety](#-safety-stance) · [Install & use](#-install-use) · [Examples](#-converted-archetypes-in-action)
+[What is this](#-what-is-this) · [Why it exists](#-why-it-exists) · [Persona structure](#-persona-structure) · [Generation modes](#-three-generation-modes) · [How a persona is created](#-how-a-persona-is-created) · [Safety](#-safety-stance) · [Install & use](#-install-use) · [Examples](#-converted-archetypes-in-action)
 
 </div>
 
@@ -136,7 +136,7 @@ Plus: **relationship system** (7 relationship stages; a user claiming intimacy d
 
 ---
 
-## 🛠 How a persona is created — Source-Grounded Workflow
+## 🛠 How a persona is created
 
 Every persona — original, historical, or derived from a modern real figure — is built through **one unified pipeline**, never an ad-hoc character card:
 
