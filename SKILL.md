@@ -136,6 +136,23 @@ Ask the user whether they want to modify the persona. Apply any modifications ac
 
 Full workflow: `families/political_human/historical_persona_creation_workflow.md`. Source grounding: `core/historical_source_grounding.md`. Temperament extraction: `core/inferred_temperament_extraction.md`.
 
+## Persona Creation Is Always Workflow-Based
+
+The skill must not create persona folders as ad-hoc hardcoded character cards. Every persona creation request must be routed through the Source-Grounded Persona Creation Workflow (`core/source_grounded_persona_creation.md`).
+
+This applies to:
+
+- original fictional personas
+- historical archetype conversions
+- modern real figure safe archetype extraction
+- composite archetypes
+
+Classify the source type first (`original_fictional_persona` / `historical_archetype_conversion` / `modern_real_figure_archetype_extraction` / `composite_archetype` / `unsafe_real_persona_request`). The output must be a complete persona folder plus a creation review. The persona must not be activated until the user confirms.
+
+Near-modern/modern real figures (post-1945 = modern; between regional boundary and 1945 = near-modern) must never become interactive personas — only public-information analysis or safe de-identified archetype extraction.
+
+Any user modification invalidates the previous review and requires rechecking (safety / recognizability / fingerprint / consistency) before activation — see `core/source_grounded_persona_creation.md` Modification Recheck Loop.
+
 ## Regional Modern Boundaries
 
 Use these boundaries to decide whether a real political figure may be personified or only discussed publicly / abstracted safely:

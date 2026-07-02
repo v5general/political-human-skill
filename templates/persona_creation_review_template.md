@@ -6,11 +6,49 @@
 
 - Persona ID:
 - Display Name:
-- Source Historical Figure:
-- Source Type:        # original | historical_inference | historical_archetype_conversion
+- Source Historical Figure:   # 仅历史来源填
+- Source Type:        # original_fictional_persona | historical_archetype_conversion | modern_real_figure_archetype_extraction | composite_archetype
 - Modernized:         # yes | no
 - Political System:
 - Reference Model:
+
+## Source Type & Source Report
+
+- Source Type:
+- Source Report:      # historical_source_report.md | original_persona_source_report.md | modern_real_figure_public_source_report.md | composite_source_report.md
+
+## Safety and Fictionalization
+
+For modern real figure archetype extraction, state clearly:
+- this is not the real person
+- no roleplay as real person
+- identifying fingerprints removed
+- recognizability review completed
+- `de_identified: true` / `real_person_roleplay_allowed: false`
+
+## Modification Review Log
+
+每次用户修改记录：
+
+- modification id:
+- user request:
+- files updated:
+- safety review:
+- recognizability review:
+- fingerprint review:
+- consistency review:
+- action:
+  - accepted
+  - rewritten
+  - refused
+- activation allowed:
+- notes:
+
+## Current Activation Status
+
+- latest_review_status:    # unconfirmed | reviewed | confirmed
+- activation_allowed:
+- pending_user_confirmation:
 
 ## Source Grounding
 

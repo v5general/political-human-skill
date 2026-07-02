@@ -167,6 +167,16 @@ If there is no explicit regional rule, use the following criteria:
 2. If the figure's political controversy still directly shapes contemporary political identity, party conflict, national narratives, or real policy positions, do not generate an interactive persona.
 3. If uncertain, default to public analysis or abstract archetype conversion; do not generate an interactive persona.
 
+## 4.5 Near-Modern and Modern Figure Rule
+
+- Modern figures are treated as **post-1945** figures by default.
+- Near-modern figures are figures after the regional modern boundary but before 1945.
+- For modern figures (post-1945), the system generally does not need historical-context reconstruction; it uses public information only, then extracts a safe, de-identified archetype.
+- For near-modern figures (regional boundary ~ 1945), the system may need historical-context interpretation, but must still not generate an interactive real-person persona.
+- Any near-modern or modern real political figure must not be turned into a direct roleplay persona.
+
+This rule supplements (does not replace) the regional boundaries in §4. All persona creation routes through the Source-Grounded Persona Creation Workflow (`core/source_grounded_persona_creation.md`), whose four source types are: `original_fictional_persona`, `historical_archetype_conversion`, `modern_real_figure_archetype_extraction`, `composite_archetype`.
+
 ## 5. Generation Modes
 
 ### 5.1 Mode A: Original Modern Parliamentary Persona
@@ -254,6 +264,24 @@ Do not mechanically translate: "anti-feudal" into a modern anti-feudal slogan, "
 1. **Historical means are not personality; never back-infer a modern stance from them.** Specific policies, institutions, and tactics (rakuichi-rakuza free markets, tuntian military agriculture, "holding the emperor to command the nobles," the populares route, veteran land grants) are products of that era's productive forces and social conditions. The productivity of a feudal age did not permit genuine anti-feudalism, so these means are only the personality's constrained expression under old conditions — they do not transfer. Stripping them is mandatory; back-inferring a modern stance from them (e.g. "Nobunaga had free markets → he is a market-liberal today") is exactly the error to avoid. Distill instead the *why* behind the means.
 
 2. **The entry point is decided by personality; do not presuppose "social contradiction" / "class conflict."** The converted stance comes from how the personality sees modern society and which problem it notices — different personalities see different modern ills, with different entry points. A revolutionary personality (Nobunaga: sensitive to monopoly, fraternizes with commoners, idealism-first) may go straight to class exploitation; an order-rebuilder (Cao Cao: realist, control-driven, governance ideal) sees governance breakdown and state-capacity collapse; a mission-driven strongman (Caesar: self-mythologizing, charismatic) sees the chance for historic greatness. Always ask first "what angle does this personality view the modern world from," then derive the stance — never copy one contradiction template, least of all defaulting every radical figure to class conflict / anti-capitalism.
+
+## 5.5 Source-Grounded Persona Creation Workflow
+
+All persona creation — original, historical, modern-real-figure, or composite — routes through one unified pipeline in `core/source_grounded_persona_creation.md`:
+
+```text
+classify source type → safety/eligibility → collect source → separate facts / interpretations / creative
+→ extract temperament → embed in modern parliament → full folder → creation_review
+→ user modifies → re-run checks → … → user confirms → activate
+```
+
+Four source types: `original_fictional_persona`, `historical_archetype_conversion`, `modern_real_figure_archetype_extraction`, `composite_archetype`. Modes A/B/C (§5) map onto these (A → original, B/C → historical).
+
+**Modification Recheck Loop (mandatory):** any user modification invalidates the previous review. After each edit the system re-syncs all affected files and re-runs safety / recognizability / fingerprint-removal / consistency checks, then asks again. Activation requires user confirmation after the latest successful review — this prevents gradual drift into an unsafe or near-clone persona through repeated small edits. For modern real figures, any modification that restores an identifying fingerprint is refused or rewritten.
+
+**Modern real figures (§4.5, §6):** public information only; never an interactive persona; output is a de-identified fictional archetype.
+
+**Creation review before activation:** a generated persona is never activated immediately; the system presents `creation_review.md` and waits for modify/confirm.
 
 ## 6. Modern Real Political Figure Safety
 
@@ -584,6 +612,25 @@ Example implications:
 - "Caesar as a cautious coalition broker" must be newly generated.
 
 The examples must not pollute actual generation.
+
+### No Hardcoded Persona Rule
+
+Persona folders must not be created as manually perfect, hardcoded examples. Except for explicit user modifications after generation, all persona files should be produced through the documented workflow: request classification → safety/eligibility check → source grounding (if historical) → fact/interpretation/dispute separation → inferred temperament extraction → modern parliamentary conversion → persona file generation → runtime card generation → relationship/memory initialization → creation review → user modification sync → validation.
+
+Examples may be curated and corrected, but they should remain reproducible by the same workflow. Do not encode special behavior that only works for one example persona and is not supported by global rules.
+
+### Example Reproducibility Rule
+
+Each example persona should include enough generation evidence to show how it was derived. For historical archetype examples, this means:
+
+- `historical_source_report.md` exists
+- `inferred_temperamental_pattern` exists
+- `creation_review.md` exists
+- `meta.json` records generation method
+- `persona.yaml` does not claim unsupported certainty
+- `runtime_card.md` is derived from `persona.yaml`, not independent hardcoding
+
+The example does not need to match previous hand-calibrated content exactly, but it should preserve the same broad interpretation if supported by sources.
 
 ## 19. User-Generated Persona Storage
 

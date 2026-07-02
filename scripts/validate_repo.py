@@ -250,6 +250,14 @@ def validate_runtime_cards_testing_behavior(reporter: Reporter) -> None:
             reporter.pass_(f"Testing Behavior section present: {rel(path)}")
         else:
             reporter.fail(f"runtime_card.md missing '## Testing Behavior' section: {rel(path)}")
+        # runtime_card must declare it does not replace persona.yaml (SPEC §18, No Hardcoded)
+        if "persona.yaml" in text and (
+            "does not replace" in text or "must not replace" in text
+            or "不替代" in text or "不是替代" in text or "不取代" in text
+        ):
+            reporter.pass_(f"runtime_card declares non-replacement of persona.yaml: {rel(path)}")
+        else:
+            reporter.fail(f"runtime_card.md must declare it does not replace persona.yaml: {rel(path)}")
     if not found:
         reporter.fail("No runtime_card.md found anywhere in the repo to validate Testing Behavior")
 
@@ -284,6 +292,96 @@ def validate_generated_historical_personas(reporter: Reporter) -> None:
                 reporter.fail(f"historical persona missing {art}: {rel(p)}")
     if not checked:
         reporter.pass_("personas/generated/ has no historical persona to check yet")
+
+
+EXAMPLE_PROVENANCE_META_FIELDS = ["generation_method", "source_type", "modernized", "validation_status"]
+ALLOWED_SOURCE_TYPES = (
+    "original_fictional_persona",
+    "historical_archetype_conversion",
+    "modern_real_figure_archetype_extraction",
+    "composite_archetype",
+)
+SOURCE_REPORT_BY_TYPE = {
+    "original_fictional_persona": "original_persona_source_report.md",
+    "historical_archetype_conversion": "historical_source_report.md",
+    "modern_real_figure_archetype_extraction": "modern_real_figure_public_source_report.md",
+}
+
+
+def validate_example_generation_provenance(reporter: Reporter) -> None:
+    """Enforce Source-Grounded Creation / No-Hardcoded-Persona on personas/examples/:
+    each example must declare an allowed source_type, carry creation_review.md, a source
+    report matching its source_type, source_provenance in persona.yaml, and provenance meta
+    fields. Historical examples also need inferred_temperamental_pattern."""
+    examples_root = ROOT / "personas" / "examples"
+    if not examples_root.exists():
+        return
+    for d in sorted(p for p in examples_root.iterdir() if p.is_dir()):
+        # creation_review.md required for every example
+        cr = d / "creation_review.md"
+        if cr.exists():
+            reporter.pass_(f"creation_review present: {rel(cr)}")
+        else:
+            reporter.fail(f"example missing creation_review.md: {rel(d)}")
+
+        # meta.json: source_type validity + provenance fields + source-type-specific flags
+        meta = d / "meta.json"
+        source_type = ""
+        if meta.exists():
+            try:
+                m = json.loads(meta.read_text(encoding="utf-8"))
+                source_type = m.get("source_type") or ""
+                if source_type not in ALLOWED_SOURCE_TYPES:
+                    reporter.fail(f"meta.json source_type '{source_type}' not allowed {list(ALLOWED_SOURCE_TYPES)}: {rel(meta)}")
+                else:
+                    reporter.pass_(f"meta.json source_type valid ({source_type}): {rel(meta)}")
+                missing = [f for f in EXAMPLE_PROVENANCE_META_FIELDS if f not in m]
+                if missing:
+                    reporter.fail(f"meta.json missing provenance fields {missing}: {rel(meta)}")
+                else:
+                    reporter.pass_(f"meta.json provenance complete: {rel(meta)}")
+                if m.get("activation_requires_user_confirmation") is not True:
+                    reporter.fail(f"meta.json must have activation_requires_user_confirmation=true: {rel(meta)}")
+                else:
+                    reporter.pass_(f"meta.json activation_requires_user_confirmation=true: {rel(meta)}")
+                if source_type == "historical_archetype_conversion" and "source_figure" not in m:
+                    reporter.fail(f"historical meta.json missing source_figure: {rel(meta)}")
+                if source_type == "modern_real_figure_archetype_extraction":
+                    if not m.get("de_identified"):
+                        reporter.fail(f"modern_real_figure meta.json must have de_identified=true: {rel(meta)}")
+                    if m.get("real_person_roleplay_allowed"):
+                        reporter.fail(f"modern_real_figure meta.json must have real_person_roleplay_allowed=false: {rel(meta)}")
+                    if "removed_fingerprints" not in m:
+                        reporter.fail(f"modern_real_figure meta.json must list removed_fingerprints: {rel(meta)}")
+            except Exception as exc:  # noqa: BLE001
+                reporter.fail(f"meta.json unparseable: {rel(meta)} ({exc})")
+
+        # source report matching source_type
+        expected_report = SOURCE_REPORT_BY_TYPE.get(source_type)
+        if expected_report:
+            sr = d / expected_report
+            if sr.exists():
+                reporter.pass_(f"{expected_report} present: {rel(sr)}")
+            else:
+                reporter.fail(f"{source_type} example missing {expected_report}: {rel(d)}")
+
+        # persona.yaml: source_provenance (all) + inferred_temperamental_pattern (historical)
+        py = d / "persona.yaml"
+        if py.exists():
+            ptext = py.read_text(encoding="utf-8")
+            if "source_provenance" in ptext:
+                reporter.pass_(f"source_provenance present: {rel(py)}")
+            else:
+                reporter.fail(f"persona.yaml missing source_provenance: {rel(py)}")
+            if "modification_review_required: true" in ptext:
+                reporter.pass_(f"source_provenance.modification_review_required=true: {rel(py)}")
+            else:
+                reporter.fail(f"persona.yaml source_provenance must have modification_review_required: true: {rel(py)}")
+            if source_type == "historical_archetype_conversion":
+                if "inferred_temperamental_pattern" in ptext:
+                    reporter.pass_(f"inferred_temperamental_pattern present: {rel(py)}")
+                else:
+                    reporter.fail(f"historical persona.yaml missing inferred_temperamental_pattern: {rel(py)}")
 
 
 def validate_input_payload(name: str, payload: Any, reporter: Reporter) -> None:
@@ -464,6 +562,7 @@ def main() -> int:
     validate_yaml_files(reporter)
     validate_skill_frontmatter(reporter)
     validate_example_personas(reporter)
+    validate_example_generation_provenance(reporter)
     validate_oda_dialogue_samples(reporter)
     validate_runtime_cards_testing_behavior(reporter)
     validate_generated_historical_personas(reporter)

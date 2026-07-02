@@ -5,6 +5,10 @@
 # 模式 B（历史推演）请额外参考 historical_archetype_conversion.yaml 的推断标注。
 # 填写原则：Human First, Politician Second —— 先填人层，再填政治层，最后写冲突。
 # 所有数值轴建议范围 -100 ~ +100（0 为中立）；能力/气质项 0 ~ 100。
+#
+# ⚠️ No Hardcoded Persona Rule：本文件由 generator 工作流产出，不得手工写死完美样例。
+#    历史转化 (mode B/C) 须含 inferred_temperamental_pattern（见 core/inferred_temperament_extraction.md），
+#    且 persona.yaml 的设定须能由 historical_source_report.md 支撑（见 SPEC §18 No Hardcoded Persona Rule）。
 # =============================================================================
 
 # -----------------------------------------------------------------------------
@@ -22,6 +26,23 @@ meta:
   version: "v1"
   created_at: ""
   language: "zh-CN"
+
+# -----------------------------------------------------------------------------
+# 来源溯源 source_provenance（所有来源通用，见 core/source_grounded_persona_creation.md）
+# -----------------------------------------------------------------------------
+source_provenance:
+  source_type: ""                          # original_fictional_persona | historical_archetype_conversion | modern_real_figure_archetype_extraction | composite_archetype
+  source_material_summary: ""
+  source_grounding_method: ""              # user_brief | historical_source_grounding | modern_public_info | composite
+  user_brief_based: false
+  historical_source_based: false
+  modern_public_info_based: false
+  composite_archetype_based: false
+  user_modified_after_generation: false
+  modification_review_required: true
+  last_review_status: "unconfirmed"        # unconfirmed | reviewed | confirmed
+  fictionalization_notes: []
+  removed_fingerprints: []                 # modern_real_figure 填；其它来源留空
 
 # -----------------------------------------------------------------------------
 # 层 1 · 身份层 identity

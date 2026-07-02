@@ -12,6 +12,55 @@
 
 ---
 
+## No Hardcoded Persona Rule（总则）
+
+persona 文件夹**不得**作为手工写死的完美样例产出。除用户在生成后明确修改的内容外，所有 persona 文件都必须由本生成器的工作流产出：
+
+请求分类 → 安全/资格检查 →（历史则 source grounding）→ 史料/解释/争议区分 → 推断气质提取 → 现代议会制转化 → persona 文件生成 → runtime card 生成 → 关系/记忆初始化 → creation review → 用户修改同步 → 校验。
+
+示例可以被打磨和校准，但必须**能由同一套工作流复现**。不得为单个示例编码“全局规则不支持、只有它才生效”的特殊行为（见 SPEC §18 No Hardcoded Persona Rule / Example Reproducibility Rule）。
+
+---
+
+## Source-Grounded Workflow（全局，所有来源）
+
+所有 persona 创建都走 `core/source_grounded_persona_creation.md` 的全局流程（输入资料 → 来源整理 → 特质提取 → 现代议会制嵌入 → 文件夹生成 → creation review → 用户修改 → 确认后激活）。区别**只在资料来源**。
+
+### Source Type Classifier
+
+判定请求属于以下之一：
+
+- `original_fictional_persona`（原创虚构）
+- `historical_archetype_conversion`（历史原型转化）
+- `modern_real_figure_archetype_extraction`（近现代/现代现实人物公开资料 → 安全原型）
+- `composite_archetype`（复合原型）
+- `unsafe_real_persona_request`（不安全：直接扮演/近克隆现实人物 → 拒绝，提供安全原型提取）
+
+### Branch Routing
+
+- **original_fictional_persona**：用户 brief 作资料，产 `original_persona_source_report.md`，生成完整文件夹。
+- **historical_archetype_conversion**：历史 source grounding，产 `historical_source_report.md`，见 `families/political_human/historical_persona_creation_workflow.md`。
+- **modern_real_figure_archetype_extraction**：**只用公开信息**，去识别化，可识别性审核，产 `modern_real_figure_public_source_report.md`，见 `safety/modern_real_figure_archetype_extraction.md`。**绝不扮演现实人物 / 近克隆**。
+- **composite_archetype**：多来源安全混合，避免可识别，产完整文件夹。
+- **unsafe_real_persona_request**：拒绝直接 persona 创建，提供安全虚构原型提取（走 modern_real_figure 分支）。
+
+> 近现代/现代现实人物（1945 后默认现代；地区边界后到 1945 近现代）：不做互动人格，只做公开资料分析或安全原型提取。地区边界（中国 1840 / 日本 1868 / 欧洲 1789）保留。
+
+### Modification Loop（修改-重审循环，强制）
+
+每次用户修改后：
+
+1. 更新所有受影响文件（persona.yaml / runtime_card.md / relationship.json / memory.json / examples.md / meta.json / creation_review.md / source_report.md / dialogue_samples）。
+2. 标记之前的 review 为失效（`latest_review_status = unconfirmed`）。
+3. 重跑相关安全 / 可识别性 / 指纹 / 一致性 / schema 检查。
+4. 更新 `creation_review.md` 与 source report 的修改审查日志。
+5. 再次询问用户修改或确认。
+6. 用户在最近一次成功 review 后确认前，不得激活。
+
+详见 `core/source_grounded_persona_creation.md` 的 Modification Recheck Loop。
+
+---
+
 ## Phase 0：入口分流 + 安全初筛
 
 1. 判定生成模式（A 原创 / B 历史推演 / C 历史转原型），或“分析近现代现实人物”/“疑似不安全近克隆”。

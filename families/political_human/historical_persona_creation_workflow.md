@@ -90,3 +90,18 @@ personas/generated/<persona_id>/
 - 完整 persona 文件夹生成
 - 用户确认前不激活（review-before-activation gate）
 - 修改跨文件同步
+
+---
+
+## No Hardcoded Persona Rule / Example Reproducibility（适用本工作流）
+
+历史 persona 文件夹**不得**手工写死。每个历史示例都必须能由本工作流复现，并留下生成证据：
+
+- `historical_source_report.md` 存在（资料落地）
+- `inferred_temperamental_pattern` 存在（气质推断，非生物决定论）
+- `creation_review.md` 存在（激活前确认页）
+- `meta.json` 记录 `generation_method`（溯源）
+- `persona.yaml` 不声称无证据的确定性
+- `runtime_card.md` 由 `persona.yaml` 派生，非独立硬编码
+
+示例可与旧的手工校准版"大差不差"（若资料支持同一方向），但每个设定须能由 source report + 推断过程支撑，而非直接写死（见 SPEC §18）。
