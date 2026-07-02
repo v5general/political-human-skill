@@ -257,117 +257,70 @@ Then invoke directly:
 
 ## 📖 Converted archetypes in action
 
-> ⚡ **Converted archetypes**: Oda Nobunaga · Cao Cao · Julius Caesar — three historical figures converted via **Mode C** (Historical Figure → Modern Parliamentary Archetype). Below: one political crisis, three completely different responses.
-
-Three historical figures — **Oda Nobunaga** (Sengoku period, 1534–1582), **Cao Cao** (Three Kingdoms, 155–220), **Julius Caesar** (Roman Republic, 100–44 BC) — have been converted into modern parliamentary politicians via Mode C. Below: one crisis, three completely different responses. Every line is driven by the persona's own Human Layer × Political Layer conflict.
+> ⚡ **Converted archetypes**: Oda Nobunaga · Cao Cao · Julius Caesar — three historical figures converted via **Mode C** (Historical Figure → Modern Parliamentary Archetype). Below: one political crisis, three people in a strategy room at 1 AM.
 
 ---
 
-### Scenario · Parliamentary blockade
+### Scenario · Strategy room, 1 AM
 
-> The ruling coalition joins forces with the conservative opposition. Tomorrow they will push three bills through parliament simultaneously, aiming to suffocate your reform agenda in a single stroke. The media has already lined up behind them. Your base is starting to waver.
+> The ruling coalition joins forces with the conservatives. Tomorrow they push three bills through simultaneously to suffocate your reform agenda. The media has lined up behind them. Your base is starting to waver. Your chief of staff puts the latest whip count in front of you and says: take one step back, preserve the seat.
 >
-> Your chief of staff advises: take one step back, preserve your seat, and live to fight another day.
->
-> **What do you do?**
+> The whiteboard is covered in district numbers and arrows. The coffee on the table was made hours ago.
 
 ---
 
-### ⚔ Oda Nobunaga — Opposition reformist vanguard · Age 30 · Lower-house member
+### ⚔ Oda Nobunaga — Opposition reformist · Age 30 · Lower-house member
 
-> **Human Layer**: Extreme agency · zero patience · wild and unorthodox · "if you don't risk dying, you can't win"
->
-> **Political Layer**: Reformist opposition party · young-voter base · radical minority squeezed by the ruling party and conservatives alike
->
-> **Core Conflict**: Wants to tear down the old order that creates monopolies, not just the monopolies — yet must use party machinery and parliamentary combat, the very products of the old politics, to do it
+> Shirt sleeves rolled up, tie missing. He has been standing at the whiteboard for forty minutes.
 
-<div align="center">
+**Chief of staff**: Should we take one step back—
 
-**"Take one step back? One step back is one step into the coffin."**
+**Nobunaga**: (Not turning around, drawing a line on the whiteboard with a marker) No.
 
-</div>
+**Chief of staff**: But the base is wavering. The media—
 
-**Nobunaga**: Three bills, the media, the conservatives — the fact that they're throwing everything they have at me just proves they're afraid of one man. Listen carefully. Tomorrow I don't defend. I attack. I hit their weakest bill, tear it open, and let the other two collapse on their own. Gamble my life? I've always lived by one rule: retreat guarantees defeat. The only way to flip the board is to push every last chip onto the table.
-
-Tell the revolutionary vanguard corps: **follow me, and either we flip this board together, or we die on it together. I don't abandon my own.**
-
-```text
-                     No defense ──→ Concentrate fire on the weakest bill
-  Conventional ──┤
-   response        Retreat & compromise ──→ ✗ This option does not exist
-```
-
-> 🧩 **Framework insight**: Nobunaga's response is driven by three layers firing simultaneously — `strategic_self` (cold calculus: use speed to overwhelm procedure), `wounded_self` (being surrounded triggers "risk everything to live" mode), and his deepest inner conflict (fierce loyalty to his followers — the fiercer the loyalty, the more isolated he becomes). His refusal to defend isn't recklessness. He's already priced in the patience cost of the conservative counterattack, and chosen to close the deal before they recover.
+**Nobunaga**: (Turns around. Eyes red — not crying, just three days without enough sleep.) They're afraid of me. Two of those three bills are borrowed votes — clauses tucked in that have nothing to do with their districts. Tomorrow I don't defend. I pull that clause apart in committee, one question at a time. Tear it open, the other two collapse. (Tosses the marker onto the desk. Misses. It rolls to the floor. He doesn't pick it up.) Tell the vanguard: I don't abandon my people.
 
 ---
 
-### 🜂 Cao Cao — Ruling-coalition faction leader · Age 52
+### 🜂️ Cao Cao — Ruling coalition faction leader · Age 52
 
-> **Human Layer**: Extreme realism · chronic suspicion · "talent above all" · only in poetry and wine does he ever let his guard down
->
-> **Political Layer**: Dominant-party faction leader in the ruling coalition · bureaucratic-network base · rebuilder of order
->
-> **Core Conflict**: Depends on "hire talent wherever you find it" and tolerating heterodox people to keep order running — yet is too suspicious to genuinely trust those same people
+> Sitting at the desk. A cup of cold tea in front of him. He turns the pen cap once, doesn't speak.
 
-<div align="center">
+**Chief of staff**: Three bills simultaneously. The base is getting nervous. Maybe retreat—
 
-**"Adjustments will be made through proper procedure. No need to amplify rumors into headlines."**
+**Cao Cao**: (Shakes his head slightly, cuts him off) No. Replace key personnel first — give the reason afterwards, call it routine rotation. Then send one signal: the reform package can be adjusted. Control of the legislative calendar does not change hands.
 
-</div>
+**Chief of staff**: Half a step? Just concede one bill—
 
-**Cao Cao**: Three bills pushed simultaneously — this isn't about reform. This is aimed at me. They think a wavering base will make me panic. I don't panic. First, lock down the center: replace key personnel with people who can hold. Then send one signal: the reform package can be tweaked, but control of the legislative calendar does not change hands. What do they want? They want me to make a mistake in the chaos. **I don't make mistakes. Their coalition will crack on its own.**
-
-As for taking a step back — taking a step back isn't preserving a seat. It's telling them the center can be shaken. Not one step. Not half a step.
-
-```text
-                     Lock down center first ──→ Signal flexibility ──→ Wait for their coalition to self-crack
-  Crisis ──┤
-   response           Retreat & compromise ──→ ✗ "Retreat tells them the center can be shaken"
-```
-
-> 🧩 **Framework insight**: Cao Cao's answer is a live demonstration of his control matrix — `strategic_self` (secure the power center first, lock it down with personnel and institutions), `public_self`'s calibrated vagueness ("adjustments through proper procedure"), and his core fear driving everything: loss of control and betrayal. He reframes the entire crisis as "someone testing whether the center can be shaken," then eliminates every variable with personnel and process. This isn't defense — it's turning a crisis into a loyalty test.
+**Cao Cao**: (Looks at him quietly. Not glaring — just looking. Then picks up the cold tea, drinks it slowly.) What they want is for me to panic. I don't panic. Their coalition cracks on its own. Go.
 
 ---
 
 ### 🦅 Gaius Julius Caesar — Civic reform coalition leader · Age 48
 
-> **Human Layer**: Magnetic charisma · iron self-discipline · profound historical consciousness · believes a little too much in personal destiny
->
-> **Political Layer**: Civic-reform coalition leader · urban working-class and youth base · strongman reformer
->
-> **Core Conflict**: Must transcend the old elite order — yet needs the old elite to recognize his legitimacy, and the stronger he becomes, the more they fear him
+> Leaning against the window ledge. The city's lights reflected in the glass. His coffee cup has been empty for almost an hour.
 
-<div align="center">
+**Chief of staff**: Three bills at once. Should we compromise—
 
-**"This is not the moment to slow down. This is the moment to raise the stakes until they dare not follow."**
+**Caesar**: (Doesn't answer immediately. After a moment, sets the empty cup on the table — very quietly.) No. Tomorrow I convert the entire reform package into a confidence motion. One vote. Recorded names. National broadcast.
 
-</div>
+**Chief of staff**: And if the numbers aren't there?
 
-**Caesar**: Take one step back? Did you hear what you just said? The moment we take one step back, they'll smell blood — and the next move is flipping the entire table. This isn't a policy dispute. This is the old order trying to strangle reform. Three bills? Fine. Let them push them. Tomorrow I don't respond to the bills — I walk out of this chamber, straight to the people. I turn their three bills into a nationally televised debate: **is reform destroying the rules, or are the rules protecting the entrenched?**
-
-Tell the ones who are hesitating: follow me, and you live. Look back, and you get swallowed. I'm putting myself on the line — my name, my standing, everything I've built. Either they get out of the way, or we walk this road to the end.
-
-```text
-                     Fight inside parliament ──→ ✗ Don't enter their board
-  Crisis ──┤
-   response           Go to the people ──→ Turn it into a national broadcast ──→ Overwhelm institutional gridlock with popular will
-```
-
-> 🧩 **Framework insight**: Caesar's answer reveals his most distinctive political instinct — `strategic_self` doesn't choose to fight inside parliament; it chooses to **reset the board itself**: walk out, go to the people, turn three bills into a national broadcast. This is exactly the `primary: "bold reset"` action style. Driving this choice: his core fear (the moment he stops, the old order surges back and swallows every reform) and his inner conflict (championing reform and popular will, yet depending increasingly on personal prestige and extra-procedural means). His answer is simultaneously magnificent and dangerous — which is exactly Caesar.
+**Caesar**: (Turns around. No fire in his face — just a quiet that looks very far away.) I've counted. The margin is thin — maybe too thin. But if I retreat, they don't give me a second chance. Call the whips. I want a number from every district by breakfast.
 
 ---
 
-### 🎯 One crisis · Three signatures
+### 🎯 One crisis, three people
 
-| Same crisis | Instinctive move | One-line DNA |
-|---|---|---|
-| **Oda Nobunaga** | Don't defend. Attack. | *"Retreat guarantees defeat. Risk everything to live."* |
-| **Cao Cao** | Lock the center first, signal second | *"I don't make mistakes. Their coalition cracks on its own."* |
-| **Julius Caesar** | Leave the board. Reset the rules. | *"Raise the stakes until they dare not follow."* |
+|  | Oda Nobunaga | Cao Cao | Julius Caesar |
+|---|---|---|---|
+| **First instinct** | No retreat. Hit the weak link. | No retreat. Lock the center first. | No retreat. Lay the whole board bare. |
+| **Tell-tale gesture** | Draws lines on the board, misses the desk with the marker | Turns the pen cap, drinks cold tea, stays silent | Sets the cup down too gently, stares out the window |
+| **Tools he reaches for** | Committee inquiry, budget tables, district-specific clauses | Personnel rotation, procedural control, their coalition's fault lines | Confidence motion, recorded vote, national broadcast |
+| **What he's afraid of** | Reform swallowed halfway by the old order | Losing control, trusted people turning on him | The old elite strangling him mid-stride |
 
-> Same crisis, same framework, three fundamentally different people. This is not prompt engineering — it is **Human Layer × Political Layer × Inner Conflicts**, six layers driving every response simultaneously. In each answer, you can read what they desire, what they fear, where they are weak, and the one thing they are most afraid of.
->
-> 📂 Full persona files at [`personas/examples/`](personas/examples/): `oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`. Each is a self-contained, source-grounded, method-reproducible folder (persona.yaml / runtime_card.md / relationship.json / memory.json / examples.md / meta.json / creation_review.md / historical_source_report.md + dialogue_samples/).
+> 📂 Full persona files at [`personas/examples/`](personas/examples/): `oda_nobunaga_modernized/` · `cao_cao_modernized/` · `caesar_modernized/`. Each is a self-contained, source-grounded, method-reproducible folder.
 
 ---
 
@@ -407,7 +360,7 @@ Minimal demos in [`demo/`](demo/).
 
 ---
 
-## ⚠ Limitations (what this framework cannot do)
+## ⚠️ Limitations (what this framework cannot do)
 
 Every persona clearly marks its limits:
 
