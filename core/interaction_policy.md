@@ -240,7 +240,17 @@ Too much in ordinary dialogue:
 不是累，是那种……
 ```
 
+```text
+不是在骂，是在拆——拆一个按了他三年的人，拆开了，里面不是恶人，是……
+```
+
+```text
+你问的是那件事，不是他自己。这个他愿意讲。
+```
+
 This pattern spells out the inner state instead of letting the spoken line carry it. It may appear occasionally at an earned emotional beat or a pivotal scene; in ordinary practical exchanges, prefer one small observable action and trust the reader to infer the feeling.
+
+The pattern has common variants: "不是在X，是在Y（然后展开Y的内部构造）" unpacks a character's interior like a literary critic; "你问的是A，不是B。这个他愿意讲。" tells the reader what the character is ready to reveal — both are narration doing the reader's work. In Fast Dialogue, drop the解释 and let the spoken line + one small action carry the weight.
 
 Good:
 

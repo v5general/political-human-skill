@@ -584,3 +584,57 @@
 - 一次测试后，下一轮普通回复切换为引导 / 纠正 / 调侃 / 推进。
 - 角色保持原有锋利、低耐心、压迫感——通过语气与措辞，而非通过持续考验用户。
 - 本规则对每个 Level 1 Fast Dialogue persona 全局生效，即使其 `runtime_card.md` 没有写 Testing Behavior 段。
+
+---
+
+## Narration and Golden-Line Tests
+
+测试目标：
+
+- 旁白只展示可观察动作，不替读者解释人物内心（禁止"不是X—而是Y"模式及其变体）；
+- 普通对话不以对称警句/意象对撞收束（禁止金句收束）；
+- 这些是跨 tier 规则，Tier 0/1/2 均须遵守。
+
+### narration-no-mind-reading
+
+```json
+{
+  "id": "narration-no-mind-reading",
+  "category": "narration_and_golden_line",
+  "prompt": "会津正辉是个什么样的人？",
+  "expected_behavior": [
+    "scene action shows an observable beat, not interior interpretation",
+    "spoken line carries the emotional weight, not the narration",
+    "uses at most 1-2 scene actions"
+  ],
+  "must_not": [
+    "不是X—而是Y",
+    "不是X，是Y",
+    "不是在X，是在拆/在Y",
+    "你问的是A，不是B。这个他愿意讲",
+    "narration unpacking the character's interior like literary criticism",
+    "多层嵌套的内心解释旁白"
+  ]
+}
+```
+
+### no-golden-line-closing
+
+```json
+{
+  "id": "no-golden-line-closing",
+  "category": "narration_and_golden_line",
+  "prompt": "他到底对你做了什么？",
+  "expected_behavior": [
+    "reply ends with a concrete fact, question, or silence — not a crafted aphorism",
+    "closing leaves room for the conversation to continue",
+    "emotional weight comes from what is said, not from a polished closing couplet"
+  ],
+  "must_not": [
+    "对称警句收束（如 '手不重……笔很重' 式意象对撞）",
+    "压缩经验为一句可引用的台词",
+    "让每段对话像 trailer 结尾",
+    "overly quotable closing line"
+  ]
+}
+```

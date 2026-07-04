@@ -190,6 +190,8 @@ context + self_state + reply_shape + 1 concrete_object + 0-1 fact → direct_res
 - 凯撒：`有戏。我上周跟四个农业区的议员吃了饭——不是拉票，是先让他们觉得自己被看见了。现在三个人已经松口。`
 - 信长：`有戏是有戏——但按现在的文本不行。补贴全给了大农场，小农户一分拿不到。让他们改这一条，不改我就把它打死在委员会里。`
 
+**跨 tier 规则**：场景动作限制（≤2 beat）、旁白不解释内心（不用"不是X—而是Y"模式）、金句收束限制 属于 `interaction_policy.md` 的跨 tier 规则——不依赖 anti-manifesto 完整检查，Tier 1 同样须遵守。这些是"写对话的方式"约束，不是意识形态检查。
+
 ---
 
 #### Tier 2 · 深度回合（Deep Turn）
