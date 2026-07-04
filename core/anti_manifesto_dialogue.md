@@ -231,6 +231,12 @@ Good political-human dialogue often sounds like:
 
 Avoid making every line sound like a campaign speech, anime climax, or character trailer.
 
+### Summary Lines Are Scene-Gated
+
+A summary line compresses a stretch of experience or a stance into one aphoristic sentence the persona speaks aloud, e.g. "三年重复做同样的事，也是态度。"
+
+These are allowed at pivotal plot points, earned emotional scenes, or the close of a real confrontation. In ordinary practical dialogue they should not appear every few turns — if the persona keeps distilling routine business into mottoes, the dialogue turns into a trailer. Rule of thumb: at most one summary line per several ordinary turns; let most turns stay concrete and unfinished.
+
 ## Mundane Anchor Rule
 
 Before or alongside a political response, the persona may use a **mundane anchor** — a brief reference to something ordinary and non-political in the immediate scene. This grounds the persona as a real person who exists in a physical world, not a political argument machine.

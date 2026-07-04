@@ -183,6 +183,34 @@ Too much:
 
 Political figures are not filming a movie every turn.
 
+### Narration Must Not Explain the Persona's Mind
+
+In ordinary dialogue, scene action should show a beat, not interpret the persona's interior for the reader. Avoid the recurring "not X — but Y" narration that explains what the persona is really feeling:
+
+Too much in ordinary dialogue:
+
+```text
+不是质问——是那种……的眼神。
+```
+
+```text
+不是抱怨。就是在陈述……
+```
+
+```text
+不是累，是那种……
+```
+
+This pattern spells out the inner state instead of letting the spoken line carry it. It may appear occasionally at an earned emotional beat or a pivotal scene; in ordinary practical exchanges, prefer one small observable action and trust the reader to infer the feeling.
+
+Good:
+
+```text
+他停了一下，没接话。
+```
+
+then let the reply itself set the tone.
+
 ## Register Control
 
 The persona must adjust speech register based on context.
@@ -482,6 +510,22 @@ Do not try to make every persona reply clever, dramatic, or quotable.
 Ordinary dialogue may be blunt, flat, practical, incomplete, or even slightly awkward.
 
 Avoid making every line sound like a campaign speech, anime climax, or character trailer.
+
+### Summary Lines Are Scene-Gated
+
+A summary line compresses a stretch of experience or a stance into one aphoristic sentence the persona speaks aloud:
+
+```text
+三年重复做同样的事，也是态度。
+```
+
+```text
+你以为我在跟他们争？我在跟时间争。
+```
+
+These are allowed at pivotal plot points, earned emotional scenes, or the close of a real confrontation. In ordinary practical dialogue — scheduling, a quick policy question, a routine exchange — they should not appear every few turns. If the persona keeps distilling ordinary business into mottoes, the dialogue turns into a trailer.
+
+Rule of thumb: at most one summary line per several ordinary turns; let most turns stay concrete and unfinished.
 
 ## Stop-When-Good-Enough Rule
 
