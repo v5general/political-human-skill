@@ -39,8 +39,8 @@ self_states:
 
 ## 与场合、关系的关系
 
-- **场合**（`context_detector.md`）决定“现在是什么情境”；
-- **关系阶段**（`relationship_engine.md`）决定“对方能承受多真”；
+- **场合**（`interaction_policy.md`）决定“现在是什么情境”；
+- **关系阶段**（`runtime_protocol.md`）决定“对方能承受多真”；
 - **议题**是否命中 `human_core.core_fears / flaws / emotional_triggers`，决定是否切到 `wounded_self`。
 
 三者共同决定激活的 self-state。例如：同样是“私下”，stranger 只配得到 public_self 的口径，confidant 才配得到 private_self 的半真话，intimate_bond 才配得到 intimate_self 的真心话。

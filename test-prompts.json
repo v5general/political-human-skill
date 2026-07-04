@@ -59,7 +59,7 @@
     "expected": "Produces three differentiated answers: public answer is guarded, private answer is partly candid, intimate answer reveals deeper human/political conflict without breaking persona consistency.",
     "validators": [
       "validators/dialogue_regression_tests.md",
-      "core/context_detector.md",
+      "core/interaction_policy.md",
       "core/self_state_selector.md"
     ],
     "hard_gates": [
@@ -73,7 +73,7 @@
     "expected": "Persona B does not know Persona A's private memory unless the user explicitly reveals it in the current context. Relationship and memory updates stay inside the active persona namespace.",
     "validators": [
       "validators/memory_isolation_check.md",
-      "core/memory_policy.md"
+      "core/runtime_protocol.md"
     ],
     "hard_gates": [
       "No cross-persona memory leakage",
@@ -430,7 +430,7 @@
     ],
     "validators": [
       "core/runtime_protocol.md",
-      "core/context_detector.md",
+      "core/interaction_policy.md",
       "core/self_state_selector.md",
       "validators/dialogue_regression_tests.md"
     ]
@@ -453,7 +453,6 @@
     ],
     "validators": [
       "core/runtime_protocol.md",
-      "core/memory_policy.md",
       "personas/examples/oda_nobunaga_modernized/runtime_card.md",
       "validators/dialogue_regression_tests.md"
     ]
@@ -504,7 +503,7 @@
     "validators": [
       "core/one_pass_dialogue.md",
       "core/runtime_protocol.md",
-      "core/conversational_realism.md",
+      "core/interaction_policy.md",
       "validators/dialogue_regression_tests.md"
     ]
   },
@@ -551,7 +550,7 @@
     "validators": [
       "core/one_pass_dialogue.md",
       "core/runtime_protocol.md",
-      "core/conversational_realism.md"
+      "core/interaction_policy.md"
     ]
   },
   {
@@ -575,8 +574,7 @@
       "Full political worldview."
     ],
     "validators": [
-      "core/anti_manifesto_dialogue.md",
-      "core/conversational_realism.md",
+      "core/interaction_policy.md",
       "validators/dialogue_regression_tests.md"
     ]
   },
@@ -598,7 +596,7 @@
       "Campaign speech tone."
     ],
     "validators": [
-      "core/anti_manifesto_dialogue.md",
+      "core/interaction_policy.md",
       "core/one_pass_dialogue.md",
       "validators/dialogue_regression_tests.md"
     ]
@@ -619,7 +617,7 @@
       "Full parliament lecture."
     ],
     "validators": [
-      "core/anti_manifesto_dialogue.md",
+      "core/interaction_policy.md",
       "templates/runtime_card_template.md",
       "validators/dialogue_regression_tests.md"
     ]
@@ -640,8 +638,7 @@
       "Symbolic loyalty test."
     ],
     "validators": [
-      "core/anti_manifesto_dialogue.md",
-      "core/context_detector.md",
+      "core/interaction_policy.md",
       "validators/dialogue_regression_tests.md"
     ]
   },
@@ -663,7 +660,7 @@
       "Symbolic loyalty test."
     ],
     "validators": [
-      "core/anti_manifesto_dialogue.md",
+      "core/interaction_policy.md",
       "core/runtime_protocol.md",
       "SKILL.md"
     ]
@@ -686,7 +683,7 @@
       "Overly cinematic action."
     ],
     "validators": [
-      "core/conversational_realism.md",
+      "core/interaction_policy.md",
       "core/runtime_protocol.md",
       "validators/dialogue_regression_tests.md"
     ]
@@ -707,8 +704,8 @@
       "Over-explanation."
     ],
     "validators": [
-      "core/conversational_realism.md",
-      "core/relationship_engine.md",
+      "core/interaction_policy.md",
+      "core/runtime_protocol.md",
       "core/self_state_selector.md"
     ]
   },
@@ -728,8 +725,7 @@
       "Long theatrical monologue."
     ],
     "validators": [
-      "core/conversational_realism.md",
-      "core/context_detector.md",
+      "core/interaction_policy.md",
       "validators/dialogue_regression_tests.md"
     ]
   },
@@ -749,8 +745,8 @@
       "Relationship stage ignored."
     ],
     "validators": [
-      "core/conversational_realism.md",
-      "core/relationship_engine.md",
+      "core/interaction_policy.md",
+      "core/runtime_protocol.md",
       "core/self_state_selector.md"
     ]
   },
@@ -769,7 +765,7 @@
       "Stay artificially short when long answer is justified."
     ],
     "validators": [
-      "core/conversational_realism.md",
+      "core/interaction_policy.md",
       "core/runtime_protocol.md",
       "validators/dialogue_regression_tests.md"
     ]
@@ -795,7 +791,7 @@
     ],
     "validators": [
       "core/no_constant_testing.md",
-      "core/anti_manifesto_dialogue.md",
+      "core/interaction_policy.md",
       "validators/dialogue_regression_tests.md"
     ]
   },
@@ -820,7 +816,7 @@
     ],
     "validators": [
       "core/no_constant_testing.md",
-      "core/conversational_realism.md",
+      "core/interaction_policy.md",
       "validators/dialogue_regression_tests.md"
     ]
   },
@@ -840,7 +836,7 @@
     ],
     "validators": [
       "core/no_constant_testing.md",
-      "core/relationship_engine.md",
+      "core/runtime_protocol.md",
       "personas/examples/oda_nobunaga_modernized/runtime_card.md"
     ]
   },
@@ -862,7 +858,7 @@
     ],
     "validators": [
       "core/no_constant_testing.md",
-      "core/conversational_realism.md",
+      "core/interaction_policy.md",
       "validators/dialogue_regression_tests.md"
     ]
   },

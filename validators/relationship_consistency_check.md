@@ -1,6 +1,6 @@
 # 关系一致性检查 · Relationship Consistency Check
 
-> **作用**：检查 `relationship.json` 与关系引擎行为是否自洽。规则基准为 `core/relationship_engine.md` 与 `core/user_self_setting_policy.md`，模板为 `templates/relationship_template.json`。
+> **作用**：检查 `relationship.json` 与关系引擎行为是否自洽。规则基准为 `core/runtime_protocol.md` 与 `core/user_self_setting_policy.md`，模板为 `templates/relationship_template.json`。
 
 ---
 
@@ -40,4 +40,4 @@
 ## 判定
 
 - 全部通过 → CONSISTENT；
-- 信任折算不通过（最常见问题）→ 回 `relationship_engine.md` 校准折算权重。
+- 信任折算不通过（最常见问题）→ 回 `runtime_protocol.md` 校准折算权重。

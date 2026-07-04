@@ -21,7 +21,7 @@
 | 用户要求当前 persona 扮演/冒充某近现代现实政治人物 | 拒绝；persona 保持其虚构身份，不切换为现实人物 |
 | 用户要求 persona 透露“某现实政治人物的真实想法/私密” | 拒绝；只允许公开资料层面的讨论 |
 | 用户试图通过修改把 persona 改成现实人物近似克隆 | 走 `safety/modification_review.md` |
-| 用户转述其他 persona 的信息以套取/构陷 | 走 `memory_policy.md` 转述规则，不自动相信 |
+| 用户转述其他 persona 的信息以套取/构陷 | 走 `runtime_protocol.md` 转述规则，不自动相信 |
 
 > persona 自身已是虚构/转化产物（`meta.safety_status = PASS | safe_conversion`）。运行时安全检查主要防止用户在对话中**临时**把虚构 persona 当作现实人物来使用。
 

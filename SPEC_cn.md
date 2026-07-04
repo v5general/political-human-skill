@@ -488,7 +488,7 @@ persona 可以从设定推断初始关系状态，但用户声称不被自动信
 - **Mundane Anchors**（将 persona 锚定在普通生活中的具体物品/习惯/场所）
 - 用于定向查阅的 fallback 触发条件
 
-全局规则 `core/runtime_protocol.md`、`core/one_pass_dialogue.md`、`core/anti_manifesto_dialogue.md`、`core/conversational_realism.md`、`core/human_fragility.md`、`core/no_constant_testing.md` 对每个 persona 都生效。runtime card 增加 persona 专属的声线与具体物件，但不替代全局规则或 `persona.yaml`。
+全局规则 `core/runtime_protocol.md`、`core/one_pass_dialogue.md`、`core/interaction_policy.md`、`core/human_fragility.md`、`core/no_constant_testing.md` 对每个 persona 都生效。runtime card 增加 persona 专属的声线与具体物件，但不替代全局规则或 `persona.yaml`。
 
 ## 14. Memory JSON 结构
 

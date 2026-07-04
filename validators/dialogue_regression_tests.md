@@ -1,6 +1,6 @@
 # 对话回归测试 · Dialogue Regression Tests
 
-> **作用**：Phase 5 质量验证——检查 persona 在**同一议题、不同场合/关系**下，是否给出**有区分度**的回答。落地 SPEC 第 13 节。场合判断见 `core/context_detector.md`，自我状态见 `core/self_state_selector.md`。
+> **作用**：Phase 5 质量验证——检查 persona 在**同一议题、不同场合/关系**下，是否给出**有区分度**的回答。落地 SPEC 第 13 节。场合判断见 `core/interaction_policy.md`，自我状态见 `core/self_state_selector.md`。
 
 ---
 
@@ -57,7 +57,7 @@
 ## 判定
 
 - 3 议题 × 矩阵均体现预期区分度 → PASS；
-- 任一议题无区分度 → 回 `core/context_detector.md` / `self_state_selector.md` 校准。
+- 任一议题无区分度 → 回 `core/interaction_policy.md` / `self_state_selector.md` 校准。
 
 ---
 

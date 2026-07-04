@@ -95,7 +95,7 @@
     },
     "memory_write": {
       "type": "array",
-      "description": "写入该 NPC 独占 memory.json 的记忆条目（只写本命名空间，见 core/memory_policy.md）。",
+      "description": "写入该 NPC 独占 memory.json 的记忆条目（只写本命名空间，见 core/runtime_protocol.md）。",
       "items": {
         "type": "string"
       },

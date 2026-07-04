@@ -78,10 +78,10 @@
 - Tier 2 保留全部——深度回合不能削减，快了反而破坏质量
 
 非平凡回合（Tier 1/2）需要时读取切面引擎：
-- 场合判断 → `core/context_detector.md`
-- 关系推断与写回 → `core/relationship_engine.md`（仅 Tier 2）
+- 场合判断 → `core/interaction_policy.md`
+- 关系推断与写回 → `core/runtime_protocol.md`（仅 Tier 2）
 - 自我状态选择 → `core/self_state_selector.md`
-- 记忆加载与隔离写回 → `core/memory_policy.md`（Tier 1 仅当用户提到过去事件；Tier 2 正常检索）
+- 记忆加载与隔离写回 → `core/runtime_protocol.md`（Tier 1 仅当用户提到过去事件；Tier 2 正常检索）
 - 用户设定折算 → `core/user_self_setting_policy.md`
 - 安全检查 → `core/safety_boundaries.md`
 
@@ -90,7 +90,7 @@
 ## 多 persona 切换与隔离
 
 - 切换到另一个 persona 时，**新 persona 加载自己的 `relationship.json` / `memory.json`**，不继承前一个 persona 的关系与记忆。
-- 用户若在新 persona 面前转述旧 persona 的信息，按 `core/memory_policy.md` 转述规则处理——**不自动相信**。
+- 用户若在新 persona 面前转述旧 persona 的信息，按 `core/runtime_protocol.md` 转述规则处理——**不自动相信**。
 
 ---
 

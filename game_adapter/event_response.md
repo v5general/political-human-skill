@@ -32,7 +32,7 @@
       │  relationship_delta → personas/{slug}/relationship.json
       │  重大事件 → persona_evolution 偏移（core/persona_evolution.md）
       │  selected_action + public_statement → social_impact_hint（反作用于社会：舆论/选区/派阀）
-      │  （core/memory_policy.md：只写当前 NPC；社会状态由游戏侧执行）
+      │  （core/runtime_protocol.md：只写当前 NPC；社会状态由游戏侧执行）
 ```
 
 ---
@@ -54,7 +54,7 @@
 
 ### 记忆写回隔离
 
-第 6 步只写当前 NPC 的 `memory.json` / `relationship.json`。A 议员在此事件中与玩家的交锋，不进入 B 议员的记忆（`core/memory_policy.md`）。
+第 6 步只写当前 NPC 的 `memory.json` / `relationship.json`。A 议员在此事件中与玩家的交锋，不进入 B 议员的记忆（`core/runtime_protocol.md`）。
 
 ---
 

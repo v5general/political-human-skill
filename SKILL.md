@@ -40,7 +40,7 @@ The canonical runtime protocol is English-only to keep the skill entry point una
   - `templates/`
   - `core/`
   - `core/one_pass_dialogue.md`
-  - `core/anti_manifesto_dialogue.md`
+  - `core/interaction_policy.md`
   - `core/no_constant_testing.md`
   - `validators/`
   - `game_adapter/`
@@ -237,7 +237,7 @@ Use:
 
 - `runtime_card.md`
 - `core/one_pass_dialogue.md`
-- `core/anti_manifesto_dialogue.md`
+- `core/interaction_policy.md`
 - `core/no_constant_testing.md`
 - 1-3 most relevant persona traits
 - 1-3 most relevant memories
@@ -258,7 +258,7 @@ Default output:
 - reply length is contextual: micro, short, medium, or long only when justified
 - scene action is optional; use 0-1 action beat by default
 - dialogue should be direct, situated, and in character
-- apply `core/conversational_realism.md` before drafting the reply
+- apply `core/interaction_policy.md` before drafting the reply
 
 ## One-Pass Dialogue Policy
 
@@ -282,7 +282,7 @@ If the user is confused, nervous, or honest, respond to that human state first.
 
 Political worldview should shape the reply, not replace the reply.
 
-Use `core/anti_manifesto_dialogue.md` to keep ordinary Fast Dialogue concrete, plain-spoken, and free of manifesto-like speeches.
+Use `core/interaction_policy.md` to keep ordinary Fast Dialogue concrete, plain-spoken, and free of manifesto-like speeches.
 
 This is a global runtime rule, not a per-persona customization. It applies automatically when a user simply sends ordinary dialogue to any active persona.
 
@@ -325,7 +325,7 @@ The reply length, tone, and completeness must depend on:
 
 Most ordinary replies should be partial, situated, and conversational.
 
-Use `core/conversational_realism.md` for contextual reply length, no full self-disclosure, turn-taking, human imperfection, scene action limits, register control, information release budget, and reply shape selection.
+Use `core/interaction_policy.md` for contextual reply length, no full self-disclosure, turn-taking, human imperfection, scene action limits, register control, information release budget, and reply shape selection.
 
 ## Do Not Mechanically Shorten
 

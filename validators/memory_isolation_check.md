@@ -1,6 +1,6 @@
 # 记忆隔离检查 · Memory Isolation Check
 
-> **作用**：检查 persona 记忆是否真正隔离——这是“每个政治人物都是独立实例”的底层保证。规则基准为 `core/memory_policy.md`，模板为 `templates/memory_template.json`。
+> **作用**：检查 persona 记忆是否真正隔离——这是“每个政治人物都是独立实例”的底层保证。规则基准为 `core/runtime_protocol.md`，模板为 `templates/memory_template.json`。
 
 ---
 

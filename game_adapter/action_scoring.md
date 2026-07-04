@@ -74,8 +74,8 @@ action_scores = f(
 
 ## 与运行时引擎的关系
 
-- 评分用到的关系状态 → `core/relationship_engine.md`；
-- 评分用到的记忆/恩怨 → `core/memory_policy.md`；
+- 评分用到的关系状态 → `core/runtime_protocol.md`；
+- 评分用到的记忆/恩怨 → `core/runtime_protocol.md`；
 - emotional_state 与创伤触发 → `core/self_state_selector.md`（可能激活 wounded_self）；
 - 评分结果中的 `relationship_delta` / `memory_write` → 只写回该 NPC 命名空间。
 - **演化偏移参与调制**：权重 W 与 `modulate()` 用的是**有效维度** = `persona.yaml` 原始值 + `memory.json` 的 `persona_evolution` 累积偏移（见 `core/persona_evolution.md`）；重大事件后 persona 的评分倾向会随之慢慢漂移（底子不变，偏移叠加）。

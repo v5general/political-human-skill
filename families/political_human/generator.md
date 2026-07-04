@@ -127,7 +127,7 @@ personas/{slug}/
 在 Phase 3.5 预览确认之前，必须先生成 `dialogue_samples/` 目录下的 6 个对话文件（casual_private / public_interview / strategy_room / confrontation / trust_low / trust_high）和 README.md。每个样本必须遵守：
 - `core/human_fragility.md` 的人性元素要求（身体状态、日常锚点、非功能性话语、脆弱展示与回收）
 - `core/no_constant_testing.md` 的测试频率限制
-- `core/anti_manifesto_dialogue.md` 的具体优先规则
+- `core/interaction_policy.md` 的具体优先规则
 - Phase 3.6 的多样性检查将在生成后立即执行
 
 ---
@@ -184,7 +184,7 @@ personas/{slug}/
 写入 `personas/{slug}/` 全部文件：
 
 - `persona.yaml`：六层档案。
-- `runtime_card.md`：从 `persona.yaml`、初始关系风格、核心记忆策略中自动压缩生成的普通对话快取。必须使用 `templates/runtime_card_template.md`，并为该人物填入 voice、dialogue rhythm、self-state shortcuts、One-Pass Hints、Anti-Manifesto Hints、**Testing Behavior**、**Fatigue & Vulnerability Hints**、**Human Moment Hints**、**Mundane Anchors**。它负责保留个人特色；全局 `core/runtime_protocol.md`、`core/one_pass_dialogue.md`、`core/anti_manifesto_dialogue.md`、`core/conversational_realism.md`、`core/no_constant_testing.md`、`core/human_fragility.md` 仍负责底层规则。
+- `runtime_card.md`：从 `persona.yaml`、初始关系风格、核心记忆策略中自动压缩生成的普通对话快取。必须使用 `templates/runtime_card_template.md`，并为该人物填入 voice、dialogue rhythm、self-state shortcuts、One-Pass Hints、Anti-Manifesto Hints、**Testing Behavior**、**Fatigue & Vulnerability Hints**、**Human Moment Hints**、**Mundane Anchors**。它负责保留个人特色；全局 `core/runtime_protocol.md`、`core/one_pass_dialogue.md`、`core/interaction_policy.md`、`core/no_constant_testing.md`、`core/human_fragility.md` 仍负责底层规则。
 - `relationship.json`：用 `templates/relationship_template.json` 初始化（stranger / caution=50）。
 - `memory.json`：用 `templates/memory_template.json` 初始化（空记忆 + 隔离字段）。
 - `SKILL.md`：内嵌运行时协议（`core/runtime_protocol.md`）+ 指向 `runtime_card.md` 的快速读取说明 + 角色卡 + 自我状态 + 风格 + 诚实边界，使该 persona 可被宿主直接激活运行。

@@ -69,7 +69,7 @@ allowed-tools:
 | **Tier 2 · 深度**（情感/信任/创伤/亲密——碰了私人感情或核心恐惧） | 完整执行：场合 + 关系 + 自我状态（含 wounded/intimate）+ 记忆检索 + 脆弱层级 + 回收检查。深度回合不能快——快了反而假。 |
 
 需要时读取：
-- 场合 → `core/context_detector.md`
+- 场合 → `core/interaction_policy.md`
 - 关系 → 本目录 `relationship.json`（用户自称亲密**不自动**被信任）
 - 自我状态 → `core/self_state_selector.md` + 下方第 4 节
 - 记忆 → 本目录 `memory.json`（仅本命名空间）

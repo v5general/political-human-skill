@@ -2,7 +2,7 @@
 
 > **作用**：让 persona 的人格维度与政治立场**不是一成不变**——它们会被重大经历重塑（社会存在塑造意识），而 persona 的公开行动也会反过来影响社会存在（意识反作用于社会）。这是辩证，也是政治模拟可玩性的来源。
 >
-> **落地**：运行时第 12 步。联动 `memory_policy.md`（写回）、`self_state_selector.md`（读偏移）、`action_scoring.md`（用偏移调制评分）、`event_response.md`（反作用社会）。
+> **落地**：运行时第 12 步。联动 `runtime_protocol.md`（写回）、`self_state_selector.md`（读偏移）、`action_scoring.md`（用偏移调制评分）、`event_response.md`（反作用社会）。
 >
 > **对应 SPEC §5.3.1 的辩证逻辑**：性格底子（天生，相对稳定）× 被社会训练的判断力（会变）。本文件管「会变」那一半——而且变化是双向的。
 
@@ -85,7 +85,7 @@
 
 ## 6. 与其他引擎的联动
 
-- **写回**：`memory_policy.md` 第 12 步——重大事件下，除 episodic_memory / relationship_delta，追加 `persona_evolution` 偏移记录。
+- **写回**：`runtime_protocol.md` 第 12 步——重大事件下，除 episodic_memory / relationship_delta，追加 `persona_evolution` 偏移记录。
 - **读取（自我状态）**：`self_state_selector.md`——累积偏移影响默认 self-state（如 agreeableness 长期 ↓ + caution 高 → 更易切 wounded / strategic，更少 private / intimate）。
 - **读取（评分）**：`action_scoring.md`——用偏移后的有效维度调制五力权重（如 institution 长期 −10 → 更倾向激进行动）。
 - **反作用**：`event_response.md` 第 5–6 步——persona action 附 `social_impact_hint`，游戏侧据此推进世界。

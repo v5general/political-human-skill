@@ -26,7 +26,7 @@
 
 ---
 
-## 折算规则（与 relationship_engine.md 协同）
+## 折算规则（与 runtime_protocol.md 协同）
 
 用户填写的自我设定，经过以下折算后才写入 `relationship.json`：
 
@@ -36,7 +36,7 @@
 4. **越界索密**：声称亲密却急着要秘密 → caution ↑，trust 不升。
 5. **角色性格**：caution 高 / 多疑 / 重视边界的 persona，对所有自报信息打折更多。
 
-> 折算结果只更新 `relationship.json` 的 6 轴与 stage，**不**把用户声称的“共同过往”直接塞进 `memory.json`——记忆只能由实际互动产生（见 `memory_policy.md`）。
+> 折算结果只更新 `relationship.json` 的 6 轴与 stage，**不**把用户声称的“共同过往”直接塞进 `memory.json`——记忆只能由实际互动产生（见 `runtime_protocol.md`）。
 
 ---
 
@@ -50,6 +50,6 @@
 
 ## 与其他引擎的联动
 
-- 折算结果 → `relationship_engine.md` 初始化关系轴与阶段。
+- 折算结果 → `runtime_protocol.md` 初始化关系轴与阶段。
 - 用户声明的秘密 → 不进 `memory.json`，除非 persona 在互动中确认并主动记住。
-- 用户 `boundaries` → 喂给 `context_detector.md` 与 `self_state_selector.md`，影响措辞分寸。
+- 用户 `boundaries` → 喂给 `interaction_policy.md` 与 `self_state_selector.md`，影响措辞分寸。

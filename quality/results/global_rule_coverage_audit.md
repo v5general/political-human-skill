@@ -5,7 +5,7 @@
 审查的全局文件：
 
 - 顶层：`SKILL.md`, `SPEC.md`, `README.md`, `test-prompts.json`
-- `core/`：runtime_protocol, conversational_realism, one_pass_dialogue, anti_manifesto_dialogue, no_constant_testing, historical_source_grounding, inferred_temperament_extraction, memory_policy, relationship_engine, self_state_selector, context_detector, persona_evolution, safety_boundaries, user_self_setting_policy
+- `core/`：runtime_protocol, one_pass_dialogue, no_constant_testing, historical_source_grounding, inferred_temperament_extraction, self_state_selector, persona_evolution, safety_boundaries, user_self_setting_policy, interaction_policy
 - `safety/`：modern_political_figure_policy, historical_figure_policy, recognizability_review, archetype_conversion_protocol, modification_review
 - `families/political_human/`：generator, historical_persona_creation_workflow, family, invocation
 - `templates/`：persona_template, runtime_card_template, historical_archetype_conversion, historical_source_report_template, persona_creation_review_template, relationship_template, memory_template, user_self_setting_template
@@ -25,12 +25,12 @@
 | creation review before activation | PASS | generator Phase 5.5; workflow step 9–13; runtime_protocol activation prerequisite |
 | user modification sync | PASS | workflow User Modification Sync; generator Phase 5.5 |
 | Fast Dialogue | PASS | core/runtime_protocol.md Fast Dialogue; SKILL Level 1 |
-| Conversational Realism | PASS | core/conversational_realism.md; runtime_protocol |
+| Conversational Realism | PASS | core/interaction_policy.md; runtime_protocol |
 | One-Pass Dialogue | PASS | core/one_pass_dialogue.md; runtime_protocol |
-| Anti-Manifesto Dialogue | PASS | core/anti_manifesto_dialogue.md; runtime_protocol step 6 |
+| Anti-Manifesto Dialogue | PASS | core/interaction_policy.md; runtime_protocol step 6 |
 | No Constant Testing | PASS | core/no_constant_testing.md; runtime_protocol step 7 |
-| memory isolation | PASS | core/memory_policy.md; SPEC §9; validators/memory_isolation_check |
-| relationship management | PASS | core/relationship_engine.md; SPEC §8 |
+| memory isolation | PASS | core/runtime_protocol.md; SPEC §9; validators/memory_isolation_check |
+| relationship management | PASS | core/runtime_protocol.md; SPEC §8 |
 | safety and recognizability review | PASS | safety/*; SPEC §6/§7; generator Phase 2; validators/recognizability_check |
 | Absolute Majority structured decision | PASS | game_adapter/*; SPEC §16; runtime_protocol Level 2 |
 | No Hardcoded Persona | PASS（本轮新增） | SPEC §18; generator; workflow; persona_template |

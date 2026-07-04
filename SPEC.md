@@ -490,7 +490,7 @@ It must include:
 - Mundane Anchors（specific objects/habits/places that ground this persona in ordinary life）
 - fallback triggers for targeted lookup
 
-Global rules in `core/runtime_protocol.md`, `core/one_pass_dialogue.md`, `core/anti_manifesto_dialogue.md`, `core/conversational_realism.md`, `core/human_fragility.md`, and `core/no_constant_testing.md` apply to every persona. The runtime card adds persona-specific voice and concrete objects; it does not replace global rules or `persona.yaml`.
+Global rules in `core/runtime_protocol.md`, `core/one_pass_dialogue.md`, `core/interaction_policy.md`, `core/human_fragility.md`, and `core/no_constant_testing.md` apply to every persona. The runtime card adds persona-specific voice and concrete objects; it does not replace global rules or `persona.yaml`.
 
 ## 14. Memory JSON Structure
 
