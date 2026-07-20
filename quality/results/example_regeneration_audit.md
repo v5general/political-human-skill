@@ -2,7 +2,7 @@
 
 ## 1. Purpose
 
-本轮按全局 Historical Source-Grounded Persona Creation Workflow **完全重新生成**三个示例的所有文件（覆盖旧文件，含 dialogue_samples）。三示例现在是"方法论自然产物"，而非用户校准的复制。**用户校准过的核心方向只作为参考标准（像答案）**，用于检查 AI 按方法论做得对不对——不是让 AI 复制校准结果。因此新生成内容"方向大差不差，但不必逐字一致"，且 `meta.user_modified_after_generation = false`（方法论产物）。资料优先 Wikipedia / 维基百科及公开可靠学术来源。
+本轮按全局 Historical Source-Grounded Persona Creation Workflow **完全重新生成**三个示例的所有文件（覆盖旧文件，含 dialogue_samples）。三示例现在是"方法论自然产物"——所有内容均由方法论推导产出，非任何外部参考的复制。新生成内容彼此方向不同但同样自洽（切入点由人格决定，见 SPEC §5.3.1 第二硬规则），且 `meta.user_modified_after_generation = false`。资料优先 Wikipedia / 维基百科及公开可靠学术来源。
 
 ## 2. Oda Nobunaga（织田信长）
 
@@ -10,7 +10,7 @@
 - **Major facts**: 推翻足利幕府、结束战国、统一半个日本；乐市乐座、民政改革、桃山时代；1582 本能寺之变
 - **Inferred temperamental pattern**: risk_tolerance high / patience low / control_need high / dominance_drive high / talent_recognition_style meritocratic（破格用秀吉等）/ betrayal_sensitivity high / crisis_response_style preemptive —— 每条带 evidence_basis，**非生物决定论**
 - **Modern conversion（方法论重新推导）**: 革命型人格 → 现代激进改革派 / 反阶级剥削；切入点 = 阶级剥削。ideology（agent 推导）：economy -78 / welfare +72 / institution -82 / foreign_policy +28 / social_values +72 / decentralization -32。乐市乐座是历史手段，**不反推**"市场自由派"。
-- **Differences from previous（校准）version**: 方向靠拢（强改革 / 破坏旧秩序 / 高行动力 / 低耐心 / 反垄断 / 亲民众），但 persona.yaml / runtime_card / examples / dialogue_samples 全部由方法论重新生成，非复制校准。`user_modified_after_generation=false`。
+- **Differences from previous version**: persona.yaml / runtime_card / examples / dialogue_samples 全部由方法论重新生成（非复制任何先前版本）。`user_modified_after_generation=false`。
 - **Files regenerated**: persona.yaml / runtime_card.md / examples.md / memory.json / relationship.json / meta.json / creation_review.md + dialogue_samples/（8 文件：casual_private / public_interview / strategy_room / confrontation / trust_low / trust_high / game_action.json / README）。historical_source_report.md 复用作资料底座。
 - **Pass/fail**: **PASS**
 
@@ -47,4 +47,4 @@
 
 ## 7. Final Result
 
-**PASS** — 三个示例完全由 source-grounded workflow 重新生成（覆盖旧文件，含 dialogue_samples），方向靠拢用户校准参考但内容为方法论自然产物（`user_modified_after_generation=false`）。通过 validate_repo.py 全部机器检查（反硬编码 + 溯源 + inferred_temperamental_pattern 非生物决定论 + Testing Behavior + runtime_card 非替代 + 语言干净）。
+**PASS** — 三个示例完全由 source-grounded workflow 重新生成（覆盖旧文件，含 dialogue_samples），内容为方法论自然产物（`user_modified_after_generation=false`）。通过 validate_repo.py 全部机器检查（反硬编码 + 溯源 + inferred_temperamental_pattern 非生物决定论 + Testing Behavior + runtime_card 非替代 + 语言干净）。

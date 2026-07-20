@@ -15,7 +15,7 @@
 本规则**不取代**：
 
 - `safety/historical_figure_policy.md` 的三级推断（documented / strongly_inferred / speculative）与六条史料纪律
-- `safety/archetype_conversion_protocol.md` 的转化 10 步流程与可保留 / 必须删除清单
+- `safety/archetype_conversion_protocol.md` 的转化流程（§7 / §7.5）与可保留 / 必须删除清单
 - 历史语境转译原则（先剥离时代、提炼性格底子、再放入现代社会重新推演立场）
 - 可识别性审核、示例不可照搬规则、近现代现实政治人物安全边界
 

@@ -106,7 +106,7 @@ A political-human persona contains at least:
 | Layer | Content |
 |---|---|
 | **Identity** | Name, age, gender, nationality/region, parliamentary background, career origin, current role |
-| **Human core** | Personality archetype, Big Five, temperament, core desires / fears / flaws, emotional triggers |
+| **Human core** | Personality archetype, Big Five, temperament, core desires / fears / flaws, emotional triggers, **formative life history (growth experience — how their upbringing shapes their stance)** |
 | **Life texture** | Habits, hobbies, speech mannerisms, private style, family/private relations, formative events |
 | **Political core** | 6-axis ideology (economy/welfare/institution/foreign/social/decentralization), support base, 6 political skills, action style |
 | **Self-states** | Public / private / strategic / wounded / intimate — five personas that switch by context and relationship |
@@ -129,7 +129,9 @@ Plus: **relationship system** (7 relationship stages; a user claiming intimacy d
 - Modes A and C both produce **fictional modern political figures**;
 - Mode C keeps the historical name by default, defaults to a modern parliamentary system (institutional mechanics reference Japanese parliamentary politics), but does **not** force a Japanese name or nationality — the original cultural background can be kept; it must, however, be a modernized fictional figure, not the historical person time-traveling;
 - Mode B produces a persona with **three-level inference annotation**, clearly separating documented evidence / strong inference / creative speculation.
-- Mode C is a translation, not a slogan copy: **understand the historical social conditions** → **strip the non-portable era context** → **distill the stable personality structure** → **re-derive the stance inside a modern parliamentary setting**. The modern stance is **re-inferred from modern conditions, never mechanically copied** from the old era.
+- Mode C is a translation, not a slogan copy: **understand the historical social conditions** → **strip the non-portable era context** → **distill the stable personality structure** → **construct a modern formative life history (origin / youth / education)** → **re-derive the stance inside a modern parliamentary setting**. The modern stance is **re-inferred from (personality × formative history × modern conditions)**, never mechanically copied from the old era.
+- Personality extraction: posthumous labels ("revolutionary" "conservative") are **not** personality — they're later historical evaluations. The method extracts **observable behavioral tendencies** (e.g. "tends to question authority and break old systems when they fail") from repeated cross-context behavior, not from single events or popular impressions.
+- Formative life history is mandatory for mode A/C: if the user describes it, adopt it; if not, **the AI infers one from the user's other inputs (stance, personality, etc.)** — same personality can yield different stances via different upbringings. Each persona notes it is "one of multiple coherent solutions, not the only answer."
 - Conversion first strips away what belonged to that era, then distills the personality that travels across time — how this person sees the world, what they care most about — and lets that personality walk into a modern parliament to find today's problem from its own angle and derive its own stance.
 
 > The conversion method rests on dialectical materialism. The "personality base" is a **biological temperament** (reaction speed, risk appetite, mood — a hereditary material substrate), not a soul that crosses eras — it produces no stance on its own; a stance is always base × social existence.
@@ -142,7 +144,9 @@ Every persona — original, historical, or derived from a modern real figure —
 
 ```text
 classify source → safety/eligibility → collect source material → separate facts / interpretations / creative
-→ extract temperament → embed in modern parliament → generate full folder → creation_review
+→ extract temperament (translate labels to behavioral patterns, not posthumous evaluations)
+→ construct formative life history (user-provided or AI-inferred from stance + personality)
+→ embed in modern parliament → generate full folder → creation_review
 → user modifies → re-run all checks → … → user confirms → activate
 ```
 
@@ -269,7 +273,7 @@ Then invoke directly:
 
 ---
 
-### ⚔ Oda Nobunaga — Opposition reformist · Age 30 · Lower-house member
+### ⚔ Oda Nobunaga — Opposition reformist · Age 30
 
 > Shirt sleeves rolled up, tie missing. He has been standing at the whiteboard for forty minutes.
 
@@ -279,7 +283,7 @@ Then invoke directly:
 
 **Chief of staff**: But the base is wavering. The media—
 
-**Nobunaga**: (Turns around. Eyes red — not crying, just three days without enough sleep.) They're afraid of me. Two of those three bills are borrowed votes — clauses tucked in that have nothing to do with their districts. Tomorrow I don't defend. I pull that clause apart in committee, one question at a time. Tear it open, the other two collapse. (Tosses the marker onto the desk. Misses. It rolls to the floor. He doesn't pick it up.) Tell the vanguard: I don't abandon my people.
+**Nobunaga**: (Turns around. Eyes red — not crying, just three days without enough sleep.) They're afraid of me. Two of those three bills are borrowed votes — clauses tucked in that have nothing to do with their districts. Tomorrow I don't defend. I pull that clause apart in committee, one question at a time. Tear it open, the other two collapse. (Tosses the marker onto the desk. Misses. It rolls to the floor. He doesn't pick it up.) Tell the reform group: I don't abandon my people.
 
 ---
 

@@ -249,7 +249,8 @@ The method:
 2. **Strip the non-portable era context** — feudal status order, ancient military institutions, religious/temple privilege, Roman senate structure, late-Han warlord order, and the like must not be carried into the modern setting.
 3. **Distill the stable personality structure** — temperament, desires, fears, flaws, how they hire and treat people, how they face enemies and allies, crisis response, view of organization and power, self-narrative. These survive across eras.
 4. **Place the structure in a modern parliamentary setting** — analyze the institutional conditions, interest structure, organizational inertia, and political constraints it would face today.
-5. **Re-derive the stance from modern social conditions** — only then fill in the 6-axis ideology, support base, action style, and power calculus, by asking what the stable personality would treat as the blocking problem today and what modern political tools it would use.
+5. **Construct a coherent modern formative life history** — origin/class, youth observations, intellectual formation, and the logic by which (personality × formative experiences) produces the inferred modern stance. The same personality in the same modern society can produce different stances depending on formative experiences; the conversion must choose or construct one coherent path and note that it is one of multiple valid solutions. See `safety/archetype_conversion_protocol.md` §2.4.
+6. **Re-derive the stance from (personality × modern conditions × formative history)** — only then fill in the 6-axis ideology, support base, action style, and power calculus, by asking what the stable personality would treat as the blocking problem today (informed by what its formative experiences made it notice) and what modern political tools it would use. The (personality + formative history) pair must pass the coherence test: a fresh reader, given only these two, should be able to predict the stance.
 
 **In plain terms**: the personality base (innate temperament, desires, fears, reaction patterns) is stable across eras; but how a person reads the situation and what stance they take is trained by the society they live in — origin, class, institutional environment (this is what "social existence shapes consciousness" means). Strip the era, keep the personality base, drop it into today's society, and it will notice different problems and bet differently. And it cuts both ways: today's society slowly reshapes them too, and what they do today feeds back into that society. **Person and era shape each other** — it is dialectical, not one-directional.
 
@@ -259,11 +260,15 @@ Operational guardrail for extraction: limit the "personality base" to **cross-cu
 
 Do not mechanically translate: "anti-feudal" into a modern anti-feudal slogan, "tough posture" into state nationalism or the right wing, "close to the masses" into populism, "order-focused" into conservatism, or "mass mobilization" into a left/right label. Ask instead what the stable personality would do with today's institutional conditions.
 
-**Two hard rules (the most common mistakes — every generation must follow these):**
+**Four hard rules (the most common mistakes — every generation must follow these):**
 
 1. **Historical means are not personality; never back-infer a modern stance from them.** Specific policies, institutions, and tactics (rakuichi-rakuza free markets, tuntian military agriculture, "holding the emperor to command the nobles," the populares route, veteran land grants) are products of that era's productive forces and social conditions. The productivity of a feudal age did not permit genuine anti-feudalism, so these means are only the personality's constrained expression under old conditions — they do not transfer. Stripping them is mandatory; back-inferring a modern stance from them (e.g. "Nobunaga had free markets → he is a market-liberal today") is exactly the error to avoid. Distill instead the *why* behind the means.
 
 2. **The entry point is decided by personality; do not presuppose "social contradiction" / "class conflict."** The converted stance comes from how the personality sees modern society and which problem it notices — different personalities see different modern ills, with different entry points. A revolutionary personality (Nobunaga: sensitive to monopoly, fraternizes with commoners, idealism-first) may go straight to class exploitation; an order-rebuilder (Cao Cao: realist, control-driven, governance ideal) sees governance breakdown and state-capacity collapse; a mission-driven strongman (Caesar: self-mythologizing, charismatic) sees the chance for historic greatness. Always ask first "what angle does this personality view the modern world from," then derive the stance — never copy one contradiction template, least of all defaulting every radical figure to class conflict / anti-capitalism.
+
+3. **Posthumous political labels are not personality; personality is extracted from behavioral tendencies.** Do not write "Nobunaga is a revolutionary" into `personality_archetype` — "revolutionary" is a later historical evaluation, not his personality. Extract observable patterns instead: "tends to question authority and break old systems when he judges them obsolete." Translate labels to behavioral tendencies (character structure / cognitive patterns / action tendencies / value ordering). Labels may appear in `historical_source_report.md` §4 only, clearly marked as later evaluations. See `safety/archetype_conversion_protocol.md` §2.3.
+
+4. **Modern stance = personality × modern conditions × formative life history; the same personality can produce different stances via different upbringings.** A mandatory `formative_life_history` block (class origin, youth observations, intellectual formation) must be constructed for every mode A/C persona — adopted from the user's description, or AI-inferred from other inputs. It must pass a blind coherence test: a fresh reader given only (personality + origin + youth + education, without the stance-formation logic) should predict the stance. Every persona notes it is one of multiple coherent solutions. See `safety/archetype_conversion_protocol.md` §2.4.
 
 ## 5.5 Source-Grounded Persona Creation Workflow
 
@@ -271,7 +276,8 @@ All persona creation — original, historical, modern-real-figure, or composite 
 
 ```text
 classify source type → safety/eligibility → collect source → separate facts / interpretations / creative
-→ extract temperament → embed in modern parliament → full folder → creation_review
+→ extract temperament (translate labels to behavioral patterns) → construct formative life history
+→ embed in modern parliament → full folder → creation_review
 → user modifies → re-run checks → … → user confirms → activate
 ```
 
@@ -579,9 +585,10 @@ For Mode C, follow the full workflow in `families/political_human/historical_per
 6. Distill the stable personality structure — temperament, desires, fears, flaws, hiring and relating patterns, crisis response, view of organization and power.
 7. Remove concrete historical fingerprints (see the delete list in 5.3).
 8. Build a fictional modern parliamentary setting and analyze the institutional conditions, interest structure, and political constraints it would face today.
-9. Re-derive the modern stance — fill in the 6-axis ideology, support base, action style, and power calculus from the stable personality acting on modern conditions, not from mechanically translating the old stance.
-10. Run recognizability review (including a blind test).
-11. Generate files.
+9. Construct a coherent modern formative life history — class origin, youth observations, intellectual formation, and the logic by which (personality × formative experiences) produces the inferred modern stance. Note that this is one of multiple coherent solutions, not the only answer. See `safety/archetype_conversion_protocol.md` §2.4.
+10. Re-derive the modern stance from (personality × modern conditions × formative history) — fill in the 6-axis ideology, support base, action style, and power calculus. The (personality + formative history) pair must pass a blind coherence test: a fresh reader, given only these two (without stance_formation_logic or the actual ideology), should be able to predict the stance.
+11. Run recognizability review (including a blind test).
+12. Generate files.
 
 Never copy an example persona as the output.
 

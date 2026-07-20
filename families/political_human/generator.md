@@ -120,7 +120,7 @@ personas/{slug}/
 
 > Human First：先人层后政治层，最后写冲突。
 
-> Mode C 额外规则：`political_core.ideology` 必须由”稳定人格结构 × 现代社会情况/制度条件/政治约束”推演而来。不要把历史立场、历史敌友、古代制度选择或时代口号直接映射成现代左右翼标签。
+> Mode C 额外规则：`political_core.ideology` 必须由"稳定人格结构 × 现代社会情况/制度条件/政治约束 × 成长经历"三者共同推演而来（见 `archetype_conversion_protocol.md` §2.4）。不要把历史立场、历史敌友、古代制度选择或时代口号直接映射成现代左右翼标签。**强制**：`human_core.formative_life_history` 块必须存在并通过盲测式 coherence test（见 §2.4 与 §8 清单）。
 
 ### dialogue_samples 生成（Phase 3 子步骤，在 persona 构建完成后）
 

@@ -72,9 +72,9 @@
 2. Run safety and eligibility check（安全与资格检查）。
 3. Collect or parse source material（收集或解析资料）。
 4. Separate source facts, user requirements, interpretations, and creative extensions（区分来源事实/用户要求/解释/创作扩展）。
-5. Extract stable persona design patterns（提炼稳定的 persona 设计模式）。
-6. Extract or infer temperamental pattern（提取或推断气质结构）.
-7. Convert or embed into modern parliamentary context（转化或嵌入现代议会制语境）。
+5. Extract stable persona design patterns（提炼稳定的 persona 设计模式）。**对所有来源类型（含模式 A/C 的成长经历，见第 7 步）**：从史料/用户描述中提取稳定行为倾向——把后世评价标签（"革新者"等）**翻译为可观察的行为倾向与认知模式**（"对过时制度低容忍度"等），从反复的跨情境行为推断，区分"评价"与"人格特征"。
+6. Extract or infer temperamental pattern（提取或推断气质结构）. 详细规则见 `core/inferred_temperament_extraction.md` 和 `safety/archetype_conversion_protocol.md` §2.3。
+7. Convert or embed into modern parliamentary context（转化或嵌入现代议会制语境）。**强制生成 `formative_life_history`**（成长经历，对模式 A/C/modern_real_figure 均适用）。生成规则：若用户提供了成长经历描述 → 采用；若未提供 → **AI 自行根据用户已提供的其他信息（立场 / 性格 / 出身暗示等）推断生成一段 coherent 的成长经历**，必须与人格结构共同解释现代立场的形成逻辑，并说明这是多种 coherent 解中的一个非唯一解（见 `archetype_conversion_protocol.md` §2.4）。
 8. Generate a complete persona folder（生成完整文件夹）。
 9. Generate `creation_review.md`。
 10. Present basic information to user（呈现基本信息）。

@@ -34,7 +34,7 @@
 | 判定近现代现实人物的禁/允边界与时代分界 | `safety/modern_political_figure_policy.md` |
 | 历史人物推演纪律、三级推断 | `safety/historical_figure_policy.md` |
 | 可识别性 5 项标准与拒绝→提炼→转化流程 | `safety/recognizability_review.md` |
-| 原型转化可保留/必须删除/10 步流程 | `safety/archetype_conversion_protocol.md` |
+| 原型转化可保留/必须删除/转化流程 | `safety/archetype_conversion_protocol.md` |
 | 用户修改的可识别性审核 | `safety/modification_review.md` |
 | 反例与安全转化范例 | `safety/examples.md` |
 

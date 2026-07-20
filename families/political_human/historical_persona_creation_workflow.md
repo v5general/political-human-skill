@@ -14,9 +14,9 @@
 2. **Search or browse reliable sources** — 主动检索资料，不凭记忆（`core/historical_source_grounding.md`）。
 3. **Summarize historical facts** — 整理史料事实。
 4. **Separate documented facts, mainstream interpretations, disputed interpretations, creative inferences** — 四级区分。
-5. **Extract stable behavioral patterns** — 提炼稳定行为模式。
+5. **Extract stable behavioral patterns** — 从史料中提炼稳定行为模式。具体做法：把后世评价标签（"革新者""保守派"等）**翻译为可观察的行为倾向和认知模式**（"对过时制度低容忍度，判定阻碍即果断打破"），从**反复的跨情境行为**而非单次事件推断，区分"后人评价"与"人格特征"。详细规则见 `core/inferred_temperament_extraction.md`（核心原则补充：历史评价 ≠ 人格特征）和 `safety/archetype_conversion_protocol.md` §2.3。
 6. **Infer temperamental patterns from repeated cross-context behavior** — 推断 `inferred_temperamental_pattern`（`core/inferred_temperament_extraction.md`），非生物决定论。
-7. **Convert the historical archetype into a modern parliamentary fictional politician** — 历史语境转译转化（`safety/archetype_conversion_protocol.md`，SPEC §5.3.1）。
+7. **Convert the historical archetype into a modern parliamentary fictional politician** — 历史语境转译转化（`safety/archetype_conversion_protocol.md`，SPEC §5.3.1）。**强制包含 `formative_life_history`**（成长经历）。生成规则：若用户描述了成长经历 → 采用并融入；若用户未描述 → **AI 自行根据用户已提供的信息（立场 / 性格 / 其他描述）推断生成一段 coherent 的成长经历**——必须与提炼的稳定人格结构共同解释现代立场的形成逻辑，并明确说明这是多种 coherent 解中的一个，非唯一解（见 `archetype_conversion_protocol.md` §2.4）。
 8. **Generate a complete persona folder** — 与 `personas/examples/<persona_id>/` 同构。本步骤内含 `generator.md` 的子阶段：
    - Phase 3: 六层 persona 构建 + dialogue_samples 生成
    - Phase 3.5: 构建预览确认

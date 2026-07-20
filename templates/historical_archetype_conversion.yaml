@@ -129,7 +129,7 @@ context_translation:
   stable_identity_conditions:             # 剥离时代后仍能识别为此人的人格结构
     - ""
   modern_social_conditions: ""            # 现代议会制中的社会情况、制度条件与政治约束
-  modern_position_inference: ""           # 由人格结构 × 现代社会情况推演出的现代立场
+  modern_position_inference: ""           # 由人格结构 × 现代社会情况 × 成长经历三者共同推演出的现代立场（见 modern_fictional_persona.formative_life_history 块）
 
 # -----------------------------------------------------------------------------
 # 三级推断标注 inference_level（safety/historical_figure_policy.md 第 2 节）
@@ -179,6 +179,22 @@ modern_fictional_persona:
   hobbies:                      # 兴趣（与政治无关的私人侧面）
     - ""
   private_fear: ""              # 私下恐惧
+
+  # ---------------------------------------------------------------------------
+  # 成长经历 formative_life_history（强制，见 archetype_conversion_protocol.md §2.4）
+  # 同一人格底子在同一现代社会可因成长经历不同而形成不同立场。
+  # 本块必须与 personality_archetype 共同解释 modern_fictional_persona.ideology 的形成逻辑。
+  # 不要求"出身阶级 = 立场"——阶级背叛常常是最有趣的现代化，只要逻辑自洽即可。
+  # 当前填写只是多种 coherent 解中的一个，非唯一解。
+  # ---------------------------------------------------------------------------
+  formative_life_history:
+    class_origin: ""              # 出身阶层 / 家庭背景（如 城市小资产阶级 / 工人阶级 / 没落资本家家族 / 农村家庭）
+    youth_observations:           # 少年时期关键观察 / 经历（2-3 个具体场景，使他注意到某些问题）
+      - ""
+    intellectual_formation: ""    # 思想成型路径（教育、关键阅读、关键人物接触、关键事件冲击）
+    stance_formation_logic: ""    # 立场形成的内在逻辑——必须能解释"为什么这个人格 + 这段经历 = 这个立场"
+    class_relation: ""            # 与出身阶级的关系（延续 / 背叛 / 矛盾）
+    alternative_paths_note: ""    # 明确说明这是多种 coherent 解中的一个；列出 1-2 个其他可能解
 
   inner_conflicts:              # 人层 vs 政治层的张力，至少 2 条
     - ""

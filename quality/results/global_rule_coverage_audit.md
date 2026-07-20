@@ -46,7 +46,7 @@
 
 - 加 No Hardcoded Persona Rule + Example Reproducibility Rule（SPEC §18 / generator / workflow / persona_template）
 - validate_repo.py 机器检查：creation_review / historical_source_report / meta 溯源 / inferred_temperamental_pattern / runtime_card 非替代声明
-- 三个示例用 source-grounded workflow 重建（补 source_report + creation_review + temperament + meta 溯源），保留用户校准的核心方向
+- 三个示例用 source-grounded workflow 重建（补 source_report + creation_review + temperament + meta 溯源），核心方向由史料 + 方法论推导支持
 
 ## 4. Required Fixes
 

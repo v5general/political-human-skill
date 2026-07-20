@@ -366,6 +366,7 @@ def validate_example_generation_provenance(reporter: Reporter) -> None:
                 reporter.fail(f"{source_type} example missing {expected_report}: {rel(d)}")
 
         # persona.yaml: source_provenance (all) + inferred_temperamental_pattern (historical)
+        # + formative_life_history (mode A/C mandatory per archetype_conversion_protocol.md §2.4)
         py = d / "persona.yaml"
         if py.exists():
             ptext = py.read_text(encoding="utf-8")
@@ -382,6 +383,27 @@ def validate_example_generation_provenance(reporter: Reporter) -> None:
                     reporter.pass_(f"inferred_temperamental_pattern present: {rel(py)}")
                 else:
                     reporter.fail(f"historical persona.yaml missing inferred_temperamental_pattern: {rel(py)}")
+            # formative_life_history is mandatory for mode A (original_fictional_persona)
+            # and mode C (historical_archetype_conversion) — see archetype_conversion_protocol.md §2.4
+            if source_type in ("original_fictional_persona", "historical_archetype_conversion"):
+                if "formative_life_history:" in ptext:
+                    reporter.pass_(f"formative_life_history present: {rel(py)}")
+                    # check the 6 required subfields
+                    required_subfields = [
+                        "class_origin:",
+                        "youth_observations:",
+                        "intellectual_formation:",
+                        "stance_formation_logic:",
+                        "class_relation:",
+                        "alternative_paths_note:",
+                    ]
+                    missing_sub = [f for f in required_subfields if f not in ptext]
+                    if missing_sub:
+                        reporter.fail(f"formative_life_history missing subfields {missing_sub}: {rel(py)}")
+                    else:
+                        reporter.pass_(f"formative_life_history subfields complete: {rel(py)}")
+                else:
+                    reporter.fail(f"{source_type} persona.yaml missing formative_life_history block (required per archetype_conversion_protocol.md §2.4): {rel(py)}")
 
 
 def validate_input_payload(name: str, payload: Any, reporter: Reporter) -> None:
