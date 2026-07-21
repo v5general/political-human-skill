@@ -36,7 +36,7 @@
 
 ## 5. Global Workflow Reproducibility
 
-三个 persona 都由同一套方法论**完全重新生成**（source grounding → inferred temperament → 现代议会制转化 → 完整文件夹含 dialogue_samples → creation review）。**切入点由人格决定**（信长 = 阶级剥削 / 曹操 = 治理失序 / 凯撒 = 成就伟业），非套同一模板（SPEC §5.3.1 两条硬规则的活例证）。`user_modified_after_generation` 全为 false（方法论产物）。validate_repo.py 全绿，语言干净（修复了 cao_cao 一处污染）。
+三个 persona 都由同一套方法论**完全重新生成**（source grounding → inferred temperament → 现代议会制转化 → 完整文件夹含 dialogue_samples → creation review）。**切入点由人格决定**（信长 = 阶级剥削 / 曹操 = 治理失序 / 凯撒 = 成就伟业），非套同一模板（SPEC §5.3.1 四条硬规则的活例证）。`user_modified_after_generation` 全为 false（方法论产物）。validate_repo.py 全绿，语言干净（修复了 cao_cao 一处污染）。
 
 ## 6. Remaining Risks
 
