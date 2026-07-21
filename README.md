@@ -12,9 +12,11 @@
 
 <br>
 
-**A framework for creating, running, and distributing "political-human persona" skills.**
+**An AI Political Personality Modeling Framework — reconstructing personality structures, not imitating labels.**
 
-A political figure here is not an opinion simulator or an ordinary character card — it is a **complete person whose profession is politics**: with personality, desires, weaknesses, habits, interests, family and life experience, alongside party, stance, support base, and way of acting. It adjusts how it responds based on who the user is, the current setting, conversation history, and how close the relationship is.
+This is not an opinion simulator, not a role-playing tool, and not an ordinary character card — it builds a **complete person whose profession is politics**:
+with personality, desires, weaknesses, habits, interests, family and life experience, alongside party, stance, support base, and way of acting.
+It adjusts how it responds based on who the user is, the current setting, conversation history, and how close the relationship is.
 
 <br>
 
@@ -30,7 +32,7 @@ A political figure here is not an opinion simulator or an ordinary character car
 
 ## ✨ What is this
 
-`Political Human Skill` splits a political figure into two layers, and deliberately writes the conflict between them:
+`Political Human Skill` reconstructs personality structures rather than imitating labels — political behavior emerges from personality, experience, and environment. It is not a historical figure replicator or a stance simulator. It splits a political figure into two layers, and deliberately writes the conflict between them:
 
 ```text
 Human Layer                    Political Layer
@@ -80,7 +82,7 @@ When used with Absolute Majority, this skill judges among the candidate actions 
 But this skill **does not serve only Absolute Majority**. It also works standalone for:
 
 1. Political simulation · Policy discussion · Parliamentary debate simulation · Fictional political figure creation
-2. Political novel / script / game character design · Role-play in political education
+2. Political novel / script / game character design · Political personality simulation
 3. Institutional game theory · Modernizing historical figures into archetypes · AI character personality research
 
 > Absolute Majority is an important use case, but the skill itself should stand as an independent, reusable, extensible Political Human Skill framework.

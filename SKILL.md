@@ -1,7 +1,7 @@
 ---
 name: political-human-skill
 description: |
-  A framework for creating, running, and distributing political-human persona skills.
+  An AI Political Personality Modeling Framework — reconstructing personality structures, not imitating labels.
   A political-human persona is not a political opinion simulator or a simple role card.
   It is a complete person whose profession is politics: personality, desires, fears,
   flaws, habits, interests, relationships, life texture, party/faction position,
@@ -26,7 +26,7 @@ allowed-tools:
 
 > Build the person first, the politician second.
 
-This skill creates and runs fictional political-human personas: complete human characters whose profession is politics. It can be used for political simulation, policy debate, parliamentary scenes, fiction and game character design, and NPC behavior generation for the political strategy game *Absolute Majority*.
+This skill creates and runs fictional political-human personas: complete human characters whose profession is politics. It reconstructs personality structures rather than imitating labels — political behavior emerges from personality, experience, and environment. It can be used for political simulation, policy debate, parliamentary scenes, fiction and game character design, and NPC behavior generation for the political strategy game *Absolute Majority*.
 
 The canonical runtime protocol is English-only to keep the skill entry point unambiguous for runtimes and agents. The English specification is `SPEC.md`, with Chinese localization in `SPEC_cn.md`.
 
@@ -224,7 +224,7 @@ Political Human Skill uses three runtime depth levels. Performance optimization 
 
 ### Level 1: Fast Dialogue
 
-Default mode for ordinary persona dialogue, roleplay, casual chat, private talk, short policy debate, and relationship conversation.
+Default mode for ordinary persona dialogue, casual chat, private talk, short policy debate, and relationship conversation.
 
 Goal:
 

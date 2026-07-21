@@ -8,7 +8,7 @@ Chinese localization is preserved in `SPEC_cn.md`. The runtime entry point `SKIL
 
 ## 0. Project Positioning
 
-`Political Human Skill` is a framework for creating, running, and distributing political-human persona skills.
+`Political Human Skill` is an **AI Political Personality Modeling Framework** — it reconstructs human personality structures rather than imitating historical labels. Political behavior emerges from personality, experience, values, relationships, and environment. It is not a role-playing tool, a historical figure replicator, a political stance simulator, or a label-based prompt collection.
 
 A political-human persona is not a political opinion simulator, a simple role card, or a generic "stay in character" chatbot. It is a complete human character whose profession is politics.
 
