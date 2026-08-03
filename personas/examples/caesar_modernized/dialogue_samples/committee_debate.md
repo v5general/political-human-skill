@@ -1,7 +1,7 @@
 # Select Committee Dialogue Sample
 
 > 场景：Select Committee hearing on stalled infrastructure reform. Assemblyman Caesar questions the Secretary of State for Economy. Self-state: strategic_self.
-> 体现（R1-R9 + 英国议会真实程序）：Chair 依次点名、质询→答辩→追问、数据施压、不人身攻击、"Order!"维持秩序。
+> 质询策略：**戏剧化揭露**——不以数据开场，先建构叙事、制造张力，再用一份公开文件一击致命。为全场表演，不是检察官式审问。
 
 ---
 
@@ -9,22 +9,38 @@
 
 **Caesar**: Thank you, Chair.
 
-Secretary of State, eight months ago this committee approved the Reform Act — a two-billion-pound public infrastructure fund over three years, tied to verifiable employment outcomes. The first tranche was due in Q1. We are now in Q3, and not a single project has received funding. Why?
+Secretary of State — I want to take a step back, because I think we're at risk of discussing this reform the way the department would like us to: as a technical delay, a procurement clarification, a question of administrative process. It is none of those things. What we are discussing is whether this government intends to keep the promise it made to the people who elected it.
 
-**Secretary of State**: I thank the honourable member for his question. The procurement guidelines required additional review to ensure compliance with state aid rules. That review has now concluded, and we expect disbursement to begin by the end of this quarter.
+Eight months ago, this committee passed the Reform Act. The centrepiece was a two-billion-pound infrastructure fund — jobs, real jobs, tied to verifiable outcomes, for communities that have been told to wait for thirty years. The Prime Minister stood at that dispatch box and said: "This is how we rebuild." Those were his words. The country believed him.
 
-**Caesar**: Additional review. The original bill included a compliance framework — Annex C, pages 14 through 22 — which the government's own legal team certified as sufficient at the time of passage. What specifically was found to be inadequate? Was it a legal gap, or an administrative preference?
+**Secretary of State**: The honourable member is being somewhat dramatic. The fund has not been cancelled — it has been delayed for legitimate compliance reasons. The procurement guidelines——
 
-**Secretary of State**: The review identified certain procurement categories that required further clarification——
+**Caesar**: The procurement guidelines were in Annex C. Pages 14 through 22. The government's own legal team certified them as sufficient. We don't need to relitigate that — it's on the record.
 
-**Caesar**: I'll tell the committee what I found. According to the department's own quarterly report — which is public — during the same period, 340 million from the existing stimulus programme went to three infrastructure projects with no employment conditions whatsoever. So the department can move quickly when the framework is loose, but freezes the moment jobs are attached. Secretary, is the difficulty legal, or is the conditional framework simply not a priority for this government?
+What I'd like to do, Chair, is draw the committee's attention to a different document. It's the department's own quarterly report, published last month. Publicly available — anyone can download it. Page 31, table 4B.
 
-（Opposition members: "Hear, hear!"）
+（Opposition members shift forward.）
+
+**Caesar**: In the same eight months that the conditional fund disbursed zero pounds, the unconditional stimulus programme disbursed three hundred and forty million. Three projects. No employment conditions. No wage floor. No accountability framework. Zero.
+
+So the department's systems work. The money can move. It simply moves differently depending on who benefits.
+
+（"Hear, hear!" from opposition benches.）
 
 **Chair**: Order.
 
-**Secretary of State**: The conditional framework is a priority. The delay is administrative, not political.
+**Caesar**: Secretary — I'm going to ask you a direct question, and I'd ask you to answer it directly. Is the conditional fund delayed because of a legal problem, or because this government prefers the version that doesn't ask anything of its donors?
 
-**Caesar**: Administrative, not political. I note that for the record. Now — I have two requests for this committee. First: that we write to the department requesting a project-by-project disbursement schedule for the first tranche, with named officials and deadlines, within thirty days. Second: that we commission an independent audit comparing employment outcomes of the conditional fund versus the unconditional stimulus, once both have been operational for twelve months. The public deserve to know which framework actually delivers. Chair, can these be taken forward?
+**Secretary of State**: That is a disgraceful characterisation——
 
-**Chair**: The committee will consider both requests. I thank the honourable member.
+**Chair**: Order. Secretary, please answer the question.
+
+**Secretary of State**: The conditional framework is a priority. The delay is administrative.
+
+**Caesar**: Administrative. Not political. I note that for the record — and I suspect the voters will note it too.
+
+Chair, I have two motions. First: this committee writes to the department requesting a project-by-project disbursement schedule for the first tranche, within thirty days, with named officials and hard deadlines. Second: we commission an independent audit — not internal, independent — comparing the employment outcomes of the conditional fund and the unconditional stimulus, twelve months from first disbursement.
+
+The country was promised a rebuild. What it got was a spreadsheet. Let's find out why.
+
+**Chair**: The committee will consider both motions. I thank the honourable member.
