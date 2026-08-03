@@ -13,7 +13,7 @@
 把一个历史人物 / 被拒的现实人物，转成一个**不可识别的现代议会制虚构政治家**，同时：
 
 - 保留：人格底色、欲望结构、弱点、行为模式、政治气质、领导风格、说话节奏、情绪触发点……
-- 删除：具体历史事件、战争、政变、丑闻、死亡方式、亲属关系、家臣部下、政党派系专名、政策口号、唯一性指纹……
+- 删除：具体历史事件、战争、政变、丑闻、死亡方式、亲属关系、家臣部下、政策口号、唯一性指纹……（真实政党名称允许保留，见 §3 修订）
 
 > 转化的产物必须是**有血有肉的政治人物**，不是一份干瘪的标签清单。
 
@@ -229,7 +229,7 @@ formative_life_history:
 ## 3. 必须删除内容（删除或改写）
 
 > ⚠️ **边界澄清（重要，防止误删）**——「必须删除」针对两类，**不要混淆**：
-> 1. **具体事实指纹**：具体事件/战役/政变/丑闻/死亡方式/亲属与家臣名单/政党派系专名/政策口号等（即下列各项）。这些会把角色**绑回历史的特定事实**，必须删或改写。
+> 1. **具体事实指纹**：具体事件/战役/政变/丑闻/死亡方式/亲属与家臣名单/政策口号等（即下列各项）。这些会把角色**绑回历史的特定事实**，必须删或改写。**真实政党名称允许保留**（见 §3 修订——政党是公共组织，非个人指纹）。
 > 2. **近现代现实政治人物的复刻防护**：见 `modern_political_figure_policy.md` / `recognizability_review.md`，目的是防止冒充/复刻现实在世或近现代政治人物——**这一条只针对近现代现实人物，不针对历史原型**。
 >
 > **❌ 不属于「必须删除」的**：历史人物的**气质、兴趣审美、行为模式、领导风格**——这些是第 2 节「可保留」的**历史特色**，应转化为现代等价物**保留**（如战国武将→剑道、建安诗人→诗歌、罗马演说家→公开演讲），让转化后的角色仍能看出"来自这个历史人物"。
@@ -246,9 +246,8 @@ formative_life_history:
 - 具体死亡方式
 - 具体亲属关系
 - 具体家臣 / 部下名单
-- 具体政党名称
-- 具体派系名称
-- 具体政策口号
+- ~~具体政党名称~~ **（修订：默认使用虚构政党，由人格与现代条件推演而来。用户可要求替换为真实政党名如 LDP、JCP 等，只要人物本身不可识别为某现实政治人物即可。近现代现实人物提取不得保留其原党派——须重新推演。）**
+- 具体政策口号（与人物绑定的独有口号须删；通用政策名可保留）
 - 现代现实人物可识别信息
 - 会把角色重新绑定到现实历史人物或近现代现实政治人物的**唯一性指纹**
 
@@ -276,7 +275,7 @@ formative_life_history:
 
 ```yaml
 political_system: modern_parliamentary_democracy
-reference_model: Japanese-style parliamentary politics
+reference_model: character's own national parliamentary system
 institutional_features:
   - parliament
   - cabinet
@@ -292,7 +291,7 @@ institutional_features:
 
 注意：
 
-- 参考日本议会制是为了**提供制度机制**，不代表角色必须变成日本人；
+- 制度机制参考**人物所属国家的议会制度**，不强制绑定特定国家——日本历史人物用日本国会机制，中国历史人物用中国人大/政协机制，欧洲人物用欧洲议会制等；
 - 可以保留原文化背景、姓名风格、国籍风格（如曹操可保留 China-inspired 虚构议会制国家、凯撒可保留 Roman/Italian-inspired）；
 - 但所有角色都必须是**虚构现代政治人物**，不得变成现实政治人物。
 
@@ -322,7 +321,7 @@ modern_fictional_persona:  # 转化后的虚构现代政治人物
   age: 0
   nationality_or_region: ""# Japan-inspired / China-inspired fictional / Roman-Italian-inspired ……
   political_system: modern_parliamentary_democracy
-  reference_model: Japanese-style parliamentary politics
+  reference_model: character's own national parliamentary system
   role: ""
   career_origin: ""
   public_image: ""

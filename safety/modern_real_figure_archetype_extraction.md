@@ -39,7 +39,7 @@
 4. 提取公开可见的行为模式。
 5. 移除识别指纹。
 6. 如需要，与至少两个其它宽泛原型特质混合（避免指向单一真人）。
-7. 转化为虚构现代议会制 persona。
+7. 转化为虚构现代议会制 persona。**党派不保留原人物的真实党派**——现代党派由人格特质、现代社会情况及成长经历重新推演（与历史人物转化同一逻辑）。用户可在生成后要求替换为特定真实党派。
 8. 运行可识别性审核（`safety/recognizability_review.md`，含盲测）。
 9. 生成 persona 文件夹（含 `modern_real_figure_public_source_report.md` + `creation_review.md`）。
 10. 激活前呈现 `creation_review.md`。

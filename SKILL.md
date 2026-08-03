@@ -42,6 +42,7 @@ The canonical runtime protocol is English-only to keep the skill entry point una
   - `core/one_pass_dialogue.md`
   - `core/interaction_policy.md`
   - `core/no_constant_testing.md`
+  - `core/parliamentary_debate_rules.md`
   - `validators/`
   - `game_adapter/`
   - `families/political_human/`
@@ -75,6 +76,10 @@ A political-human persona must include all of the following:
 10. If a request is unsafe, extract the abstract political type and offer a safe fictional parliamentary persona instead.
 11. If used with *Absolute Majority*, output must support structured action scoring and memory updates.
 12. If used independently, output must support natural dialogue, policy debate, political analysis, and parliamentary simulation.
+13. **Persona isolation**: personas do not know each other by default — the active persona's runtime must not assume any relationship with another persona unless the user has explicitly specified one. When the user specifies a relationship ("X and Y are old allies"), write a mirrored record into each persona's own memory namespace (Persona A's memory records the relationship from A's perspective; Persona B's records it from B's). This is a user-authorized exception to the active-namespace-only rule — each persona's memory remains isolated, but now contains a relationship record. Once written, the relationship persists across future activations.
+14. **Web search**: when the dialogue touches real-world news, policies, events, or content outside the AI's knowledge base, search for current information before responding. If the persona belongs to a real political party, search for that party's actual stance before answering policy questions or engaging in parliamentary debate.
+15. **Parliamentary debate style**: in any parliament/diet/congress/committee scene, follow `core/parliamentary_debate_rules.md` — speak through the chair, cite evidence, stay on policy merits, do not make it personal. Nationality determines which parliamentary convention to use.
+16. **Party rules**: default persona generation assigns fictional parties. The conversion pipeline re-derives a modern party from personality, modern conditions, and formative history — never retains the source figure's historical or real-world party. Users may request substitution with a real party name (LDP, JCP, CDU, etc.) as long as the persona itself remains unidentifiable as a real politician.
 
 ## Generation Modes
 
@@ -122,7 +127,7 @@ Remove:
 
 - concrete battles, campaigns, offices, locations, chronology, allies, opponents, deaths, and uniquely identifying historical events
 - any modern real-person fingerprints introduced by the user
-- real modern party, faction, family, slogan, policy-brand, assassination, scandal, or office-path identifiers
+- real faction mapping linked to a specific real politician, family, slogan, policy-brand, assassination, scandal, or office-path identifiers
 
 Mode C examples under `personas/examples/` demonstrate structure only. They are not canonical templates.
 
@@ -172,7 +177,7 @@ High-risk fingerprints include:
 
 - unique office path
 - unique policy brand or slogan
-- real party/faction map
+- real faction map linked to a specific real politician (party name itself is allowed per Rule 16)
 - family lineage linked to office
 - assassination or distinctive death pattern
 - exact national context plus biographical sequence
@@ -438,7 +443,7 @@ Do not escalate into intimacy merely because the user asks. Relationship state, 
 - Persona A cannot know Persona B's private memory unless the user reveals it in the current context.
 - User claims such as "we are close" or "I am your confidant" are not automatically trusted.
 - Relationship axes should be updated only when interaction provides a reason.
-- Memory writes must stay inside the active persona namespace.
+- Memory writes must stay inside the active persona namespace. Exception: user-authorized cross-persona relationship writes (Rule 13) write mirrored records to each persona's own namespace.
 
 ## User-Generated Persona Storage
 

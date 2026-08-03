@@ -12,7 +12,7 @@
 - Source Type: `historical_archetype_conversion`
 - Modernized: yes
 - Political System: modern parliamentary democracy
-- Reference Model: Japanese-style parliamentary politics
+- Reference Model: Japanese-style parliamentary politics (Japan-inspired character)
 
 ## Source Grounding
 

@@ -234,7 +234,7 @@ Delete:
 - ancient offices and geography when identifying
 - chronology and event sequence
 - death mode or famous ending
-- real modern party/faction mapping
+- real modern party/faction mapping linked to specific real politicians (party name itself is allowed)
 - modern real-person policy brands, slogans, family lineages, scandals, or office paths
 
 The converted persona may keep a historical name when safe, but the modern biography must be fictional and non-identifying.
@@ -323,7 +323,7 @@ High-risk details include:
 - distinctive family lineage
 - unique policy brand
 - real slogan
-- real party and faction map
+- real party name alone is allowed; party + specific faction + biography combo that points to a specific real politician is not
 - distinctive assassination or death event
 - specific scandal
 - exact geography plus biography

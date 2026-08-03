@@ -151,12 +151,12 @@ modern_fictional_persona:
   age: 0
   nationality_or_region: ""     # Japan-inspired / China-inspired fictional / Roman-Italian-inspired ……
   political_system: "modern_parliamentary_democracy"
-  reference_model: "Japanese-style parliamentary politics"
+  reference_model: "character's own national parliamentary system"
   role: ""                      # 如 改革派执政党党首候选人 / 执政联盟核心派阀领袖
   career_origin: ""             # 从政前身份
   public_image: ""              # 公开形象
 
-  party_faction:                # 虚构党派与派系（不得是现实政党/派系）
+  party_faction:                # 党派与派系（允许真实党派名；派系名建议虚构）
     party: ""
     faction: ""
     role_in_party: ""

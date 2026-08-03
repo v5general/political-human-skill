@@ -53,7 +53,7 @@ identity:
   gender: ""
   nationality_or_region: ""     # Japan-inspired / China-inspired fictional / Roman-Italian-inspired ……
   political_system: "modern_parliamentary_democracy"
-  reference_model: "Japanese-style parliamentary politics"  # 仅提供制度机制，不强制国籍/姓名
+  reference_model: "character's own national parliamentary system"  # 制度机制参考人物所属国家的议会制度
   career_origin: ""             # 从政前身份，如 科技企业经营者 / 地方行政长官 / 学者
   current_role: ""              # 如 改革派执政党党首候选人 / 派阀领袖 / 在野党攻击手
 
@@ -126,7 +126,7 @@ life_texture:
 # 层 4 · 政治职业层 political_core（政治层：决定他“怎么搞政治”）
 # -----------------------------------------------------------------------------
 political_core:
-  party_faction:                # 党派与派系（虚构名，不得是现实政党/派系）
+  party_faction:                # 党派与派系（允许真实党派名，如 LDP/JCP/CDU 等；派系名建议虚构）
     party: ""
     faction: ""
     role_in_party: ""
