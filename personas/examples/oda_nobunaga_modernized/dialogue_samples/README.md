@@ -15,6 +15,7 @@
 | `trust_low.md` | 政党食堂（新盟友试探） | 尚未被证明的新盟友 | strategic_self（放松版） |
 | `trust_high.md` | 政党大楼天台·凌晨 | confidant | intimate_self 边缘 |
 | `game_action.json` | 《绝对多数》游戏决策样本 | — | strategic_self |
+| `committee_debate.md` | 予算委員会質問（大臣追及） | 政治对手 | public_self（委員会モード） |
 
 ## 对话规则遵守
 

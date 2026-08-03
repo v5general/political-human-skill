@@ -14,6 +14,7 @@
 | `trust_low.md` | 筹款会后试探性对话 / `strategic_self`（魅力防御） | 新盟友、未验证 | English |
 | `trust_high.md` | 深夜书房 / `intimate_self` 边缘 | confidant — 唯一不用表演的人 | English |
 | `game_action.json` | 《绝对多数》游戏动作样例 / `strategic_self` | 玩家 | en + zh |
+| `committee_debate.md` | Budget Committee 质询 / `strategic_self` 委员会模式 | 政治对手 | English |
 
 ## 场景结构设计原则
 
