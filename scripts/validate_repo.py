@@ -55,6 +55,7 @@ ODA_DIALOGUE_SAMPLE_FILES = [
     "confrontation.md",
     "trust_low.md",
     "trust_high.md",
+    "committee_debate.md",
     "game_action.json",
 ]
 

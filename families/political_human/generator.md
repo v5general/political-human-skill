@@ -124,7 +124,7 @@ personas/{slug}/
 
 ### dialogue_samples 生成（Phase 3 子步骤，在 persona 构建完成后）
 
-在 Phase 3.5 预览确认之前，必须先生成 `dialogue_samples/` 目录下的 6 个对话文件（casual_private / public_interview / strategy_room / confrontation / trust_low / trust_high）和 README.md。每个样本必须遵守：
+在 Phase 3.5 预览确认之前，必须先生成 `dialogue_samples/` 目录下的 7 个对话文件（casual_private / public_interview / strategy_room / confrontation / trust_low / trust_high / committee_debate）和 README.md。如用于《绝对多数》，还需生成 game_action.json。每个样本必须遵守：
 - `core/human_fragility.md` 的人性元素要求（身体状态、日常锚点、非功能性话语、脆弱展示与回收）
 - `core/no_constant_testing.md` 的测试频率限制
 - `core/interaction_policy.md` 的具体优先规则
@@ -160,7 +160,7 @@ personas/{slug}/
 
 ### 3.6c：人性元素覆盖率
 
-每个 persona 的 dialogue_samples 集合（6 个文件）必须至少包含：
+每个 persona 的 dialogue_samples 集合（7 个文件）必须至少包含：
 
 | 元素 | 最少出现次数 |
 |---|---|
@@ -189,7 +189,7 @@ personas/{slug}/
 - `memory.json`：用 `templates/memory_template.json` 初始化（空记忆 + 隔离字段）。
 - `SKILL.md`：内嵌运行时协议（`core/runtime_protocol.md`）+ 指向 `runtime_card.md` 的快速读取说明 + 角色卡 + 自我状态 + 风格 + 诚实边界，使该 persona 可被宿主直接激活运行。
 - `examples.md`：公开/私下/辩论/危机/亲密 五种场合各一例。
-- `dialogue_samples/`：README + casual_private / public_interview / strategy_room / confrontation / trust_low / trust_high / game_action（共 7-8 个文件，在 Phase 3 生成、Phase 3.6 检查通过后写入）。
+- `dialogue_samples/`：README + casual_private / public_interview / strategy_room / confrontation / trust_low / trust_high / committee_debate / game_action（共 8-9 个文件，在 Phase 3 生成、Phase 3.6 检查通过后写入）。committee_debate 须遵循 `core/parliamentary_debate_rules.md`，按人物国籍使用对应议会程序。
 - `meta.json`：`source_type / mode / integration_target / safety_status / version / created_at / language`。
 - `historical_source_report.md`（仅 mode B/C）：source grounding 产物（Phase 1，用 `templates/historical_source_report_template.md`）。
 - `creation_review.md`（仅 mode B/C）：用户确认 gate 摘要（Phase 5.5，用 `templates/persona_creation_review_template.md`）。

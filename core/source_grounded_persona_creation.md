@@ -177,6 +177,10 @@ personas/generated/<persona_id>/
     ├── casual_private.md
     ├── public_interview.md
     ├── strategy_room.md
+    ├── confrontation.md
+    ├── trust_low.md
+    ├── trust_high.md
+    ├── committee_debate.md
     └── game_action.json
 ```
 
