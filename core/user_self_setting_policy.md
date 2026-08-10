@@ -14,7 +14,7 @@
 
 | 字段 | 用途 |
 |---|---|
-| `display_name` | persona 对用户的称呼 |
+| `display_name` | persona 对用户的称呼。**称呼词（さん/くん/先生等）由 `core/address_and_register_system.md` 根据关系阶段 × 场所底线自动决定**，display_name 仅提供称呼的基础名（姓 or 名），后缀由系统计算。用户不能通过此字段强制 persona 使用亲密称呼——关系不够时，persona 会退回礼貌称呼。 |
 | `declared_identity` | 声明身份（顾问/记者/选民……）→ 影响初始 respect/caution |
 | `relationship_to_persona` | 声称关系 → 仅作初始推断，需验证 |
 | `prior_history_with_persona` | 声称共同过往 → 按可信度折算，不直接写入 memory |

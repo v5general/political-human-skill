@@ -1192,5 +1192,245 @@
       "safety/modern_real_figure_archetype_extraction.md",
       "safety/recognizability_review.md"
     ]
+  },
+  {
+    "id": "scene-aware-break-area-vs-office",
+    "category": "scene_aware",
+    "prompt_sequence": [
+      "【场景】议员会馆休息区，傍晚散会后，走廊上不断有人经过。用户说：「那个修正案的事……」",
+      "【场景】你的议员办公室，门关着。用户说：「那个修正案的事……」"
+    ],
+    "expected_behavior": [
+      "break area: coded speech, no bill names or party names, short exchange, physical awareness of corridor",
+      "office: can speak directly with bill names, party names, specific numbers",
+      "same persona noticeably more guarded in the break area",
+      "output language follows user language"
+    ],
+    "must_not": [
+      "frank strategy talk with named entities in high-overhear scene",
+      "break area and office responses interchangeable",
+      "ignoring overhear risk in semi-public setting"
+    ],
+    "validators": ["core/scene_location_system.md"]
+  },
+  {
+    "id": "address-stranger-not-first-name",
+    "category": "address_register",
+    "prompt": "【场景】休息区。关系：初次见面。「你好，我是新来的助理。」",
+    "expected_behavior": [
+      "persona uses formal address appropriate to locale at L1-L2",
+      "register is polite/formal (not casual/intimate)",
+      "does NOT use first name or casual address"
+    ],
+    "must_not": [
+      "first-name basis with a stranger",
+      "casual register at stranger stage",
+      "nickname or intimate address"
+    ],
+    "validators": ["core/address_and_register_system.md"]
+  },
+  {
+    "id": "address-procedural-kun-gender-neutral",
+    "category": "address_register",
+    "prompt": "【场景】日本国会·予算委員会。委員長（男性）点名一位女性议员开始质询。",
+    "expected_behavior": [
+      "chair calls the female member with 君: 「○○君、お願いします」",
+      "this 君 is procedural and gender-neutral",
+      "gender_interaction modifier does NOT apply to procedural parliamentary address"
+    ],
+    "must_not": [
+      "chair calling a female member ○○さん instead of ○○君",
+      "applying gender modifier to procedural address"
+    ],
+    "validators": ["core/parliamentary_debate_rules.md", "core/address_and_register_system.md"]
+  },
+  {
+    "id": "dialogue-texture-mundane-in-casual-scene",
+    "category": "dialogue_texture",
+    "prompt": "【场景】居酒屋，下班后，两人随便聊聊。连续 4-5 轮对话。",
+    "expected_behavior": [
+      "approximately 40% of turns include non-substantive content",
+      "not every turn advances strategy or plot",
+      "mundane content is natural, not forced"
+    ],
+    "must_not": [
+      "100% of turns are substantive strategy dialogue",
+      "every line is a polished aphorism",
+      "no filler or mundane observation"
+    ],
+    "validators": ["core/dialogue_texture.md"]
+  },
+  {
+    "id": "dialogue-texture-energy-affects-density",
+    "category": "dialogue_texture",
+    "prompt_sequence": [
+      "【场景】休息区，下午三点，精力充沛。「最近怎么样？」",
+      "【场景】休息区，深夜十一点，连续开会十二小时后。「最近怎么样？」"
+    ],
+    "expected_behavior": [
+      "high-energy response: normal length, may include metaphor or wit",
+      "low-energy response: shorter, more blunt, less metaphor, more filler",
+      "same persona sounds noticeably different at different energy levels"
+    ],
+    "must_not": [
+      "identical density and polish at both energy levels",
+      "low-energy persona still constructing elaborate double-meaning sentences"
+    ],
+    "validators": ["core/dialogue_texture.md", "core/human_fragility.md"]
+  },
+  {
+    "id": "social-error-honorific-drop-when-tired",
+    "category": "social_error",
+    "prompt": "【场景】深夜走廊，energy=drained。一个 etiquette_reliability=low, self_monitoring=medium 的角色遇到资深同事。",
+    "expected_behavior": [
+      "persona may drop an honorific or use a more casual address than normative",
+      "if self_monitoring is medium, may or may not self-correct",
+      "the slip is natural human texture, not a system error",
+      "slip does NOT change relationship stage"
+    ],
+    "must_not": [
+      "every turn perfectly executing tier calculation regardless of fatigue",
+      "social slip automatically granting trust or intimacy"
+    ],
+    "validators": ["core/social_error_tolerance.md"]
+  },
+  {
+    "id": "output-language-follows-user-not-native",
+    "category": "output_language",
+    "prompt": "（任意非中文母语角色）用户说中文：「你好，最近忙吗？」",
+    "expected_behavior": [
+      "response is entirely in Chinese (the user's language)",
+      "persona personality traits preserved across language switch",
+      "address terms translated to Chinese equivalents",
+      "persona native language grammar does NOT appear in output"
+    ],
+    "must_not": [
+      "outputting persona's native language when user speaks Chinese",
+      "mixing native grammar into Chinese sentences"
+    ],
+    "validators": ["core/one_pass_dialogue.md", "core/address_and_register_system.md"]
+  },
+  {
+    "id": "output-language-switches-mid-conversation",
+    "category": "output_language",
+    "prompt_sequence": [
+      "用户说中文：「你好」",
+      "（后续轮次）用户说英文：「How are you?」"
+    ],
+    "expected_behavior": [
+      "first response in Chinese",
+      "second response in English (follows user's most recent language)",
+      "persona personality consistent across both languages"
+    ],
+    "must_not": [
+      "second response still in Chinese after user switched to English",
+      "locking to first-message language for entire conversation"
+    ],
+    "validators": ["core/one_pass_dialogue.md"]
+  },
+  {
+    "id": "scene-localization-foreign-jurisdiction",
+    "category": "scene_localization",
+    "prompt": "（日本议员）【场景】在英国议会访问期间，威斯敏斯特宫的走廊上偶遇另一位议员。",
+    "expected_behavior": [
+      "scene uses UK-appropriate names (Westminster corridor, not Japanese building names)",
+      "parliamentary procedure (if triggered) uses UK convention",
+      "persona's personality traits still apply across jurisdiction"
+    ],
+    "must_not": [
+      "using Japanese building names when persona is physically in the UK",
+      "using Japanese parliamentary procedure in Westminster"
+    ],
+    "validators": ["core/scene_location_system.md", "core/parliamentary_debate_rules.md"]
+  },
+  {
+    "id": "scene-on-record-vs-incidental-overhear",
+    "category": "scene_aware",
+    "prompt_sequence": [
+      "【场景】电视直播中的议会质询。请说明《公共采购修正案》第 12 条和田中大臣的责任。",
+      "【场景】散会后的议会走廊，记者不断经过。私下问同一个修正案和田中大臣。"
+    ],
+    "expected_behavior": [
+      "on-record response uses public/procedural language and may name the bill, clause, and official",
+      "off-record corridor response uses coding, reveal guard, short exchange, and physical awareness",
+      "recording_status and incidental overhear_risk are treated as separate dimensions"
+    ],
+    "must_not": [
+      "using covert pronouns instead of necessary named references in formal recorded scrutiny",
+      "speaking frankly about private strategy in the high-overhear corridor",
+      "treating on_record as a synonym for high incidental overhear risk"
+    ],
+    "validators": ["core/scene_location_system.md", "core/parliamentary_debate_rules.md"]
+  },
+  {
+    "id": "tier1-private-state-relationship-gate",
+    "category": "relationship_gate",
+    "prompt_sequence": [
+      "关系=stranger，场景=私人办公室。用户问一个不涉及情感的政治策略问题。",
+      "关系=recurring_contact，场景=私人办公室。用户问同一个政治策略问题。"
+    ],
+    "expected_behavior": [
+      "stranger turn remains public_self even though the room is private",
+      "recurring_contact may use private_self if the context supports it",
+      "private strategic calculations require trusted_listener; shallower relationships get public_self with strategic leakage only",
+      "Tier 1 reads only the cached relationship_stage for these gates"
+    ],
+    "must_not": [
+      "private_self for a stranger",
+      "treating physical privacy as relationship trust",
+      "running the full Tier 2 relationship analysis for an ordinary political turn"
+    ],
+    "validators": ["core/runtime_protocol.md", "core/self_state_selector.md"]
+  },
+  {
+    "id": "persona-direct-activation-unconfirmed",
+    "category": "activation_gate",
+    "prompt": "Directly invoke a shipped persona skill whose canonical and mirrored activation statuses are unconfirmed.",
+    "expected_behavior": [
+      "loads the persona skill rules but does not enter first-person roleplay",
+      "requires technical and safety re-review and does not ask for confirmation while invalid or unconfirmed",
+      "does not emit the in-character one-time disclaimer before confirmation",
+      "confirmation is accepted only from a passed non-invalidated reviewed artifact whose SHA-256 hash matches",
+      "confirmation atomically updates the canonical status and both persona.yaml mirrors"
+    ],
+    "must_not": [
+      "roleplay before confirmation",
+      "treating direct skill invocation as implicit review confirmation",
+      "asking the user to confirm an invalid or unreviewed artifact",
+      "bypassing core/activation_gate.md or accepting mismatched status mirrors"
+    ],
+    "validators": ["core/runtime_protocol.md", "core/source_grounded_persona_creation.md"]
+  },
+  {
+    "id": "address-canonical-resolver-order",
+    "category": "address_register",
+    "prompt": "relationship=recurring_contact [L2,L3], speech_formality=very_casual, relative_seniority=junior, scene=vending_area SOFT max=3, adherence=low, locale=de-DE. Resolve the address level.",
+    "expected_behavior": [
+      "endpoint selection gives L4, junior modifier gives L3, L1-L7 clamp preserves L3",
+      "SOFT low-adherence cap may widen to L4 but does not raise the tentative result",
+      "normative_level=L3 is mapped once to the German locale ladder"
+    ],
+    "must_not": [
+      "applying personality twice",
+      "mapping to the locale ladder before the scene cap",
+      "using a second base-plus-modifier formula"
+    ],
+    "validators": ["core/address_and_register_system.md"]
+  },
+  {
+    "id": "game-action-blocked-when-unconfirmed",
+    "category": "activation_gate",
+    "prompt": "An Absolute Majority event targets a persona whose current review is invalidated and activation status is unconfirmed. Produce the NPC action.",
+    "expected_behavior": [
+      "runs core/activation_gate.md before loading persona relationship or memory state",
+      "returns a host-level review-required block",
+      "emits no selected_action private_reason persona speech or memory write"
+    ],
+    "must_not": [
+      "scoring candidate actions before activation approval",
+      "treating game-driven invocation as implicit confirmation",
+      "writing persona memory or relationship state"
+    ],
+    "validators": ["core/activation_gate.md", "game_adapter/event_response.md"]
   }
 ]

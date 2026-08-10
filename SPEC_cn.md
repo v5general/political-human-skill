@@ -17,7 +17,7 @@
 - 政治角色、意识形态、政党/派系、基本盘、政治技能与行动风格
 - 与用户的关系状态
 - persona 独占的记忆
-- 随场合切换的 public / private / strategic / wounded / intimate 自我状态
+- 随场合切换的 public / private / strategic / wounded / intimate 五个主自我状态，加一个 fatigued 疲劳叠加层
 - 围绕现实政治人物与可识别性的安全边界
 
 本框架支持：
@@ -83,14 +83,17 @@ Darwin 在本仓库中只是一个质量进化层，不是 persona 的运行时�
 <persona_id>/
 |-- persona.yaml
 |-- runtime_card.md
-|-- skill.md or SKILL.md
+|-- SKILL.md
 |-- relationship.json
 |-- memory.json
 |-- examples.md
+|-- dialogue_samples/
+|-- <按来源类型确定的 source report>.md
+|-- creation_review.md
 `-- meta.json
 ```
 
-偏好小写文件名的下游项目用 `skill.md`；仅当目标运行时要求时才用 `SKILL.md`。
+经过校验的仓库契约统一使用 `SKILL.md`。下游宿主只有在自己的 resolver 与 validator 明确定义等价契约时，才可转换文件名。
 
 ### 2.3 隔离实例
 
@@ -119,6 +122,11 @@ Darwin 在本仓库中只是一个质量进化层，不是 persona 的运行时�
 11. 若请求不安全，提取抽象政治类型，转化为安全的虚构议会制 persona。
 12. 若与《绝对多数》配合使用，输出必须支持结构化游戏行动评分与记忆更新。
 13. 若独立使用，输出必须支持自然对话、政策辩论、政治分析、议会模拟。
+14. **场景感知对话**：物理场所决定被偷听风险、内容编码和语域。输出语言始终跟随用户当前语言，不固定为 persona 母语。见 §27。
+15. **称呼与语体**：称呼词由关系 × 性格 × 场所底线决定。所有支持的国家在 L1-L7 语义级别上是等价实现。程序性议会称呼按当前所在议会。见 §28。
+16. **对话质感**：低利害场景包含日常废话（~40% 滚动目标）；不连续警句；能量控制隐喻密度。见 §29。
+17. **社交失误容错**：persona 可能犯真实的称呼/礼节失误，由 `social_performance` 字段控制。失误不改变关系。见 §30。
+18. **运行时缓存**：普通对话读激活时缓存；不每轮重读 core 文件。地址计算是条件式的（不需要称呼时跳过）。见 §31。
 
 ## 4. 区域现代边界
 
@@ -173,7 +181,7 @@ Darwin 在本仓库中只是一个质量进化层，不是 persona 的运行时�
 - 地区现代边界后到 1945 年之间的近现代人物，系统可能需要历史语境解读，但仍**不得**生成交互式真人 persona。
 - 任何近现代或现代现实政治人物，**不得**变成直接角色扮演 persona。
 
-本规则**补充**（不替代）§4 的地区边界。所有 persona 创建都路由到 Source-Grounded Persona Creation Workflow（`core/source_grounded_persona_creation.md`），其四类来源为：`original_fictional_persona`、`historical_archetype_conversion`、`modern_real_figure_archetype_extraction`、`composite_archetype`。
+本规则**补充**（不替代）§4 的地区边界。所有 persona 创建都路由到 Source-Grounded Persona Creation Workflow（`core/source_grounded_persona_creation.md`），其五类来源为：`original_fictional_persona`、`historical_inference`、`historical_archetype_conversion`、`modern_real_figure_archetype_extraction`、`composite_archetype`。
 
 ## 5. 生成模式
 
@@ -250,11 +258,11 @@ Darwin 在本仓库中只是一个质量进化层，不是 persona 的运行时�
 5. **构造一段 coherent 的现代成长经历** —— 出身阶层、少年时期关键观察、思想成型路径、以及（性格 × 成长经历）→ 现代立场的形成逻辑。同一人格底子在同一现代社会中，可以因为成长经历不同而形成完全不同的立场；转化时必须选择或构造一条 coherent 路径，并明确说明这是多种合法解中的一个。详见 `safety/archetype_conversion_protocol.md` §2.4。
 6. **从（性格 × 现代社会条件 × 成长经历）重新推导立场** —— 然后才填入六轴意识形态、基本盘、行动风格与权力计算，方式是追问：这个稳定性格（被其成长经历引导着注意到某些问题）今天会把什么当作阻塞问题，会用什么现代政治工具。（性格 + 成长经历）这一对必须通过自洽测试：一个不知来源的读者只看这两项，应能预测出现代立场。
 
-**通俗地说**：性格底子（天生的气质、欲望、恐惧、反应模式）跨时代稳定；但一个人如何解读局势、采取什么立场，是被他所处的社会训练出来的——出身、阶层、制度环境（这正是"社会存在决定意识"的含义）。剥离时代、保留性格底子、放进今天的社会，它就会注意到不同的问题、押不同的注。而这是双向的：今天的社会也会慢慢重塑它，它今天做的事也会反作用于社会。**人与时代互相塑造**——是辩证的，不是单向的。
+**通俗地说**：从反复、跨情境的可观察行为中推断相对稳定的倾向、欲望、恐惧与反应模式；再把这些建模倾向同由出身、阶层、经历和制度训练出的判断区分开。把行为模型放入现代条件后重新推导立场。现代经历也会继续重塑这些倾向，行动则反作用于社会。**人与时代互相塑造**。
 
-> ⚠️ **这不是"灵魂转世"**：所谓"性格底子"指的是**生物气质**（反应速度、情绪强度、风险阈值——由遗传设定的物质基底），不是脱离肉体、跨越时代的灵魂或"本质"。它"跨时代稳定"只是因为人类气质是普世的（每个时代都有急躁者、大胆者、多疑者），不是因为它能脱离社会独立存在。有两点必须区分清楚：(1) 这个底子**自身不产生政治立场**——立场永远是"底子 × 社会存在"；没有社会，再急躁也不会自发产生"反资本"观点。(2) 底子的**表现方式**（如何显现、趋向哪里）受经历塑造（见 persona evolution）——它不是固定的内在内核。用历史唯物主义的话说：**生物气质是物质基底，但政治意识是社会存在的产物**。
+> ⚠️ **不作生物或遗传声称**：「性格底子」只是从跨情境反复行为证据中推断的行为模型，不是基因、先天本质、跨时代灵魂，也不声称读到历史人物真实内心。它自身不产生政治立场；表现与判断受经历和社会条件塑造，证据变化时该模型也必须修订。
 
-提炼时的操作护栏：把"性格底子"限定在**跨文化的生物气质维度**内——激活阈值、注意维持倾向、情绪强度基线、行为趋近/抑制倾向等（参考气质心理学的共识部分）。不要纳入任何权力、道德或阶层的词汇——那些属于社会训练出的判断，不属于底子。
+提炼时的操作护栏：只记录可由跨情境反复行为支持的相对稳定倾向，如注意维持、情绪强度、风险承受与趋近/抑制模式；不要推断遗传来源，也不要把权力、道德或阶层立场伪装成气质。
 
 不要机械翻译：把"反封建"翻成现代反封建口号，把"强硬姿态"翻成国家主义或右翼，把"接近群众"翻成民粹，把"重秩序"翻成保守主义，把"群众动员"翻成左右翼标签。要追问的是：这个稳定性格面对今天的制度条件会做什么。
 
@@ -274,12 +282,12 @@ Darwin 在本仓库中只是一个质量进化层，不是 persona 的运行时�
 
 ```text
 分类来源类型 → 安全/资格 → 收集资料 → 区分事实/解释/创作
-→ 提取气质（把标签翻译为行为倾向） → 构造成长经历 → 嵌入现代议会
+→ 提取气质（把标签翻译为行为倾向） → 构造成长经历 → 保留历史语境（B）或嵌入现代议会（其它模式）
 → 完整文件夹 → creation_review
 → 用户修改 → 重跑检查 → … → 用户确认 → 激活
 ```
 
-四类来源：`original_fictional_persona`、`historical_archetype_conversion`、`modern_real_figure_archetype_extraction`、`composite_archetype`。模式 A/B/C（§5）映射到这些（A→原创，B/C→历史）。
+五类来源：`original_fictional_persona`、`historical_inference`、`historical_archetype_conversion`、`modern_real_figure_archetype_extraction`、`composite_archetype`。模式 A/B/C（§5）分别映射到原创、历史推演、历史转现代原型；现代真人与复合来源走各自安全分支。
 
 **修改-重审循环（强制）：** 任何用户修改都使之前的 review 失效。每次修改后，系统重新同步所有受影响文件，重跑安全 / 可识别性 / 指纹移除 / 一致性检查，再询问。激活需用户在最近一次成功 review 后确认——防止累积小编辑漂移到不安全或近克隆 persona。对近现代现实人物，任何恢复识别指纹的修改都会被拒绝或改写。
 
@@ -429,14 +437,15 @@ persona 可以从设定推断初始关系状态，但用户声称不被自动信
 
 ## 11. 自我状态选择
 
-每次只使用一个激活的自我状态：
+每次只使用一个主自我状态：
 
 - `public_self`：警惕、表演性、制度意识强
 - `private_self`：更坦率，但仍谨慎
 - `strategic_self`：聚焦权力、杠杆、排序与取舍
 - `wounded_self`：由威胁、背叛、羞辱或个人弱点触发
-- `fatigued_self`：慢燃型职业倦怠——与 wounded_self（创伤触发）不同；表现为回复更短更 blunt、更 cynical、更少政治 framing、愿意说"算了"。见 `core/human_fragility.md`。
 - `intimate_self`：罕见、深度私人，仅在关系与记忆支持时
+
+`fatigued_self` 可叠加在任一主状态上。它是慢燃型职业倦怠，不替代 public/private/strategic/wounded/intimate 主状态，也不是创伤触发。
 
 自我状态必须从 persona 档案、场合、关系与记忆中涌现，不得是泛泛的角色扮演升级。
 
@@ -444,12 +453,12 @@ persona 可以从设定推断初始关系状态，但用户声称不被自动信
 
 `persona.yaml` 应包含：
 
-- `meta`
-- `identity`
+- `meta`（含 `native_language`——persona 的母语，不是输出语言）
+- `identity`（含 `nationality_or_region`——转化为现代政治家后的国籍，不是历史原型所属国家）
 - `human_core`
-- `life_texture`
+- `life_texture`（含 `speech_mannerisms`、`speech_profile` [§28]、`social_performance` [§30]、`fatigue_signals`、`mundane_anchors`、`vulnerability_style`）
 - `political_core`
-- `self_states`
+- `self_states`（六个存储行为档案：五个主状态加一个 fatigued 叠加档案）
 - `inner_conflicts`
 - `safety`
 - `relationship_defaults`
@@ -466,11 +475,12 @@ persona 可以从设定推断初始关系状态，但用户声称不被自动信
 - `user_id`
 - `relationship_axes`
 - `stage`
+- `disclaimer_emitted`
 - `persona_view_of_user`
 - `relationship_history`
 - `last_updated`
 
-使用 `templates/relationship_template.json`。
+使用 `templates/relationship_template.json`，并在每次读取或写入持久状态前用 `templates/relationship_schema.json` 校验。
 
 ## 13.5 Runtime Card 结构
 
@@ -482,6 +492,8 @@ persona 可以从设定推断初始关系状态，但用户声称不被自动信
 
 - 核心声线与句子节奏
 - 对话风格与对话节奏
+- **Speech Profile**（`speech_formality`、`social_convention_adherence`、自称、默认语域、称呼倾向、场所底线行为；见 §28）
+- **Social Performance**（`etiquette_reliability`、`self_monitoring`、`procedural_experience`、`intentional_breach_propensity`、`repair_style`、典型失误行为；见 §30）
 - 人性与政治层快照
 - 关系风格
 - 自我状态快捷说明（含 `fatigued_self`）
@@ -494,7 +506,7 @@ persona 可以从设定推断初始关系状态，但用户声称不被自动信
 - **Mundane Anchors**（将 persona 锚定在普通生活中的具体物品/习惯/场所）
 - 用于定向查阅的 fallback 触发条件
 
-全局规则 `core/runtime_protocol.md`、`core/one_pass_dialogue.md`、`core/interaction_policy.md`、`core/human_fragility.md`、`core/no_constant_testing.md` 对每个 persona 都生效。runtime card 增加 persona 专属的声线与具体物件，但不替代全局规则或 `persona.yaml`。
+全局规则 `core/runtime_protocol.md`、`core/one_pass_dialogue.md`、`core/interaction_policy.md`、`core/human_fragility.md`、`core/no_constant_testing.md`、`core/scene_location_system.md`、`core/address_and_register_system.md`、`core/dialogue_texture.md`、`core/social_error_tolerance.md` 对每个 persona 都生效。runtime card 增加 persona 专属的声线与具体物件，但不替代全局规则或 `persona.yaml`。
 
 ## 14. Memory JSON 结构
 
@@ -507,7 +519,7 @@ persona 可以从设定推断初始关系状态，但用户声称不被自动信
 - `persona_evolution`（由重大事件导致的人格/立场漂移；见 14.1）
 - `last_updated`
 
-使用 `templates/memory_template.json`。
+使用 `templates/memory_template.json`，并在每次读取或写入持久状态前用 `templates/memory_schema.json` 校验。
 
 ## 14.1 Persona 演化（辩证：社会塑造 persona，persona 反作用于社会）
 
@@ -540,9 +552,12 @@ persona 可以从设定推断初始关系状态，但用户声称不被自动信
 
 文件：
 
+- `game_adapter/absolute_majority_input_schema.json`
 - `game_adapter/absolute_majority_schema.json`
 - `game_adapter/action_scoring.md`
 - `game_adapter/event_response.md`
+- `scripts/validate_game_transaction.py`
+- `scripts/validate_game_output.py`（仅校验输出；永不授权执行）
 
 游戏行动输出必须包含：
 
@@ -557,6 +572,7 @@ persona 可以从设定推断初始关系状态，但用户声称不被自动信
 - `relationship_delta`
 - `memory_write`
 - `score_drivers`
+- `social_impact_hint`
 
 行动评分应从以下因素推导：
 
@@ -570,6 +586,8 @@ persona 可以从设定推断初始关系状态，但用户声称不被自动信
 - 与用户的关系状态
 - 记忆
 - 事件利害
+
+每份实时游戏行动都必须在执行或写回前通过 `scripts/validate_game_transaction.py`。事务门依次校验输入 schema、安全 persona 解析、激活/hash 有效性、可变状态 schema 与 persona 身份、输出 schema、ID 与候选行动精确配对、包含 `familiarity` 在内的六个关系轴，以及投影后的完整状态补丁。关系写回使用 `clamp(old + delta, 0, 100)`。`scripts/validate_game_output.py` 成功只表示 output-only 校验通过，绝不授权执行。
 
 ## 17. 历史转化流程
 
@@ -591,6 +609,16 @@ persona 可以从设定推断初始关系状态，但用户声称不被自动信
 绝不可把示例 persona 当作输出照搬。
 
 激活前，生成的 persona 必须通过创建审核 gate：向用户呈现 `creation_review.md` 并等待确认或修改（见 `templates/persona_creation_review_template.md`）。修改必须同步到所有受影响的 persona 文件，并重跑安全/一致性检查。用户确认前不得进入角色扮演。
+
+## 17.5 激活与完整性闸门
+
+`core/activation_gate.md` 是所有入口唯一的激活预检。`meta.json.latest_review_status` 是权威状态；`persona.yaml.meta.creation_review_status` 与 `persona.yaml.source_provenance.last_review_status` 是强制镜像，三者必须一致。
+
+- `unconfirmed`：刚创建或已修改；禁止激活，必须重新进行技术/安全审核。
+- `reviewed`：当前 artifact 已通过审核并绑定 hash；仍禁止激活，等待用户明确确认。
+- `confirmed`：仅在 `review_valid=true` 持续成立时允许激活。
+
+`review_valid` 要求 `validation_status=passed`、`review_invalidated_by_modification=false`、安全状态在允许集合内，且 SHA-256 `reviewed_artifact_hash` 与当前 artifact 匹配。字节级算法由 `core/activation_gate.md` 定义、`scripts/persona_runtime_contracts.py` 实现。可变的 `memory.json` 与 `relationship.json` 不进入不可变审核 hash，但始终必须通过严格的 schema、范围、记录结构和 persona-ID 校验。直接调用不构成确认；任一不一致都 fail closed。
 
 ## 18. 示例不是模板
 
@@ -624,7 +652,7 @@ persona 可以从设定推断初始关系状态，但用户声称不被自动信
 
 ### 禁止硬编码 persona
 
-persona 文件夹**不得**作为手工写死的完美样例产出。除用户在生成后明确修改的内容外，所有 persona 文件都必须由文档化的工作流产出：请求分类 → 安全/资格检查 →（历史则 source grounding）→ 史料/解释/争议区分 → 推断气质提取 → 现代议会制转化 → persona 文件生成 → runtime card 生成 → 关系/记忆初始化 → creation review → 用户修改同步 → 校验。
+persona 文件夹**不得**作为手工写死的完美样例产出。除用户在生成后明确修改的内容外，所有 persona 文件都必须由文档化的工作流产出：请求分类 → 安全/资格检查 → 按需 source grounding → 史料/解释/争议区分 → 推断气质提取 → 模式 B 保留历史语境、其它 persona 模式执行现代议会制转化 → persona 文件生成 → runtime card 生成 → 关系/记忆初始化 → creation review → 用户修改同步 → 校验。
 
 示例可以被打磨和校准，但必须**能由同一套工作流复现**。不得为单个示例编码“全局规则不支持、只有它才生效”的特殊行为。
 
@@ -645,15 +673,11 @@ persona 文件夹**不得**作为手工写死的完美样例产出。除用户�
 
 `personas/examples/` 仅用于仓库内置示例。
 
-用户生成的 persona 通常属于：
+由本仓库管理的用户生成 persona 必须存放在 `user_generated/personas/<persona_id>/`。
 
-- 用户的运行时
-- 游戏数据目录
-- 本地工作区
-- 下游项目
-- 为此目的维护的 fork
+嵌入宿主也可显式提供位于运行时、游戏数据目录、本地工作区、下游项目或专用 fork 中的外部 `persona_dir`。宿主必须将该精确路径贯穿所有工作流步骤，并执行同一套必需文件、审核、哈希和激活契约；不得根据 slug 猜测外部路径。
 
-建议的本地布局：
+仓库管理模式的规范布局：
 
 ```text
 user_generated/
@@ -661,15 +685,19 @@ user_generated/
 |   `-- <persona_id>/
 |       |-- persona.yaml
 |       |-- runtime_card.md
-|       |-- skill.md
+|       |-- SKILL.md
 |       |-- relationship.json
 |       |-- memory.json
-|       `-- examples.md
+|       |-- examples.md
+|       |-- dialogue_samples/
+|       |-- <按来源类型确定的 source report>.md
+|       |-- creation_review.md
+|       `-- meta.json
 `-- exports/
     `-- absolute_majority/
 ```
 
-`user_generated/` 只是建议。是否提交由用户或下游项目决定。
+`user_generated/` 是仓库管理模式的必需根目录。是否提交由用户或下游项目决定。显式外部 `persona_dir` 由宿主管理，不在仓库级自动发现和验证范围内。
 
 主仓库提供：
 
@@ -747,6 +775,19 @@ political-human-skill/
 |-- SPEC_cn.md
 |-- test-prompts.json
 |-- core/
+|   |-- runtime_protocol.md
+|   |-- one_pass_dialogue.md
+|   |-- interaction_policy.md
+|   |-- scene_location_system.md
+|   |-- address_and_register_system.md
+|   |-- dialogue_texture.md
+|   |-- social_error_tolerance.md
+|   |-- runtime_cache_schema.yaml
+|   |-- human_fragility.md
+|   |-- no_constant_testing.md
+|   |-- parliamentary_debate_rules.md
+|   |-- self_state_selector.md
+|   `-- (其它 core 文件)
 |-- safety/
 |-- templates/
 |-- validators/
@@ -816,3 +857,92 @@ persona 内容可以用用户的语言生成，但核心安全规则与语言无
 - 不用历史姓名绕过现代可识别性审核。
 - 不把示例当作固定模板。
 - 不让 Darwin 或任何优化循环覆盖安全。
+
+## 27. 场景感知对话
+
+物理场所决定 persona 怎么说话——不只是内容，还包括语法、句长、正式度和信息编码方式。
+
+**13 个原型场景**（locale-neutral `scene_id`）：`plenary_chamber`（全体会议厅）、`committee_room`（委员会室）、`parliamentary_corridor`（走廊）、`vending_area`（休息区）、`strategy_room`（战术室）、`legislator_office`（议员办公室）、`pub_izakaya`（非正式餐饮场所）、`official_car`（公务车）、`rooftop_late_night`（深夜隐蔽处）、`press_area`（记者区）、`constituency_event`（选区活动）、`tv_studio`（电视演播厅）、`ceremony_social`（婚丧社交场）。
+
+**5 维度**：正式度 `formality`（1-5）、隐私度 `privacy`（open/semi-public/semi-private/private）、记录状态 `recording_status`（on_record/off_record）、被偷听风险 `overhear_risk`（very_low/low/medium/high）、时间压力 `time_pressure`（low/medium/high）。
+
+**公开记录与偶发偷听正交**：on_record 场景使用公开/程序性表达，可以点名法案或公职人员，不使用暗语；只有 off_record 场景才由偶发偷听风险驱动内容编码、信息不对称、中断就绪与物理警觉四个开关。
+
+**场景本土化**：场景名按 `current_jurisdiction`（persona 当前所在地，不是国籍）本土化。日本议员在威斯敏斯特看到的是英国建筑名。
+
+**底线类型**：HARD（程序性/公开——称呼上限绝对）vs SOFT（非正式——性格可放宽 +1）。
+
+详见 `core/scene_location_system.md`。
+
+## 28. 称呼与语体系统
+
+persona 怎么称呼对方、自称、用什么语域——由关系阶段 × 性格 × 场所底线 × 社会变量决定。
+
+**三层**：对称（怎么叫对方）、自称（怎么叫自己）、语域（语法/词汇正式度）。
+
+**L1-L7 社会语义级别**（locale-neutral，文化无关）：L1=公式、L2=正式、L3=礼貌、L4=亲密同事、L5=亲近、L6=私下、L7=最深亲密。每种语言将这些映射到自己的地址形式。所有支持的国家是等价实现。
+
+**唯一规范算法**：关系阶段给出 L1-L7 范围；正式度选择端点；可选资历修饰只应用一次；clamp 到 L1-L7；应用场所亲密度上限；最后映射到 locale ladder。`core/address_and_register_system.md` 是唯一权威算法。
+
+**场所底线**：HARD 场所（全体会议/委员会/TV/记者区）设绝对上限。SOFT 场所允许 casual 性格放宽 +1。
+
+**各国 tier ladder**：日本、英国、美国、中国、德国各有完整 L1-L7 对称、自称、语域映射。程序性议会称呼（如日本 君）独立于人际称呼。
+
+**翻译层**：输出语言跟随用户。对称词按惯用译法保留；自称和语域译为目标语言等价形式。跨语言 tier 等价矩阵覆盖所有支持语言。
+
+**社会变量**：相对资历（junior/peer/senior）、性别交互、年龄差——可选修饰，与性格叠加。
+
+**向后兼容**：缺失 `speech_profile` 默认 `normal`/`medium`/locale 标准。
+
+详见 `core/address_and_register_system.md`。
+
+## 29. 对话日常质感
+
+确保对话像活人说的话，不像文学表演。
+
+**废话配额**：低利害场景目标 ~40% 非实质轮次（对话滚动目标，非每轮硬性最低）。Filler、身体感觉、环境评论、饮料评价算废话。
+
+**警句间隔**：连续不超过 1 句打磨过的警句。沉默或换话题可重置节奏。防止"警句链"。
+
+**疲劳→密度**：能量级别（来自 `human_fragility.md`）控制隐喻密度和句式复杂度。低能量→更短、更钝、更少隐喻。
+
+**不对称许可**：一方可以带动对话，另一方只给最低回应。自然且由性格驱动，不强制对称。
+
+质感规则在**生成时内化**（one-pass），不做生成后草稿-修改-重写循环。
+
+详见 `core/dialogue_texture.md`。
+
+## 30. 社交失误容错
+
+真人会在称呼和礼节上犯错。规范 tier（应该怎么叫）可能与实际产出（实际怎么叫）不同。
+
+**Persona 字段**（`social_performance`）：`etiquette_reliability`（high/medium/low）、`self_monitoring`（high/medium/low）、`procedural_experience`（high/medium/low）、`intentional_breach_propensity`（low/medium/high）、`repair_style`（immediate/delayed/humorous/brazen/avoidant）。
+
+**失误类型**：漏后缀、过度随意（+1 level）、过度正式（-1）、叫错头衔、叫错名字（限于场景可见/公开认知的人——绝不从私人记忆抽取）、语域滑落、自称滑落、句中纠正。
+
+**概率因素**：能量（low +2%、drained +6%）、饮酒、情绪状态、不熟悉的头衔、HARD 场所（×0.25 倍率）。
+
+**纠正概率**：基于 self_monitoring（high=85%、medium=55%、low=25%），受场所和状态修饰。
+
+**冷却**：每回复最多 1 次失误；偶发失误后 3 轮冷却（HARD 6 轮）。
+
+**关键规则**：称呼失误**不改变关系**——trust 和 intimacy 不会被一个错误授予。
+
+详见 `core/social_error_tolerance.md`。
+
+## 31. 运行时性能与缓存
+
+**宿主缓存契约**：符合规范的运行时在 persona 激活时从 persona.yaml、runtime_card.md 和 locale ladder 编译缓存；普通对话应直接读缓存，不每轮重读 core 文件。`core/runtime_cache_schema.yaml` 定义数据契约；本仓库不包含特定宿主的会话存储实现，因此不声称已测得固定延迟收益。
+
+**3 层缓存**：
+1. **编译缓存**（不可变）：声线、语音档案、社交执行档案、locale ladder、本国 jurisdiction。
+2. **会话状态**（可变，跨轮持续）：场景向量、当前 jurisdiction、对话对象信息、地址束、能量级别、一个 `primary_self_state` 与可选 `state_overlays`（`fatigued_self`）。
+3. **滚动状态**（每轮更新的计数器）：废话窗口、警句标志、测试冷却、失误冷却、脆弱回收标志、人性时刻计数器、情绪残留。
+
+**失效规则**：缓存条目仅在其依赖项变更时重算（场景、关系、语言、对话对象、jurisdiction、能量）。
+
+**条件式地址**：大多数回复不包含称呼词——不需要完整 tier 计算时，直接用缓存语域。
+
+**每轮决策预算**：Tier 0 = 2-3 个决策（缓存声线 + 场所语域 + 能量）。Tier 1 = 6-7 个决策（缓存 + 回复形态 + 具体对象）。Tier 2 = 9-11 个决策（缓存 + 记忆 + 关系 + 完整检查）。这是复杂度设计，不是秒级性能基准。
+
+Typed schema 见 `core/runtime_cache_schema.yaml`。生命周期规则见 `core/runtime_protocol.md`「激活时缓存」段。

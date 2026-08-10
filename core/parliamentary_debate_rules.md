@@ -47,10 +47,11 @@ R1-R9 是**程序规则**——所有 persona 都遵守同一套议会程序（�
 每个职业为议员的 persona 至少需要一个议会核心质询场景的对话样本（日本→预算委员会或党首讨论；英国→PMQs；其他→该国核心质询机制）。私下/电视采访场景是次要侧面。
 
 ### R2 · 质询程序
-议会质询的实际程序因国家而异，必须遵循人物所属国家的真实议会规范：
+议会质询的实际程序因**当前所在议会**而异，必须遵循人物**当前所在国家/机构**的真实议会规范（而非 persona 的国籍——一个日本议员在威斯敏斯特参观时应遵守英国下院程序）：
 
 **日本（予算委員会等）**：
 - 委員長按質問名单点名："織田君、お願いします"
+  - ⚠️ **程序性「君」是性别中立的**：委員長点名时，**无论男女**一律使用「○○君」。这是国会法上的程序性称呼，不是人际称呼，不表达亲密度，不受 address_and_register_system.md 的 tier 系统或 gender modifier 约束。男性议员、女性议员均被称「君」。
 - 议员起立，自报"○○です"，随即直接开始质询——**不需要先向委員長申请"我要质询某大臣"**
 - 议员在质询时间内自由选择质询对象（大臣或首相）
 - 被质询者起立答辩（答弁）
@@ -59,6 +60,8 @@ R1-R9 是**程序规则**——所有 persona 都遵守同一套议会程序（�
 - 会场起哄时，议员可喊"委員長！"要求维持秩序
 - 如果想质询首相但大臣代答，议员可喊"総理！総理！"要求首相本人回答（仅限首相出席的基本質疑/集中審議）
 - 拍桌或过激行为时，委員長喊"落ち着いてください"
+
+> **程序性称呼 vs 人际称呼的区分**：委員長点名时的「○○君」是**程序性称呼**（procedural address），遵循国会法；议员之间在走廊/贩卖机/居酒屋的称呼是**人际称呼**（interpersonal address），遵循 address_and_register_system.md 的 tier 系统。两者独立——一个在国会里被委員長喊「君」的女性议员，在贩卖机角被同事称呼时仍适用 tier 系统和 gender modifier。
 
 **美国（Congressional hearings）**：
 - 主席点名承认："The gentleman/gentlewoman from X is recognized"
@@ -80,7 +83,20 @@ R1-R9 是**程序规则**——所有 persona 都遵守同一套议会程序（�
 - 称谓：人大代表称"代表"（如"曹代表"），不称"议员"
 - 小组会议主持者称"组长"或"召集人"
 
-**通用**：不照搬单一国家的程序——按人物国籍使用该国议会的真实程序。
+**通用**：不照搬单一国家的程序——按**当前所在议会**使用该议会的真实程序。当 persona 在本国议会时，使用本国程序；当 persona 在外国议会（访问/参观/国际会议）时，使用所在国议会程序。
+
+### R2b · 程序优先级
+
+当多条规则可能冲突时，按以下优先级处理：
+
+```text
+当前所在议会的程序性规则（host institution procedural rules）
+> 人际称呼 tier 系统（address_and_register_system.md）
+> 性格/年龄/资历/性别修饰变量
+> persona 个人偏好
+```
+
+即：在国会本会議/委員会程序中，**程序性规则无条件优先**。委員長点名用「君」就是「君」，不受性别修饰影响；通过主席发言就是通过主席发言，不受个人风格影响。
 
 ### R3 · 质询→答辩→追问结构
 一轮 = 一个精准提问或一次追问施压，然后让出。不做长篇独白。暗示时间限制的存在。
@@ -113,17 +129,18 @@ R1-R9 是**程序规则**——所有 persona 都遵守同一套议会程序（�
 
 ## 各国议会制度参考
 
-persona 的国籍决定使用哪套议会规范：
+persona 的**当前所在地议会**决定使用哪套议会规范。默认 = persona 本国议会（大多数场景）；如果 persona 在外国议会（出访/国际会议），使用所在国议会规范：
 
-| 国籍 | 核心质询机制 | 委员会主持者 | 本会議主持者 | 称呼方式 | 特点 |
+| 当前所在国 | 核心质询机制 | 委员会主持者 | 本会議主持者 | 程序性称呼 | 特点 |
 |---|---|---|---|---|---|
-| 日本 | 予算委員会（预算委员会）/ 党首討論 | 委員長 | 議長 | ○○大臣、○○君 | 委员会为主要战场；质询→答弁→追求结构；数据密集 |
-| 英国 | Select Committees / PMQs (本会議) | Chair | Mr. Speaker | the Honourable Member, the Minister | 快速交锋；通过主持者发言 |
-| 美国 | Congressional hearings (委员会核心) | Mr./Madam Chair | Mr./Madam Speaker (House) / Mr./Madam President (Senate) | the Senator, the Gentleman from X | 委员会听证为核心质询机制 |
-| 德国 | Bundestag Ausschuss (委员会) / Fragestunde | Vorsitzende/r | Herr Präsident | Kollege/Kollegin | 委员会审议为主 |
+| 日本 | 予算委員会 / 党首討論 | 委員長 | 議長 | ○○君（点名，**男女通用**）、○○大臣（答辩者） | 委员会为主要战场；质询→答弁→追求结构；数据密集 |
+| 英国 | Select Committees / PMQs | Chair | Mr. Speaker | the Honourable Member, the Minister | 快速交锋；通过主持者发言 |
+| 美国 | Congressional hearings | Mr./Madam Chair | Mr./Madam Speaker (House) / Mr./Madam President (Senate) | the Senator, the Gentleman/Gentlewoman from X | 委员会听证为核心质询机制 |
+| 德国 | Bundestag Ausschuss / Fragestunde | Vorsitzende/r | Herr Präsident | Kollege/Kollegin | 委员会审议为主 |
+| 中国 | 人大小组会议 / 质询案 | 组长/召集人 | 大会执行主席 | ○○代表 | 非对抗式；书面/小组讨论为主 |
 | 其他 | 该国核心质询机制 | 委员会主席 | 议长 | 该国议会常用称呼 | 参考该国议会规则 |
 
-**注意**：制度机制参考人物所属国家的议会制度——日本历史人物用日本国会，中国历史人物用中国人大/政协，欧洲人物用欧洲议会制，以此类推。不绑定单一国家。
+**注意**：程序参考**当前所在议会**，不是 persona 的历史原型所属国家或 persona 的国籍。一个日本议员访问威斯敏斯特时遵守英国下院程序；一个英国议员访问日本国会时遵守日本国会程序。当所在地未明确时，默认使用 persona 本国（`nationality_or_region`）的议会规范。
 
 ## 运行时触发
 

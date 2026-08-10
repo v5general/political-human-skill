@@ -1,6 +1,6 @@
 # Historical Source Grounding Check · 历史 persona 资料落地校验
 
-> **作用**：校验模式 B/C 历史 persona 生成是否走了 source-grounded 工作流（`families/political_human/historical_persona_creation_workflow.md`）。`validate_repo.py` 对 `personas/generated/` 做机器检查；本文件是完整的人工/AI 校验清单。
+> **作用**：校验模式 B/C 历史 persona 生成是否走了 source-grounded 工作流（`families/political_human/historical_persona_creation_workflow.md`）。`validate_repo.py` 对 `user_generated/personas/` 做机器检查；本文件是完整的人工/AI 校验清单。
 
 ## 一个历史 persona 生成有效，当且仅当：
 
@@ -36,4 +36,4 @@
 
 ## 机器检查范围说明
 
-`validate_repo.py` 的 `validate_generated_historical_personas` 只检查 `personas/generated/`（新生成产物），**不检查 `personas/examples/`**——后者是内置结构演示（SPEC §18：示例不是模板），其完整 source grounding 痕迹不作为 repo 校验门槛。新机制的强制力落在 generator 工作流 + 生成产物机器检查上。
+`validate_repo.py` 检查 `user_generated/personas/` 的所有生成来源类型；`personas/examples/` 由独立的内置示例检查覆盖。生成根与调用根统一由 `core/persona_path_resolver.md` 解析。

@@ -51,6 +51,25 @@ The runtime card is a map, not the territory.
 - Does this persona lecture?
 - What makes this persona speak more than usual:
 
+## Speech Profile (see core/address_and_register_system.md)
+
+- `speech_formality`: (very_formal / formal / normal / casual / very_casual)
+- `social_convention_adherence`: (high / medium / low)
+- Self-reference (formal场合):
+- Self-reference (私下/随意):
+- Default register: (该语言的正式/非正式标记，如: standard / colloquial / formal)
+- Address tendency: (this persona tends toward which level? e.g., "stays at formal address longer than relationship requires" or "drops to familiar address quickly")
+- Scene-floor behavior: (does this persona respect hard floors? push soft floors? e.g., "always formal in plenary, drops quickly in informal settings")
+
+## Social Performance (see core/social_error_tolerance.md)
+
+- `etiquette_reliability`: (high / medium / low — how reliably does this persona execute etiquette norms?)
+- `self_monitoring`: (high / medium / low — does this persona notice and correct their own slips?)
+- `procedural_experience`: (high / medium / low — familiarity with parliamentary procedure)
+- `intentional_breach_propensity`: (low / medium / high — tendency to deliberately break etiquette)
+- `repair_style`: (immediate / delayed / humorous / brazen / avoidant — how does this persona fix a slip?)
+- Typical slip behavior: (e.g., "drops honorifics when tired" / "never slips in parliament but sloppy in izakaya" / "deliberately uses first name to provoke")
+
 ## Human Core Snapshot
 
 - Core temperament:
@@ -136,8 +155,8 @@ The runtime card is a map, not the territory.
 - Body state signals this persona uses:（揉太阳穴？喝茶/咖啡？看窗外？沉默更久？）
 - What level of vulnerability does this persona show at each relationship stage:
   - stranger / public_audience: 不展示任何脆弱，维持职业形象
-  - recurring_contact / working_relationship: 可以展示身体状态（累、头疼）
-  - trusted_listener / ally: 可以展示职业疲惫和挫折感
+  - recurring_contact: 可以展示身体状态（累、头疼）
+  - trusted_listener: 可以展示职业疲惫和挫折感
   - confidant / inner_circle: 可以展示真正的脆弱和恐惧
   - intimate_bond: 完整袒露，但仍以 fragments 给出
 - How this persona recovers after showing vulnerability:（自嘲化解？沉默后换话题？"算了说正事"？暴躁收回？）

@@ -18,6 +18,7 @@
       "stay_silent"
     ],
     "current_relationship": {
+      "familiarity": 0,
       "trust": 22,
       "respect": 50,
       "affection": 10,
@@ -40,11 +41,45 @@
     }
   },
   "expected_output": {
+    "persona_id": "cao_cao_modernized",
+    "event_id": "admin_reform_002",
     "selected_action": "lock_personnel_posts",
+    "candidate_actions": [
+      "support_bill",
+      "delay_bill",
+      "force_vote_before_recess",
+      "lock_personnel_posts",
+      "stay_silent"
+    ],
+    "action_scores": {
+      "support_bill": 63,
+      "delay_bill": 31,
+      "force_vote_before_recess": 74,
+      "lock_personnel_posts": 91,
+      "stay_silent": 9
+    },
     "public_statement": "Take the administrative posts and the budget line now; leave the committee seats for later. The center has to be able to move.",
     "private_reason": "He refuses delay because delay is where bills die. He locks the people, not the furniture, and accepts a visible split over a hidden one so he knows who is still his.",
+    "emotional_state": "controlled suspicion under procedural pressure",
+    "relationship_delta": {
+      "familiarity": 1,
+      "trust": 0,
+      "affection": 0,
+      "respect": 2,
+      "caution": 2,
+      "dependency": 0
+    },
     "memory_write": [
       "The player warned about a defection but withheld the name during admin_reform_002; he answered by locking personnel posts first and watching who asked for delay."
-    ]
+    ],
+    "score_drivers": {
+      "support_base_pressure": "Supporters prioritize visible administrative delivery over faction choreography.",
+      "faction_pressure": "The faction wants votes locked before an open split.",
+      "personal_ambition": "Control of appointments strengthens his ability to stabilize the center.",
+      "personal_grudge": "No confirmed personal grudge is used without the defector's name.",
+      "trauma_trigger": "The unnamed defection risk raises caution but does not justify wounded_self certainty.",
+      "relationship_context": "The player's warning earns respect, while withholding the name preserves distrust."
+    },
+    "social_impact_hint": "Consolidates administrative control, increases factional caution, and delays an open split while making centralization more visible."
   }
 }

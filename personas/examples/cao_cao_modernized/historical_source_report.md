@@ -8,6 +8,7 @@
 
 ## 1. Eligibility Check
 
+- source_type: historical_archetype_conversion
 - Figure: 曹操（Cao Cao），字孟德，一名吉利，小名阿瞒
 - Region: China
 - Era: 东汉末年（约 155–220 AD）
@@ -24,7 +25,7 @@
 | 1 | Wikipedia: Cao Cao | https://en.wikipedia.org/wiki/Cao_Cao | encyclopedia | medium-high |
 | 2 | Rafe de Crespigny, *A Biographical Dictionary of Later Han to the Three Kingdoms (23–220 AD)* / *Imperial Warlord: A Biography of Cao Cao* (Brill, 2010) | de Crespigny, R. (2010). *Imperial Warlord: A Biography of Cao Cao*. Brill. | academic_summary | high |
 | 3 | 陈寿《三国志·魏书·武帝纪》（正史，同代 / 早期官修） | 陈寿《三国志》，中华书局校点本 | primary_source | high |
-| 4 | Project MUSE / ResearchGate "Speaking of Cao Cao" 相关学术讨论（近现代学界对曹操的重新评价） | 学术期刊 / MUSE / ResearchGate 检索 | academic_summary | medium-high |
+| 4 | 鲁迅，《魏晋风度及文章与药及酒之关系》（1927 年讲演） | 收入《而已集》；后世文化接受与曹操再评价的一手文本 | reputable_secondary_source（接受史，不作汉末事实来源） | medium |
 | 5 | 建安文学研究（曹操《短歌行》《蒿里行》《步出夏门行》等诗歌文本本身，作为同代人自述） | 文学 / 史学交叉研究；诗歌原文 | primary_source（诗人自述） | medium（气质参考，非政事史实） |
 
 > 说明：Wikipedia（#1）作为权威百科起点，其关键事实（生卒、官渡、屯田、求贤令、建安文学、220 病逝）与正史（#3）和 de Crespigny 学术传记（#2）一致，方采信。单一弱源不采信。
@@ -60,7 +61,7 @@
 - **现实主义政治家**：重实效轻虚名，重制度与人事控制轻道德姿态；"实权重于名义"是其一贯作风。[#1][#2][#3]
 - **诗人气质与文化抱负**：建安诗歌表明他不仅是军阀，还有建设文化秩序的抱负；诗中反复出现的求贤、忧时、时效（"对酒当歌，人生几何"）主题，与其唯才是举、秩序重建的政治行为互证。[#3][#5]
 - **"中国历史最神秘、最矛盾的人物之一"**（de Crespigny 等语）：能臣与奸雄、务实与权谋、求才与多疑并存于一人，评价随时代与立场剧烈摇摆。[#1][#2]
-- **"秩序重建者"框架的来源**：鲁迅（1920s）、毛泽东（1950s 推动为曹操"翻案"）、葛剑雄、易中天等近现代论者倾向于肯定其雄才大略、秩序重建之功与唯才是举的进步性，批评宋明以来将其脸谱化为"奸臣"的正统观念。[#4] **此为 20 世纪以来的学界/政治再评价，非陈寿原本评价**——persona 把"秩序重建者"作为现代原型切入点是合法的（SPEC §5.3.1），但应明确这是后人框架，而非曹操本人或正史的自我/他者定位。
+- **"秩序重建者"框架的来源**：鲁迅 1927 年讲演是近现代曹操再评价的可定位例证，反对把曹操简化为传统舞台上的"奸雄"脸谱。[#4] 更宽泛的 20 世纪政治与大众再评价不作为本报告的独立事实来源。persona 把"秩序重建者"作为现代原型切入点是转化层选择，不是陈寿、曹操本人或汉末同时代人的原始定位。
 
 ## 5. Disputed or Uncertain Points
 

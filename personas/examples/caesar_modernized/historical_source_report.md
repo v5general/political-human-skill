@@ -1,6 +1,6 @@
 # Historical Source Report: Gaius Julius Caesar
 
-> 模板用途：模式 B/C 历史 persona 创建时，`core/historical_source_grounding.md` 的产物。落盘到 `personas/<persona_id>/historical_source_report.md`。是后续 `inferred_temperamental_pattern` 提取与现代转化的**事实底座**。
+> 模板用途：模式 B/C 历史 persona 创建时，`core/historical_source_grounding.md` 的产物。本文件位于已解析的 `<persona_dir>/historical_source_report.md`，是后续 `inferred_temperamental_pattern` 提取与现代转化的**事实底座**。
 >
 > 填写纪律：区分史料 / 主流解释 / 争议 / 后世想象 / 创作边界；不把文学演义当史实；不声称还原真实内心。
 >
@@ -8,6 +8,7 @@
 
 ## 1. Eligibility Check
 
+- source_type: historical_archetype_conversion
 - Figure: Gaius Julius Caesar（凯撒，前 100 – 前 44）
 - Region: Europe（罗马共和国末期 / 地中海世界）
 - Era: 罗马共和国末期（Late Roman Republic）
@@ -33,38 +34,42 @@ Source types:
 
 | # | Title | URL / Citation | Source Type | Confidence |
 |---|---|---|---|---|
-| 1 | Wikipedia: Julius Caesar | https://en.wikipedia.org/wiki/Julius_Caesar | encyclopedia | high |
-| 2 | EBSCO Research Starters: Julius Caesar | EBSCO Research Starters (学术入门综述) | academic_summary | high |
-| 3 | JSTOR: "Julius Caesar as a Political Leader" | JSTOR 学术论文 | academic_summary | high |
-| 4 | PBS: The Roman Empire / Caesar | https://www.pbs.org/empires/romans/ | reputable_secondary_source | medium-high |
-| 5 | BBC: Julius Caesar | https://www.bbc.co.uk/history/historic_figures/caesar_julius.shtml | reputable_secondary_source | medium-high |
-| 6 | Caesar, *Commentarii de Bello Gallico*（《高卢战记》） | 本人自述，third-person narrative | primary_source（**政治宣传性**，须标注） | medium（事实可信但叙事带宣传目的） |
-| 7 | Caesar, *Commentarii de Bello Civili*（《内战记》） | 本人自述 | primary_source（**政治宣传性**） | medium |
-| 8 | Cicero, letters & orations（西塞罗书信 / 演说） | 同时代政治家私人通信与公开演说 | primary_source | medium-high |
-| 9 | Sallust, *Bellum Catilinae* / *Bellum Jugurthinum*（撒路斯提乌斯） | 同时代史家 | primary_source | medium-high |
-| 10 | Plutarch, *Life of Caesar*（普鲁塔克《凯撒传》） | 帝国早期传记，距事件约一百余年 | reputable_secondary_source | medium |
+| 1 | Encyclopaedia Britannica, “Julius Caesar” | https://www.britannica.com/biography/Julius-Caesar-Roman-ruler | encyclopedia | medium-high |
+| 2 | Matthias Gelzer, *Caesar: Politician and Statesman* | Harvard University Press, English trans. 1968 | academic_summary | high |
+| 3 | Ronald Syme, *The Roman Revolution* | Oxford University Press, 1939 | academic_summary | high |
+| 4 | Christian Meier, *Caesar: A Biography* | Basic Books, English trans. 1995 | academic_summary | high |
+| 5 | Robert Morstein-Marx, *Julius Caesar and the Roman People* | Cambridge University Press, 2021 | academic_summary | high |
+| 6 | Mary Beard, *SPQR: A History of Ancient Rome* | Profile / Liveright, 2015 | academic_summary | high |
+| 7 | Caesar, *Commentarii de Bello Gallico*（《高卢战记》） | 本人自述，按卷/章定位 | primary_source（**政治宣传性**，须标注） | medium |
+| 8 | Caesar, *Commentarii de Bello Civili*（《内战记》） | 本人自述，按卷/章定位 | primary_source（**政治宣传性**） | medium |
+| 9 | Cicero, *Epistulae ad Atticum* / *Epistulae ad Familiares* / orations | 同时代书信与公开演说，按书/信/节定位 | primary_source | medium-high |
+| 10 | Plutarch, *Life of Caesar* | 帝国早期传记，按章节定位 | reputable_secondary_source | medium |
+| 11 | Sallust, *Bellum Catilinae* / *Bellum Jugurthinum* | 同时代史家，按章节定位 | primary_source | medium-high |
+| 12 | Suetonius, *Divus Iulius* | 帝国早期传记，按章节定位 | reputable_secondary_source | medium |
+| 13 | Appian, *Civil Wars*, Books 2–3 | 帝国时期叙事，按书/章定位 | reputable_secondary_source | medium |
+| 14 | Cassius Dio, *Roman History*, Books 37–44 | 帝国时期叙事，按书/章定位 | reputable_secondary_source | medium |
 
-**冷源提示**：凯撒并非史料稀缺人物，但关键在于**区分自述 vs 独立记载**。本人著作（《高卢战记》《内战记》）是极为难得的一手材料，却被普遍视为精心构造的政治宣传（第三人称叙事、为本人行动辩护）；推断气质时优先采用多源交叉印证的行为（跨越卢比孔、终身独裁、土地法、被刺），而非其自述中的自我形象。
+**冷源提示**：凯撒并非史料稀缺人物，但关键在于**区分自述 vs 独立记载**。本人著作（#7、#8）是极为难得的一手材料，却被普遍视为精心构造的政治宣传（第三人称叙事、为本人行动辩护）；推断气质时优先采用多源交叉印证的行为，而非其自述中的自我形象。
 
 ## 3. Documented Facts
 
 史料（含本人自述与独立记载）直接支持、多源交叉印证的事实：
 
 - 罗马将军、政治家、作家；出身古老贵族家族（gens Julia），自称追溯到女神维纳斯与先祖 Iulus。（Wikipedia #1；Plutarch #10）
-- 高卢征服（前 58–前 50）：八年军事行动，将罗马版图扩至莱茵河，撰写《高卢战记》向元老院与公民展示功绩。（#1, #6, #10）
+- 高卢征服（前 58–前 50）：八年军事行动，将罗马版图扩至莱茵河，撰写《高卢战记》向元老院与公民展示功绩。（#1, #7, #10）
 - **populares 派（平民派）**路线：代表平民与中产利益，对抗元老院寡头派（optimates）。推动土地分配与债务改革。（#1, #3, #9）
 - 前三头同盟（Caesar–Pompey–Crassus）：非正式权力结盟，绕开元老院主导共和国政治；克拉苏死后三头破裂。（#1, #5, #10）
-- 前 49 年**跨越卢比孔河**（crossing the Rubicon），率军进入意大利，触发内战；以少击多、最终击败庞培。（#1, #4, #7, #10）
+- 前 49 年**跨越卢比孔河**（crossing the Rubicon），率军进入意大利，触发内战；以少击多、最终击败庞培。（#1, #4, #8, #10）
 - 多次担任执政官；前 48 起任独裁官，前 44 任**终身独裁官（Dictator perpetuo）**——近乎连续的独裁权力。（#1, #2, #3）
 - 改革广泛：儒略历、债务重组、土地殖民分配、公民权扩展、元老院扩容（加入支持者）。（#1, #3）
-- 前 44 年 3 月 15 日（Ides of March）被元老院共和派（Brutus、Cassius 等）刺杀。（#1, #5, #8, #10）
+- 前 44 年 3 月 15 日（Ides of March）被元老院共和派（Brutus、Cassius 等）刺杀。（#1, #9, #10, #12, #13, #14）
 - 共和国→帝国转变的关键人物；其养嗣 Octavian（后称 Augustus）最终终结共和、建立帝制。（#1, #2）
 
 ## 4. Mainstream Historical Interpretations
 
 主流史学解释（多可靠来源支持；属"解释"而非"史实"，但共识度高）。
 
-> ⚠️ **本节分层呈现**：(a) 古代文学性史料（Plutarch / Suetonius / Appian / Cassius Dio）的描述——这些史料本身有精英/ Optimate 立场偏向；(b) 现代修正派（Gelzer / Syme / Meier / Morstein-Marx 2021 / Beard 2016 *SPQR* / Badian 等）的重新评估。**关键**：persona 的"使命感驱动/把个人追求升华为国家命运"框架属于 **19-20 世纪 Caesarism 浪漫主义阅读**（Weber → Napoleon III → 文学化凯撒），不是 Plutarch / Suetonius 对凯撒心理的原本描述——原始史料中的凯撒以 ***dignitas***（个人荣誉/地位）为核心驱动，不是浪漫主义式的"改写国家命运使命感"。两种框架不可混同；persona 的"使命感驱动"措辞是 SPEC §5.3.1 转化层的合法现代化，但不应被当作史实凯撒的自述。后世政治评价标签（"暴君""解放者""伟大领袖"）保留在本节作为历史评价参照，不可作为 `personality_archetype` / `human_core` 等人格字段的描述语（见 `safety/archetype_conversion_protocol.md` §2.3）。
+> ⚠️ **本节分层呈现**：(a) 古代文学性史料（Plutarch / Suetonius / Appian / Cassius Dio）的描述——这些史料本身有精英 / Optimate 立场偏向；(b) 现代研究（Gelzer / Syme / Meier / Morstein-Marx 2021 / Beard 2015 *SPQR*）的重新评估。**关键**：persona 的"使命感驱动/把个人追求升华为国家命运"框架属于后世 Caesarism 阅读，不是 Plutarch / Suetonius 对凯撒心理的原本描述——原始史料中的凯撒以 ***dignitas***（个人荣誉/地位）为核心驱动，不是浪漫主义式的"改写国家命运使命感"。两种框架不可混同；persona 的"使命感驱动"措辞是 SPEC §5.3.1 转化层的合法现代化，但不应被当作史实凯撒的自述。后世政治评价标签保留在本节作为历史评价参照，不可作为人格字段的描述语。
 
 **古代文学性史料的描述（须考虑 Elite / Optimate 偏向）**：
 - **ambition-driven（野心驱动）**：Plutarch (*Caes.* 4, 11, 58) 与 Suetonius (*Iul.* 7, 9, 30) 一致强调其 boundless / limitless ambition；Suetonius 记载其在亚历山大像前流泪的轶事（同年龄未成就伟业）。**注意（现代修正派）**：Meier 1995 与 Morstein-Marx 2021 认为"无边野心"叙事部分是 Optimate 派（Cato / Cicero / 后来刺杀者）的**敌意框架**，被后世当作中性事实接受——本 persona 在使用此框架时须标注此偏向。
@@ -72,7 +77,7 @@ Source types:
 - **military genius（军事天才）**：高卢战役与内战中的指挥才能被广泛承认；以少击多、行动果决。（#1, #4）
 - **Republic-ender（共和国终结者）**：其独裁与权力集中被视为共和制崩溃、向帝制过渡的决定性一步；无论评价褒贬，其制度后果被一致承认。**注意**：Wikipedia 与 Beard (*SPQR* 2016) 强调凯撒是**结构性危机的催化剂**而非唯一原因——共和制自 Gracchi 兄弟以来已制度性衰退百年。
 - **self-mythologizer（自我神话化）**：以第三人称撰写自述、将自己嵌入罗马神话谱系、把个人行动包装为历史使命。**关键订正**：维纳斯/埃涅阿斯/尤卢斯谱系是**尤利乌斯家族既有的家族神话**（凯撒放大而非发明）；**形式上的神化是死后由元老院在前 42 年宣布的**（非生前自称）；生前接受的神化荣誉（神庙立像、钱币头像、七月改名 Julius）是元老院授予的、凯撒接受的，**不是**凯撒主动自称。persona 的"自我神话化"应理解为"构造英雄化公开叙事"，而非"生前自称活着的神"。
-- **"reformer"框架的争议**：现代学者 Badian（*Oxford Classical Dictionary*）明确指出凯撒"had no plans for basic social and constitutional reform"——其改革是夺权工具与维系追随者的杠杆，而非系统性改革纲领。persona 把凯撒现代化为"改革派"是 SPEC §5.3.1 转化层的合法选择，但应明确这是现代阅读，不是古代共识。
+- **"reformer"框架的争议**：现代研究对凯撒是否拥有系统性社会/宪制改革纲领并无一致结论；Meier 与 Morstein-Marx 尤其强调晚期共和竞争、谈判与追随者政治，不能把所有措施倒推成一套预先完成的改革蓝图。（#4, #5）persona 把凯撒现代化为"改革派"是转化层选择，不是古代共识。
 - **one of the most influential & most controversial figures**：普遍被列入西方历史最有影响力人物；同时最具争议。（#1, #2）
 
 ## 5. Disputed or Uncertain Points
@@ -84,8 +89,8 @@ Source types:
   - 共和派（含刺杀者）视角：个人权力凌驾共和、毁灭自由 → 暴君。
   - 现代主流多取"复杂人物"立场：既推动改革，也终结了共和制衡。（#1, #3, #9）
 - **与元老院关系的性质**：是被迫对抗（元老院先宣布紧急状态），还是主动架空？多方叙述侧重不同。（#1, #7, #10）
-- **本人自述的宣传性**：《高卢战记》被视为精心构造的政治宣传（为高卢行动辩护、向罗马公众塑造功绩），其叙事不可等同于中立史实；需以西塞罗、撒路斯提乌斯等独立记载交叉校验。（#3, #6, #7, #8）
-- **跨越卢比孔的决断**：是深思熟虑的豪赌，还是被元老院逼迫的最后选择？**史源订正**：传统的"凯撒主动豪赌"叙事在现代研究中已被复杂化——Morstein-Marx 2021（Wikipedia 引述的最重要现代源之一）把内战建模为**囚徒困境**式的谈判破裂：凯撒的核心诉求是第二次执政官职位与凯旋式（合法的政治保险），元老院中的强硬派拒绝保证选举批准，最终 *senatus consultum ultimum*（最终紧急法令）是在凯撒渡河意图明显后才通过。**Ehrhardt 1995** 进一步批评了"凯撒因怕被审判而被迫渡河"的简化叙事。本 persona 的 `crisis_response_style: bold_reset` 描述的是**行为风格**（一旦决裂，敢于以大胆行动重置），不等于动机是单方面的豪赌——历史的真相更接近"双方互动升级导致的破局"。（#1, #10）
+- **本人自述的宣传性**：《高卢战记》被视为精心构造的政治宣传（为高卢行动辩护、向罗马公众塑造功绩），其叙事不可等同于中立史实；需以西塞罗、撒路斯提乌斯等独立记载交叉校验。（#2, #7, #8, #9, #11）
+- **跨越卢比孔的决断**：是深思熟虑的豪赌，还是谈判破裂后的最后选择？Morstein-Marx 2021 将内战放回双方互动升级、职位保障与元老院强硬派竞争的制度语境，反对单一动机叙事。（#5）本 persona 的 `crisis_response_style: bold_reset` 只描述决裂后的行为风格，不把复杂动机简化为单方面豪赌。
 - **遇刺原因**：是共和派保卫自由，还是旧精英对权力被稀释的反击？两种解读并存。（#3, #9）
 - **"伟大"的代价**：成就与共和国毁灭的因果关系、个人野心在其中权重几何——是历史评价分歧的核心。（#2, #3）
 

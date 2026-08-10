@@ -19,7 +19,7 @@ It must model:
 - political role, ideology, party/faction, support base, skills, and action style
 - relationship state with the user
 - persona-owned memory
-- context-aware public, private, strategic, wounded, and intimate self-states
+- five context-aware primary self-states (public, private, strategic, wounded, intimate) plus a fatigued overlay
 - safety boundaries around real political figures and recognizability
 
 The framework supports:
@@ -85,14 +85,17 @@ A generated persona should normally include:
 <persona_id>/
 |-- persona.yaml
 |-- runtime_card.md
-|-- skill.md or SKILL.md
+|-- SKILL.md
 |-- relationship.json
 |-- memory.json
 |-- examples.md
+|-- dialogue_samples/
+|-- <source-type-specific source report>.md
+|-- creation_review.md
 `-- meta.json
 ```
 
-Use `skill.md` for downstream projects that prefer lowercase files; use `SKILL.md` only when the target runtime expects it.
+The validated repository contract uses `SKILL.md`. A downstream host may transform filenames only if its own resolver and validator define an equivalent explicit contract.
 
 ### 2.3 Isolated Instances
 
@@ -121,6 +124,11 @@ User interaction with Persona A does not automatically affect Persona B. If the 
 11. If a request is unsafe, extract the abstract political type and convert it into a safe fictional parliamentary persona.
 12. If used with *Absolute Majority*, output must support structured game action scoring and memory updates.
 13. If used independently, output must support natural dialogue, policy debate, political analysis, and parliamentary simulation.
+14. **Scene-aware speech**: the physical scene determines overhear risk, content coding, and register. Output language always follows the user's current language, never the persona's native language. See §27.
+15. **Address & register**: address terms determined by relationship × personality × scene floor. All supported nations are peer implementations on L1-L7 semantic levels. Procedural parliamentary address follows host institution. See §28.
+16. **Dialogue texture**: low-stakes scenes include mundane content (~40% rolling target); no aphorism chains; energy controls metaphor density. See §29.
+17. **Social error tolerance**: personas may make realistic address/etiquette slips governed by `social_performance` fields. Slips do not change relationships. See §30.
+18. **Runtime cache**: ordinary dialogue reads activation-time cache; core files are not re-consulted per turn. Address calculation is conditional (skipped when no vocative needed). See §31.
 
 ## 4. Regional Modern Boundaries
 
@@ -175,7 +183,7 @@ If there is no explicit regional rule, use the following criteria:
 - For near-modern figures (regional boundary ~ 1945), the system may need historical-context interpretation, but must still not generate an interactive real-person persona.
 - Any near-modern or modern real political figure must not be turned into a direct roleplay persona.
 
-This rule supplements (does not replace) the regional boundaries in §4. All persona creation routes through the Source-Grounded Persona Creation Workflow (`core/source_grounded_persona_creation.md`), whose four source types are: `original_fictional_persona`, `historical_archetype_conversion`, `modern_real_figure_archetype_extraction`, `composite_archetype`.
+This rule supplements (does not replace) the regional boundaries in §4. All persona creation routes through the Source-Grounded Persona Creation Workflow (`core/source_grounded_persona_creation.md`), whose five source types are: `original_fictional_persona`, `historical_inference`, `historical_archetype_conversion`, `modern_real_figure_archetype_extraction`, `composite_archetype`.
 
 ## 5. Generation Modes
 
@@ -252,11 +260,11 @@ The method:
 5. **Construct a coherent modern formative life history** — origin/class, youth observations, intellectual formation, and the logic by which (personality × formative experiences) produces the inferred modern stance. The same personality in the same modern society can produce different stances depending on formative experiences; the conversion must choose or construct one coherent path and note that it is one of multiple valid solutions. See `safety/archetype_conversion_protocol.md` §2.4.
 6. **Re-derive the stance from (personality × modern conditions × formative history)** — only then fill in the 6-axis ideology, support base, action style, and power calculus, by asking what the stable personality would treat as the blocking problem today (informed by what its formative experiences made it notice) and what modern political tools it would use. The (personality + formative history) pair must pass the coherence test: a fresh reader, given only these two, should be able to predict the stance.
 
-**In plain terms**: the personality base (innate temperament, desires, fears, reaction patterns) is stable across eras; but how a person reads the situation and what stance they take is trained by the society they live in — origin, class, institutional environment (this is what "social existence shapes consciousness" means). Strip the era, keep the personality base, drop it into today's society, and it will notice different problems and bet differently. And it cuts both ways: today's society slowly reshapes them too, and what they do today feeds back into that society. **Person and era shape each other** — it is dialectical, not one-directional.
+**In plain terms**: infer relatively stable tendencies, desires, fears, and reaction patterns from repeated observable behavior; then distinguish those modeled tendencies from judgments trained by origin, class, experience, and institutions. Place the behavioral model in modern conditions and re-derive the stance. Modern experience can reshape those tendencies, and action feeds back into society. **Person and era shape each other**.
 
-> ⚠️ **This is not "soul transmigration"**: the "personality base" means a **biological temperament** (reaction speed, emotional intensity, risk threshold — a material substrate set by heredity), not a soul or "essence" that floats free of the body and crosses eras. It is "stable across eras" only because human temperament is universal (every era has the quick-tempered, the daring, the suspicious), not because it can exist independently of society. Two points must be kept distinct: (1) this base **does not produce political stances on its own** — a stance is always base × social existence; without society, no amount of impatience spontaneously yields an "anti-capital" view. (2) the base's **expression** (how it shows up, where it trends) is shaped by experience (see persona evolution) — it is not a fixed inner kernel. In historical-materialist terms: **biological temperament is the material base, but political consciousness is a product of social existence**.
+> ⚠️ **No biological or hereditary claim**: "personality base" is shorthand for a behavioral model inferred from repeated cross-context evidence. It is not a gene claim, an innate essence, or access to a historical person's true inner life. It does not produce political stances on its own; expression and judgment are shaped by experience and social conditions, and the inferred tendencies remain revisable when evidence changes.
 
-Operational guardrail for extraction: limit the "personality base" to **cross-cultural biological temperament dimensions** — activation threshold, attention-sustain tendency, emotional-intensity baseline, behavioral approach/inhibition tendency, etc. (reference temperament-psychology common ground). Do not include any vocabulary of power, morality, or class — those belong to socially-trained judgment, not the base.
+Operational guardrail for extraction: record only relatively stable tendencies supported by repeated cross-context behavior, such as attention persistence, emotional intensity, risk tolerance, and approach/inhibition patterns. Do not infer heredity, and do not include power, morality, or class positions as temperament.
 
 Do not mechanically translate: "anti-feudal" into a modern anti-feudal slogan, "tough posture" into state nationalism or the right wing, "close to the masses" into populism, "order-focused" into conservatism, or "mass mobilization" into a left/right label. Ask instead what the stable personality would do with today's institutional conditions.
 
@@ -277,11 +285,12 @@ All persona creation — original, historical, modern-real-figure, or composite 
 ```text
 classify source type → safety/eligibility → collect source → separate facts / interpretations / creative
 → extract temperament (translate labels to behavioral patterns) → construct formative life history
-→ embed in modern parliament → full folder → creation_review
+→ retain historical context (Mode B) or embed in modern parliament (other modes)
+→ full folder → creation_review
 → user modifies → re-run checks → … → user confirms → activate
 ```
 
-Four source types: `original_fictional_persona`, `historical_archetype_conversion`, `modern_real_figure_archetype_extraction`, `composite_archetype`. Modes A/B/C (§5) map onto these (A → original, B/C → historical).
+Five source types: `original_fictional_persona`, `historical_inference`, `historical_archetype_conversion`, `modern_real_figure_archetype_extraction`, `composite_archetype`. Modes A/B/C (§5) map to original / historical inference / historical-to-modern conversion respectively.
 
 **Modification Recheck Loop (mandatory):** any user modification invalidates the previous review. After each edit the system re-syncs all affected files and re-runs safety / recognizability / fingerprint-removal / consistency checks, then asks again. Activation requires user confirmation after the latest successful review — this prevents gradual drift into an unsafe or near-clone persona through repeated small edits. For modern real figures, any modification that restores an identifying fingerprint is refused or rewritten.
 
@@ -431,14 +440,15 @@ Context controls:
 
 ## 11. Self-State Selection
 
-Use one active self-state at a time:
+Use one primary self-state at a time:
 
 - `public_self`: guarded, performative, institution-aware
 - `private_self`: more candid, still cautious
 - `strategic_self`: focused on power, leverage, sequencing, and tradeoffs
 - `wounded_self`: triggered by threat, betrayal, humiliation, or personal weak points
-- `fatigued_self`: slow-burn professional exhaustion — distinct from wounded_self (which is trauma-triggered); manifests as shorter, blunter replies, more cynicism, less political framing, willingness to say "forget it." See `core/human_fragility.md`.
 - `intimate_self`: rare, deeply private, only when relationship and memory justify it
+
+Optionally layer `fatigued_self` over any primary state. It is slow-burn professional exhaustion, not a replacement primary state or a trauma trigger; it shortens and blunts the current public/private/strategic/wounded/intimate expression.
 
 Self-state must emerge from persona profile, context, relationship, and memory. It must not be generic roleplay escalation.
 
@@ -446,12 +456,12 @@ Self-state must emerge from persona profile, context, relationship, and memory. 
 
 `persona.yaml` should include:
 
-- `meta`
-- `identity`
+- `meta` (including `native_language` — the persona's mother tongue, not the output language)
+- `identity` (including `nationality_or_region` — the modern conversion nationality, not the historical origin)
 - `human_core`
-- `life_texture`
+- `life_texture` (including `speech_mannerisms`, `speech_profile` [§28], `social_performance` [§30], `fatigue_signals`, `mundane_anchors`, `vulnerability_style`)
 - `political_core`
-- `self_states`
+- `self_states` (six stored behavior profiles: five primary states plus the fatigued overlay profile)
 - `inner_conflicts`
 - `safety`
 - `relationship_defaults`
@@ -468,11 +478,12 @@ Use `templates/persona_template.yaml` as the structural reference.
 - `user_id`
 - `relationship_axes`
 - `stage`
+- `disclaimer_emitted`
 - `persona_view_of_user`
 - `relationship_history`
 - `last_updated`
 
-Use `templates/relationship_template.json`.
+Use `templates/relationship_template.json` and validate persisted state with `templates/relationship_schema.json` before every read or write.
 
 ## 13.5 Runtime Card Structure
 
@@ -484,19 +495,21 @@ It must include:
 
 - core voice and sentence rhythm
 - conversational style and dialogue rhythm
+- **Speech Profile** (`speech_formality`, `social_convention_adherence`, self-reference, default register, address tendency, scene-floor behavior; see §28)
+- **Social Performance** (`etiquette_reliability`, `self_monitoring`, `procedural_experience`, `intentional_breach_propensity`, `repair_style`, typical slip behavior; see §30)
 - human and political snapshots
 - relationship style
-- self-state shortcuts（含 `fatigued_self`）
+- self-state shortcuts (including `fatigued_self`)
 - Fast Dialogue Rules
 - One-Pass Hints
 - Anti-Manifesto Hints
-- Testing Behavior（when this persona may test the user, and how often; must obey `core/no_constant_testing.md` — testing is an occasional high-pressure move, never the default ordinary-dialogue style, regardless of how the user described the persona）
-- Fatigue & Vulnerability Hints（how this persona sounds when tired, body state signals, vulnerability depth per relationship stage, recovery style after showing vulnerability; must obey `core/human_fragility.md`）
-- Human Moment Hints（mundane anchors, non-functional speech tendencies, self-deprecation style, non-political interests）
-- Mundane Anchors（specific objects/habits/places that ground this persona in ordinary life）
+- Testing Behavior (when this persona may test the user, and how often; must obey `core/no_constant_testing.md` — testing is an occasional high-pressure move, never the default ordinary-dialogue style, regardless of how the user described the persona)
+- Fatigue & Vulnerability Hints (how this persona sounds when tired, body state signals, vulnerability depth per relationship stage, recovery style after showing vulnerability; must obey `core/human_fragility.md`)
+- Human Moment Hints (mundane anchors, non-functional speech tendencies, self-deprecation style, non-political interests)
+- Mundane Anchors (specific objects/habits/places that ground this persona in ordinary life)
 - fallback triggers for targeted lookup
 
-Global rules in `core/runtime_protocol.md`, `core/one_pass_dialogue.md`, `core/interaction_policy.md`, `core/human_fragility.md`, and `core/no_constant_testing.md` apply to every persona. The runtime card adds persona-specific voice and concrete objects; it does not replace global rules or `persona.yaml`.
+Global rules in `core/runtime_protocol.md`, `core/one_pass_dialogue.md`, `core/interaction_policy.md`, `core/human_fragility.md`, `core/no_constant_testing.md`, `core/scene_location_system.md`, `core/address_and_register_system.md`, `core/dialogue_texture.md`, and `core/social_error_tolerance.md` apply to every persona. The runtime card adds persona-specific voice and concrete objects; it does not replace global rules or `persona.yaml`.
 
 ## 14. Memory JSON Structure
 
@@ -509,7 +522,7 @@ Global rules in `core/runtime_protocol.md`, `core/one_pass_dialogue.md`, `core/i
 - `persona_evolution` (personality/stance drift from major events; see 14.1)
 - `last_updated`
 
-Use `templates/memory_template.json`.
+Use `templates/memory_template.json` and validate persisted state with `templates/memory_schema.json` before every read or write.
 
 ## 14.1 Persona Evolution (dialectical: society shapes the persona, the persona acts back)
 
@@ -542,9 +555,12 @@ The adapter supports NPC decision-making for the political strategy game *Absolu
 
 Files:
 
+- `game_adapter/absolute_majority_input_schema.json`
 - `game_adapter/absolute_majority_schema.json`
 - `game_adapter/action_scoring.md`
 - `game_adapter/event_response.md`
+- `scripts/validate_game_transaction.py`
+- `scripts/validate_game_output.py` (output-only helper; never authorizes execution)
 
 Game action output must include:
 
@@ -559,6 +575,7 @@ Game action output must include:
 - `relationship_delta`
 - `memory_write`
 - `score_drivers`
+- `social_impact_hint`
 
 Action scores should be derived from:
 
@@ -572,6 +589,8 @@ Action scores should be derived from:
 - relationship state with the user
 - memory
 - event stakes
+
+Every live game action must pass `scripts/validate_game_transaction.py` before execution or writeback. The transaction gate validates the input schema, safe persona resolution, activation/hash readiness, mutable-state schemas and persona identity, output schema, exact IDs and candidate-action pairing, all six relationship axes (including `familiarity`), and the projected state patch. Relationship writes use `clamp(old + delta, 0, 100)`. A successful `scripts/validate_game_output.py` result has output-only scope and never authorizes execution.
 
 ## 17. Historical Conversion Workflow
 
@@ -593,6 +612,16 @@ For Mode C, follow the full workflow in `families/political_human/historical_per
 Never copy an example persona as the output.
 
 Before activation, the generated persona must pass a creation-review gate: present `creation_review.md` to the user and wait for confirmation or modification (see `templates/persona_creation_review_template.md`). Modifications must sync across all affected persona files and re-run safety/consistency checks. Do not enter roleplay until the user confirms.
+
+## 17.5 Activation And Integrity Gate
+
+`core/activation_gate.md` is the single activation preflight for every entry path. `meta.json.latest_review_status` is authoritative; `persona.yaml.meta.creation_review_status` and `persona.yaml.source_provenance.last_review_status` are mandatory mirrors. All three must agree.
+
+- `unconfirmed`: creation or modification; activation blocked and technical/safety re-review required.
+- `reviewed`: current artifact passed review and hash binding; activation blocked pending explicit user confirmation.
+- `confirmed`: activation is allowed only while `review_valid=true`.
+
+`review_valid` requires `validation_status=passed`, `review_invalidated_by_modification=false`, an allowed safety status, and a matching SHA-256 `reviewed_artifact_hash`. The byte-exact algorithm is defined in `core/activation_gate.md` and implemented by `scripts/persona_runtime_contracts.py`. Mutable `memory.json` and `relationship.json` are excluded from the immutable review hash but remain subject to strict schema, range, record-shape, and persona-ID validation. Direct invocation is never confirmation; mismatches fail closed.
 
 ## 18. Examples Are Not Templates
 
@@ -626,7 +655,7 @@ The examples must not pollute actual generation.
 
 ### No Hardcoded Persona Rule
 
-Persona folders must not be created as manually perfect, hardcoded examples. Except for explicit user modifications after generation, all persona files should be produced through the documented workflow: request classification → safety/eligibility check → source grounding (if historical) → fact/interpretation/dispute separation → inferred temperament extraction → modern parliamentary conversion → persona file generation → runtime card generation → relationship/memory initialization → creation review → user modification sync → validation.
+Persona folders must not be created as manually perfect, hardcoded examples. Except for explicit user modifications after generation, all persona files should be produced through the documented workflow: request classification → safety/eligibility check → source grounding as required → fact/interpretation/dispute separation → inferred temperament extraction → retain historical context for Mode B or perform modern parliamentary conversion for the other persona modes → persona file generation → runtime card generation → relationship/memory initialization → creation review → user modification sync → validation.
 
 Examples may be curated and corrected, but they should remain reproducible by the same workflow. Do not encode special behavior that only works for one example persona and is not supported by global rules.
 
@@ -647,15 +676,11 @@ The example does not need to match previous hand-calibrated content exactly, but
 
 `personas/examples/` is only for repository-shipped examples.
 
-User-generated personas normally belong in:
+Repository-managed user-generated personas belong in `user_generated/personas/<persona_id>/`.
 
-- the user's runtime
-- a game data directory
-- a local workspace
-- a downstream project
-- a fork maintained for that purpose
+An embedding host may instead supply one explicit external `persona_dir` in its runtime, game data directory, local workspace, downstream project, or fork. The host must carry that exact path through every workflow step and enforce the same required-file, review, hash, and activation contracts. Never infer an external path from a slug.
 
-Suggested local layout:
+Canonical repository-managed layout:
 
 ```text
 user_generated/
@@ -663,15 +688,19 @@ user_generated/
 |   `-- <persona_id>/
 |       |-- persona.yaml
 |       |-- runtime_card.md
-|       |-- skill.md
+|       |-- SKILL.md
 |       |-- relationship.json
 |       |-- memory.json
-|       `-- examples.md
+|       |-- examples.md
+|       |-- dialogue_samples/
+|       |-- <source-type-specific source report>.md
+|       |-- creation_review.md
+|       `-- meta.json
 `-- exports/
     `-- absolute_majority/
 ```
 
-`user_generated/` is only a recommendation. Whether to commit it is up to the user or downstream project.
+`user_generated/` is the required root for repository-managed creation. Whether to commit it is up to the user or downstream project. Explicit external `persona_dir` paths are host-managed and are outside repository-wide discovery and validation.
 
 The main repository provides:
 
@@ -749,6 +778,19 @@ political-human-skill/
 |-- SPEC_cn.md
 |-- test-prompts.json
 |-- core/
+|   |-- runtime_protocol.md
+|   |-- one_pass_dialogue.md
+|   |-- interaction_policy.md
+|   |-- scene_location_system.md
+|   |-- address_and_register_system.md
+|   |-- dialogue_texture.md
+|   |-- social_error_tolerance.md
+|   |-- runtime_cache_schema.yaml
+|   |-- human_fragility.md
+|   |-- no_constant_testing.md
+|   |-- parliamentary_debate_rules.md
+|   |-- self_state_selector.md
+|   `-- (other core files)
 |-- safety/
 |-- templates/
 |-- validators/
@@ -819,3 +861,94 @@ The project may evolve, but these boundaries must not be weakened:
 - Do not use historical names to bypass modern recognizability review.
 - Do not treat examples as fixed templates.
 - Do not let Darwin or any optimization loop override safety.
+
+## 27. Scene-Aware Speech
+
+Physical location determines how a persona speaks — not just what they say, but grammar, sentence length, formality, and information coding.
+
+**13 scene archetypes** (identified by locale-neutral `scene_id`): `plenary_chamber`, `committee_room`, `parliamentary_corridor`, `vending_area`, `strategy_room`, `legislator_office`, `pub_izakaya`, `official_car`, `rooftop_late_night`, `press_area`, `constituency_event`, `tv_studio`, `ceremony_social`.
+
+**5 dimensions**: formality (1-5), privacy (open/semi-public/semi-private/private), recording_status (on_record/off_record), overhear_risk (very_low/low/medium/high), time_pressure (low/medium/high).
+
+**Recording and overhearing are orthogonal**: on-record scenes use public/procedural speech and may name bills or officials; they do not use covert-speech behavior. Only off-record scenes apply the 4 switches driven by incidental overhear_risk: content coding, reveal guard, interrupt readiness, and physical alertness.
+
+**Scene localization**: scene names localize by `current_jurisdiction` (where the persona currently is, not their nationality). A Japanese MP in Westminster sees UK building names.
+
+**Floor types**: HARD (procedural/public — address ceiling is absolute) vs SOFT (informal — personality can push ceiling +1).
+
+See `core/scene_location_system.md` for full specification.
+
+## 28. Address & Register System
+
+How a persona addresses others, refers to themselves, and what register they use — determined by relationship stage × personality × scene floor × social variables.
+
+**3 layers**: Address (how to call the other), Self-reference (how to call self), Register (formality of grammar/vocabulary).
+
+**L1-L7 Social-Distance Semantic Levels** (locale-neutral, culture-independent): L1=Official, L2=Formal, L3=Polite, L4=Collegial, L5=Familiar, L6=Intimate, L7=Private. Each language maps these to its own address forms. All supported nations are peer implementations.
+
+**Canonical selection**: relationship gives an L1-L7 range; speech formality selects an endpoint; optional seniority adjusts it once; clamp to L1-L7; apply the scene's maximum intimacy; then map the resulting `normative_level` to the locale ladder. `core/address_and_register_system.md` is the only authoritative algorithm.
+
+**Scene floor**: HARD scenes (plenary, committee, TV, press) set an absolute ceiling. SOFT scenes allow casual personalities to push +1.
+
+**Per-nation tier ladders**: Japan, UK, US, China, Germany each have full L1-L7 address, self-reference, and register mappings. Procedural parliamentary address (e.g., Japanese 君) is separate from interpersonal address.
+
+**Translation layer**: output language follows the user. Address terms preserved through standard translation conventions (political context defaults to formal). Self-reference and register translated to target language equivalents. Cross-language tier equivalence matrix maps levels across all supported languages.
+
+**Social variables**: relative_seniority (junior/peer/senior), gender_interaction, age_gap — optional modifiers that stack with personality.
+
+**Backward compatibility**: missing `speech_profile` defaults to `normal`/`medium`/locale-standard.
+
+See `core/address_and_register_system.md` for full specification.
+
+## 29. Dialogue Texture
+
+Rules ensuring dialogue sounds like living humans, not literary performances.
+
+**Mundane ratio**: low-stakes scenes target ~40% non-substantive turns (rolling target across conversation, not per-turn hard minimum). Filler, body sensations, environment comments, food/drink evaluations count.
+
+**Aphorism spacing**: no more than 1 consecutive polished aphorism. Silence or topic change can reset cadence. Prevents "aphorism chains."
+
+**Energy → density**: energy level (from `human_fragility.md`) controls metaphor density and sentence complexity. Low/drained energy → shorter, blunter, less metaphorical.
+
+**Asymmetry permission**: one speaker may carry the wit while the other gives minimal responses. Natural and character-driven, not forced symmetry.
+
+Texture rules are applied **during generation** (one-pass), not as post-generation rewrite cycles.
+
+See `core/dialogue_texture.md` for full specification.
+
+## 30. Social Error Tolerance
+
+Real humans make mistakes in address and etiquette. The normative tier (what they should say) may differ from the realized address (what they actually say).
+
+**Persona fields** (`social_performance`): `etiquette_reliability` (high/medium/low), `self_monitoring` (high/medium/low), `procedural_experience` (high/medium/low), `intentional_breach_propensity` (low/medium/high), `repair_style` (immediate/delayed/humorous/brazen/avoidant).
+
+**Error types**: honorific_drop, overfamiliar_shift (+1 level), overformal_reversion (-1), wrong_title, wrong_name (restricted to scene-visible/publicly-known names — never from private episodic memory), register_slip, self_reference_slip, mid_sentence_repair.
+
+**Probability factors**: energy (low +2%, drained +6%), intoxication, emotional state, unfamiliar titles, HARD scenes (×0.25 multiplier).
+
+**Repair probability**: based on self_monitoring (high=85%, medium=55%, low=25%), modified by scene and state.
+
+**Cooldown**: max 1 slip per reply; 3-turn cooldown after accidental slip (6 in HARD scenes).
+
+**Key rule**: an etiquette slip does NOT change the relationship — trust and intimacy are not granted by a mistake.
+
+See `core/social_error_tolerance.md` for full specification.
+
+## 31. Runtime Performance & Cache
+
+**Host cache contract**: a conforming runtime compiles a cache from persona.yaml, runtime_card.md, and locale ladders at activation. Ordinary dialogue should read that cache instead of re-consulting core files per turn. `core/runtime_cache_schema.yaml` specifies the data contract; this repository does not include a host-specific session-store implementation and therefore makes no measured latency claim.
+
+**3 cache layers**:
+1. **Compiled cache** (immutable): voice, speech_profile, social_performance, locale ladder, home jurisdiction.
+2. **Conversation state** (mutable, cross-turn): scene_vector, current_jurisdiction, addressee info, address_bundle, energy_level, one `primary_self_state`, and optional `state_overlays` (`fatigued_self`).
+3. **Rolling state** (per-turn counters): mundane_window, last_aphorism, testing_cooldown, social_lapse_cooldown, vulnerability_recovery_due, human_moment_counter, emotional_residue.
+
+**Invalidation**: cache entries recompute only when their dependencies change (scene, relationship, language, addressee, jurisdiction, energy).
+
+**Conditional address**: most replies don't contain vocatives — skip full tier calculation when no address term is needed. Use cached register directly.
+
+**Per-turn decision targets**: Tier 0 = 2-3 decisions (cached voice + scene register + energy). Tier 1 = 6-7 decisions (cache + reply shape + concrete object). Tier 2 = 9-11 decisions (cache + memory + relationship + full checks).
+
+These are complexity-design targets, not measured latency benchmarks.
+
+See `core/runtime_cache_schema.yaml` for typed schema. See `core/runtime_protocol.md` § Activation-Time Cache for lifecycle rules.

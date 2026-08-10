@@ -1,6 +1,6 @@
 # Source-Grounded Persona Creation Workflow
 
-> **作用**：创建**任何** political-human persona 文件夹的全局工作流。它是 `families/political_human/generator.md` 的总纲，把原先只针对历史人物的 source-grounding 方法泛化为四类来源共用一套流程。
+> **作用**：创建**任何** political-human persona 文件夹的全局工作流。它是 `families/political_human/generator.md` 的总纲，把原先只针对历史人物的 source-grounding 方法泛化为五类来源共用一套流程。
 >
 > **核心原则**：不论用户创建的是原创虚构人物、历史人物原型、还是基于近现代现实人物公开资料提取的安全原型，最终都通过同一套"输入资料/用户要求 → 来源整理 → 特质提取 → 现代议会制嵌入 → 文件夹生成 → creation review → 用户修改 → 确认后激活"流程。区别**只在资料来源**。
 
@@ -14,7 +14,13 @@
 
 除非用户引用历史或现实人物，否则**不需要历史 source grounding**。系统仍须从用户要求中提炼稳定的 persona 设计模式，通过全局流程生成完整文件夹。
 
-### 2. `historical_archetype_conversion`
+### 2. `historical_inference`
+
+来自分界前或允许的历史人物，保留其历史时代语境进行推演（Mode B），不移植为现代政治家。
+
+资料来源与证据纪律同历史转化模式；需要历史 source grounding、三级推断标注与 `inferred_temperamental_pattern`，但不执行现代议会制转译。
+
+### 3. `historical_archetype_conversion`
 
 来自分界前或允许的历史人物的 persona。
 
@@ -22,7 +28,7 @@
 
 **需要历史 source grounding 与历史语境转译**（见 `core/historical_source_grounding.md` + `core/inferred_temperament_extraction.md` + `safety/archetype_conversion_protocol.md`）。
 
-### 3. `modern_real_figure_archetype_extraction`
+### 4. `modern_real_figure_archetype_extraction`
 
 来自近现代/现代现实政治人物或公开政治行动者的**公开信息**的安全虚构原型。
 
@@ -30,7 +36,7 @@
 
 此模式**绝不得**创建现实人物的互动人格，必须产出**去识别化的虚构原型**（见 `safety/modern_real_figure_archetype_extraction.md`）。
 
-### 4. `composite_archetype`
+### 5. `composite_archetype`
 
 来自多个宽泛类型、历史模式或公开原型的虚构 persona。
 
@@ -74,7 +80,7 @@
 4. Separate source facts, user requirements, interpretations, and creative extensions（区分来源事实/用户要求/解释/创作扩展）。
 5. Extract stable persona design patterns（提炼稳定的 persona 设计模式）。**对所有来源类型（含模式 A/C 的成长经历，见第 7 步）**：从史料/用户描述中提取稳定行为倾向——把后世评价标签（"革新者"等）**翻译为可观察的行为倾向与认知模式**（"对过时制度低容忍度"等），从反复的跨情境行为推断，区分"评价"与"人格特征"。
 6. Extract or infer temperamental pattern（提取或推断气质结构）. 详细规则见 `core/inferred_temperament_extraction.md` 和 `safety/archetype_conversion_protocol.md` §2.3。
-7. Convert or embed into modern parliamentary context（转化或嵌入现代议会制语境）。**强制生成 `formative_life_history`**（成长经历，对模式 A/C/modern_real_figure 均适用）。生成规则：若用户提供了成长经历描述 → 采用；若未提供 → **AI 自行根据用户已提供的其他信息（立场 / 性格 / 出身暗示等）推断生成一段 coherent 的成长经历**，必须与人格结构共同解释现代立场的形成逻辑，并说明这是多种 coherent 解中的一个非唯一解（见 `archetype_conversion_protocol.md` §2.4）。
+7. Apply the source-specific setting step. Mode B (`historical_inference`) retains the historical setting and reconstructs `formative_life_history` only from sourced history plus explicitly labeled inference. Modes A/C, modern-safe extraction, and composite creation embed a fictional persona in modern parliamentary context and require a coherent `formative_life_history`; when not user-supplied, mark the generated account as one non-unique coherent explanation (see `archetype_conversion_protocol.md` §2.4).
 8. Generate a complete persona folder（生成完整文件夹）。
 9. Generate `creation_review.md`。
 10. Present basic information to user（呈现基本信息）。
@@ -164,15 +170,16 @@
 ## 统一文件夹结构
 
 ```text
-personas/generated/<persona_id>/
+user_generated/personas/<persona_id>/
 ├── persona.yaml
 ├── runtime_card.md
+├── SKILL.md
 ├── relationship.json
 ├── memory.json
 ├── examples.md
 ├── meta.json
 ├── creation_review.md
-├── source_report.md          # 统一名；可由下列之一实现/软链
+├── <source-type-specific source report>
 └── dialogue_samples/
     ├── casual_private.md
     ├── public_interview.md
@@ -184,14 +191,14 @@ personas/generated/<persona_id>/
     └── game_action.json
 ```
 
-`source_report.md` 的实现（按来源）：
+source report 的文件名按来源固定：
 
 - 历史人物：`historical_source_report.md`
 - 原创人物：`original_persona_source_report.md`
 - 近现代现实人物安全原型：`modern_real_figure_public_source_report.md`
-- 复合：`composite_source_report.md`（或合并上述）
+- 复合：`composite_archetype_source_report.md`
 
-> 仓库内置示例可保留各自具名 source report（如 `historical_source_report.md`）；新生成产物建议用统一名 `source_report.md` 便于读取调用。validate 检查"存在某种 source report"。
+不得改用模糊的统一文件名；validator 按 `source_type` 检查精确报告名。
 
 ---
 
@@ -209,8 +216,9 @@ personas/generated/<persona_id>/
   "user_modified_after_generation": false,
   "activation_requires_user_confirmation": true,
   "latest_review_status": "unconfirmed",
-  "review_invalidated_by_modification": false,
-  "validation_status": "pending"
+  "review_invalidated_by_modification": true,
+  "validation_status": "pending",
+  "reviewed_artifact_hash": ""
 }
 ```
 

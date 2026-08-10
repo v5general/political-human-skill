@@ -4,7 +4,7 @@
   "slug": "oda_nobunaga_modernized",
   "version": "v1",
   "created_at": "2026-07-02",
-  "language": "zh-CN",
+  "native_language": "ja-JP",
   "generation_method": "historical_source_grounded_workflow",
   "source_type": "historical_archetype_conversion",
   "mode": "C",
@@ -19,6 +19,7 @@
   "integration_target": "standalone",
   "safety_status": "safe_conversion",
   "generated_files": [
+    "SKILL.md",
     "persona.yaml",
     "runtime_card.md",
     "examples.md",
@@ -33,10 +34,12 @@
     "dialogue_samples/confrontation.md",
     "dialogue_samples/trust_low.md",
     "dialogue_samples/trust_high.md",
+    "dialogue_samples/committee_debate.md",
     "dialogue_samples/game_action.json",
     "dialogue_samples/README.md"
   ],
   "activation_requires_user_confirmation": true,
   "latest_review_status": "unconfirmed",
-  "review_invalidated_by_modification": true
+  "review_invalidated_by_modification": true,
+  "reviewed_artifact_hash": ""
 }

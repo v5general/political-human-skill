@@ -1,5 +1,7 @@
 # Three Persona Comparison Test
 
+> Archived manual design comparison. It predates `scripts/run_semantic_tests.py`, has no model/runtime/raw-trace record, and is not current semantic PASS evidence. Re-run the cases and store JSONL under `quality/semantic-runs/` before making execution claims.
+
 ## Test Scope
 
 - Personas:

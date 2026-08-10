@@ -1,5 +1,7 @@
 # Example Regeneration Audit
 
+> Archived snapshot from before later runtime edits. Statements that `user_modified_after_generation=false`, validation was complete, or the examples currently PASS no longer describe the working artifacts. Current metadata is authoritative; use `scripts/validate_repo.py` and recorded semantic runs for current evidence.
+
 ## 1. Purpose
 
 本轮按全局 Historical Source-Grounded Persona Creation Workflow **完全重新生成**三个示例的所有文件（覆盖旧文件，含 dialogue_samples）。三示例现在是"方法论自然产物"——所有内容均由方法论推导产出，非任何外部参考的复制。新生成内容彼此方向不同但同样自洽（切入点由人格决定，见 SPEC §5.3.1 第二硬规则），且 `meta.user_modified_after_generation = false`。资料优先 Wikipedia / 维基百科及公开可靠学术来源。

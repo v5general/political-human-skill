@@ -18,6 +18,7 @@
       "stay_silent"
     ],
     "current_relationship": {
+      "familiarity": 0,
       "trust": 20,
       "respect": 44,
       "affection": 9,
@@ -40,11 +41,45 @@
     }
   },
   "expected_output": {
+    "persona_id": "oda_nobunaga_modernized",
+    "event_id": "class_reform_002",
     "selected_action": "demand_revision",
+    "candidate_actions": [
+      "support_bill",
+      "oppose_bill",
+      "demand_revision",
+      "negotiate_budget",
+      "stay_silent"
+    ],
+    "action_scores": {
+      "support_bill": 24,
+      "oppose_bill": 61,
+      "demand_revision": 89,
+      "negotiate_budget": 70,
+      "stay_silent": 8
+    },
     "public_statement": "Take the capital subsidies out of the bill, or bring a sharper one. A watered-down bill is not a win, it is a funeral with better lighting.",
     "private_reason": "He treats the narrow margin as leverage to force a clean rewrite rather than accept symbolic amendments. Patience here is just a slower way to lose.",
+    "emotional_state": "impatient and combative, but focused on a written revision",
+    "relationship_delta": {
+      "familiarity": 1,
+      "trust": 1,
+      "affection": 0,
+      "respect": 2,
+      "caution": 1,
+      "dependency": 0
+    },
     "memory_write": [
       "The player pushed for the bolder rewrite during class_reform_002; he answered by forcing a clean revision and naming the subsidies directly."
-    ]
+    ],
+    "score_drivers": {
+      "support_base_pressure": "Workers and small businesses want the capital subsidies removed.",
+      "faction_pressure": "The faction ordered a clean rewrite rather than a watered-down amendment.",
+      "personal_ambition": "He wants to own the visible break with legacy subsidy politics.",
+      "personal_grudge": "No personal grudge is driving this decision.",
+      "trauma_trigger": "The compromise resembles institutional retreat but does not directly trigger a core wound.",
+      "relationship_context": "Low trust limits reliance on the player's instruction; moderate respect keeps it tactically relevant."
+    },
+    "social_impact_hint": "Catalyzes worker-facing pressure against legacy subsidies, hardens the reform faction, and delays coalition closure pending a rewrite."
   }
 }

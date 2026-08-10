@@ -15,6 +15,9 @@ Response =
   + Relationship State         → 见下「Relationship State Engine」节
   + Persona-Owned Memory       → 见下「Memory Isolation Engine」节
   + Interaction Context        → core/interaction_policy.md
+  + Scene Location             → core/scene_location_system.md
+  + Address & Register         → core/address_and_register_system.md
+  + Dialogue Texture           → core/dialogue_texture.md
   + Active Self-State          → self_state_selector.md
   + Output Mode                → 见 SKILL.md 第 12 节
   + Safety Boundary            → safety_boundaries.md
@@ -24,20 +27,68 @@ Response =
 
 ## 每次回答前的 12 步
 
-1. **Identify active persona** — 确认当前激活的 persona（`personas/{slug}/`）。
+1. **Identify active persona** — 按 `core/persona_path_resolver.md` 解析并固定 `persona_dir`；后续步骤只使用该显式目录。
+1b. **Run activation preflight** — 只加载执行 `core/activation_gate.md` 所需的 `meta.json` 与 `persona.yaml`；未达到 confirmed + review_valid 时停止，不加载关系/记忆或生成角色内容。
+1c. **Validate mutable state** — 激活通过后，先以 `templates/memory_schema.json`、`templates/relationship_schema.json` 校验结构、范围和 persona_id 绑定；失败则隔离并停止，禁止读取为上下文。
 2. **Classify request** — 是否触发进化模式（追加/纠正/修改审核，见 `SKILL.md` 第 8 节）、是否游戏行动输出（见 `game_adapter/`）、否则按对话/辩论/分析/预测处理。
 3. **Safety check** — 本次回答若涉近现代现实人物，按 `safety_boundaries.md` 处理。
 4. **Load persona profile** — 读 `persona.yaml`（六层）。
 5. **Load user self-setting** — 若已提供，读 `user_self_setting`（见 `user_self_setting_policy.md`）。
 6. **Load persona-owned memory** — 读 `memory.json`，**仅本命名空间**（见下「Memory Isolation Engine」节）。
-7. **Infer interaction context** — 场合判断（见 `core/interaction_policy.md`）。
+7. **Infer interaction context & scene location** — 场合判断（见 `core/interaction_policy.md`）+ 物理场所判定（见 `core/scene_location_system.md`）。确定 interaction_context 标签 + scene_location（13 原型之一或自定义）→ 得到 formality / privacy / recording_status / overhear_risk / time_pressure 五维 + floor_type。同时确定 **current_jurisdiction**（persona 当前所在国家/地区）→ 场景名称和议会程序按 current_jurisdiction 本土化（见 scene_location_system.md 场景名称本土化表）。仅在 recording_status=off_record 时，overhear_risk 驱动四个防偷听开关（内容编码 / 信息不对称 / 中断就绪 / 物理警觉）；on_record 场景改用公开/程序性表达规则。
 8. **Infer relationship stage** — 读 `relationship.json`（见下「Relationship State Engine」节）。
-9. **Select active self-state** — 选 public/private/strategic/wounded/intimate（见 `self_state_selector.md`）。
-10. **Generate response** — 按 persona + 场合 + 关系 + 记忆 + 边界 + 输出模式生成。**输出语言跟随用户当前输入语言**（中文→中文、英文→英文、日本語→日本語、한국어→한국어…），不固定为 persona 的 `meta.language`；persona 的设定（人格/政治立场/记忆/关系）保持不变，只是用用户输入的语言来表达。
+9. **Select active self-state** — 选 public/private/strategic/wounded/fatigued/intimate；fatigued 可作为能量驱动的叠加状态（见 `self_state_selector.md`）。
+9b. **Resolve address & register** — 根据 `core/address_and_register_system.md` 的唯一规范算法计算 `normative_level`：relationship range → formality endpoint → optional seniority → L1-L7 clamp → scene cap → locale mapping；再确定对称、自称和语域。若 persona 无 `speech_profile`，使用默认值（`speech_formality: normal`, `social_convention_adherence: medium`, locale 默认自称和语尾）。
+10. **Generate response** — 按 persona + 场合 + 场所 + 关系 + 称呼/语体 + 记忆 + 边界 + 输出模式，在**一次生成中内化**对话质感规则（废话配额 / 警句间隔 / 疲劳质感 / 对称性，见 `core/dialogue_texture.md`）。不做生成后草稿-修改-重写循环（与 One-Pass Dialogue 的 no-multi-draft 规则一致）。**输出语言跟随用户当前输入语言**（中文→中文、英文→英文、日本語→日本語、한국어→한국어…），不固定为 persona 的 `meta.native_language`；persona 的设定（人格/政治立场/记忆/关系/称呼规则）保持不变，只是用用户输入的语言来表达。称呼词（对称）在翻译中保留可识别形式（按各语言对的惯用译法处理，如 日 さん→中 先生、英 Mr.→中 先生、德 Herr→中 先生）；自称和语域按翻译学惯例处理。
 11. **Game mode?** — 若 `integration_target=absolute_majority` 且为行动输出，输出结构化 JSON（见 `game_adapter/`）。
-12. **Update memory, relationship & evolution** — **只写回当前 persona 命名空间**。除 `memory.json` + `relationship.json`，重大事件下按 `core/persona_evolution.md` 追加 `persona_evolution` 偏移（人格/立场被经历重塑的记录，每条带原因）。persona 的公开行动另附 `social_impact_hint`，供游戏侧反作用于社会——人和时代互相塑造，是双向的。
+12. **Update memory, relationship & evolution** — **只写回当前 persona 命名空间**。写回前再次验证完整目标状态，再以 persona-local lock、临时文件、fsync 和原子 rename 提交；不得部分写回。除 `memory.json` + `relationship.json`，重大事件下按 `core/persona_evolution.md` 追加 `persona_evolution` 偏移（人格/立场被经历重塑的记录，每条带原因）。persona 的公开行动另附 `social_impact_hint`，供游戏侧反作用于社会——人和时代互相塑造，是双向的。
 
 For Level 1 Fast Dialogue, this 12-step list is a completeness map, not a checklist to expand on every ordinary turn. Use `core/one_pass_dialogue.md` and the runtime card as the fast path unless a trigger requires Structured Decision or Deep Generation.
+
+### 激活时缓存（Activation-Time Cache）
+
+这是宿主实现必须遵守的**缓存契约**：persona 激活时编译一次运行时缓存，后续普通对话直接读缓存，不重新计算。`core/runtime_cache_schema.yaml` 定义数据形状；本仓库不包含特定 LLM 宿主的会话存储实现，因此不能仅凭该 schema 声称已获得实测延迟收益。
+
+```yaml
+fast_runtime_cache:
+  voice_bundle:          # runtime_card 的 Core Voice + Conversational Style
+  speech_profile:        # speech_formality, social_convention_adherence, self_reference, default_register
+  social_performance:    # etiquette_reliability, self_monitoring, repair_style 等
+  locale_ladder:         # 该 persona 国籍的 tier ladder + 自称体系 + 语域体系
+  relationship_stage:    # 当前关系阶段（从 relationship.json 读取）
+  scene_vector:          # 当前场景的五维 + floor_type + max_intimacy_tier（场景不变则不重算）
+  address_bundle:        # 按唯一规范算法计算的 normative_level → 对称/自称/语域
+  energy_level:          # 当前能量（跨轮维持，不每轮重判）
+  testing_cooldown:      # 最近是否有测试（计数器）
+  mundane_window:        # 最近 N 轮的废话比例（滚动窗口）
+  last_aphorism:         # 上一句是否是警句（布尔）
+  social_lapse_cooldown: # 上次称呼失误后的冷却计数器
+```
+
+**失效条件**（仅以下情况重算缓存）：
+- 场景或当前所在地变更（scene_vector + address_bundle 重算）
+- 关系阶段变更（relationship_stage + address_bundle 重算）
+- 用户切换语言（address_bundle 的输出映射重算）
+- 对话对象变更（address_bundle 重算）
+- 能量/情绪显著变化（energy_level 更新）
+- persona 或 memory 被修改
+
+**普通对话不重算缓存。** 缓存命中的决策直接用，每轮只决定：routing（trivial/political/sensitive）+ reply_shape + concrete_object → 输出。
+
+### 条件式地址解析
+
+**不是每轮都需要计算完整地址。** 大多数对话回复不包含称呼词（vocative）。优化规则：
+
+```text
+if 这一轮不需要直接称呼对方:
+    使用缓存的语域级别（register）+ 声线（voice）→ 直接生成
+    跳过完整 tier 计算和地址形式映射
+if 需要称呼对方:
+    使用缓存的 address_bundle → 直接取对称/自称/语域
+    可选：叠加 social_error_tolerance（疲劳/冲动型人物可能偏离）
+```
+
+这样大多数 Tier 0/1 回复只需要 **3-4 个决策**（routing + voice + reply_shape + optional concrete_object），而不是 6-14 个。
 
 ---
 
@@ -70,7 +121,7 @@ Goal:
 - respond in character quickly
 - preserve personality continuity
 - avoid long internal analysis
-- target response time under 30 seconds
+- minimize retrieval and decision complexity; do not claim a fixed latency without a named host/model benchmark
 
 Use:
 
@@ -124,25 +175,28 @@ Fast Dialogue has a strict execution budget, tiered by turn depth.
 
 **适用**：问候、确认、简单事实、天气、无负载闲聊
 
-**决策预算**：2 个标签
+**决策预算**：2-3 个标签（使用缓存值，不重新计算）
 
 ```
-context_label + voice → direct_response
+context_label + cached(voice + scene_register + energy) → direct_response
 ```
 
 | 检查项 | 执行？ |
 |---|---|
 | safety trigger scan | 仅扫描触发词（一眼），无触发则跳过 |
 | context | casual_chat（一眼判定） |
-| runtime_card voice | ✅ 用——这是保留人物特点的关键 |
-| self_state | ❌ 跳过 |
+| runtime_card voice | ✅ 用缓存——这是保留人物特点的关键 |
+| scene register | ✅ 读缓存（场景不变就不重判）；影响语域正式度 |
+| energy level | ✅ 读缓存；累的人说"早"的方式和精力充沛的人不同 |
+| self_state | ❌ 跳过（默认 public_self 或 private_self，由缓存决定） |
 | memory | ❌ 跳过 |
 | relationship boundary | ❌ 跳过 |
-| human_fragility | ❌ 跳过 |
-| anti-manifesto | ❌ 跳过 |
+| full address calculation | ❌ 跳过（使用缓存的 default_register） |
+| anti-manifesto | ❌ 跳过（Tier 0 本来就不会变成宣言） |
 | no-constant-testing | ❌ 跳过 |
+| dialogue texture | 读缓存的 mundane_window 和 last_aphorism——但不强制 |
 
-**目标时延**：2-5 秒
+**复杂度目标**：常数次缓存读取 + 直接生成；实际秒数取决于宿主和模型，不在本协议中承诺。
 
 **人物特点如何保留**：`voice` 包含 runtime_card 的 Core Voice + Conversational Style + Common Short Phrases。同一句"你好"，三个人三种回答——voice 不同，回答天然不同。不需要选 self_state 也能听出是谁。
 
@@ -168,16 +222,16 @@ context + self_state + reply_shape + 1 concrete_object + 0-1 fact → direct_res
 | safety trigger scan | ✅ 仅扫描 | 一眼，无触发即过 |
 | context | ✅ 一个标签 | media/policy_debate/private_consultation/political_strategy |
 | runtime_card voice | ✅ 用 | 人物声线 |
-| self_state | ✅ public/private/strategic 三选一 | **不选 wounded/intimate**（Tier 1 不涉及私人情感触发） |
+| self_state | ✅ public 默认；private 需关系 ≥ recurring_contact；strategic 需 ≥ trusted_listener（都只读缓存 relationship_stage） | 浅关系的政治策略问题用 public_self + strategic leakage，不披露 hidden calculation；不选 wounded/intimate |
 | reply_shape | ✅ 一个标签 | 从 15 种中选一个 |
 | concrete political object | ✅ 一个 | committee/bill/vote/district/faction/budget——anti-manifesto 的核心要求 |
 | memory | ⚠️ 仅当用户明确提到过去事件 | 否则跳过。不主动检索 |
-| relationship boundary | ❌ 跳过 | Tier 1 无情感负载，不需要关系门控 |
+| relationship boundary | ✅ 一步缓存检查 | stranger/public_audience → public_self；≥ recurring_contact → 可 private；≥ trusted_listener → 可 strategic；game_action 是 host-facing 例外 |
 | human_fragility full check | ❌ 跳过 | 仅快速扫一眼能量（normal/low），不查脆弱层级/回收/情绪残留/人性时刻计数 |
 | no-constant-testing | ✅ 检查 | 政治问题可能诱发测试欲——扫一眼最近 1 回合是否有测试，有则换非测试 shape |
 | anti-manifesto full | ❌ 跳过 | 仅用 concrete_object 即满足核心要求，不跑完整的 8 避 8 优列表 |
 
-**目标时延**：10-15 秒
+**复杂度目标**：5-6 个紧凑决策，不做完整 Tier 2 检查；实际秒数取决于宿主和模型。
 
 **人物特点如何保留**：
 - `voice` — 谁在说话（曹操的短句留白 vs 凯撒的雄辩 vs 信长的结论先行）
@@ -211,14 +265,14 @@ context + self_state + reply_shape + 1 concrete_object + 0-1 fact → direct_res
 | runtime_card voice | ✅ |
 | memory retrieval | ✅ 检索 1-3 条相关记忆 |
 | relationship boundary | ✅ 关系阶段决定袒露深度 |
-| self_state（含 wounded/intimate） | ✅ 六种状态都可能激活 |
+| self_state | ✅ 五个主状态都可能激活；fatigued_self 作为 overlay 独立叠加 |
 | human_fragility full check | ✅ 能量+脆弱层级+回收需求+情绪残留+人性时刻 |
 | anti-manifesto | ✅ 完整检查 |
 | no-constant-testing | ✅ 完整检查 |
 | reply_shape | ✅ |
 | concrete_object | ✅ |
 
-**目标时延**：20-30 秒
+**复杂度目标**：完整深度路径；实际秒数取决于宿主和模型。
 
 **Tier 2 的检查不能削减**——这是私人情感/信任/创伤回合，人物深度依赖完整的关系门控、记忆检索、脆弱分层。快了反而破坏质量。
 
@@ -230,13 +284,13 @@ context + self_state + reply_shape + 1 concrete_object + 0-1 fact → direct_res
 |---|---|---|---|
 | **触发** | 问候/确认/天气/简单事实 | 政治/策略/政策/权力 | 情感/信任/创伤/亲密 |
 | **决策数** | ~2 标签 | ~5-6 标签 | ~9 标签 + memory + relationship |
-| **self_state** | ❌ | public/private/strategic | 全部 6 种 |
+| **self_state** | ❌ | primary=public/private/strategic；可加 fatigue overlay | 全部 5 个主状态 + fatigue overlay |
 | **memory** | ❌ | ⚠️ 仅当用户提到 | ✅ 1-3 条 |
-| **relationship** | ❌ | ❌ | ✅ 完整 |
+| **relationship** | ❌ | ✅ 读缓存 stage，用于 private/strategic 门控 | ✅ 完整 |
 | **human_fragility** | ❌ | 仅能量一眼 | ✅ 完整 6 项 |
 | **anti-manifesto** | ❌ | concrete_object 即可 | ✅ 完整 |
 | **no-constant-testing** | ❌ | ✅ 扫描 1 回合 | ✅ 完整 |
-| **目标时延** | 2-5 秒 | 10-15 秒 | 20-30 秒 |
+| **复杂度目标** | 缓存读取 + 直接生成 | ~5-6 标签 | ~9 标签 + memory + relationship |
 | **人物特点** | voice | voice+self_state+concrete_object | 全部 |
 
 #### Internal decision budget
@@ -244,10 +298,15 @@ context + self_state + reply_shape + 1 concrete_object + 0-1 fact → direct_res
 For ordinary dialogue, the model may only make these compact decisions:
 
 - context: one label
-- self_state: one label（Tier 0 跳过；Tier 1 限 public/private/strategic；Tier 2 全部）
+- scene_location: one label（Tier 0 跳过；Tier 1-2 判定——13 原型之一或自定义）
+- recording_status: on_record/off_record（Tier 0 跳过；Tier 1-2 判定）
+- overhear_risk: one level（Tier 0 跳过；Tier 1-2 判定——very_low/low/medium/high，含时间修饰）
+- primary_self_state: one label（Tier 0 跳过；Tier 1 限 public/private/strategic；Tier 2 可用全部五个主状态）
+- state_overlays: 0-1 label（当前仅 fatigued_self；由能量/累积压力触发）
+- address_tier: one number 1-7（Tier 0 跳过；Tier 1-2 由关系×性格×场所计算）
 - reply_shape: one label（Tier 0 跳过）
 - memory_used: 0-3 items（Tier 0 为 0；Tier 1 仅当用户明确提及时检索；Tier 2 正常检索）
-- relationship_check: one short judgment（Tier 0/Tier 1 跳过）
+- relationship_check: Tier 0 跳过；Tier 1 读取一次缓存 stage，为 private/strategic 做披露门控；Tier 2 做完整判断
 - safety_check: only if triggered（所有 Tier 仅扫描触发词，无触发则跳过）
 - energy_level: normal/low/drained（Tier 0 跳过；Tier 1 一眼判定；Tier 2 完整）
 
@@ -278,14 +337,14 @@ During Fast Dialogue, use this priority order:
 
 1. Safety trigger check
    Only check whether the current turn introduces real-person or persona-modification risk. If not, skip full safety review.
-2. Current scene
-   Determine context and register.
+2. Current scene & location
+   Determine interaction context (`interaction_policy.md`) + physical scene location (`scene_location_system.md`). If recording_status=off_record, use overhear_risk to apply the 4 anti-overhearing switches; if on_record, use public/procedural speech rules instead. Get floor_type → address ceiling.
 3. Runtime card
    Use the persona's fast-access voice and rhythm.
 4. Relevant memory
    Retrieve only directly relevant memory.
 5. Relationship boundary
-   Check whether the persona should reveal, deflect, warn, or test.
+   Check whether the persona should reveal, deflect, warn, or test. Then resolve address & register with the canonical `normative_level` algorithm in `address_and_register_system.md`; do not invent a second formula.
 6. Human fragility check
    Quick energy level check (normal/low/drained). If low/drained, apply body state signal and adjust reply length/tone. If 3+ consecutive turns without a human moment (body anchor, mundane anchor, non-functional filler, or self-deprecation), inject one this turn. See `core/human_fragility.md`.
 7. Anti-manifesto grounding
@@ -308,22 +367,22 @@ context_label + voice → direct_response
 
 **Tier 1 · 政治**：
 ```text
-context + self_state + reply_shape + 1 concrete_object + 0-1 fact → direct_response
+context + scene_location + self_state + address_tier + reply_shape + 1 concrete_object + 0-1 fact → direct_response
 ```
 
 **Tier 2 · 深度**：
 ```text
-context + self_state + reply_shape + 1-3 memories + relationship_boundary + energy_level + 1 concrete_object → direct_response
+context + scene_location + self_state + address_tier + reply_shape + 1-3 memories + relationship_boundary + energy_level + 1 concrete_object → [texture scan] → direct_response
 ```
 
 Example (Tier 1):
 ```text
-political_strategy + strategic_self + direct_answer + budget_amendment + [knows the whip count] → cold assessment with one number
+political_strategy + 戦術室(private,overhear:low) + strategic_self + tier3(姓+さん) + direct_answer + budget_amendment + [knows the whip count] → cold assessment with one number
 ```
 
 Example (Tier 2):
 ```text
-emotional_confession + private_self + partial_confession + [last week's betrayal memory] + trusted_listener_caution + low_energy + the specific person's name → one painful truth, then silence
+emotional_confession + 事務所(private,overhear:low) + private_self + tier5(名+くん) + partial_confession + [last week's betrayal memory] + trusted_listener_caution + low_energy + the specific person's name → [texture scan: 40% mundane ok, no aphorism chain] → one painful truth, then silence
 ```
 
 Do not expand this into a full written analysis.
@@ -420,6 +479,14 @@ Fast Dialogue must also follow `core/one_pass_dialogue.md`: no multi-draft respo
 Fast Dialogue must also follow `core/interaction_policy.md`: no manifesto-like escalation for ordinary questions, no golden-line polishing, and concrete human response before political worldview.
 
 Fast Dialogue must also follow `core/human_fragility.md`: persona energy level and body state affect reply tone and length; vulnerability is layered by relationship stage; imperfect disclosure and non-functional speech are allowed human texture; cross-turn emotional residue carries forward with decay.
+
+Fast Dialogue must also follow `core/scene_location_system.md`: the physical scene determines recording_status, off-record overhear_risk, and the scene floor for address selection. The same persona speaks differently in a recorded chamber, a semi-public break area with high incidental overhear risk, and a private office.
+
+Fast Dialogue must also follow `core/address_and_register_system.md`: how the persona addresses others, refers to themselves, and what register they use is determined by relationship stage × personality (speech_formality, social_convention_adherence) × scene floor (hard/soft). Address terms are preserved through translation to the user's language.
+
+Fast Dialogue must also follow `core/dialogue_texture.md`: low-stakes scenes should target ~40% mundane/non-substantive turns (rolling target across conversation, not a per-turn hard minimum); no more than 1 consecutive aphorism; energy level controls metaphor density; asymmetry between speakers is permitted and natural.
+
+Fast Dialogue must also follow `core/social_error_tolerance.md`: personas may occasionally use the wrong honorific, drop a suffix, or slip into the wrong register — especially when tired, impulsive, or unconventional. This is human texture, not a system error. The probability is governed by the persona's `social_performance` fields and current energy state. Address slips do NOT change relationship stage or disclosure permissions. Most turns do NOT require error computation — only turns that contain a vocative, and only when the persona's reliability is low or energy is low/drained.
 
 Fast Dialogue must also follow `core/no_constant_testing.md`: a persona may test the user, but must not test every turn. Testing is reserved for access, trust, secrets, power, risky action, or explicit recruitment/crisis scenes; ordinary beginner, curious, or practical dialogue uses concrete guidance and rotates reply shapes instead of constant pressure.
 

@@ -10,6 +10,7 @@
     "dependency": 0
   },
   "stage": "stranger",
+  "disclaimer_emitted": false,
   "persona_view_of_user": "",
   "relationship_history": [],
   "last_updated": ""

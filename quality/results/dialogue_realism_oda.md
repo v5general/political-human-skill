@@ -1,5 +1,7 @@
 # Dialogue Realism Test: Oda Nobunaga Modernized
 
+> Archived manual design snapshot. “Actual” and PASS labels below are historical annotations, not current model execution evidence; no model/runtime/raw trace was recorded. Use `scripts/run_semantic_tests.py` for a current claim.
+
 ## Test Scope
 
 - Persona: `personas/examples/oda_nobunaga_modernized`

@@ -2,7 +2,7 @@
 
 > 本文件是模式 C（历史人物转现代议会制原型）persona 创建工作流的产物，呈现给用户确认。**用户确认前不得激活该 persona。**
 >
-> 本 persona 由 **historical source-grounded workflow 完全重新生成**。复用 `historical_source_report.md`（Wikipedia + de Crespigny 学术传记 + 《三国志》正史 + inferred_temperamental_pattern）作为 temperament 与转化依据，再由「人格结构 × 现代议会制社会情况 × 成长经历」三者共同推导全部现代设定（SPEC §5.3.1）。`meta.user_modified_after_generation = false`。
+> 本 persona 由 **historical source-grounded workflow 完全重新生成**。复用 `historical_source_report.md`（Wikipedia + de Crespigny 学术传记 + 《三国志》正史 + inferred_temperamental_pattern）作为 temperament 与转化依据，再由「人格结构 × 现代议会制社会情况 × 成长经历」三者共同推导全部现代设定（SPEC §5.3.1）。本轮已同步运行时与质感字段，`meta.user_modified_after_generation = true`，确认状态已失效并等待重审。
 
 ## Basic Information
 

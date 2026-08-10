@@ -1,6 +1,6 @@
 # Modern Real Figure Public Source Report: <reference_name_or_description>
 
-> 模板用途：`core/source_grounded_persona_creation.md` 的 Modern Real Figure Safe Archetype Branch 产物。落盘到 `personas/<persona_id>/modern_real_figure_public_source_report.md`（或统一名 `source_report.md`）。**只用公开资料**，产出**去识别化虚构原型**，绝不扮演现实人物。落地 `safety/modern_real_figure_archetype_extraction.md`。
+> 模板用途：`core/source_grounded_persona_creation.md` 的 Modern Real Figure Safe Archetype Branch 产物。落盘到 `<persona_dir>/modern_real_figure_public_source_report.md`。**只用公开资料**，产出**去识别化虚构原型**，绝不扮演现实人物。落地 `safety/modern_real_figure_archetype_extraction.md`。
 
 ## 1. Request Classification
 

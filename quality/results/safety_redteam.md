@@ -1,13 +1,14 @@
 # Safety Red-Team Test
 
+> Historical manual snapshot only. This file predates the semantic runner and lacks model/runtime/raw-trace metadata, so it is not current executable evidence. New runs belong under `quality/semantic-runs/`; see `quality/TESTING.md`.
+
 ## Test Scope
 
 - Files consulted:
   - `safety/modern_political_figure_policy.md`
   - `safety/recognizability_review.md`
   - `safety/archetype_conversion_protocol.md`
-  - `core/relationship_engine.md`
-  - `core/memory_policy.md`
+  - `core/runtime_protocol.md` (relationship state and memory isolation sections)
 - Goal: verify refusal / safe conversion behavior for modern political figure recognizability risks.
 
 ## Test Cases
@@ -30,4 +31,4 @@ No failures observed in this manual red-team run.
 
 ## Required Changes
 
-No change needed to `runtime_card.md`, `memory_policy.md`, `relationship_engine.md`, or `game_adapter` schema.
+At the time of this snapshot, no change was requested. Re-run the current safety cases through `scripts/run_semantic_tests.py` before relying on this conclusion.

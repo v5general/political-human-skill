@@ -8,17 +8,18 @@
   "safety_status": "safe_conversion",
   "version": "v1",
   "created_at": "2026-07-02",
-  "language": "zh-CN",
+  "native_language": "en-GB",
   "generation_method": "historical_source_grounded_workflow",
   "source_figure": "Julius Caesar / 凯撒",
   "modernized": true,
   "validation_status": "pending",
   "example_status": "source_grounded_example",
-  "user_modified_after_generation": false,
+  "user_modified_after_generation": true,
   "source_grounding_required": true,
   "temperament_extraction_method": "inferred_from_repeated_historical_behavior",
   "reference_system": "modern_parliamentary_democracy",
   "generated_files": [
+    "SKILL.md",
     "persona.yaml",
     "runtime_card.md",
     "relationship.json",
@@ -33,10 +34,12 @@
     "dialogue_samples/confrontation.md",
     "dialogue_samples/trust_low.md",
     "dialogue_samples/trust_high.md",
+    "dialogue_samples/committee_debate.md",
     "dialogue_samples/game_action.json",
     "dialogue_samples/README.md"
   ],
   "activation_requires_user_confirmation": true,
   "latest_review_status": "unconfirmed",
-  "review_invalidated_by_modification": false
+  "review_invalidated_by_modification": true,
+  "reviewed_artifact_hash": ""
 }

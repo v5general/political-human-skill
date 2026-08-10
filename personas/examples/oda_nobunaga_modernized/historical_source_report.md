@@ -7,6 +7,7 @@
 
 ## 1. Eligibility Check
 
+- source_type: historical_archetype_conversion
 - Figure: 织田信长 / Oda Nobunaga（约 1534–1582）
 - Region: Japan
 - Era: 战国时代 / Sengoku period（~1467–1603）

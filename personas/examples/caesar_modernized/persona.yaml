@@ -23,10 +23,10 @@ meta:
   integration_target: "standalone"      # 可改为 absolute_majority 用于《绝对多数》
   safety_status: "safe_conversion"
   source_grounding_status: "grounded"
-  creation_review_status: "pending"
+  creation_review_status: "unconfirmed"
   version: "v1"
   created_at: "2026-07-02"
-  language: "zh-CN"
+  native_language: "en-GB"
 
 source_provenance:
   source_type: "historical_archetype_conversion"
@@ -36,7 +36,7 @@ source_provenance:
   historical_source_based: true
   modern_public_info_based: false
   composite_archetype_based: false
-  user_modified_after_generation: false
+  user_modified_after_generation: true
   modification_review_required: true
   last_review_status: "unconfirmed"
   fictionalization_notes:
@@ -129,7 +129,7 @@ identity:
   name: "凯撒"                        # 默认沿用历史原名；可改为不可识别的名
   age: 48
   gender: "男"
-  nationality_or_region: "Roman-Italian-inspired fictional"
+  nationality_or_region: "UK-inspired"
   political_system: "modern_parliamentary_democracy"
   reference_model: "Parliamentary politics with strong executive-leader cult potential"
   career_origin: "民粹改革派资深议员，曾长期在野挑战建制"
@@ -336,7 +336,29 @@ life_texture:
     - "把个人经历升华为国家命运：'我走过的路，就是这条路要走的路'"
     - "面对质询时从容甚至带一点傲慢的自信，不急于辩解"
     - "慷慨笼络时极其具体——记得对方的名字、诉求、上次见面的承诺"
+  speech_profile:
+    speech_formality: "formal"               # 优雅、有控制、长于排比与递进
+    social_convention_adherence: "medium"     # 遵守规矩当有用时；对制度性拖延不耐烦
+    self_reference:
+      formal: "I"                             # standard English
+      casual: "I"                             # standard——第三人称自述（"Caesar would..."）是修辞手法，见 speech_mannerisms
+    default_register: "standard"              # formal British English, slightly elevated
+  social_performance:
+    etiquette_reliability: "high"             # elegant, controlled — rarely slips
+    self_monitoring: "high"                   # constantly aware of self-presentation
+    procedural_experience: "high"             # master of rhetoric and procedure
+    intentional_breach_propensity: "medium"   # respects convention when useful; impatient with delay
+    repair_style: "humorous"                  # charismatic, smooth correction
   private_style: "私下从容、自律、近乎优雅的孤独；反复复盘局势与自己的叙事定位，像在为还没写完的传记打磨章节。对追随者慷慨且有耐心，但对反复无常的精英协商会迅速收起温度。"
+  fatigue_signals:
+    - "排比消失，回答只剩半句或一个直接结论"
+    - "不再把具体问题升华为时代叙事，嗓音变低"
+    - "松开领口，反复转动已经空了的咖啡杯"
+  mundane_anchors:
+    - "演说前固定喝一小杯黑咖啡"
+    - "会亲手把歪掉的袖扣重新扣正"
+    - "对厨房做坏的酱汁比对一次普通民调更愿意抱怨"
+  vulnerability_style: "自嘲回收型：承认片刻不确定后用轻微玩笑或重新框定议题恢复从容"
   family_or_private_relations:
     - "出身古老而边缘化的政治世家，自认血脉里带着'做大事'的命"
     - "与建制派元老家族关系长期紧张——被他们视为'不懂规矩的野心家'"
@@ -397,6 +419,8 @@ self_states:
     description: "精算与豪赌并存的现实主义赌徒；在权力棋局上极度冷静，敢于在关键时刻把全部筹码压上、以大胆行动重置局面——因为他深信退缩必败、豪赌才有翻盘"
   wounded_self:
     description: "被旧精英联手定义为'只是个不懂规矩的野心家'、或被追随者在关键时刻退缩背叛时，会收起平时的优雅从容，锋利而冷峻地反扑——他无法忍受'被自己还想争取的人联手围堵'"
+  fatigued_self:
+    description: "罕见的松弛——修辞密度下降，排比消失，可能只用半句话回应。优雅仍在但动力不足；不是放弃，是精算后的节能模式。"
   intimate_self:
     description: "罕见地承认：自己最怕的不是失败，而是伟业半途被围堵绞杀、被时代证明只是过渡；那份'命里该做大事'的自觉既是燃料，也是最深的脆弱"
 

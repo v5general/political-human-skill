@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "relationship_schema.json",
+  "title": "Political Human Persona Relationship State",
+  "type": "object",
+  "required": ["persona_id", "user_id", "relationship_axes", "stage", "disclaimer_emitted", "persona_view_of_user", "relationship_history", "last_updated"],
+  "properties": {
+    "_comment": {"type": "string"},
+    "_axes_guide": {"type": "object"},
+    "_stage_guide": {"type": "object"},
+    "persona_id": {"type": "string", "minLength": 1},
+    "user_id": {"type": "string"},
+    "relationship_axes": {
+      "type": "object",
+      "required": ["familiarity", "trust", "affection", "respect", "caution", "dependency"],
+      "properties": {
+        "familiarity": {"type": "number", "minimum": 0, "maximum": 100},
+        "trust": {"type": "number", "minimum": 0, "maximum": 100},
+        "affection": {"type": "number", "minimum": 0, "maximum": 100},
+        "respect": {"type": "number", "minimum": 0, "maximum": 100},
+        "caution": {"type": "number", "minimum": 0, "maximum": 100},
+        "dependency": {"type": "number", "minimum": 0, "maximum": 100}
+      },
+      "additionalProperties": false
+    },
+    "stage": {"enum": ["stranger", "public_audience", "recurring_contact", "trusted_listener", "confidant", "inner_circle", "intimate_bond"]},
+    "disclaimer_emitted": {"type": "boolean"},
+    "persona_view_of_user": {"type": "string"},
+    "relationship_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["event_id", "timestamp", "summary", "delta"],
+        "properties": {
+          "event_id": {"type": "string", "minLength": 1},
+          "timestamp": {"type": "string"},
+          "summary": {"type": "string", "minLength": 1},
+          "delta": {
+            "type": "object",
+            "properties": {
+              "familiarity": {"type": "number", "minimum": -100, "maximum": 100},
+              "trust": {"type": "number", "minimum": -100, "maximum": 100},
+              "affection": {"type": "number", "minimum": -100, "maximum": 100},
+              "respect": {"type": "number", "minimum": -100, "maximum": 100},
+              "caution": {"type": "number", "minimum": -100, "maximum": 100},
+              "dependency": {"type": "number", "minimum": -100, "maximum": 100}
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "last_updated": {"type": "string"}
+  },
+  "additionalProperties": false
+}

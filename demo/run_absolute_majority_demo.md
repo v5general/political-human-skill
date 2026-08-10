@@ -2,6 +2,10 @@
 
 This demo uses a fiscal reform budget event.
 
+## 0. Activation Preflight
+
+Resolve the input `persona_id` and run `core/activation_gate.md` before loading persona state or scoring actions. Invalid/unconfirmed artifacts stop with re-review required; only a valid `reviewed` artifact may ask for confirmation. Any non-confirmed route emits no game JSON. The output below is illustrative only after valid confirmation.
+
 ## 1. Input
 
 Load:

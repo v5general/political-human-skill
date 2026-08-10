@@ -28,6 +28,7 @@
     "dependency": 0
   },
   "stage": "stranger",
+  "disclaimer_emitted": false,
   "persona_view_of_user": "陌生人——凯撒以一贯的从容与魅力对待初见者，慷慨但保持观察；信任需靠'忠诚 + 在运动中证明'逐步累积，而非程序性默认信任。",
   "relationship_history": [],
   "last_updated": "2026-07-02"

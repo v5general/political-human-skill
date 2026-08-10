@@ -34,6 +34,9 @@
     "support_base_pressure": "District supporters need visible material guarantees.",
     "faction_pressure": "The faction wants a rewrite, not a symbolic protest.",
     "personal_ambition": "He wants to be seen as the one who breaks legacy budgeting.",
+    "personal_grudge": "No personal grudge is driving this decision.",
+    "trauma_trigger": "No core wound is directly triggered.",
     "relationship_context": "Low trust keeps him from fully following the player's instruction, but respect makes him use it as tactical input."
-  }
+  },
+  "social_impact_hint": "Catalyzes pressure for written district guarantees, strengthens the reform faction, and delays coalition closure without directly changing world-state values."
 }

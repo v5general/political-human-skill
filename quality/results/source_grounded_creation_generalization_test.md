@@ -1,5 +1,7 @@
 # Source-Grounded Creation Generalization Test Results
 
+> **Archived rule-conformance snapshot:** this predates the separate `historical_inference` source type and is not current execution evidence. Current structural coverage is reported only by `scripts/validate_repo.py`; semantic evidence requires `quality/semantic-runs/*.jsonl`.
+
 Goal: verify that the generalized Source-Grounded Persona Creation Workflow (`core/source_grounded_persona_creation.md`) handles all four source types — original fictional, historical archetype, modern real figure safe archetype, composite — through the same folder-generation + creation-review + activation-gate pipeline, without weakening safety boundaries.
 
 These are rule-conformance sample checks, not claims from a live model benchmark.

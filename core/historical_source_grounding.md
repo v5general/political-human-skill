@@ -25,14 +25,14 @@
 
 1. **Eligibility check**：确认该人物在其地区近现代分界之前（见 `safety/modern_political_figure_policy.md` 第 4 节）。分界及以后 → 不进入本流程。
 2. **Search / browse reliable sources**：主动检索可靠资料（不要只凭记忆）。优先 primary_source / academic_summary / encyclopedia / museum_or_archive / historical_database / reputable_secondary_source。排除信源黑名单（知乎、公众号、百度百科、内容农场、AI 生成的虚构传记）。区分史书 / 文学演义 / 后世评价。
-3. **Summarize documented facts**：整理史料直接支持的事实（落盘 `references/research/`，沿用 `historical_figure_policy.md` 第 3 节的分轨建议）。
+3. **Summarize documented facts**：整理史料直接支持的事实并落盘。最小交付可直接写入 `historical_source_report.md`；资料量大时再使用 `<persona_dir>/references/research/` 保存检索笔记。无论采用哪种布局，决定性主张都必须有可定位的书目/URL 与页码、章节或条目定位，不能把数据库检索页本身当作来源。
 4. **Separate levels**：
    - documented（史料直接支持）
    - mainstream interpretation（主流史学解释）
    - disputed / uncertain（争议或证据弱）
    - later myth / literature / popular image（小说、演义、戏剧、宣传、后世想象）
    - creative inference boundary（可用于 persona 创作、但不得当史实）
-5. **Produce `historical_source_report.md`**（用 `templates/historical_source_report_template.md`），写入 `personas/{slug}/`。
+5. **Produce `historical_source_report.md`**（用 `templates/historical_source_report_template.md`），写入已解析的 `persona_dir`。
 6. 完成后，才进入 `core/inferred_temperament_extraction.md`（气质提取）与 `safety/archetype_conversion_protocol.md`（转化）。
 
 ## Hard Rules
@@ -45,7 +45,7 @@
 
 ## 输出与下游
 
-source grounding 的产物是 `personas/{slug}/historical_source_report.md`，它喂给：
+source grounding 的产物是 `<persona_dir>/historical_source_report.md`，它喂给：
 
 - `core/inferred_temperament_extraction.md`：从 documented / repeated 行为推断 `inferred_temperamental_pattern`
 - `safety/archetype_conversion_protocol.md`：提炼人格结构 → 转化现代议会制

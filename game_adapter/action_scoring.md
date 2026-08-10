@@ -20,7 +20,7 @@ action_scores = f(
 
 ---
 
-## 五大评分驱动力（score_drivers）
+## 五大评分驱动力 + 关系上下文（score_drivers）
 
 每个候选行动的分数，由以下五力共同作用（见 schema 的 `score_drivers`）：
 
@@ -32,7 +32,7 @@ action_scores = f(
 | **personal_grudge**（政治恩怨） | `memory.json` 承诺冲突 + 对玩家/他者的既有态度 | 报复/抵制的 ↑，报恩的合作 ↑ |
 | **trauma_trigger**（创伤触发） | `human_core.core_fears/flaws/emotional_triggers` + `wounded_self` | 命中创伤时可能**非理性偏离最高分** |
 
-> 五力并非等权——由 persona 的性格决定权重。例如 high discipline 的角色给 ambition 打折；high neuroticism 的角色在 trauma_trigger 下权重大增。
+> 五力并非等权——由 persona 的性格决定权重。输出另须包含 `relationship_context`，记录关系状态如何调制五力；它不是第六种政治压力。
 
 ---
 
@@ -63,7 +63,8 @@ action_scores = f(
     "faction_pressure": "派阀要求换取预算补偿再表态",
     "personal_ambition": "希望借机向首相索取地方预算承诺，累积政绩",
     "personal_grudge": "玩家此前未兑现承诺，有怨气",
-    "trauma_trigger": "无"
+    "trauma_trigger": "无",
+    "relationship_context": "对玩家信任偏低，但既有尊重使预算承诺仍可作为谈判筹码"
   }
 }
 ```

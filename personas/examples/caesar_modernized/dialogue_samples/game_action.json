@@ -18,6 +18,7 @@
       "withdraw_motion"
     ],
     "current_relationship": {
+      "familiarity": 0,
       "trust": 24,
       "respect": 55,
       "affection": 12,
@@ -40,11 +41,45 @@
     }
   },
   "expected_output": {
+    "persona_id": "caesar_modernized",
+    "event_id": "confidence_vote_001",
     "selected_action": "force_confidence_vote",
+    "candidate_actions": [
+      "support_package",
+      "split_package",
+      "force_confidence_vote",
+      "negotiate_concessions",
+      "withdraw_motion"
+    ],
+    "action_scores": {
+      "support_package": 74,
+      "split_package": 28,
+      "force_confidence_vote": 92,
+      "negotiate_concessions": 49,
+      "withdraw_motion": 6
+    },
     "public_statement": "The package moves together, and it moves in daylight. Let every member vote where the country can see them.",
     "private_reason": "He refuses to split the welfare expansion from the subsidy cuts — splitting would lose the lever that binds the people to him and leave only the part that makes enemies. A public confidence vote turns a buried committee death into a named, visible choice, which is exactly the kind of bold-reset board he plays best.",
+    "emotional_state": "confident, impatient with procedural delay, alert to overreach criticism",
+    "relationship_delta": {
+      "familiarity": 1,
+      "trust": 1,
+      "affection": 0,
+      "respect": 2,
+      "caution": 1,
+      "dependency": 0
+    },
     "memory_write": [
       "The player urged him to pass the package whole during confidence_vote_001; he forced a public confidence vote and kept the welfare expansion intact."
-    ]
+    ],
+    "score_drivers": {
+      "support_base_pressure": "Supporters demand visible action and will punish another procedural delay.",
+      "faction_pressure": "The faction ordered a public vote and rejected committee referral.",
+      "personal_ambition": "A visible confidence vote reinforces his image as the person who can move the whole package.",
+      "personal_grudge": "No personal grudge is driving the motion.",
+      "trauma_trigger": "The threat of procedural burial echoes elite obstruction but does not independently trigger wounded_self.",
+      "relationship_context": "The player's advice is useful, but the prior failed voucher keeps trust limited."
+    },
+    "social_impact_hint": "Polarizes public scrutiny, consolidates the strong-reform bloc, and accelerates a visible institutional confrontation."
   }
 }

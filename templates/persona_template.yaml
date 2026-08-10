@@ -16,22 +16,25 @@
 # -----------------------------------------------------------------------------
 meta:
   persona_id: ""                # 全局唯一，建议与 slug 一致
-  slug: ""                      # personas/{slug}/ 目录名
-  source_type: ""               # original | historical_inference | historical_archetype_conversion
+  slug: ""                      # persona_id 使用的稳定目录名；路径由 persona_path_resolver 解析
+  source_type: ""               # original_fictional_persona | historical_inference | historical_archetype_conversion | modern_real_figure_archetype_extraction | composite_archetype
   mode: ""                      # A(原创) | B(历史推演) | C(历史转原型)
   integration_target: ""        # standalone | absolute_majority
   safety_status: ""             # PASS | safe_conversion（不得为 real_figure_clone）
-  source_grounding_status: ""   # 仅 mode B/C：not_required | grounded | sparse_source（见 core/historical_source_grounding.md）
-  creation_review_status: ""    # 仅 mode B/C：pending | modified | confirmed（用户确认 gate，见 generator.md Phase 5.5）
+  source_grounding_status: ""   # not_required | grounded | sparse_source（mode A 通常为 not_required）
+  creation_review_status: "unconfirmed"  # meta.json.latest_review_status 的镜像：unconfirmed | reviewed | confirmed
   version: "v1"
   created_at: ""
-  language: "zh-CN"
+  native_language: ""           # persona 的母语——其现代国籍的官方/主要语言（如 ja-JP, en-GB, zh-CN）。
+                                # ⚠️ 这是 persona "真正说的语言"，不是输出语言。
+                                # 输出语言跟随用户当前输入语言（见 runtime_protocol.md 第 10 步）。
+                                # 称呼/自称/敬语规则基于此字段（见 core/address_and_register_system.md）。
 
 # -----------------------------------------------------------------------------
 # 来源溯源 source_provenance（所有来源通用，见 core/source_grounded_persona_creation.md）
 # -----------------------------------------------------------------------------
 source_provenance:
-  source_type: ""                          # original_fictional_persona | historical_archetype_conversion | modern_real_figure_archetype_extraction | composite_archetype
+  source_type: ""                          # original_fictional_persona | historical_inference | historical_archetype_conversion | modern_real_figure_archetype_extraction | composite_archetype
   source_material_summary: ""
   source_grounding_method: ""              # user_brief | historical_source_grounding | modern_public_info | composite
   user_brief_based: false
@@ -51,7 +54,9 @@ identity:
   name: ""                      # 虚构姓名；模式 C 默认可沿用历史原名或改为不可识别的名
   age: 0
   gender: ""
-  nationality_or_region: ""     # Japan-inspired / China-inspired fictional / Roman-Italian-inspired ……
+  nationality_or_region: ""     # ⚠️ 以转化为现代政治家后的国籍为准，不是历史原型所属的古代国家。
+                                # 如：Japan-inspired / UK-inspired(British) / US-inspired / China-inspired / Germany-inspired
+                                # 此字段决定使用哪国地址系统（见 core/address_and_register_system.md 国籍映射表）。
   political_system: "modern_parliamentary_democracy"
   reference_model: "character's own national parliamentary system"  # 制度机制参考人物所属国家的议会制度
   career_origin: ""             # 从政前身份，如 科技企业经营者 / 地方行政长官 / 学者
@@ -111,6 +116,34 @@ life_texture:
     - ""
   speech_mannerisms:            # 说话方式 / 口头禅 / 节奏
     - ""
+
+  # ---------------------------------------------------------------------------
+  # 语音档案 speech_profile（与 core/address_and_register_system.md 联动）
+  # 决定 persona 在不同关系/场所下的称呼选择、自称、语尾级别。
+  # ---------------------------------------------------------------------------
+  speech_profile:
+    speech_formality: ""        # very_formal | formal | normal | casual | very_casual
+                                 # 按唯一规范算法选择范围端点（very_formal=min-1,
+                                 # formal/normal=min, casual=max, very_casual=max+1）。
+    social_convention_adherence: ""  # high | medium | low
+                                # 控制是否敢突破场所底线。high=即使 casual 也守规矩；
+                                # low=敢在非正式场合越界。
+    self_reference:             # 自称（persona 母语）——按场合列出
+      formal: ""                # 正式场合自称（各语言的标准正式自称）
+      casual: ""                # 私下/随意场合自称（各语言的随意自称；如始终正式则同 formal）
+    default_register: ""        # 默认语域级别（该语言的标准正式/非正式标记）
+
+  # ---------------------------------------------------------------------------
+  # 社交执行档案 social_performance（与 core/social_error_tolerance.md 联动）
+  # 决定 persona 在称呼和礼节上的不完美程度。真人会犯错——尤其是累、冲动、
+  # 不拘小节的人。这些字段控制失误概率和纠正风格。
+  # ---------------------------------------------------------------------------
+  social_performance:
+    etiquette_reliability: ""   # high | medium | low —— 执行礼节规矩的可靠性
+    self_monitoring: ""         # high | medium | low —— 自我意识到失误并纠正的程度
+    procedural_experience: ""   # high | medium | low —— 对议会程序的熟悉度
+    intentional_breach_propensity: ""  # low | medium | high —— 故意打破礼节的倾向
+    repair_style: ""            # immediate | delayed | humorous | brazen | avoidant
   private_style: ""             # 私下风格，如「独处时极度安静，反复复盘」
   fatigue_signals:              # 疲惫时的言语/行为信号（与 fatigued_self 状态对应）
     - ""                        # 如「回复变短变 blunt」「更 cynical」「揉太阳穴」「说"算了"」
@@ -126,7 +159,7 @@ life_texture:
 # 层 4 · 政治职业层 political_core（政治层：决定他“怎么搞政治”）
 # -----------------------------------------------------------------------------
 political_core:
-  party_faction:                # 党派与派系（允许真实党派名，如 LDP/JCP/CDU 等；派系名建议虚构）
+  party_faction:                # 党派与派系（允许真实党派名，如 LDP/Labour/CDU/Democratic Party 等；派系名建议虚构）
     party: ""
     faction: ""
     role_in_party: ""

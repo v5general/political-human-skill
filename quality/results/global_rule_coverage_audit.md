@@ -1,5 +1,7 @@
 # Global Rule Coverage Audit
 
+> Archived manual coverage snapshot. PASS labels below are not current end-to-end evidence and may be superseded by later canonical paths. Current claims require `scripts/validate_repo.py` plus semantic JSONL records as defined in `quality/TESTING.md`.
+
 ## 1. Audit Scope
 
 审查的全局文件：

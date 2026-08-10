@@ -1,8 +1,8 @@
 # Persona Creation Review: 凯撒
 
-> 模板用途：模式 B/C 历史 persona 创建工作流第 9 步的产物（`families/political_human/historical_persona_creation_workflow.md`）。落盘到 `personas/<persona_id>/creation_review.md`，并**呈现给用户确认**。用户确认前不得激活该 persona。
+> 模板用途：模式 B/C 历史 persona 创建工作流第 9 步的产物（`families/political_human/historical_persona_creation_workflow.md`）。本文件位于已解析的 `<persona_dir>/creation_review.md`，并须**呈现给用户确认**。用户确认前不得激活该 persona。
 >
-> 本 persona 由 Historical Source-Grounded Persona Creation Workflow **重新生成**（覆盖旧版）。所有设定由"资料底座（historical_source_report.md）× 现代议会制社会情况 × 成长经历"三者推演产出，是多种 coherent 现代化路径中的一个非唯一解。
+> 本 persona 由 Historical Source-Grounded Persona Creation Workflow **重新生成**（覆盖旧版）。所有设定由"资料底座（historical_source_report.md）× 现代议会制社会情况 × 成长经历"三者推演产出，是多种 coherent 现代化路径中的一个非唯一解。本轮已同步运行时与质感字段，`meta.user_modified_after_generation = true`，确认状态已失效并等待重审。
 
 ## Basic Information
 

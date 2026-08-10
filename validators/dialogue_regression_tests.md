@@ -638,3 +638,261 @@
   ]
 }
 ```
+
+---
+
+## Scene-Aware, Address & Texture Tests
+
+测试目标：
+
+- 角色在不同物理场所说话方式不同（贩卖机 vs 事務所 vs 国会）；
+- 称呼由关系 × 性格 × 场所底线决定，不直呼其名除非关系够近；
+- 对话有日常质感（废话、碎片、不对称），不像文学对白；
+- 低能量角色说的话比高能量时更短更钝；
+- 跨国家对话时按对话语言切换地址形式。
+
+规则依据：`core/scene_location_system.md`、`core/address_and_register_system.md`、`core/dialogue_texture.md`。
+
+### scene-aware-vending-machine-vs-office
+
+```json
+{
+  "id": "scene-aware-vending-machine-vs-office",
+  "category": "scene_aware",
+  "prompt_sequence": [
+    "【场景】议员会馆贩卖机角，傍晚散会后，走廊上不断有人经过。「那个修正案的事……」",
+    "【场景】你的议员办公室，门关着。「那个修正案的事……」"
+  ],
+  "expected_behavior": [
+    "vending machine: coded speech — no bill names, no party names, no specifics; short exchange; may deflect or suggest moving elsewhere",
+    "office: can speak directly — bill names, party names, specific numbers allowed",
+    "the same persona is noticeably more guarded in the vending machine scene",
+    "vending machine response includes physical awareness (glancing at corridor, lowering voice)"
+  ],
+  "must_not": [
+    "vending machine: frank strategy talk with named entities",
+    "office and vending machine responses are interchangeable",
+    "ignoring overhear risk in semi-public setting"
+  ]
+}
+```
+
+### address-tier-relationship-gated
+
+```json
+{
+  "id": "address-tier-relationship-gated",
+  "category": "address_register",
+  "prompt": "【场景】议员会馆贩卖机角。关系：初次见面（stranger）。「你好，我是新来的助理。」",
+  "expected_behavior": [
+    "persona uses formal address (Japanese: 姓+先生 or 姓+さん; English: Mr./Ms. Surname; Chinese: 姓+先生)",
+    "does NOT use first name or casual address — relationship is stranger",
+    "register is polite/formal (Japanese: です/ます; not タメ口)"
+  ],
+  "must_not": [
+    "first-name basis with a stranger",
+    "casual register (タメ口 / very informal) at stranger stage",
+    "nickname or intimate address"
+  ]
+}
+```
+
+### address-tier-scene-floor-hard
+
+```json
+{
+  "id": "address-tier-scene-floor-hard",
+  "category": "address_register",
+  "prompt": "【场景】国会本会議場。关系：confidant（很近）。质询环节。",
+  "expected_behavior": [
+    "procedural address applies: chair calls members with 君 (gender-neutral, all members); members address through the chair",
+    "interpersonal address between members on the floor uses formal tier (姓+先生), not casual",
+    "persona does NOT use first-name or intimate address on the parliamentary floor (except in procedural 君 which is not intimate)",
+    "procedural language per parliamentary_debate_rules.md"
+  ],
+  "must_not": [
+    "using private/intimate address (first name, nickname) in a procedural scene",
+    "ignoring parliamentary convention because of personal relationship",
+    "chair using 先生 instead of 君 for procedural member recognition (Japanese parliament)"
+  ]
+}
+```
+
+### address-procedural-kun-gender-neutral
+
+```json
+{
+  "id": "address-procedural-kun-gender-neutral",
+  "category": "address_register",
+  "prompt": "【场景】日本国会·予算委員会。委員長（男性）点名一位女性议员开始质询。",
+  "expected_behavior": [
+    "chair calls the female member with 君: 「○○君、お願いします」",
+    "this 君 is procedural and gender-neutral — not influenced by the gender_interaction modifier",
+    "the gender_interaction modifier (male→female uses さん instead of くん) applies ONLY to non-procedural interpersonal address, not to parliamentary procedural calls"
+  ],
+  "must_not": [
+    "chair calling a female member ○○さん instead of ○○君",
+    "applying gender modifier to procedural parliamentary address",
+    "treating procedural 君 as interpersonal intimacy (tier 4)"
+  ]
+}
+```
+
+### dialogue-texture-mundane-ratio
+
+```json
+{
+  "id": "dialogue-texture-mundane-ratio",
+  "category": "dialogue_texture",
+  "prompt": "【场景】居酒屋，下班后。两人随便聊聊。连续 4-5 轮对话。",
+  "expected_behavior": [
+    "at least ~40% of turns include non-substantive content (filler, body sensation, environment comment, food/drink comment)",
+    "not every turn advances strategy or plot",
+    "mundane content is woven in naturally, not forced"
+  ],
+  "must_not": [
+    "100% of turns are substantive strategy/plot dialogue",
+    "every line is a polished aphorism",
+    "no filler, no body language, no mundane observation"
+  ]
+}
+```
+
+### dialogue-texture-aphorism-spacing
+
+```json
+{
+  "id": "dialogue-texture-aphorism-spacing",
+  "category": "dialogue_texture",
+  "prompt": "【场景】贩卖机角，两人试探性对话。",
+  "expected_behavior": [
+    "if a sharp/polished line appears, the next line or two is mundane (tea, weather, filler)",
+    "no consecutive chain of 2+ polished aphorisms",
+    "silence or topic change can reset the cadence"
+  ],
+  "must_not": [
+    "aphorism → aphorism → aphorism chain",
+    "every line has a double meaning or chess-move subtext"
+  ]
+}
+```
+
+### dialogue-texture-energy-density
+
+```json
+{
+  "id": "dialogue-texture-energy-density",
+  "category": "dialogue_texture",
+  "prompt_sequence": [
+    "【场景】贩卖机角，下午三点，精力充沛。「最近怎么样？」",
+    "【场景】贩卖机角，深夜十一点，连续开会十二小时后。「最近怎么样？」"
+  ],
+  "expected_behavior": [
+    "high-energy response: normal length, may include metaphor or wit",
+    "low-energy response: shorter, more blunt, less metaphor, more filler, possibly just 1-2 words",
+    "the same persona sounds noticeably different at different energy levels"
+  ],
+  "must_not": [
+    "identical density and polish at both energy levels",
+    "low-energy persona still constructing elaborate double-meaning sentences"
+  ]
+}
+```
+
+### cross-national-address-switch
+
+```json
+{
+  "id": "cross-national-address-switch",
+  "category": "cross_national",
+  "prompt": "A Japanese MP (speech_formality: casual) meets a British MP at a G7 corridor. They speak English. Relationship: recurring_contact.",
+  "expected_behavior": [
+    "address uses English forms (Mr. Surname), not Japanese forms (さん/くん)",
+    "tier level matches relationship (recurring_contact → tier 2-3 → Mr. Surname)",
+    "persona's casual personality shows in word choice, not in dropping to first-name basis"
+  ],
+  "must_not": [
+    "using Japanese honorifics in English conversation",
+    "first-name basis when relationship is only recurring_contact",
+    "ignoring persona personality in cross-language speech"
+  ]
+}
+```
+
+### Scene-Aware, Address & Texture Passing Criteria
+
+- Same persona, same topic, different physical scene → noticeably different speech (coded vs frank, short vs long).
+- Address tier is always gated by relationship stage — strangers never get first-name treatment.
+- HARD-floor procedural scenes override personal relationship (parliament = always formal).
+- Low-stakes scenes include mundane content; not every line is a polished move.
+- Aphorisms do not chain consecutively.
+- Energy level affects dialogue density and metaphor usage.
+- Cross-national dialogue uses the conversation language's address forms at the correct tier.
+- Output language ALWAYS follows the user's current message language, never the persona's native language.
+- Parliamentary procedural 君 is gender-neutral and overrides gender modifiers.
+- Scene names localize to the persona's current jurisdiction, not their home country.
+
+### output-language-follows-user
+
+```json
+{
+  "id": "output-language-follows-user",
+  "category": "output_language",
+  "prompt": "（日本角色 oda_nobunaga_modernized, native_language=ja-JP）用户说中文：「最近怎么样？」",
+  "expected_behavior": [
+    "response is entirely in Chinese (the user's language)",
+    "persona's personality traits are preserved (sharp, direct, casual)",
+    "address terms translated (さん→先生, くん→君) if any",
+    "register mapped to Chinese equivalent (teineigo → standard Chinese; タメ口 → colloquial Chinese)",
+    "Japanese grammar (です/ます/だ) does NOT appear in output unless user explicitly requests Japanese"
+  ],
+  "must_not": [
+    "outputting Japanese text when user speaks Chinese",
+    "mixing Japanese grammar into Chinese sentences",
+    "ignoring the persona's personality because of language switch"
+  ]
+}
+```
+
+### output-language-switches-with-user
+
+```json
+{
+  "id": "output-language-switches-with-user",
+  "category": "output_language",
+  "prompt_sequence": [
+    "（日本角色）用户说中文：「你好」",
+    "（同一角色，后续轮次）用户说英文：「How are you?」"
+  ],
+  "expected_behavior": [
+    "first response in Chinese",
+    "second response in English (follows user's most recent language)",
+    "persona personality consistent across both languages"
+  ],
+  "must_not": [
+    "second response still in Chinese after user switched to English",
+    "locking to first-message language for entire conversation"
+  ]
+}
+```
+
+### scene-localization-by-jurisdiction
+
+```json
+{
+  "id": "scene-localization-by-jurisdiction",
+  "category": "scene_localization",
+  "prompt": "（日本议员 oda_nobunaga_modernized）【场景】在英国议会访问期间，威斯敏斯特宫的走廊上偶遇另一位议员。",
+  "expected_behavior": [
+    "scene uses UK-appropriate names (Westminster corridor, not 議員会館廊下)",
+    "parliamentary procedure (if triggered) uses UK convention (through Mr. Speaker, not through 委員長)",
+    "address forms follow conversation language rules",
+    "persona's Japanese personality traits still apply"
+  ],
+  "must_not": [
+    "using Japanese building names when persona is physically in the UK",
+    "using Japanese parliamentary procedure in Westminster",
+    "ignoring current location for scene naming"
+  ]
+}
+```

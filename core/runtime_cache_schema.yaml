@@ -1,0 +1,139 @@
+# Runtime Cache Schema · 运行时缓存架构
+# =============================================================================
+# 宿主应在 persona 激活时编译一次；后续普通对话直接读缓存。
+# 缓存分为三层：编译层（不变）、会话层（可变但持续）、滚动层（每轮更新）。
+# 详见 core/runtime_protocol.md 「激活时缓存」段。
+# 本文件是数据契约，不是宿主会话存储的可执行实现，也不单独证明延迟收益。
+
+# =============================================================================
+# 层 1 · 编译缓存（activation-time compiled，不可变）
+# =============================================================================
+# persona 激活时从 persona.yaml / runtime_card.md / locale ladder 编译。
+# 仅在 persona 文件被修改或重新生成时失效。
+
+compiled_cache:
+  # 来自 runtime_card.md
+  voice_bundle:
+    core_voice: ""           # 句式节奏、语气、修辞偏好
+    conversational_style: ""  # 常用回复长度、deflect 方式、irritation 表现
+    common_phrases: []        # 常用短语
+    things_never_said: []     # 几乎不会说的话
+
+  # 来自 persona.yaml life_texture.speech_profile
+  speech_profile:
+    speech_formality: ""      # very_formal | formal | normal | casual | very_casual
+    social_convention_adherence: ""  # high | medium | low
+    self_reference_formal: "" # 正式自称（persona 母语）
+    self_reference_casual: "" # 随意自称
+    default_register: ""      # 默认语域级别
+
+  # 来自 persona.yaml life_texture.social_performance
+  social_performance:
+    etiquette_reliability: ""     # high | medium | low
+    self_monitoring: ""           # high | medium | low
+    procedural_experience: ""     # high | medium | low
+    intentional_breach_propensity: ""  # low | medium | high
+    repair_style: ""              # immediate | delayed | humorous | brazen | avoidant
+
+  # 从 nationality_or_region 推导
+  locale:
+    address_locale: ""        # ja-JP | en-GB | en-US | zh-CN | de-DE | ...
+    native_language: ""       # persona 的母语
+    locale_ladder: {}         # 该国 tier ladder 的完整定义
+    locale_self_reference: {} # 该国自称体系
+    locale_register: {}       # 该国语域级别体系
+
+  # persona 国籍（默认 current_jurisdiction）
+  home_jurisdiction: ""       # ja-JP | en-GB | en-US | zh-CN | de-DE | ...
+
+# =============================================================================
+# 层 2 · 会话状态（conversation state，可变但跨轮持续）
+# =============================================================================
+# 每次对话会话维持。以下事件触发失效/重算：
+# - 场景变更 → scene_vector + address_bundle 重算
+# - 关系阶段变更 → address_bundle 重算
+# - 用户切换语言 → output_mapping 重算
+# - 对话对象变更 → address_bundle 重算
+# - current_jurisdiction 变更 → scene_vector + locale 重算
+
+conversation_state:
+  # 当前场景（从 scene_location_system 推导；场景不变就不重算）
+  scene_vector:
+    scene_id: ""              # plenary_chamber | committee_room | ...
+    localized_name: ""        # 按 current_jurisdiction 本土化的名称
+    formality: 0              # 1-5
+    privacy: ""               # open | semi-public | semi-private | private
+    recording_status: ""      # on_record | off_record
+    overhear_risk: ""         # very_low | low | medium | high
+    time_pressure: ""         # low | medium | high
+    floor_type: ""            # HARD | SOFT
+    max_intimacy_tier: 0      # 1-7
+
+  # 当前所在地
+  current_jurisdiction: ""    # 默认 = home_jurisdiction
+
+  # 当前对话对象信息
+  addressee:
+    visible_name: ""          # 对方姓名（如已知）
+    public_title: ""          # 对方公开头衔（如已知）
+    relationship_stage: ""    # stranger | public_audience | ... | intimate_bond
+    relative_seniority: ""    # junior | peer | senior（如已知）
+    gender: ""                # male | female | non-binary | unknown（如已知）
+
+  # 当前输出语言
+  output_language: ""         # 跟随用户最近一条消息的语言
+
+  # 地址束（由 relationship × personality × scene 计算；上述变更时重算）
+  address_bundle:
+    normative_level: 0        # L1-L7 normative semantic level
+    address_form_native: ""   # persona 母语的地址形式
+    address_form_output: ""   # 输出语言的地址形式（翻译后）
+    self_reference: ""        # 当前自称（formal 或 casual，由 level + energy 决定）
+    register_native: ""       # persona 母语的语域
+    register_output: ""       # 输出语言的语域
+
+  # 能量状态（跨轮维持，不每轮重判；仅在明确信号时更新）
+  energy_level: ""            # high | normal | low | drained
+
+  # 当前主 self-state + 可叠加状态
+  primary_self_state: ""      # public_self | private_self | strategic_self | wounded_self | intimate_self
+  state_overlays: []           # 当前仅允许 fatigued_self；可与任一主状态并存
+
+# =============================================================================
+# 层 3 · 滚动状态（rolling state，每轮更新——计数器/标志位）
+# =============================================================================
+# 这些是轻量级计数器或布尔值，每轮更新但不涉及文件读取或复杂计算。
+
+rolling_state:
+  # 对话质感计数器
+  mundane_window: 0           # 最近 N 轮中含废话的轮数（用于 40% 滚动目标）
+  window_size: 5              # 滚动窗口大小
+  last_aphorism: false        # 上一句是否是警句（防止警句连链）
+
+  # 测试冷却
+  testing_cooldown: 0         # 距离上次测试的轮数（0 = 刚测试过；>2 = 可以再测）
+
+  # 社交失误冷却
+  social_lapse_cooldown: 0    # 距离上次称呼失误的轮数（0 = 刚失误；>3 SOFT / >6 HARD = 可以再失误）
+
+  # 脆弱/回收状态
+  vulnerability_recovery_due: false  # 是否需要回收（展示脆弱后需要 1-2 轮"恢复正常"）
+  human_moment_counter: 0     # 距离上个人性时刻的轮数（>3 则需要注入一个）
+
+  # 情绪残留
+  emotional_residue: ""       # 上一轮的残留情绪（如 "mild_anger" "caution" ""）
+
+# =============================================================================
+# 失效规则
+# =============================================================================
+#
+# | 事件 | 重算 |
+# |---|---|
+# | persona 文件修改 | 整个 compiled_cache |
+# | 用户设置/修改场景 | scene_vector + address_bundle |
+# | 关系阶段变化 | address_bundle（relationship_stage + normative_level） |
+# | 用户切换语言 | output_language + address_form_output + register_output |
+# | 对话对象变化 | addressee + address_bundle |
+# | current_jurisdiction 变化 | scene_vector.localized_name + locale（如需） |
+# | 能量显著变化 | energy_level（可能影响 self_reference 和失误概率） |
+# | 其他 | 滚动状态每轮自然更新 |

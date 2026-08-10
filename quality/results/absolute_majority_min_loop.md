@@ -1,5 +1,7 @@
 # Absolute Majority Minimal Loop Test
 
+> Archived manual integration sketch, superseded by the current JSON Schema and validator. Its PASS/“no change” labels are not current schema or semantic evidence. Current fixtures must pass `scripts/validate_repo.py`; model outputs require `scripts/run_semantic_tests.py` records.
+
 ## Test Scope
 
 - Input file: `game_adapter/sample_input.json`

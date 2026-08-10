@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "memory_schema.json",
+  "title": "Political Human Persona Memory",
+  "type": "object",
+  "required": [
+    "persona_id",
+    "episodic_memory",
+    "commitments_and_conflicts",
+    "public_world_events",
+    "persona_evolution",
+    "last_updated"
+  ],
+  "properties": {
+    "_comment": {"type": "string"},
+    "persona_id": {"type": "string", "minLength": 1},
+    "episodic_memory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "timestamp", "occasion", "summary", "user_attitude_observed", "persona_disclosed", "inference_level", "emotional_weight"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "timestamp": {"type": "string"},
+          "occasion": {"type": "string", "minLength": 1},
+          "summary": {"type": "string", "minLength": 1},
+          "user_attitude_observed": {"type": "string"},
+          "persona_disclosed": {"type": "string"},
+          "inference_level": {"enum": ["documented", "strongly_inferred", "speculative"]},
+          "emotional_weight": {"type": "number", "minimum": -100, "maximum": 100}
+        },
+        "additionalProperties": false
+      }
+    },
+    "commitments_and_conflicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "summary", "status", "timestamp"],
+        "properties": {
+          "type": {"enum": ["promise", "conflict", "trust_shift", "secret_shared"]},
+          "summary": {"type": "string", "minLength": 1},
+          "status": {"enum": ["open", "resolved", "broken"]},
+          "timestamp": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "public_world_events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["event", "persona_stance", "timestamp"],
+        "properties": {
+          "event": {"type": "string", "minLength": 1},
+          "persona_stance": {"type": "string"},
+          "timestamp": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "persona_evolution": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["trigger_event", "timestamp", "shifts", "inference_level", "magnitude", "emotional_state"],
+        "properties": {
+          "_comment": {"type": "string"},
+          "trigger_event": {"type": "string", "minLength": 1},
+          "timestamp": {"type": "string"},
+          "shifts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["field", "delta", "reason"],
+              "properties": {
+                "field": {"type": "string", "minLength": 1},
+                "delta": {"type": "number", "minimum": -100, "maximum": 100},
+                "reason": {"type": "string", "minLength": 1}
+              },
+              "additionalProperties": false
+            }
+          },
+          "inference_level": {"enum": ["documented", "strongly_inferred", "speculative"]},
+          "magnitude": {"enum": ["minor", "moderate", "major"]},
+          "emotional_state": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "last_updated": {"type": "string"}
+  },
+  "additionalProperties": false
+}

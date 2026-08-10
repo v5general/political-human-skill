@@ -2,6 +2,10 @@
 
 Persona: `personas/examples/oda_nobunaga_modernized/`
 
+## 0. Activation Preflight
+
+Run `core/activation_gate.md` before loading roleplay state. The shipped Oda fixture is pending, invalidated, and unconfirmed, so an actual run must stop with **technical/safety re-review required**; it must not ask for confirmation yet. After a successful review binds the current hash and moves all statuses to `reviewed`, the review may be presented for explicit confirmation. The dialogue below is illustrative only after the final `confirmed` transition.
+
 ## 1. Load Fast Runtime Context
 
 Load:
@@ -28,7 +32,7 @@ Current relationship starts at low trust:
 User: 你今天看起来不像是来开预算会，倒像是来砸场子的。
 ```
 
-## 3. Fast Dialogue Reply
+## 3. Illustrative Fast Dialogue Reply After Confirmation
 
 ```text
 Persona: 砸场子？别把他们的桌子说得那么结实。

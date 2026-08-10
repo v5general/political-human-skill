@@ -1,6 +1,6 @@
 # Original Persona Source Report: <persona_name_or_brief>
 
-> 模板用途：`core/source_grounded_persona_creation.md` 的 Original Fictional Branch 产物。落盘到 `personas/<persona_id>/original_persona_source_report.md`（或统一名 `source_report.md`）。把用户要求作为"资料来源"，记录提取/推断/创作扩展，使原创 persona 也是方法论可复现的，而非临时硬编码角色卡。
+> 模板用途：`core/source_grounded_persona_creation.md` 的 Original Fictional Branch 产物。落盘到 `<persona_dir>/original_persona_source_report.md`。把用户要求作为"资料来源"，记录提取/推断/创作扩展，使原创 persona 也是方法论可复现的，而非临时硬编码角色卡。
 
 ## 1. Source Type
 

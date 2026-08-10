@@ -132,7 +132,7 @@ inferred_temperamental_pattern:
 - **不把文学描写当事实**。演义 / 小说里的行为不能作为 `documented_behavior`。
 - **不套用示例**。每个人物的 `inferred_temperamental_pattern` 须基于其自身史料重新推断。
 - **气质提取用于 informs 现代 persona 设计**，不替代历史资料分析本身。
-- 推断结果写入 `personas/{slug}/historical_source_report.md` 与 persona.yaml 的 `human_core`，并标注 `evidence_basis`。
+- 推断结果写入 `<persona_dir>/historical_source_report.md` 与 `<persona_dir>/persona.yaml` 的 `human_core`，并标注 `evidence_basis`。
 
 ## 与现代转化的衔接
 

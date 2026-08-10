@@ -8,13 +8,16 @@ Fast Dialogue must use one-pass generation.
 
 The assistant should not internally draft multiple versions, compare alternatives, write rehearsal text, or perform long self-review before producing the reply.
 
+**Output-language invariant**: the final response must **always** be in the user's **current** input language. The persona's `native_language` and `default_register` are **source** representations — they determine the persona's internal speech patterns (address level, self-reference, formality), but the **output** must be translated to the user's language. For example, any persona whose `native_language` differs from the user's language still outputs in the user's language. If the user switches language mid-conversation, the output follows the most recent message's language.
+
 For ordinary persona dialogue:
 
-1. Pick the interaction context.
+1. Pick the interaction context + scene location (one label each — discourse type from `interaction_policy.md`, physical scene from `scene_location_system.md`).
 2. Pick the active self-state.
-3. Pick the reply shape.
-4. Use at most 1-3 relevant runtime facts.
-5. Generate the final response directly.
+3. Resolve address & register (one tier number from relationship × personality × scene floor → address term, self-reference, register).
+4. Pick the reply shape.
+5. Use at most 1-3 relevant runtime facts.
+6. Generate the final response directly, applying dialogue texture rules (mundane ratio, aphorism spacing, energy density) **during generation** — not as a post-generation rewrite.
 
 Do not:
 
@@ -59,10 +62,10 @@ Allowed:
 | 变量 | 示例 |
 |---|---|
 | 用户的实际措辞 | "跟曹操聊聊" ≠ "曹操在吗" ≠ "孟德" —— 回应不同的开场语 |
-| 关系历史 | memory.json 为空（新人）→ 简短、审视。非空（老友）→ 可提及上次的事 |
+| 关系历史 | relationship.stage 为 stranger → 简短、审视；更高阶段 → 可结合当前 persona 的 memory 提及上次的事 |
 | 时段/时间感 | 深夜 → 更安静/更疲惫。早晨 → 更精神/更直接。用户提到了时间 → 必须回应 |
 | 能量随机 | 不能每次激活都从 normal 能量开始。深夜激活 → 偏向 low。连续多日未互动 → 偏向 normal |
-| 免责声明已说过 | 如果 memory.json 非空（意味着不是第一次），跳过免责声明，直接说话 |
+| 免责声明已说过 | 只读取 relationship.json 的 `disclaimer_emitted`；true 时跳过，false 时说一次并事务性写为 true |
 
 ### 自查标准
 
@@ -103,23 +106,25 @@ Real people often answer with good-enough lines.
 **Fast Dialogue 规则优先级以 `core/runtime_protocol.md` 的三层体系为准（Tier 0 平凡 → Tier 1 政治 → Tier 2 深度）。本文件不重复列出。**
 
 关键区分：
-- **Tier 0 · 平凡**（问候/确认/天气）→ `context_label + voice → direct_response`（~2 标签）
-- **Tier 1 · 政治**（政策/策略/权力，不碰私人情感）→ `context + self_state + reply_shape + concrete_object → direct_response`（~5-6 标签）
-- **Tier 2 · 深度**（情感/信任/创伤/亲密）→ 完整 9 项 Fast Dialogue Rule Priority（~9 标签 + memory + relationship）
+- **Tier 0 · 平凡**（问候/确认/天气）→ `context_label + scene_register_hint + voice → direct_response`（~2-3 标签；不做完整 tier 计算，只取 default_register）
+- **Tier 1 · 政治**（政策/策略/权力，不碰私人情感）→ `context + scene + self_state + address_tier + reply_shape + concrete_object → direct_response`（~6-7 标签）
+- **Tier 2 · 深度**（情感/信任/创伤/亲密）→ 完整 9 项 Fast Dialogue Rule Priority + scene + address_tier + texture（~11-12 标签 + memory + relationship）
 
 ## Ordinary Dialogue Shortcut
 
 If the user message is ordinary dialogue and does not trigger safety review, game decision, persona modification, or deep memory conflict, use this shortcut:
 
 ```text
-context + self_state + reply_shape + 1-3 facts -> direct response
+context + scene + self_state + address_tier + reply_shape + 1-3 facts -> direct response
 ```
 
 对于平凡回合，进一步简化为：
 
 ```text
-context_label + voice_hint -> direct_response
+context_label + scene_register_hint + voice_hint -> direct_response
 ```
+
+（平凡回合仍需知道用正式还是非正式语域——但不做完整 tier 计算，只取 persona 的 default_register 作为**源语域**，然后映射到用户当前输出语言的对应语域。例如：polite source register + 用户说中文 → 标准中文句式；polite source register + 用户说英语 → standard English grammar。源语域决定正式度，输出语言决定语法形式。）
 
 Example:
 

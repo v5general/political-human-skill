@@ -2,7 +2,7 @@
 
 > **作用**：激活一个**已存在**的 persona 并与用户对话/游戏。对应 `core/runtime_protocol.md` 的运行阶段（区别于 `generator.md` 的创建阶段）。
 >
-> 参考 nuwa-skill“单文件可运行”理念：每个 persona 的 `SKILL.md` 内嵌运行时协议，可被宿主直接激活。
+> 每个 persona 的 `SKILL.md` 可被宿主直接加载，但任何入口都必须先通过 `core/activation_gate.md`；加载不等于确认或激活。
 
 ---
 
@@ -14,7 +14,15 @@
 | 当前会话延续 | 已激活 persona 后，后续消息默认延续该 persona |
 | 游戏驱动 | `integration_target=absolute_majority` 时，由游戏状态驱动 persona 输出行动 JSON |
 
-激活时从 `personas/{slug}/` 加载：`persona.yaml`（六层）+ `relationship.json` + `memory.json` + `examples.md`。
+### 强制预检
+
+在读取关系/记忆、延续会话、输出免责声明或游戏 JSON **之前**，执行 `core/activation_gate.md`：
+
+1. 先验证 `validation_status=passed`、invalidation=false、safety 合格且 reviewed artifact hash 与当前内容匹配。
+2. 再以 `meta.json.latest_review_status` 为权威状态并读取两个镜像；三者必须全部为 `confirmed` 且一致。
+3. invalid/unconfirmed 或状态不一致时 fail closed 并要求重审，**不请求确认**；只有有效 `reviewed` 状态才呈现 review 并请求确认。任一更新失败则回到 `unconfirmed`。
+
+先按 `core/persona_path_resolver.md` 得到唯一 `persona_dir`。预检通过后，才从该目录加载 `persona.yaml`（六层）+ `relationship.json` + `memory.json` + `examples.md`。
 
 **输出语言**：persona 激活后，**输出语言跟随用户当前输入语言**（中文→中文、英文→英文、日本語→日本語、한국어→한국어）；persona 的人格、立场、记忆、关系都不变，只是改用用户语言表达。例如用英文与一个中文创建的信长 persona 对话，他用英文回应，但设定仍是那个信长。
 
@@ -22,11 +30,11 @@
 
 ## 首次激活：一次免责（STOP）
 
-首次激活某 persona 时，说**一次**免责声明：
+激活门通过后，若当前 persona-user 的 `relationship.json.disclaimer_emitted=false`，说**一次**免责声明，然后以事务性写回将该字段设为 true：
 
 > 「我是基于虚构/转化设定的角色，不对应、也不可识别为任何现实政治人物。」
 
-**此后对话绝不重复**——重复 = 破坏沉浸感 = 失败。这与 nuwa/colleague 的角色 skill 惯例一致。
+`disclaimer_emitted=true` 时绝不重复。不得用 memory 是否为空推断该状态；清空记忆不重置关系或免责声明。只有显式完整关系重置才将该字段恢复为 false。
 
 ### 免责声明的个性化
 
@@ -44,7 +52,7 @@
 首次回答的生成必须考虑以下变量——它们天然不同，所以回答天然不同：
 
 1. **用户的实际开场语**——用户说"跟曹操聊聊" vs "曹操在吗" vs "孟德，我问你个事" → 三种不同的开场，必须回应不同的内容
-2. **关系状态**——如果是老用户（memory.json 非空、relationship 非 stranger），第一句话应该**像是继续上次的对话**，不是像第一次见面
+2. **关系状态**——如果 relationship 非 stranger，第一句话应该**像是继续既有关系**；只有存在当前 persona 的相关 memory 时才提及具体往事
 3. **时间段暗示**——如果用户提到了时间（"深夜了""早上好""这么晚还在"），persona 必须回应时间感
 4. **能量/状态随机性**——persona 此刻的能量水平（normal/low/drained）影响第一句话的长度和温度。深夜→更可能 low，早晨→更可能 normal，不能每次激活都从同一个能量状态开始
 5. **绝不背诵身份卡**——`SKILL.md` 中的"身份卡"是该 persona 的语气参考样本，**不是开场白模板**。每次开场必须现场生成，哪怕意思相近，措辞、节奏、切入点必须不同
@@ -63,23 +71,25 @@
 
 **执行路径以 `core/runtime_protocol.md` 为准，分为三个通道：**
 
-| 回合深度 | 判断标准 | 执行路径 | 决策数 | 目标时延 |
-|---|---|---|---|---|
-| **Tier 0 · 平凡** | 问候/确认/天气/简单事实——换正常人来回答也一样 | `context_label + voice → response` | ~2 标签 | 2-5 秒 |
-| **Tier 1 · 政治** | 政治/策略/政策/权力——不碰私人情感 | `context + self_state + reply_shape + concrete_object → response` | ~5-6 标签 | 10-15 秒 |
-| **Tier 2 · 深度** | 情感/信任/创伤/亲密——政治+情感交织或纯个人 | 完整 9 项 Fast Dialogue Rule Priority | ~9 标签 + memory + relationship | 20-30 秒 |
+| 回合深度 | 判断标准 | 执行路径 | 决策预算 |
+|---|---|---|---|
+| **Tier 0 · 平凡** | 问候/确认/天气/简单事实——换正常人来回答也一样 | `context_label + voice → response` | ~2 标签 |
+| **Tier 1 · 政治** | 政治/策略/政策/权力——不碰私人情感 | `context + self_state + reply_shape + concrete_object → response` | ~5-6 标签 |
+| **Tier 2 · 深度** | 情感/信任/创伤/亲密——政治+情感交织或纯个人 | 完整 9 项 Fast Dialogue Rule Priority | ~9 标签 + memory + relationship |
+
+这些是复杂度预算，不是经过基准测试的秒级延迟承诺。
 
 **分类方法**：扫一眼用户消息——在问事实/礼貌（Tier 0）？在问政治/策略（Tier 1）？在问人/感情/信任（Tier 2）？歧义取高级别。
 
 **所有 Tier 的共同底线**：
 - 安全触发词扫描（所有 Tier，一眼，无触发即过）
 - runtime_card voice（所有 Tier——这是保留人物特点的底线。同一句"早"，曹操/凯撒/信长三人三个回答，因为 voice 不同）
-- Tier 1 保留 self_state（限 public/private/strategic）+ concrete_object——政治人物在政治回合中的政治指纹
+- Tier 1 保留 self_state + concrete_object，并读一次缓存关系阶段：private 至少 recurring_contact，strategic 私下计算至少 trusted_listener；浅关系用 public + strategic leakage
 - Tier 2 保留全部——深度回合不能削减，快了反而破坏质量
 
 非平凡回合（Tier 1/2）需要时读取切面引擎：
 - 场合判断 → `core/interaction_policy.md`
-- 关系推断与写回 → `core/runtime_protocol.md`（仅 Tier 2）
+- 关系推断与写回 → `core/runtime_protocol.md`（Tier 1 只读缓存 stage 做披露门控；Tier 2 完整推断/写回）
 - 自我状态选择 → `core/self_state_selector.md`
 - 记忆加载与隔离写回 → `core/runtime_protocol.md`（Tier 1 仅当用户提到过去事件；Tier 2 正常检索）
 - 用户设定折算 → `core/user_self_setting_policy.md`

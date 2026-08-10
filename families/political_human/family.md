@@ -12,7 +12,7 @@
 |---|---|
 | family | `political_human` |
 | 对象 | 职业是政治的完整人类角色（虚构现代政治人物） |
-| 存储根 | `personas/{slug}/` |
+| 存储根 | 生成：`user_generated/personas/{slug}/`；内置示例：`personas/examples/{slug}/`（由 path resolver 解析） |
 | 生成器 | `generator.md`（本目录） |
 | 调用协议 | `invocation.md`（本目录） |
 | 人格模板 | `templates/persona_template.yaml`（六层） |
@@ -59,14 +59,14 @@
 ## Persona 实例结构
 
 ```text
-personas/{slug}/
+user_generated/personas/{slug}/
 ├── SKILL.md              # 该 persona 自己的运行 skill（内嵌运行时协议 + 角色卡）
 ├── persona.yaml          # 六层人格档案
 ├── relationship.json     # 独占关系状态
 ├── memory.json           # 独占记忆
 ├── examples.md           # 多场合示例对话
 ├── meta.json             # 元信息（含 source_type/mode/safety_status）
-└── references/           # 仅 mode B/C：史料与提炼笔记
+└── references/           # 有外部资料时的检索与提炼笔记
 ```
 
 实例的**创建**见 `generator.md`，**激活运行**见 `invocation.md`。

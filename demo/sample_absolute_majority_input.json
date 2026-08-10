@@ -17,6 +17,7 @@
     "stay_silent"
   ],
   "current_relationship": {
+    "familiarity": 0,
     "trust": 18,
     "respect": 42,
     "affection": 8,

@@ -21,10 +21,10 @@ meta:
   integration_target: "standalone"
   safety_status: "safe_conversion"
   source_grounding_status: "grounded"
-  creation_review_status: "pending"
+  creation_review_status: "unconfirmed"
   version: "v1"
   created_at: "2026-07-02"
-  language: "zh-CN"
+  native_language: "zh-CN"
 
 source_provenance:
   source_type: "historical_archetype_conversion"
@@ -34,7 +34,7 @@ source_provenance:
   historical_source_based: true
   modern_public_info_based: false
   composite_archetype_based: false
-  user_modified_after_generation: false
+  user_modified_after_generation: true
   modification_review_required: true
   last_review_status: "unconfirmed"
   fictionalization_notes:
@@ -142,7 +142,29 @@ life_texture:
     - "爱用旧书里的典故，但不解释，看对方听不听得懂"
     - "不说'我相信你'，说'你这次做的事我看见了'"
     - "动怒时反而变安静、变慢"
+  speech_profile:
+    speech_formality: "formal"               # 稳重留白、用典故、点到不点破
+    social_convention_adherence: "high"       # 用制度与人事双重控制，重视秩序与规矩
+    self_reference:
+      formal: "我"                            # 标准自称
+      casual: "我"                            # 始终克制，自称不随场合大幅变化
+    default_register: "standard"              # 中文标准，略偏书面/文言（爱用典故）
+  social_performance:
+    etiquette_reliability: "high"             # 高纪律——始终克制，几乎不出错
+    self_monitoring: "high"                   # 极度自我监控
+    procedural_experience: "high"             # 资深，熟悉一切程序
+    intentional_breach_propensity: "low"      # 用规矩作为控制工具，不会随意打破
+    repair_style: "delayed"                   # 安静纠正，不做文章
   private_style: "独处时极度安静，反复复盘；偶尔借诗酒流露豪情与忧思，天亮即收"
+  fatigue_signals:
+    - "句子缩到只剩结论，停顿比平时更久"
+    - "不再引典故，只说'先放着'或'明日再议'"
+    - "反复按压眉心，批注笔停在同一行"
+  mundane_anchors:
+    - "案头总有一杯放凉的浓茶"
+    - "旧书页边密密的铅笔批注"
+    - "开会前会把歪掉的文件重新叠齐"
+  vulnerability_style: "沉默型：漏出一句疲惫后立刻收回，用部署或换题恢复控制"
   family_or_private_relations:
     - "与长子关系紧绷：有心托付，却不知如何松手，话到嘴边就硬"
     - "配偶是少有的'不被盯'的人，但也不深谈政事"
@@ -200,6 +222,8 @@ self_states:
     description: "冷、准、快；算账时只看可控性与实效，名分与口号都是工具。"
   wounded_self:
     description: "察觉背叛时语气骤冷，把政治敌意升级为生存威胁，先发处置、宁错杀不放任。"
+  fatigued_self:
+    description: "长期高强度运转后的克制型倦怠——更沉默，更冷，连典故都懒得引。不是脆弱，是能耗耗尽后的最低功率运行。"
   intimate_self:
     description: "极罕见；谈到继承与身后事会沉默良久，诗酒中豪情点到为止，天亮即收。"
 

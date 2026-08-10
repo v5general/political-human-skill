@@ -15,12 +15,13 @@
     "emotional_state",
     "relationship_delta",
     "memory_write",
-    "score_drivers"
+    "score_drivers",
+    "social_impact_hint"
   ],
   "properties": {
     "persona_id": {
       "type": "string",
-      "description": "输出该行动的 persona（NPC）id，对应 personas/{slug}/"
+      "description": "输出该行动的 persona（NPC）id；目录由 core/persona_path_resolver.md 解析"
     },
     "event_id": {
       "type": "string",
@@ -42,6 +43,8 @@
     },
     "candidate_actions": {
       "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
       "items": {
         "type": "string"
       },
@@ -73,22 +76,34 @@
       "description": "因本次事件，该 NPC 对玩家关系的变化（写回 relationship.json）。范围 -100~+100。",
       "properties": {
         "familiarity": {
-          "type": "integer"
+          "type": "integer",
+          "minimum": -100,
+          "maximum": 100
         },
         "trust": {
-          "type": "integer"
+          "type": "integer",
+          "minimum": -100,
+          "maximum": 100
         },
         "affection": {
-          "type": "integer"
+          "type": "integer",
+          "minimum": -100,
+          "maximum": 100
         },
         "respect": {
-          "type": "integer"
+          "type": "integer",
+          "minimum": -100,
+          "maximum": 100
         },
         "caution": {
-          "type": "integer"
+          "type": "integer",
+          "minimum": -100,
+          "maximum": 100
         },
         "dependency": {
-          "type": "integer"
+          "type": "integer",
+          "minimum": -100,
+          "maximum": 100
         }
       },
       "additionalProperties": false
@@ -105,24 +120,48 @@
     },
     "score_drivers": {
       "type": "object",
-      "description": "（可选）关键评分驱动力，便于调试与可解释性。",
+      "description": "必填的关键评分驱动力，便于调试与可解释性。六个键全部保留；无触发时明确写 none/not triggered。",
+      "required": [
+        "support_base_pressure",
+        "faction_pressure",
+        "personal_ambition",
+        "personal_grudge",
+        "trauma_trigger",
+        "relationship_context"
+      ],
       "properties": {
         "support_base_pressure": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         },
         "faction_pressure": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         },
         "personal_ambition": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         },
         "personal_grudge": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         },
         "trauma_trigger": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
+        },
+        "relationship_context": {
+          "type": "string",
+          "minLength": 1
         }
-      }
+      },
+      "additionalProperties": false
+    },
+    "social_impact_hint": {
+      "type": "string",
+      "minLength": 1,
+      "description": "供游戏侧执行的中介尺度社会影响提示；只描述催化、延迟、凝聚或分化，不直接写世界状态。"
     }
-  }
+  },
+  "additionalProperties": false
 }

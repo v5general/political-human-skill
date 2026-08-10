@@ -1,6 +1,6 @@
 # Persona Creation Review: <persona_name>
 
-> 模板用途：模式 B/C 历史 persona 创建工作流第 9 步的产物（`families/political_human/historical_persona_creation_workflow.md`）。落盘到 `personas/<persona_id>/creation_review.md`，并**呈现给用户确认**。用户确认前不得激活该 persona。
+> 模板用途：模式 B/C 历史 persona 创建工作流第 9 步的产物（`families/political_human/historical_persona_creation_workflow.md`）。落盘到已解析的 `<persona_dir>/creation_review.md`（仓库管理模式默认为 `user_generated/personas/<persona_id>/creation_review.md`），并**呈现给用户确认**。用户确认前不得激活该 persona。
 
 ## Basic Information
 
@@ -15,7 +15,7 @@
 ## Source Type & Source Report
 
 - Source Type:
-- Source Report:      # historical_source_report.md | original_persona_source_report.md | modern_real_figure_public_source_report.md | composite_source_report.md
+- Source Report:      # historical_source_report.md | original_persona_source_report.md | modern_real_figure_public_source_report.md | composite_archetype_source_report.md
 
 ## Safety and Fictionalization
 
@@ -44,11 +44,13 @@ For modern real figure archetype extraction, state clearly:
 - activation allowed:
 - notes:
 
-## Current Activation Status
+## Status At Review Finalization
 
-- latest_review_status:    # unconfirmed | reviewed | confirmed
-- activation_allowed:
-- pending_user_confirmation:
+- latest_review_status: reviewed
+- activation_allowed: false
+- pending_user_confirmation: true
+
+> 此处是不可变审核快照，不随之后的用户确认改写。当前激活状态只读取 `meta.json` 及 `persona.yaml` 两个镜像字段。
 
 ## Source Grounding
 

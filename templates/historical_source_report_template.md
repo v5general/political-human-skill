@@ -1,11 +1,12 @@
 # Historical Source Report: <historical_figure_name>
 
-> 模板用途：模式 B/C 历史 persona 创建时，`core/historical_source_grounding.md` 的产物。落盘到 `personas/<persona_id>/historical_source_report.md`。是后续 `inferred_temperamental_pattern` 提取与现代转化的**事实底座**。
+> 模板用途：模式 B/C 历史 persona 创建时，`core/historical_source_grounding.md` 的产物。落盘到已解析的 `<persona_dir>/historical_source_report.md`（仓库管理模式默认为 `user_generated/personas/<persona_id>/historical_source_report.md`）。是后续 `inferred_temperamental_pattern` 提取与现代转化的**事实底座**。
 >
 > 填写纪律：区分史料 / 主流解释 / 争议 / 后世想象 / 创作边界；不把文学演义当史实；不声称还原真实内心。
 
 ## 1. Eligibility Check
 
+- source_type:             # historical_inference | historical_archetype_conversion
 - Figure:
 - Region:
 - Era:

@@ -33,7 +33,7 @@
 ## 完整 persona 文件夹结构
 
 ```text
-personas/generated/<persona_id>/
+user_generated/personas/<persona_id>/
 ├── persona.yaml
 ├── runtime_card.md
 ├── relationship.json
@@ -53,7 +53,7 @@ personas/generated/<persona_id>/
     └── game_action.json
 ```
 
-> `personas/generated/` 是本地生成的建议输出位置。是否提交由项目配置决定（可在 `.gitignore` 忽略）。仓库内置示例仍在 `personas/examples/`，**不得**作为生成产物的固定模板。
+> `user_generated/personas/` 是 `core/persona_path_resolver.md` 规定的生成根。仓库内置示例仍在 `personas/examples/`，**不得**作为生成产物的固定模板。
 
 ## Creation Review Before Activation（强制 gate）
 

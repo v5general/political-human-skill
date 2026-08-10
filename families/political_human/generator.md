@@ -69,25 +69,25 @@ persona 文件夹**不得**作为手工写死的完美样例产出。除用户�
 
 ---
 
-## Phase 0.5：创建 persona 目录
+## Phase 0.5：解析并创建 persona 目录
 
 ```text
-personas/{slug}/
+user_generated/personas/{slug}/
 ├── persona.yaml  runtime_card.md  relationship.json  memory.json
 ├── SKILL.md  examples.md  meta.json
-├── historical_source_report.md  creation_review.md   # 仅 mode B/C（source grounding + 用户确认 gate）
-└── references/{research/, sources/}   # 仅 mode B/C
+├── <source-type-specific source report>  creation_review.md   # 所有 mode 强制
+└── references/{research/, sources/}   # 有外部资料时
 ```
 
-`slug` 规则：原创 `original_<主题>` 或自定；历史转化 `<人物拼音/罗马名>_modernized`。
+`slug` 规则：原创 `original_<主题>` 或自定；历史转化 `<人物拼音/罗马名>_modernized`。目录解析只遵循 `core/persona_path_resolver.md`，并把解析后的 `persona_dir` 传给后续所有 Phase。
 
 ---
 
 ## Phase 1：资料采集与原型提炼
 
-- **mode A**：以用户描述为主，必要时补宽泛政治类型画像。
+- **mode A**：以用户描述为主，产出 `original_persona_source_report.md`，明确用户提供事实、宽泛背景资料、创作推断与可识别性检查；不得跳过 source report。
 - **mode B/C**：**必须先 source grounding**——主动检索/浏览可靠资料（不得只凭记忆、不得套用示例），产 `historical_source_report.md`（用 `templates/historical_source_report_template.md`），四级区分（史料事实 / 主流解释 / 争议 / 创作推断）；遵守 `core/historical_source_grounding.md` 与 `safety/historical_figure_policy.md` 六条史料纪律 + 三级推断；信源黑名单（知乎 / 公众号 / 百度百科 / 内容农场）。再按 `core/inferred_temperament_extraction.md` 推断 `inferred_temperamental_pattern`（非生物决定论）。完整端到端流程见 `families/political_human/historical_persona_creation_workflow.md`。
-- **mode C 历史语境转译**：不得直接套用历史人物原时代的政治立场。**记住逻辑**：立场 = 天生的性格底子（跨时代稳定的脾气、欲望、恐惧、反应方式）× 被社会训练出来的判断力（出身、阶层、制度环境塑造他怎么看世界——即社会存在塑造意识）。先理解其原时代主要矛盾、看清当时的社会怎么造就了他的立场；再剥离不可迁移的时代条件，提炼性格底子；最后把性格底子放进现代议会制社会，让它重新判断、推出新立场。现代社会也可能慢慢重塑性格底子，人物在现代的行动也会反作用于社会——人和时代互相塑造。
+- **mode C 历史语境转译**：不得直接套用历史人物原时代的政治立场。立场由反复行为支持的相对稳定倾向 × 成长经历 × 社会条件共同形成。先理解原时代主要矛盾，再剥离不可迁移条件，把可证据化的行为倾向放进现代议会制重新推演。不得推断遗传或先天注定；现代经历仍会重塑人物，行动也会反作用于社会。
 
 > 同名历史人物任务**不得套用示例**，须基于当前资料重新推算（见 `safety/historical_figure_policy.md` 第 6 节）。
 
@@ -113,9 +113,9 @@ personas/{slug}/
 
 1. 身份层 identity
 2. 人性核心层 human_core（先填）
-3. 生活质感层 life_texture（含新增：`fatigue_signals`、`mundane_anchors`、`vulnerability_style`——从 persona 人格结构推断其疲惫表现、日常锚点和脆弱回收风格）
+3. 生活质感层 life_texture（含新增：`fatigue_signals`、`mundane_anchors`、`vulnerability_style`——从 persona 人格结构推断其疲惫表现、日常锚点和脆弱回收风格；`speech_profile`——从人格结构 × 国籍推断 speech_formality / social_convention_adherence / self_reference / default_register，见 `core/address_and_register_system.md`；`social_performance`——从人格结构 × 从政经验推断 etiquette_reliability / self_monitoring / procedural_experience / intentional_breach_propensity / repair_style，见 `core/social_error_tolerance.md`）
 4. 政治职业层 political_core
-5. 自我状态层 self_states（含新增：`fatigued_self`——政治疲惫/职业倦怠时的状态，与 wounded_self 的创伤触发区分）
+5. 自我状态层 self_states（五个主状态 + `fatigued_self` 叠加档案；后者表示政治疲惫/职业倦怠，与 wounded_self 的创伤触发区分）
 6. 内在冲突层 inner_conflicts（至少 2 条，人层 vs 政治层张力；新增 `human_vs_political` 维度：个人情感与政治计算之间的实时拉扯）
 
 > Human First：先人层后政治层，最后写冲突。
@@ -128,6 +128,9 @@ personas/{slug}/
 - `core/human_fragility.md` 的人性元素要求（身体状态、日常锚点、非功能性话语、脆弱展示与回收）
 - `core/no_constant_testing.md` 的测试频率限制
 - `core/interaction_policy.md` 的具体优先规则
+- `core/scene_location_system.md` 的场所感知（overhear_risk 驱动内容编码；贩卖機角 ≠ 事務所）
+- `core/address_and_register_system.md` 的称呼规则（关系 × 性格 × 场所底线 → tier → 对称/自称/语尾）
+- `core/dialogue_texture.md` 的日常质感（废话配额、警句间隔、疲劳密度、不对称许可）
 - Phase 3.6 的多样性检查将在生成后立即执行
 
 ---
@@ -181,7 +184,7 @@ personas/{slug}/
 
 ## Phase 4：写入 persona 文件
 
-写入 `personas/{slug}/` 全部文件：
+写入已解析的 `persona_dir`（默认 `user_generated/personas/{slug}/`）全部文件：
 
 - `persona.yaml`：六层档案。
 - `runtime_card.md`：从 `persona.yaml`、初始关系风格、核心记忆策略中自动压缩生成的普通对话快取。必须使用 `templates/runtime_card_template.md`，并为该人物填入 voice、dialogue rhythm、self-state shortcuts、One-Pass Hints、Anti-Manifesto Hints、**Testing Behavior**、**Fatigue & Vulnerability Hints**、**Human Moment Hints**、**Mundane Anchors**。它负责保留个人特色；全局 `core/runtime_protocol.md`、`core/one_pass_dialogue.md`、`core/interaction_policy.md`、`core/no_constant_testing.md`、`core/human_fragility.md` 仍负责底层规则。
@@ -190,9 +193,9 @@ personas/{slug}/
 - `SKILL.md`：内嵌运行时协议（`core/runtime_protocol.md`）+ 指向 `runtime_card.md` 的快速读取说明 + 角色卡 + 自我状态 + 风格 + 诚实边界，使该 persona 可被宿主直接激活运行。
 - `examples.md`：公开/私下/辩论/危机/亲密 五种场合各一例。
 - `dialogue_samples/`：README + casual_private / public_interview / strategy_room / confrontation / trust_low / trust_high / committee_debate / game_action（共 8-9 个文件，在 Phase 3 生成、Phase 3.6 检查通过后写入）。committee_debate 须遵循 `core/parliamentary_debate_rules.md`，按人物国籍使用对应议会程序。
-- `meta.json`：`source_type / mode / integration_target / safety_status / version / created_at / language`。
-- `historical_source_report.md`（仅 mode B/C）：source grounding 产物（Phase 1，用 `templates/historical_source_report_template.md`）。
-- `creation_review.md`（仅 mode B/C）：用户确认 gate 摘要（Phase 5.5，用 `templates/persona_creation_review_template.md`）。
+- `meta.json`：来源/运行字段外，还必须含 activation gate 状态：`latest_review_status=unconfirmed`、`validation_status=pending`、`review_invalidated_by_modification=true`、空 `reviewed_artifact_hash`；后续只按 `core/activation_gate.md` 转移。
+- source-type-specific source report（所有 mode 强制）：Mode A=`original_persona_source_report.md`（`templates/original_persona_source_report_template.md`）；Mode B/C=`historical_source_report.md`；modern-safe extraction=`modern_real_figure_public_source_report.md`；composite=`composite_archetype_source_report.md`（`templates/composite_archetype_source_report_template.md`）。
+- `creation_review.md`（所有 mode 强制）：在 Phase 4 用 `templates/persona_creation_review_template.md` 生成并定稿，作为 Phase 5 审核与 artifact hash 的不可变输入。Phase 5.5 只呈现，不再生成或改写。
 
 ### Runtime card generation rule
 
@@ -245,24 +248,26 @@ Do not choose between global rules and persona runtime. Use both:
 
 ## Phase 5：质量验证
 
-跑 `validators/`（persona_consistency / recognizability / dialogue_regression 等）：双层完整、一致、场合区分度、安全状态、诚实边界均达标；并确认 `runtime_card.md` 含 Testing Behavior 段、且测试频率符合 `core/no_constant_testing.md`（测试是偶尔的高压动作，不是默认话术）。不达标回 Phase 2/3 迭代。
+跑 `validators/`（persona_consistency / recognizability / dialogue_regression 等）：双层完整、一致、场合区分度、安全状态、诚实边界均达标；并确认 `runtime_card.md` 含 Testing Behavior 段、且测试频率符合 `core/no_constant_testing.md`（测试是偶尔的高压动作，不是默认话术）。此阶段验证**审核就绪**，不要求用户已经确认。
+
+通过后按 `core/activation_gate.md` 计算当前 artifact hash，设置 `validation_status=passed`、`review_invalidated_by_modification=false`，并将权威状态与两个镜像原子更新为 `reviewed`。不达标则保持 `pending + invalidated + unconfirmed`，回 Phase 2/3 迭代。
 
 ---
 
 ## Phase 5.5：用户确认 gate（Creation Review Before Activation）
 
-**mode B/C 强制；mode A 强烈推荐。**
+**所有来源类型与所有 mode 强制。**
 
-生成 persona 文件夹并通过 Phase 5 验证后，**不得立即激活进入角色扮演**。必须先用 `templates/persona_creation_review_template.md` 生成 `creation_review.md`，并向用户呈现基本信息摘要，询问是否修改。
+persona 文件夹（含已定稿的 `creation_review.md`）通过 Phase 5 并进入当前 `reviewed` 状态后，**不得立即激活进入角色扮演**。向用户呈现该已审核 review 的摘要，询问是否修改；此阶段不得改写任何被 hash 保护的文件。
 
 - 用户提出修改 → 按 `families/political_human/historical_persona_creation_workflow.md` 的 User Modification Sync，**同步更新所有受影响文件**（persona.yaml / runtime_card.md / relationship.json / examples.md / creation_review.md / meta.json），重跑 validator 与 `safety/modification_review.md`，再回到本 gate。
-- 用户确认 → 才进入"交付与进化"，激活 persona。
+- 用户确认 → 先重新核对 review_valid 和 artifact hash；只从当前 `reviewed` 状态原子切换三处状态为 `confirmed`，再进入"交付与进化"并允许激活。
 
-即使用户说"直接让他和我说话"，也必须先呈现 creation_review 并等待确认。这是 mode B/C 的硬性 gate，不可跳过。
+即使用户说"直接让他和我说话"，也必须先完成当前 artifact 的有效审核、呈现 creation_review 并等待确认。这是所有 mode 的硬性 gate，不可跳过。
 
 ---
 
 ## 交付与进化
 
-- 交付：告知 persona 位置 `personas/{slug}/`，提示可用 `invocation.md` 激活。
+- 交付：告知已解析的 `persona_dir`（默认 `user_generated/personas/{slug}/`），提示可用 `invocation.md` 激活。
 - 进化：用户后续追加资料 / 对话纠正 / 修改设定 → 见 `SKILL.md` 第 8 节与 `safety/modification_review.md`（每次修改必审）。

@@ -70,12 +70,25 @@ When used with Absolute Majority, this skill judges among the candidate actions 
 
 ```json
 {
+  "persona_id": "npc_reformist_01",
+  "event_id": "fiscal_reform_01",
+  "candidate_actions": ["support_bill", "negotiate_budget", "join_rebellion"],
   "selected_action": "negotiate_budget",
   "action_scores": { "support_bill": 58, "negotiate_budget": 86, "join_rebellion": 27 },
   "public_statement": "The direction of the policy is understandable, but the local economy's capacity needs more careful institutional design.",
   "private_reason": "The support base depends on local public spending; supporting it directly would damage constituency relations.",
-  "relationship_delta": { "trust": 1, "respect": 2, "caution": 1 },
-  "memory_write": ["The player asked this NPC to support the bill in the fiscal-reform event, but offered no local budget compensation."]
+  "emotional_state": "controlled but under constituency pressure",
+  "relationship_delta": { "familiarity": 1, "trust": 1, "affection": 0, "respect": 2, "caution": 1, "dependency": 0 },
+  "memory_write": ["The player asked this NPC to support the bill in the fiscal-reform event, but offered no local budget compensation."],
+  "score_drivers": {
+    "support_base_pressure": "high local-spending exposure",
+    "faction_pressure": "leadership prefers immediate support",
+    "personal_ambition": "wants ownership of a workable compromise",
+    "personal_grudge": "none",
+    "trauma_trigger": "not triggered",
+    "relationship_context": "limited trust; proposal judged on substance"
+  },
+  "social_impact_hint": "A negotiated amendment may delay the vote while holding the coalition together."
 }
 ```
 
@@ -97,7 +110,7 @@ This project stands on three excellent open-source projects:
 - **[colleague-skill · dot-skill](https://github.com/titanwings/colleague-skill)** (by [@titanwings](https://github.com/titanwings)) — its **generate → invoke → update → family** structure inspired this project's self-contained persona directory layout, the intake → generate → preview → write → evolve creation flow, and the layered persona writing style.
 - **[darwin-skill](https://github.com/alchaincyf/darwin-skill)** (by [@alchaincyf / 花叔](https://github.com/alchaincyf)) — its **evaluate → improve → validate → keep/revert** loop inspired this project's quality-evolution layer: a Darwin adapter, domain gates, regression prompts, and result logging for maintaining the skill over time.
 
-But Political Human Skill is an **independent framework** serving a very different object — "a complete person whose profession is politics". Original cores include: the **two-layer (Human + Political) structure and its inner conflicts**, the political-profession dimension (6-axis ideology / support base / action style), the **relationship system**, **memory isolation**, **context detection** and 5 **self-states**, the **recognizability safety boundary for modern real figures**, and the **game-action adapter** for [Absolute Majority](https://github.com/v5general/Absolute_Majority).
+But Political Human Skill is an **independent framework** serving a very different object — "a complete person whose profession is politics". Original cores include: the **two-layer (Human + Political) structure and its inner conflicts**, the political-profession dimension (6-axis ideology / support base / action style), the **relationship system**, **memory isolation**, **context detection**, **five primary self-states plus a fatigued overlay**, the **recognizability safety boundary for modern real figures**, and the **game-action adapter** for [Absolute Majority](https://github.com/v5general/Absolute_Majority).
 
 ---
 
@@ -111,7 +124,7 @@ A political-human persona contains at least:
 | **Human core** | Personality archetype, Big Five, temperament, core desires / fears / flaws, emotional triggers, **formative life history (growth experience — how their upbringing shapes their stance)** |
 | **Life texture** | Habits, hobbies, speech mannerisms, private style, family/private relations, formative events |
 | **Political core** | 6-axis ideology (economy/welfare/institution/foreign/social/decentralization), support base, 6 political skills, action style |
-| **Self-states** | Public / private / strategic / wounded / intimate — five personas that switch by context and relationship |
+| **Self-states** | Six stored profiles: five runtime primaries (public/private/strategic/wounded/intimate) plus a fatigued overlay that can modify any primary |
 | **Inner conflicts** | Tension between the Human Layer and the Political Layer (at least 2; the source of depth) |
 
 Plus: **relationship system** (7 relationship stages; a user claiming intimacy does not equal automatic trust), **memory isolation** (each persona owns its memory namespace), **context detection** (the same issue gets different answers in public / private / intimate settings), **output modes** (dialogue / debate / analysis / prediction / game JSON).
@@ -132,7 +145,7 @@ Plus: **relationship system** (7 relationship stages; a user claiming intimacy d
 - Mode C translates, not copies: **understand historical conditions → strip non-portable era context → distill stable personality → construct modern formative history → re-derive stance**. Stance = personality × formative history × modern conditions, never mechanically translated.
 - Personality is extracted from behavioral tendencies, not from posthumous labels. Formative life history is mandatory: user-provided or AI-inferred from stance and personality. Same personality can yield different stances; each persona notes it's "one of multiple solutions, not the only answer."
 
-> The conversion method rests on dialectical materialism. The "personality base" is a **biological temperament** (reaction speed, risk appetite, mood — a hereditary material substrate), not a soul that crosses eras — it produces no stance on its own; a stance is always base × social existence.
+> The conversion method treats the "personality base" as **relatively stable tendencies inferred from repeated observable behavior**, not heredity, genes, or a soul that crosses eras. Stability is a modeling assumption for conversion, while stance remains a product of tendencies × lived experience × social existence.
 
 ---
 
@@ -144,20 +157,22 @@ Every persona — original, historical, or derived from a modern real figure —
 classify source → safety/eligibility → collect source material → separate facts / interpretations / creative
 → extract temperament (translate labels to behavioral patterns, not posthumous evaluations)
 → construct formative life history (user-provided or AI-inferred from stance + personality)
-→ embed in modern parliament → generate full folder → creation_review
+→ retain historical context (Mode B) or embed in modern parliament (other modes)
+→ generate full folder → creation_review
 → user modifies → re-run all checks → … → user confirms → activate
 ```
 
-**Four source types** (the only difference between them is *where the material comes from*)：
+**Five source types** (the main difference is where the material comes from and whether historical context is retained)：
 
 | Source type | Source material | Safety note |
 |---|---|---|
-| **Original fictional** | user brief, world setting, usage mode | no real-figure cloning |
-| **Historical → modern** | historical sources, documented facts, interpretations, later myth, creative inference | figure must be before the regional boundary; stance is re-derived, never copied |
-| **Modern real figure → safe archetype** | **public information only** — public bio, offices, speeches, policy positions, election history | **never** an interactive persona of the real figure; output is a de-identified fictional archetype |
-| **Composite** | multiple broad types / references | no single identifiable near-clone target |
+| **Original fictional** (`original_fictional_persona`) | user brief, world setting, usage mode | no real-figure cloning |
+| **Historical inference** (`historical_inference`) | historical sources, documented facts, interpretations, disputes | remains in the historical setting; distinguishes evidence from inference |
+| **Historical → modern** (`historical_archetype_conversion`) | historical sources, documented facts, interpretations, later myth, creative inference | figure must be before the regional boundary; stance is re-derived, never copied |
+| **Modern real figure → safe archetype** (`modern_real_figure_archetype_extraction`) | **public information only** — public bio, offices, speeches, policy positions, election history | **never** an interactive persona of the real figure; output is a de-identified fictional archetype |
+| **Composite** (`composite_archetype`) | multiple broad types / references | no single identifiable near-clone target |
 
-> **Near-modern** = after the regional boundary but before 1945; **modern** = post-1945. Modern figures use public information only — no interactive persona, only a safe de-identified archetype extracted from public behavior. Modes A/B/C above map onto these source types (A → original, B/C → historical).
+> **Near-modern** = after the regional boundary but before 1945; **modern** = post-1945. Modern figures use public information only — no interactive persona, only a safe de-identified archetype extracted from public behavior. Modes A/B/C map to original / historical inference / historical-to-modern conversion respectively.
 
 ### 🔁 Modification Recheck Loop (mandatory)
 
@@ -168,6 +183,8 @@ For modern real figures specifically, any edit that **restores an identifying fi
 ### 📋 Creation review before activation
 
 A generated persona is never activated on the spot. The system first presents a `creation_review.md` summary — identity, inferred temperament, modern role, ideology, support base, safety status, files generated — and waits for the user to modify or confirm.
+
+Activation remains blocked until `review_valid=true` and the canonical status plus both mirrors are all `confirmed`. Direct invocation is not confirmation.
 
 > Full workflow: [`core/source_grounded_persona_creation.md`](core/source_grounded_persona_creation.md) · Modern real figure branch: [`safety/modern_real_figure_archetype_extraction.md`](safety/modern_real_figure_archetype_extraction.md)
 
@@ -245,7 +262,7 @@ Once installed, tell the agent:
 > Design a faction-leader NPC for Absolute Majority
 ```
 
-Then invoke directly:
+After the activation gate passes, invoke directly:
 
 ```
 > (in public) Do you support this fiscal reform?
@@ -253,7 +270,7 @@ Then invoke directly:
 > How will you act in this no-confidence vote? (output game JSON)
 ```
 
-> The first time a persona is activated, it states once: "I am a character based on fictional / converted settings and do not correspond to any real political figure"; it is not repeated afterwards, to avoid repetitive disclaimers during normal use.
+> The first time a persona is activated, it states once: "I am a character based on fictional / converted settings and do not correspond to any real political figure." This is persisted as `relationship.json.disclaimer_emitted`; clearing memory alone does not reset it.
 
 ---
 
@@ -285,7 +302,7 @@ Then invoke directly:
 
 ---
 
-### 🜂️ Cao Cao — Ruling coalition faction leader · Age 52
+### 🜂️ Cao Cao — Ruling coalition faction leader · Age 58
 
 > Sitting at the desk. A cup of cold tea in front of him. He turns the pen cap once, doesn't speak.
 
@@ -343,7 +360,7 @@ political-human-skill/
 └── personas/examples/   # ⚡ 3 converted Mode C personas (oda / cao_cao / caesar)
 ```
 
-> `personas/examples/` ships only built-in examples — personas you generate during normal use belong in your own runtime / game data / workspace, not in this repo. Examples are not fixed templates: a new Oda/Cao Cao/Caesar request is regenerated from current sources, never copied. Stricter rules in [SPEC.md](SPEC.md) §18–19.
+> `personas/examples/` ships only built-in examples. Repository-managed generation writes to `user_generated/personas/<persona_id>/`; embedding hosts may supply an explicit external `persona_dir` and assume validation responsibility. Examples are not fixed templates: a new Oda/Cao Cao/Caesar request is regenerated from current sources, never copied. Stricter rules in [SPEC.md](SPEC.md) §18–19.
 
 ---
 
@@ -357,6 +374,10 @@ political-human-skill/
 pip install -r requirements.txt
 python scripts/validate_repo.py
 ```
+
+This command performs structural validation only. Provider-neutral model execution with raw-output and judge records is documented in [`quality/TESTING.md`](quality/TESTING.md) and implemented by `scripts/run_semantic_tests.py`.
+
+Live Absolute Majority execution must pass `scripts/validate_game_transaction.py`; `scripts/validate_game_output.py` is output-only and never authorizes execution.
 
 Minimal demos in [`demo/`](demo/).
 

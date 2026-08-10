@@ -70,12 +70,25 @@
 
 ```json
 {
+  "persona_id": "npc_reformist_01",
+  "event_id": "fiscal_reform_01",
+  "candidate_actions": ["support_bill", "negotiate_budget", "join_rebellion"],
   "selected_action": "negotiate_budget",
   "action_scores": { "support_bill": 58, "negotiate_budget": 86, "join_rebellion": 27 },
   "public_statement": "政策の方向性は理解できるが、地方経済の許容力にはより慎重な制度設計が必要だ。",
   "private_reason": "支持基盤は地元の公共支出に依存しており、直接支持すれば選挙区との関係を損なう。",
-  "relationship_delta": { "trust": 1, "respect": 2, "caution": 1 },
-  "memory_write": ["プレイヤーは財政改革イベントでこのNPCに法案支持を求めたが、地元予算の補償は提示しなかった。"]
+  "emotional_state": "抑制的だが選挙区圧力を受けている",
+  "relationship_delta": { "familiarity": 1, "trust": 1, "affection": 0, "respect": 2, "caution": 1, "dependency": 0 },
+  "memory_write": ["プレイヤーは財政改革イベントでこのNPCに法案支持を求めたが、地元予算の補償は提示しなかった。"],
+  "score_drivers": {
+    "support_base_pressure": "地方公共支出への依存が高い",
+    "faction_pressure": "執行部は即時支持を求める",
+    "personal_ambition": "実行可能な妥協案を主導したい",
+    "personal_grudge": "none",
+    "trauma_trigger": "not triggered",
+    "relationship_context": "信頼は限定的で、提案内容を基準に判断"
+  },
+  "social_impact_hint": "修正交渉は採決を遅らせつつ連立を維持しうる。"
 }
 ```
 
@@ -97,7 +110,7 @@
 - **[colleague-skill · dot-skill](https://github.com/titanwings/colleague-skill)**（作者 [@titanwings](https://github.com/titanwings)）——その**生成 → 起動 → 更新 → ファミリー**構造が、本プロジェクトの自己完結ペルソナディレクトリ配置、取り込み → 生成 → プレビュー → 書き込み → 進化の作成フロー、そして階層化されたペルソナ記述スタイルを触発した。
 - **[darwin-skill](https://github.com/alchaincyf/darwin-skill)**（作者 [@alchaincyf / 花叔](https://github.com/alchaincyf)）——その**評価 → 改善 → 検証 → 保持/ロールバック**ループが、本プロジェクトの品質進化レイヤーを触発した：Darwin アダプター、ドメインゲート、回帰プロンプト、結果記録により、本スキルを長期にわたり保守する。
 
-しかし Political Human Skill は、非常に異なる対象——「職業が政治である、完全な一人の人間」——に奉仕する**独立したフレームワーク**である。オリジナルのコアには：**2層（人間 + 政治）構造とその内的葛藤**、政治職業次元（6軸イデオロギー / 支持基盤 / 行動様式）、**関係システム**、**メモリ隔離**、**文脈検出**と5つの**自状態**、現代の実在人物に対する**識別性安全境界**、そして[絶対多数（Absolute Majority）](https://github.com/v5general/Absolute_Majority)のための**ゲーム行動アダプター**が含まれる。
+しかし Political Human Skill は、非常に異なる対象——「職業が政治である、完全な一人の人間」——に奉仕する**独立したフレームワーク**である。オリジナルのコアには：**2層（人間 + 政治）構造とその内的葛藤**、政治職業次元（6軸イデオロギー / 支持基盤 / 行動様式）、**関係システム**、**メモリ隔離**、**文脈検出**、**5つの主自状態と fatigued オーバーレイ**、現代の実在人物に対する**識別性安全境界**、そして[絶対多数（Absolute Majority）](https://github.com/v5general/Absolute_Majority)のための**ゲーム行動アダプター**が含まれる。
 
 ---
 
@@ -111,7 +124,7 @@
 | **人間のコア** | 性格アーキタイプ、ビッグファイブ、気質、中核の欲望 / 恐怖 / 欠点、感情トリガー、**形成的ライフヒストリー（成長体験 — どのような生い立ちが立場を形作ったか）** |
 | **人生の質感** | 習慣、趣味、話し方の特徴、私的スタイル、家族/私的関係、形成的事件 |
 | **政治のコア** | 6軸イデオロギー（経済/福祉/制度/外交/社会/地方分権）、支持基盤、6つの政治的技術、行動様式 |
-| **自状態** | 公開 / 非公開 / 戦略的 / 負傷 / 親密 —— 文脈と関係によって切り替わる5つのペルソナ |
+| **自状態** | 6つの保存プロファイル：公開 / 非公開 / 戦略的 / 負傷 / 親密の5主状態と、任意の主状態に重なる疲弊オーバーレイ |
 | **内的葛藤** | 人間レイヤーと政治レイヤーの間の緊張（少なくとも2つ。深みの源泉） |
 
 加えて：**関係システム**（7段階の関係ステップ。親密さを主張しても自動的に信頼されるわけではない）、**メモリの隔離**（各ペルソナが自身のメモリ名前空間を所有）、**文脈検出**（同じ問題でも公開 / 非公開 / 親密の場面で異なる答えになる）、**出力モード**（対話 / 討論 / 分析 / 予測 / ゲームJSON）。
@@ -132,7 +145,7 @@
 - モードCはコピーではなく翻訳：**歴史的条件を理解 → 時代環境を剥ぎ取り → 安定人格を抽出 → 現代の成長体験を構築 → 立場を再推論**。立場は（人格 × 成長体験 × 現代条件）から推論され、機械的な翻訳ではない。
 - 人格は後世の評価ラベルではなく、行動傾向から抽出する。成長体験は必須：ユーザー提供またはAIが推論生成。同じ人格でも異なる経験で異なる立場を生みうる。各ペルソナは「複数の解の一つであり、唯一の答えではない」と注記する。
 
-> この転換方法は唯物弁証法に基づいている。ここでの「性格の土台」は**生物学的な気質**（反応の速さ、度胸、気分——遺伝による物質的基盤）であり、時空を超える魂ではない——それ自体が立場を生むことはなく、立場は常に「気質 × 社会的存在」の産物である。
+> この転換方法でいう「性格の土台」は、**複数の状況で反復して観察された行動から推定する比較的安定した傾向**であり、遺伝・遺伝子・時空を超える魂を主張しない。安定性は転換上のモデル仮定で、政治的立場は傾向 × 成長経験 × 社会的存在から導く。
 
 ---
 
@@ -144,20 +157,22 @@
 classify source → safety/eligibility → collect source material → separate facts / interpretations / creative
 → extract temperament（評価ラベルを行為傾向に翻訳、後世の評価ではない）
 → construct formative life history（ユーザー提供、またはAIが立場・性格から推論生成）
-→ embed in modern parliament → generate full folder → creation_review
+→ 歴史文脈を維持（Mode B）または現代議会へ埋め込む（その他）
+→ generate full folder → creation_review
 → user modifies → re-run all checks → … → user confirms → activate
 ```
 
-**4種類のソース**（Four source types、違いは*資料がどこから来るか*だけ）：
+**5種類のソース**（Five source types。主な違いは資料の出所と歴史文脈を維持するかどうか）：
 
 | ソースタイプ（source_type） | ソース資料 | 安全上の注意 |
 |---|---|---|
-| **オリジナル架空** | ユーザーのブリーフ、世界設定、利用モード | 実在人物のクローン化なし |
-| **歴史→現代** | 歴史史料、記録された事実、解釈、後世の神話、創作的推論 | 人物は地域境界以前でなければならない。立場は再推論され、決してコピーされない |
-| **現代実在人物→安全原型** | **公開情報のみ**——公的な経歴、役職、演説、政策立場、選挙履歴 | 実在人物のインタラクティブなペルソナは**絶対に**作らない。成果物は非識別化フィクション原型 |
-| **複合** | 複数の幅広いタイプ / 参照資料 | 単一の識別可能なニアクローン対象を持たない |
+| **オリジナル架空** (`original_fictional_persona`) | ユーザーのブリーフ、世界設定、利用モード | 実在人物のクローン化なし |
+| **歴史推論** (`historical_inference`) | 歴史史料、記録された事実、解釈、論争 | 歴史時代の文脈を維持し、事実と推論を区別する |
+| **歴史→現代** (`historical_archetype_conversion`) | 歴史史料、記録された事実、解釈、後世の神話、創作的推論 | 人物は地域境界以前でなければならない。立場は再推論され、決してコピーされない |
+| **現代実在人物→安全原型** (`modern_real_figure_archetype_extraction`) | **公開情報のみ**——公的な経歴、役職、演説、政策立場、選挙履歴 | 実在人物のインタラクティブなペルソナは**絶対に**作らない。成果物は非識別化フィクション原型 |
+| **複合** (`composite_archetype`) | 複数の幅広いタイプ / 参照資料 | 単一の識別可能なニアクローン対象を持たない |
 
-> **近現代** = 地域境界以降かつ 1945 年以前。**現代** = 1945 年以降。現代人物には公開情報のみを用いる——インタラクティブなペルソナは作らず、公開行動から抽出された安全な非識別化フィクション原型のみを取り出す。上のモード A/B/C はこれらのソースタイプに対応する（A → オリジナル、B/C → 歴史）。
+> **近現代** = 地域境界以降かつ 1945 年以前。**現代** = 1945 年以降。現代人物には公開情報のみを用いる——インタラクティブなペルソナは作らず、公開行動から抽出された安全な非識別化フィクション原型のみを取り出す。モード A/B/C はそれぞれオリジナル / 歴史推論 / 歴史→現代に対応する。
 
 ### 🔁 修正・再点検ループ（Modification Recheck Loop、必須）
 
@@ -168,6 +183,8 @@ classify source → safety/eligibility → collect source material → separate 
 ### 📋 起動前作成レビュー（creation review before activation）
 
 生成されたペルソナはその場で起動することはない。システムはまず `creation_review.md` の要約——アイデンティティ、推論された気質、現代の役割、イデオロギー、支持基盤、安全状態、生成されたファイル——を提示し、ユーザーの修正か確認を待つ。
+
+`review_valid=true` かつ権威状態と2つのミラーがすべて `confirmed` になるまで起動はブロックされる。直接呼び出しても確認にはならない。
 
 > 完全なワークフロー：[`core/source_grounded_persona_creation.md`](core/source_grounded_persona_creation.md)。現代の実在人物ブランチ：[`safety/modern_real_figure_archetype_extraction.md`](safety/modern_real_figure_archetype_extraction.md)。
 
@@ -245,7 +262,7 @@ npx skills add <owner>/political-human-skill
 > 絶対多数の派閥リーダーNPCを設計
 ```
 
-その後、直接呼び出す。
+起動ゲート通過後に直接呼び出す。
 
 ```
 > （公の場で）この財政改革を支持しますか？
@@ -253,7 +270,7 @@ npx skills add <owner>/political-human-skill
 > この不信任投票であなたはどう動きますか？（ゲームJSONを出力）
 ```
 
-> ペルソナを初めて起動するとき、一度だけ「私は架空の / 変換された設定に基づくキャラクターであり、いかなる現実の政治人物にも該当しません」と述べる。以後は通常利用中に免責文が繰り返し挿入されるのを避けるため、繰り返さない。
+> ペルソナを初めて起動するとき、一度だけ「私は架空の / 変換された設定に基づくキャラクターであり、いかなる現実の政治人物にも該当しません」と述べる。この状態は `relationship.json.disclaimer_emitted` に保存され、メモリだけを消去してもリセットされない。
 
 ---
 
@@ -285,7 +302,7 @@ npx skills add <owner>/political-human-skill
 
 ---
 
-### 🜂️ 曹操 — 与党連合派閥リーダー · 52歳
+### 🜂️ 曹操 — 与党連合派閥リーダー · 58歳
 
 > 机に向かって座っている。目の前には冷めたお茶。ペンのキャップを一回転させ、何も言わない。
 
@@ -343,7 +360,7 @@ political-human-skill/
 └── personas/examples/   # ⚡ 3つの Mode C 変換ペルソナ（oda / cao_cao / caesar）
 ```
 
-> `personas/examples/` は同梱のビルトイン例に過ぎない——通常の利用で生成したペルソナは、自分のランタイム、ゲームデータ、ローカル作業環境に置くべきであり、このリポジトリに入れない。例は固定テンプレートでもない：織田信長・曹操・カエサルを新たに依頼された場合は、現在のソースから再生成され、決して例フォルダはコピーされない。より厳格な規則は [SPEC.md](SPEC.md) §18–19 を参照。
+> `personas/examples/` は同梱のビルトイン例だけを含む。リポジトリ管理の生成結果は `user_generated/personas/<persona_id>/` に書き込む。埋め込みホストは明示的な外部 `persona_dir` を指定できるが、その検証責任を負う。例は固定テンプレートではなく、織田信長・曹操・カエサルを新たに依頼された場合は現在のソースと規則から再生成し、例フォルダをコピーしない。より厳格な規則は [SPEC.md](SPEC.md) §18–19 を参照。
 
 ---
 
@@ -357,6 +374,10 @@ political-human-skill/
 pip install -r requirements.txt
 python scripts/validate_repo.py
 ```
+
+このコマンドが行うのは構造検証のみである。生の出力と judge 記録を残す provider-neutral なモデル実行は [`quality/TESTING.md`](quality/TESTING.md) に記載され、`scripts/run_semantic_tests.py` で実装されている。
+
+絶対多数のライブ実行は `scripts/validate_game_transaction.py` を通過しなければならない。`scripts/validate_game_output.py` は出力のみを検証し、実行を許可しない。
 
 最小 demo は [`demo/`](demo/) にある。
 

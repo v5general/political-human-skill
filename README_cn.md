@@ -70,12 +70,25 @@ Response = 人格档案 + 用户自我设定 + 关系状态 + 该人格独占的
 
 ```json
 {
+  "persona_id": "npc_reformist_01",
+  "event_id": "fiscal_reform_01",
+  "candidate_actions": ["support_bill", "negotiate_budget", "join_rebellion"],
   "selected_action": "negotiate_budget",
   "action_scores": { "support_bill": 58, "negotiate_budget": 86, "join_rebellion": 27 },
   "public_statement": "政策方向可以理解，但地方经济的承受能力需要更细致的制度设计。",
   "private_reason": "支持基础依赖地方公共支出，直接支持会损害选区关系。",
-  "relationship_delta": { "trust": 1, "respect": 2, "caution": 1 },
-  "memory_write": ["玩家在财政改革事件中要求该 NPC 支持法案，但未提供地方预算补偿。"]
+  "emotional_state": "克制，但承受选区压力",
+  "relationship_delta": { "familiarity": 1, "trust": 1, "affection": 0, "respect": 2, "caution": 1, "dependency": 0 },
+  "memory_write": ["玩家在财政改革事件中要求该 NPC 支持法案，但未提供地方预算补偿。"],
+  "score_drivers": {
+    "support_base_pressure": "地方公共支出依赖度高",
+    "faction_pressure": "领导层要求立即支持",
+    "personal_ambition": "希望主导一个可执行的妥协方案",
+    "personal_grudge": "none",
+    "trauma_trigger": "not triggered",
+    "relationship_context": "信任有限，按方案本身判断"
+  },
+  "social_impact_hint": "谈判修正可能推迟表决，同时维持联盟团结。"
 }
 ```
 
@@ -97,7 +110,7 @@ Response = 人格档案 + 用户自我设定 + 关系状态 + 该人格独占的
 - **[colleague-skill · dot-skill](https://github.com/titanwings/colleague-skill)**（作者 [@titanwings](https://github.com/titanwings)）——它的**生成 → 调用 → 更新 → 家族化**结构，启发了本项目自包含的 persona 目录布局、采集 → 生成 → 预览 → 写入 → 演化的创建流程，以及分层的人格写法。
 - **[darwin-skill](https://github.com/alchaincyf/darwin-skill)**（作者 [@alchaincyf / 花叔](https://github.com/alchaincyf)）——它的**评估 → 改进 → 验证 → 保留/回滚**循环，启发了本项目的质量进化层：一个 Darwin 适配器、领域门槛、回归提示词和结果记录，用于长期维护本 Skill。
 
-但 Political Human Skill 是一个**独立的框架**，服务于一个截然不同的对象——「职业是政治的完整的人」。原创核心包括：**双层（人 + 政治）结构及其内在冲突**、政治职业维度（6 轴意识形态 / 支持基础 / 行动风格）、**关系系统**、**记忆隔离**、**场合判断**与 5 种**自我状态**、针对现代真实人物的**可辨识度安全边界**，以及面向[《绝对多数》](https://github.com/v5general/Absolute_Majority)的**游戏行动适配器**。
+但 Political Human Skill 是一个**独立的框架**，服务于一个截然不同的对象——「职业是政治的完整的人」。原创核心包括：**双层（人 + 政治）结构及其内在冲突**、政治职业维度（6 轴意识形态 / 支持基础 / 行动风格）、**关系系统**、**记忆隔离**、**场合判断**、**五个主自我状态加一个 fatigued 疲劳叠加层**、针对现代真实人物的**可辨识度安全边界**，以及面向[《绝对多数》](https://github.com/v5general/Absolute_Majority)的**游戏行动适配器**。
 
 ---
 
@@ -111,7 +124,7 @@ Response = 人格档案 + 用户自我设定 + 关系状态 + 该人格独占的
 | **人性核心层** | 性格原型、大五人格、气质、核心欲望 / 恐惧 / 弱点、情绪触发点、**成长经历（formative life history — 什么经历塑造了他们的立场）** |
 | **生活质感层** | 习惯、爱好、说话方式、私下风格、家庭/私人关系、成形事件 |
 | **政治职业层** | 意识形态 6 轴（经济/福利/制度/外交/社会/分权）、支持基础、政治技能 6 项、行动风格 |
-| **自我状态层** | 公开 / 私下 / 策略 / 受伤 / 亲密 五种人格，随场合与关系切换 |
+| **自我状态层** | 六个存储档案：公开/私下/策略/受伤/亲密五个运行时主状态，加一个可叠加在任一主状态上的倦怠层 |
 | **内在冲突层** | 人层与政治层之间的张力（至少 2 条，深度的来源） |
 
 并配套：**关系系统**（7 个关系阶段，用户自称亲密不等于角色自动信任）、**记忆隔离**（每个 persona 独占记忆命名空间）、**场合判断**（同一议题在公开/私下/亲密场合给出不同回答）、**输出模式**（对话 / 辩论 / 分析 / 预测 / 游戏 JSON）。
@@ -132,7 +145,7 @@ Response = 人格档案 + 用户自我设定 + 关系状态 + 该人格独占的
 - 模式 C 是转译而非搬运：**理解历史条件 → 剥离时代语境 → 提炼稳定人格 → 构造现代成长经历 → 推演现代立场**。立场由（人格 × 成长经历 × 现代条件）共同推演，不是机械翻译。
 - 人格从行为倾向中提取，而非从后世评价标签（"革新者""保守派"）中提取。成长经历为强制字段：用户提供或用 AI 根据立场性格推断。同一人格可通过不同经历形成不同立场，每个 persona 注明"非唯一答案"。
 
-> 这套转化方法基于唯物辩证法。这里的「性格底子」是**生物学的气质倾向**（反应快慢、胆量、脾气，遗传给的物质基础），不是跨越时空的灵魂——它自己不产生立场，立场必须是它 × 社会存在的产物。
+> 这套转化方法把「性格底子」限定为**从跨情境、反复可见行为中推断的相对稳定倾向**，不声称遗传、基因或跨时空灵魂。稳定性只是转化时的建模假设；政治立场仍由倾向 × 成长经历 × 社会存在共同产生。
 
 ---
 
@@ -144,20 +157,22 @@ Response = 人格档案 + 用户自我设定 + 关系状态 + 该人格独占的
 classify source → safety/eligibility → collect source material → separate facts / interpretations / creative
 → extract temperament（把后世评价标签翻译为行为倾向，而非后人评价本身）
 → construct formative life history（用户提供或用AI从立场+性格推断生成）
-→ embed in modern parliament → generate full folder → creation_review
+→ 保留历史语境（模式 B）或嵌入现代议会（其它模式）
+→ generate full folder → creation_review
 → user modifies → re-run all checks → … → user confirms → activate
 ```
 
-**四类来源**（Four source types，区别只在于*材料从哪里来*）：
+**五类来源**（Five source types，主要区别在于*材料从哪里来*以及是否保留历史语境）：
 
 | 来源类型（source_type） | 来源材料 | 安全说明 |
 |---|---|---|
-| **原创虚构** | 用户需求、世界观设定、使用模式 | 不克隆真实人物 |
-| **历史→现代原型** | 历史史料、文献记载、解释、后世神话、创作推断 | 人物必须在区域边界之前；立场是重新推演出来的，不是搬抄 |
-| **现代真实人物→安全原型** | **仅公开信息**——公开履历、职务、演讲、政策立场、选举历史 | **绝不**做真实人物的交互式人格；产出是一个去识别化虚构原型 |
-| **复合** | 多种宽泛类型 / 参考资料 | 没有单一可辨识的近似克隆对象 |
+| **原创虚构** (`original_fictional_persona`) | 用户需求、世界观设定、使用模式 | 不克隆真实人物 |
+| **历史推演** (`historical_inference`) | 历史史料、文献记载、解释与争议 | 保留历史时代语境，区分事实与推断 |
+| **历史→现代原型** (`historical_archetype_conversion`) | 历史史料、文献记载、解释、后世神话、创作推断 | 人物必须在区域边界之前；立场是重新推演出来的，不是搬抄 |
+| **现代真实人物→安全原型** (`modern_real_figure_archetype_extraction`) | **仅公开信息**——公开履历、职务、演讲、政策立场、选举历史 | **绝不**做真实人物的交互式人格；产出是一个去识别化虚构原型 |
+| **复合** (`composite_archetype`) | 多种宽泛类型 / 参考资料 | 没有单一可辨识的近似克隆对象 |
 
-> **近现代** = 区域边界之后、1945 年之前；**现代** = 1945 年以后。现代人物只使用公开信息——不做交互式人格，只提取一个从公开行为中抽取的安全的去识别化原型。上面的模式 A/B/C 对应这些来源类型（A → 原创虚构，B/C → 历史人物）。
+> **近现代** = 区域边界之后、1945 年之前；**现代** = 1945 年以后。现代人物只使用公开信息——不做交互式人格，只提取一个从公开行为中抽取的安全的去识别化原型。模式 A/B/C 分别映射到原创虚构 / 历史推演 / 历史转现代原型。
 
 ### 🔁 修改-重审循环（Modification Recheck Loop，强制）
 
@@ -168,6 +183,8 @@ classify source → safety/eligibility → collect source material → separate 
 ### 📋 激活前创建审核（creation review before activation）
 
 生成的人格不会当场激活。系统先给出一份 `creation_review.md` 摘要——身份、推断的气质、现代角色、意识形态、支持基础、安全状态、已生成文件——等待用户修改或确认。
+
+只有 `review_valid=true` 且权威状态与两个镜像全部为 `confirmed` 时才可激活。直接调用不构成确认。
 
 > 完整工作流见：[`core/source_grounded_persona_creation.md`](core/source_grounded_persona_creation.md)。现代真实人物分支见：[`safety/modern_real_figure_archetype_extraction.md`](safety/modern_real_figure_archetype_extraction.md)。
 
@@ -245,7 +262,7 @@ npx skills add <owner>/political-human-skill
 > 给《绝对多数》设计一个派阀领袖 NPC
 ```
 
-造完之后直接调用：
+通过激活门后再直接调用：
 
 ```
 > （在公开场合）你支持这个财政改革吗？
@@ -253,7 +270,7 @@ npx skills add <owner>/political-human-skill
 > 这场倒阁投票，你会怎么行动？（输出游戏 JSON）
 ```
 
-> 首次激活某个 persona 时，它会说明一次"我是基于虚构/转化设定的角色，不对应现实政治人物"；此后不再重复，以避免正常使用中反复插入免责声明。
+> 首次激活某个 persona 时，它会说明一次"我是基于虚构/转化设定的角色，不对应现实政治人物"。该状态持久化在 `relationship.json.disclaimer_emitted`；仅清空记忆不会重置它。
 
 ---
 
@@ -285,7 +302,7 @@ npx skills add <owner>/political-human-skill
 
 ---
 
-### 🜂️ 曹操 — 执政联盟派阀领袖 · 52岁
+### 🜂️ 曹操 — 执政联盟派阀领袖 · 58岁
 
 > 坐在桌前，面前一杯凉透的茶。他把笔帽转了一圈，没说话。
 
@@ -343,7 +360,7 @@ political-human-skill/
 └── personas/examples/   # ⚡ 三个 Mode C 转化 persona（oda / cao_cao / caesar）
 ```
 
-> `personas/examples/` 只是一组项目自带示例——日常使用中生成的 persona 应放在你自己的运行环境、游戏数据目录、本地工作区，而不是加入本仓库。示例也不是固定模板：如果你重新要求生成织田信长、曹操或凯撒，Skill 会根据当前请求和安全规则重新生成，而不是复制示例文件夹。更严格的规则见 [SPEC.md](SPEC.md) §18–19。
+> `personas/examples/` 只包含内置示例。仓库管理的生成结果写入 `user_generated/personas/<persona_id>/`；嵌入宿主也可显式提供外部 `persona_dir` 并承担验证责任。示例不是固定模板：重新请求织田信长、曹操或凯撒时会根据当前来源和规则重新生成，而不是复制示例文件夹。更严格的规则见 [SPEC.md](SPEC.md) §18–19。
 
 ---
 
@@ -357,6 +374,10 @@ political-human-skill/
 pip install -r requirements.txt
 python scripts/validate_repo.py
 ```
+
+该命令只执行结构验证。带原始输出与 judge 记录的 provider-neutral 模型测试见 [`quality/TESTING.md`](quality/TESTING.md)，由 `scripts/run_semantic_tests.py` 实现。
+
+实时《绝对多数》执行必须通过 `scripts/validate_game_transaction.py`；`scripts/validate_game_output.py` 仅校验输出，绝不授权执行。
 
 最小 demo 见 [`demo/`](demo/)。
 

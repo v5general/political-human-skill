@@ -23,8 +23,22 @@
 - [ ] 数值组合在政治上 plausible（如 economy=+80 且 welfare=+80 同时极右大政府，需有解释）。
 
 ### 4. 自我状态完备
-- [ ] `self_states` 五种（public/private/strategic/wounded/intimate）均有 description；
-- [ ] 各状态描述与 `human_core` 一致，不自相矛盾（如 public 强硬但 public_self 写成“软弱” → 不通过）。
+- [ ] `self_states` 的六个存储档案均有 description：五个主状态（public/private/strategic/wounded/intimate）及 fatigued 叠加档案；
+- [ ] 各状态描述与 `human_core` 一致，不自相矛盾（如 public 强硬但 public_self 写成"软弱" → 不通过）。
+
+### 4b. 语言与语音档案
+- [ ] `meta.native_language` 存在且与 `identity.nationality_or_region` 一致（日本→ja-JP、中国→zh-CN、英国→en-GB、美国→en-US、德国→de-DE）；
+- [ ] `meta.native_language` 是 persona 的**母语**，不是输出语言（输出语言跟随用户）；
+- [ ] `life_texture.speech_profile` 存在且包含 `speech_formality` / `social_convention_adherence` / `self_reference` / `default_register`；
+- [ ] `speech_formality` ∈ {very_formal, formal, normal, casual, very_casual}；
+- [ ] `social_convention_adherence` ∈ {high, medium, low}；
+- [ ] `speech_profile` 与 `speech_mannerisms` 不矛盾（如 mannerisms 写"粗犷直接"但 formality=very_formal → 不通过）；
+- [ ] `identity.nationality_or_region` 以**转化为现代政治家后的国籍**为准，不是历史原型所属古代国家。
+
+### 4c. 社交执行档案
+- [ ] `life_texture.social_performance` 存在或使用默认值（缺失时默认：etiquette_reliability=medium, self_monitoring=medium, procedural_experience=medium, intentional_breach_propensity=low, repair_style=immediate）；
+- [ ] `etiquette_reliability` 与人格不矛盾（如 discipline=90 但 reliability=low → 需解释）；
+- [ ] `intentional_breach_propensity` 与 `social_convention_adherence` 方向一致（high adherence + high breach → 不通过，除非有明确解释如"知道规矩但故意选择性违反"）。
 
 ### 5. 安全字段
 - [ ] `safety.is_fictional = true`；
@@ -37,7 +51,8 @@
 - [ ] `conversion_audit.deleted_fingerprints` 非空，`recognizability_blind_check.result = not_identifiable`；
 - [ ] **source grounding 已完成**：`historical_source_report.md` 存在，四级区分（史料 / 主流解释 / 争议 / 创作），非凭记忆生成（见 `core/historical_source_grounding.md`、`validators/historical_source_grounding_check.md`）；
 - [ ] **`inferred_temperamental_pattern` 存在**且**无生物决定论声称**（不得写"遗传决定"；见 `core/inferred_temperament_extraction.md`）；
-- [ ] **用户确认 gate**：`meta.creation_review_status` 为 `confirmed` 才算可激活（见 `generator.md` Phase 5.5）。
+- [ ] **审核就绪检查（确认前可执行）**：结构/安全检查通过时，将 artifact hash、`validation_status=passed`、`review_invalidated_by_modification=false` 与三处 `reviewed` 状态一起写入；一致性校验本身不要求用户已确认。
+- [ ] **激活 gate**：只有 review_valid=true 且 `meta.json.latest_review_status`（权威）与两个镜像全部为 `confirmed` 时才可激活；详见 `core/activation_gate.md`。
 
 ---
 

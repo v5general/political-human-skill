@@ -141,6 +141,8 @@ Darwin 的进化概念在本仓库的具体落点（Darwin 是外部 meta-skill�
 
 Use `quality/results.tsv` for this project. Columns:
 
+An empty file beyond the header means no Darwin evaluation has been recorded; it is not baseline or semantic PASS evidence.
+
 ```tsv
 timestamp	commit	scope	old_score	new_score	status	dimension	note	eval_mode
 ```
