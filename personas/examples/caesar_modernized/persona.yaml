@@ -23,7 +23,7 @@ meta:
   integration_target: "standalone"      # 可改为 absolute_majority 用于《绝对多数》
   safety_status: "safe_conversion"
   source_grounding_status: "grounded"
-  creation_review_status: "unconfirmed"
+  creation_review_status: "confirmed"
   version: "v1"
   created_at: "2026-07-02"
   native_language: "en-GB"
@@ -38,10 +38,15 @@ source_provenance:
   composite_archetype_based: false
   user_modified_after_generation: true
   modification_review_required: true
-  last_review_status: "unconfirmed"
+  last_review_status: "confirmed"
   fictionalization_notes:
     - "现代虚构议会制原型，已删除历史指纹，不可识别为现实人物"
-  removed_fingerprints: []
+  removed_fingerprints:
+    - "具体战役、渡河事件与内战进程的名称/时间/结局（runtime 字段不含）"
+    - "前三头同盟具名成员与结盟序列"
+    - "遇刺事件、行刺者与具体死亡方式——runtime 仅保留抽象化的'被旧精英围堵'恐惧（见 private_fear 注记）"
+    - "罗马官职晋升序列与元老院具体人事"
+    - "神化事件（神庙立像/七月改名等）与神话谱系叙事"
 
 # -----------------------------------------------------------------------------
 # 转化溯源（仅 mode B/C）

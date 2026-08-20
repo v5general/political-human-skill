@@ -14,6 +14,9 @@ from jsonschema import Draft202012Validator
 ROOT = Path(__file__).resolve().parents[1]
 MANAGED_ID_PATTERN = re.compile(r"[a-z0-9][a-z0-9_-]*")
 MUTABLE_FILES = {"memory.json", "relationship.json"}
+# Executor transaction artifacts (scripts/review_state.py): never part of review identity.
+RESERVED_ARTIFACT_MARKERS = frozenset({".review_txn.marker", "meta.json.review_stage", "persona.yaml.review_stage"})
+LOCK_NAME_PREFIX = ".review_state.lock"
 ACTIVATION_STATUSES = {"unconfirmed", "reviewed", "confirmed"}
 SAFETY_STATUSES = {"PASS", "safe_conversion"}
 SOURCE_REPORT_BY_TYPE = {
@@ -165,7 +168,7 @@ def compute_review_artifact_hash(directory: Path, persona: dict[str, Any], meta:
         if not resolved.is_relative_to(resolved_root):
             raise PersonaContractError(f"persona artifact resolves outside persona_dir: {path}")
         relative = path.relative_to(directory).as_posix()
-        if path.is_file() and relative not in MUTABLE_FILES:
+        if path.is_file() and relative not in MUTABLE_FILES and relative not in RESERVED_ARTIFACT_MARKERS and not (relative == LOCK_NAME_PREFIX or relative.startswith(LOCK_NAME_PREFIX + "/")):
             artifact_paths.append(path)
 
     digest = hashlib.sha256()

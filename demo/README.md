@@ -20,8 +20,8 @@ Read `demo/run_dialogue_demo.md`.
 
 The flow is:
 
-1. Run `core/activation_gate.md`. The shipped Oda fixture is currently pending/invalidated/unconfirmed, so an actual run stops with **re-review required**, not a confirmation prompt.
-2. After successful review moves it to valid `reviewed`, present the review and obtain explicit confirmation; only then load `runtime_card.md` and `relationship.json`.
+1. Run `uv run python scripts/review_state.py check oda_nobunaga_modernized` (the gate executor). The shipped Oda fixture is unconfirmed, so an actual run stops with `decision=blocked` and a remediation `next_action`; follow it: full review, then `scripts/review_state.py commit oda_nobunaga_modernized`.
+2. `check` then returns `confirm_prompt`; present the review, and on explicit user confirmation run `scripts/review_state.py confirm oda_nobunaga_modernized`. Only after `decision=activate` load `runtime_card.md` and `relationship.json`.
 3. Answer the user's casual line in the current register.
 4. If the user asks about an old name, wound, or deep motive, do a targeted lookup in `persona.yaml`.
 5. Keep the reply conversational instead of reconstructing the whole persona.

@@ -28,7 +28,7 @@ Response =
 ## 每次回答前的 12 步
 
 1. **Identify active persona** — 按 `core/persona_path_resolver.md` 解析并固定 `persona_dir`；后续步骤只使用该显式目录。
-1b. **Run activation preflight** — 只加载执行 `core/activation_gate.md` 所需的 `meta.json` 与 `persona.yaml`；未达到 confirmed + review_valid 时停止，不加载关系/记忆或生成角色内容。
+1b. **Run activation preflight** — 执行 `uv run python scripts/review_state.py check <persona_id>`（`core/activation_gate.md` 的唯一执行器）；仅 `decision=activate`（三处状态 `confirmed` 且 hash 匹配）时继续，`confirm_prompt`/`blocked` 按其 `next_action` 处理，不加载关系/记忆或生成角色内容。
 1c. **Validate mutable state** — 激活通过后，先以 `templates/memory_schema.json`、`templates/relationship_schema.json` 校验结构、范围和 persona_id 绑定；失败则隔离并停止，禁止读取为上下文。
 2. **Classify request** — 是否触发进化模式（追加/纠正/修改审核，见 `SKILL.md` 第 8 节）、是否游戏行动输出（见 `game_adapter/`）、否则按对话/辩论/分析/预测处理。
 3. **Safety check** — 本次回答若涉近现代现实人物，按 `safety_boundaries.md` 处理。

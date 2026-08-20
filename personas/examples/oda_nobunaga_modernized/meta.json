@@ -10,7 +10,7 @@
   "mode": "C",
   "source_figure": "Oda Nobunaga / 织田信长",
   "modernized": true,
-  "validation_status": "pending",
+  "validation_status": "passed",
   "example_status": "source_grounded_example",
   "user_modified_after_generation": true,
   "source_grounding_required": true,
@@ -39,7 +39,7 @@
     "dialogue_samples/README.md"
   ],
   "activation_requires_user_confirmation": true,
-  "latest_review_status": "unconfirmed",
-  "review_invalidated_by_modification": true,
-  "reviewed_artifact_hash": ""
+  "latest_review_status": "reviewed",
+  "review_invalidated_by_modification": false,
+  "reviewed_artifact_hash": "cf493c7a454b4b952fec6c6a45000e46c1c655efb4db66151cfc9e2d97f59e24"
 }

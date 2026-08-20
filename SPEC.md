@@ -621,7 +621,7 @@ Before activation, the generated persona must pass a creation-review gate: prese
 - `reviewed`: current artifact passed review and hash binding; activation blocked pending explicit user confirmation.
 - `confirmed`: activation is allowed only while `review_valid=true`.
 
-`review_valid` requires `validation_status=passed`, `review_invalidated_by_modification=false`, an allowed safety status, and a matching SHA-256 `reviewed_artifact_hash`. The byte-exact algorithm is defined in `core/activation_gate.md` and implemented by `scripts/persona_runtime_contracts.py`. Mutable `memory.json` and `relationship.json` are excluded from the immutable review hash but remain subject to strict schema, range, record-shape, and persona-ID validation. Direct invocation is never confirmation; mismatches fail closed.
+`review_valid` requires `validation_status=passed`, `review_invalidated_by_modification=false`, an allowed safety status, and a matching SHA-256 `reviewed_artifact_hash`. The byte-exact algorithm is defined in `core/activation_gate.md` and implemented by `scripts/persona_runtime_contracts.py`. Mutable `memory.json` and `relationship.json` are excluded from the immutable review hash but remain subject to strict schema, range, record-shape, and persona-ID validation. Direct invocation is never confirmation; mismatches fail closed. All status transitions are executed solely by `scripts/review_state.py` (`check` / `commit` / `confirm`); hand-editing review-state fields is forbidden, and a block due to a missing committed review must be answered with immediate remediation (review → `commit`), never a dead end.
 
 ## 18. Examples Are Not Templates
 

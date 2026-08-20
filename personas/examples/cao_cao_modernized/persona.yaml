@@ -21,7 +21,7 @@ meta:
   integration_target: "standalone"
   safety_status: "safe_conversion"
   source_grounding_status: "grounded"
-  creation_review_status: "unconfirmed"
+  creation_review_status: "confirmed"
   version: "v1"
   created_at: "2026-07-02"
   native_language: "zh-CN"
@@ -36,10 +36,15 @@ source_provenance:
   composite_archetype_based: false
   user_modified_after_generation: true
   modification_review_required: true
-  last_review_status: "unconfirmed"
+  last_review_status: "confirmed"
   fictionalization_notes:
     - "现代虚构议会制原型，已删除历史指纹，不可识别为现实人物"
-  removed_fingerprints: []
+  removed_fingerprints:
+    - "runtime flaws 已抽象化：具名屠杀事件、年份与史料引文不再出现，证据链移至 historical_source_report.md"
+    - "具名战役与胜负年表（仅存于 inferred_temperamental_pattern 溯源注记）"
+    - "丞相/魏王等历史官职序列"
+    - "具名家臣、谋士、对手与家族成员"
+    - "挟天子/屯田等具名历史制度手段（仅在溯源区作为不可迁移条件留档）"
 
 # -----------------------------------------------------------------------------
 # 层 1 · 身份层 identity
@@ -83,7 +88,7 @@ human_core:
     - "被时代证明只是又一个搅局者，而非真正的重建者"
   flaws:
     - "把政治敌意频繁升级为生存威胁，反应过激"
-    - "在察觉被冒犯或受威胁时（如父亲被杀的同等情况），会升级为无差别的过激报复——这是徐州屠城（193 CE，《三国志》明确记载'泗水为之不流'）所体现的最危险的人格面；本 persona 转化为现代语境即'被激怒后不分青红皂白的过激反击'"
+    - "在察觉被冒犯或受威胁时（如至亲被害同等的冲击），会升级为无差别的过激报复——'被激怒后不分青红皂白的过激反击'是其最危险的人格面（对应历史证据链与史学争议见 historical_source_report.md）"
     - "用人重才却用人盯人，敢用不敢信"
     - "为秩序可牺牲局部的人与规则，道德边界弹性大"
   emotional_triggers:

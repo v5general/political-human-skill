@@ -140,6 +140,13 @@
 
 这防止通过反复小编辑逐渐漂移到不安全、不一致或近克隆 persona。
 
+## Review State Execution（审核状态落盘，强制）
+
+- 每次重审通过后立即执行 `scripts/review_state.py commit <persona_id>`；用户明确确认后执行 `confirm <persona_id>`。禁止手工编辑任何 review 状态字段。
+- 创建/修改会话以最近一次 `commit` 成功为完成定义；不得以空 `reviewed_artifact_hash` 收尾。
+- 对话期对 `memory.json` / `relationship.json` 的正常写入永不触发 review 失效（hash 契约已排除这两个文件）。
+- 重新打开或再次激活本身不构成重审理由：`confirmed` 且 hash 匹配的 persona 直接放行；只有 immutable 工件的规范化内容变化（hash 契约所覆盖的内容）才需要重审。注意 hash 基于 `persona.yaml` / `meta.json` 的规范化解析结果，二者中的纯注释/空白/键序调整不改变 hash；修改对话期状态文件（`memory.json` / `relationship.json`）永不触发重审。
+
 ## Modern Real Figure Fingerprint Removal（现当代人物指纹删除）
 
 从近现代/现代公开人物提取安全原型时，必须移除或改写所有识别指纹。指纹包括但不限于：

@@ -31,8 +31,8 @@ allowed-tools:
 直接调用本 skill 只会加载规则，**不自动授权进入角色**。完整状态机以 `core/activation_gate.md` 为准：
 
 - 读取权威状态 `meta.json.latest_review_status` 和 `persona.yaml` 的两个镜像状态；三者必须全部为 `confirmed` 且一致。
-- invalid/unconfirmed 或状态不一致时，不得进入角色、不得输出免责声明、不得请求确认；先要求技术/安全重审。
-- 仅当 `validation_status=passed`、invalidation=false、artifact hash 匹配且三处状态均为 `reviewed` 时，才呈现 `creation_review.md` 并请求确认，再原子更新三处为 `confirmed`。
+- invalid/unconfirmed 或状态不一致时，不得进入角色、不得输出免责声明、不得请求确认；按补救路径完成技术/安全重审。
+- 预检与状态迁移只经执行器：`uv run python scripts/review_state.py check <persona_id>` 返回 `confirm_prompt` 时呈现 `creation_review.md`，用户确认后执行 `scripts/review_state.py confirm <persona_id>`；禁止手工编辑任何 review 状态字段。
 
 ### 1.1 一次性免责（仅首次激活时说一次）
 

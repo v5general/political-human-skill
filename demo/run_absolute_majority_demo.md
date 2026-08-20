@@ -4,7 +4,7 @@ This demo uses a fiscal reform budget event.
 
 ## 0. Activation Preflight
 
-Resolve the input `persona_id` and run `core/activation_gate.md` before loading persona state or scoring actions. Invalid/unconfirmed artifacts stop with re-review required; only a valid `reviewed` artifact may ask for confirmation. Any non-confirmed route emits no game JSON. The output below is illustrative only after valid confirmation.
+Resolve the input `persona_id` and run `uv run python scripts/review_state.py check <persona_id>` (the executor for `core/activation_gate.md`) before loading persona state or scoring actions. `decision=blocked` follows its `next_action` remediation (review → `commit`); `confirm_prompt` asks for explicit user confirmation, then `scripts/review_state.py confirm <persona_id>`. Any state other than `decision=activate` (`confirmed` fixture) emits no game JSON. The output below is illustrative only after valid confirmation.
 
 ## 1. Input
 

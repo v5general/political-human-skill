@@ -13,7 +13,7 @@
   "generation_method": "historical_source_grounded_workflow",
   "source_figure": "Cao Cao / 曹操",
   "modernized": true,
-  "validation_status": "pending",
+  "validation_status": "passed",
   "example_status": "source_grounded_example",
   "user_modified_after_generation": true,
   "source_grounding_required": true,
@@ -40,7 +40,7 @@
     "dialogue_samples/game_action.json"
   ],
   "activation_requires_user_confirmation": true,
-  "latest_review_status": "unconfirmed",
-  "review_invalidated_by_modification": true,
-  "reviewed_artifact_hash": ""
+  "latest_review_status": "confirmed",
+  "review_invalidated_by_modification": false,
+  "reviewed_artifact_hash": "adfb1e429e8bea70e68968f7c0a9ad0654238247d3f2198e1101fb3bc57a0f8b"
 }

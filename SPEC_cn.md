@@ -618,7 +618,7 @@ persona 可以从设定推断初始关系状态，但用户声称不被自动信
 - `reviewed`：当前 artifact 已通过审核并绑定 hash；仍禁止激活，等待用户明确确认。
 - `confirmed`：仅在 `review_valid=true` 持续成立时允许激活。
 
-`review_valid` 要求 `validation_status=passed`、`review_invalidated_by_modification=false`、安全状态在允许集合内，且 SHA-256 `reviewed_artifact_hash` 与当前 artifact 匹配。字节级算法由 `core/activation_gate.md` 定义、`scripts/persona_runtime_contracts.py` 实现。可变的 `memory.json` 与 `relationship.json` 不进入不可变审核 hash，但始终必须通过严格的 schema、范围、记录结构和 persona-ID 校验。直接调用不构成确认；任一不一致都 fail closed。
+`review_valid` 要求 `validation_status=passed`、`review_invalidated_by_modification=false`、安全状态在允许集合内，且 SHA-256 `reviewed_artifact_hash` 与当前 artifact 匹配。字节级算法由 `core/activation_gate.md` 定义、`scripts/persona_runtime_contracts.py` 实现。可变的 `memory.json` 与 `relationship.json` 不进入不可变审核 hash，但始终必须通过严格的 schema、范围、记录结构和 persona-ID 校验。直接调用不构成确认；任一不一致都 fail closed。所有状态迁移只由 `scripts/review_state.py`（`check` / `commit` / `confirm`）执行；禁止手工编辑 review 状态字段；因缺少已落盘审核而 blocked 时必须立即补救（复审 → `commit`），不得止步于报告。
 
 ## 18. 示例不是模板
 

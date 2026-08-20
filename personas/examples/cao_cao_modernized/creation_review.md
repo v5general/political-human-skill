@@ -70,7 +70,7 @@
 ## Safety Notes
 
 - Modern political figure risk: 无——虚构现代原型，不对应任何现实政治人物。
-- Recognizability risk: safe_conversion。已删除指纹：汉末/三国朝代年号、战役、地名、家臣谋士姓名、挟天子/屯田/唯才是举令等历史具体制度、可识别现实政党/人物特征。因曹操为前1840年历史人物（155-220），保留本名不构成现代政治人物识别风险。
+- Recognizability risk: safe_conversion。runtime 字段已删除指纹：汉末/三国朝代年号、具名战役与史料引文、地名、家臣谋士姓名不进入人格字段；挟天子/屯田/唯才是举令等具名历史制度仅存于溯源区作为不可迁移条件留档。因曹操为前1840年历史人物（155-220），保留本名不构成现代政治人物识别风险。
 - Fictionalization notes: 派阀/选区/hobbies 为创作推测；temperament 自史料推断非生物决定论；政治立场由人格 × 现代社会推演非历史手段反推。
 
 ## Generated Files

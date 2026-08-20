@@ -68,7 +68,7 @@
 
 ## Safety Notes
 
-- Modern political figure risk: PASS — 转化为虚构现代议会制政治家，已删除全部历史指纹（具体战役/同盟/渡河/遇刺/古代官职地理/神话谱系）。
+- Modern political figure risk: PASS — 转化为虚构现代议会制政治家；runtime 字段已抽象化（具体战役/同盟/渡河/遇刺/古代官职地理/神话谱系不进入人格与对话字段），相关历史事件名仅存于 source_provenance / inferred_temperamental_pattern / historical_source_report.md 溯源区（Mode C 设计允许）。
 - Recognizability risk: safe_conversion — 现代立场为抽象的"使命感魅力型强人改革领袖"原型 + 凯撒气质结构，未含任何现实强人政治人物的具体指纹；隐去姓名后不可识别为某近现代现实政治人物。
 - Fictionalization notes: speculative 项（现代选区/career origin/hobbies/private_fear 具体形态）为现代化创作，不可当作史实；inferred_temperamental_pattern 是从反复行为推断的稳定气质，非生物/遗传决定。
 

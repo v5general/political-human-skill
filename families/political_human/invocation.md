@@ -16,11 +16,11 @@
 
 ### 强制预检
 
-在读取关系/记忆、延续会话、输出免责声明或游戏 JSON **之前**，执行 `core/activation_gate.md`：
+在读取关系/记忆、延续会话、输出免责声明或游戏 JSON **之前**，执行 `core/activation_gate.md`——落地为一条命令：`uv run python scripts/review_state.py check <persona_id>`：
 
-1. 先验证 `validation_status=passed`、invalidation=false、safety 合格且 reviewed artifact hash 与当前内容匹配。
-2. 再以 `meta.json.latest_review_status` 为权威状态并读取两个镜像；三者必须全部为 `confirmed` 且一致。
-3. invalid/unconfirmed 或状态不一致时 fail closed 并要求重审，**不请求确认**；只有有效 `reviewed` 状态才呈现 review 并请求确认。任一更新失败则回到 `unconfirmed`。
+1. `decision=activate`（confirmed 且 hash 匹配）才加载角色状态；`decision=confirm_prompt`（有效 reviewed）呈现 review 摘要并请求确认，确认后执行 `scripts/review_state.py confirm <persona_id>`。
+2. `decision=blocked` 时 fail closed 并跟随输出的 `next_action` 补救（复审 → `commit`），**不请求确认、也不止步于报告 blocked**。
+3. 镜像不一致、hash 过期或中断事务由 `check` 自动失效为 `unconfirmed`；禁止手工编辑任何 review 状态字段。
 
 先按 `core/persona_path_resolver.md` 得到唯一 `persona_dir`。预检通过后，才从该目录加载 `persona.yaml`（六层）+ `relationship.json` + `memory.json` + `examples.md`。
 

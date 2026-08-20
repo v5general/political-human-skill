@@ -51,7 +51,7 @@ persona 文件夹**不得**作为手工写死的完美样例产出。除用户�
 每次用户修改后：
 
 1. 更新所有受影响文件（persona.yaml / runtime_card.md / relationship.json / memory.json / examples.md / meta.json / creation_review.md / source_report.md / dialogue_samples）。
-2. 标记之前的 review 为失效（`latest_review_status = unconfirmed`）。
+2. 运行 `scripts/review_state.py check <persona_id>`：hash 失配会自动把三处状态失效为 `unconfirmed` 并给出补救路径；禁止手工编辑任何 review 状态字段。
 3. 重跑相关安全 / 可识别性 / 指纹 / 一致性 / schema 检查。
 4. 更新 `creation_review.md` 与 source report 的修改审查日志。
 5. 再次询问用户修改或确认。
@@ -250,7 +250,7 @@ Do not choose between global rules and persona runtime. Use both:
 
 跑 `validators/`（persona_consistency / recognizability / dialogue_regression 等）：双层完整、一致、场合区分度、安全状态、诚实边界均达标；并确认 `runtime_card.md` 含 Testing Behavior 段、且测试频率符合 `core/no_constant_testing.md`（测试是偶尔的高压动作，不是默认话术）。此阶段验证**审核就绪**，不要求用户已经确认。
 
-通过后按 `core/activation_gate.md` 计算当前 artifact hash，设置 `validation_status=passed`、`review_invalidated_by_modification=false`，并将权威状态与两个镜像原子更新为 `reviewed`。不达标则保持 `pending + invalidated + unconfirmed`，回 Phase 2/3 迭代。
+通过后执行 `scripts/review_state.py commit <persona_id>`：它先重置为 unconfirmed 基线、跑机械工件校验、再按 `core/activation_gate.md` 计算 artifact hash，并把权威状态与两个镜像原子置为 `reviewed`。不达标（commit 失败）则保持 `pending + invalidated + unconfirmed`，回 Phase 2/3 迭代。
 
 ---
 
@@ -261,7 +261,7 @@ Do not choose between global rules and persona runtime. Use both:
 persona 文件夹（含已定稿的 `creation_review.md`）通过 Phase 5 并进入当前 `reviewed` 状态后，**不得立即激活进入角色扮演**。向用户呈现该已审核 review 的摘要，询问是否修改；此阶段不得改写任何被 hash 保护的文件。
 
 - 用户提出修改 → 按 `families/political_human/historical_persona_creation_workflow.md` 的 User Modification Sync，**同步更新所有受影响文件**（persona.yaml / runtime_card.md / relationship.json / examples.md / creation_review.md / meta.json），重跑 validator 与 `safety/modification_review.md`，再回到本 gate。
-- 用户确认 → 先重新核对 review_valid 和 artifact hash；只从当前 `reviewed` 状态原子切换三处状态为 `confirmed`，再进入"交付与进化"并允许激活。
+- 用户确认 → 执行 `scripts/review_state.py confirm <persona_id>`（脚本自行核对当前状态、hash 与三处镜像，只从有效 `reviewed` 原子切换为 `confirmed`），再进入"交付与进化"并允许激活。
 
 即使用户说"直接让他和我说话"，也必须先完成当前 artifact 的有效审核、呈现 creation_review 并等待确认。这是所有 mode 的硬性 gate，不可跳过。
 

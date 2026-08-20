@@ -65,7 +65,7 @@ user_generated/personas/<persona_id>/
 
 > 是否要修改这个人格？可以修改姓名、年龄、性别、职业路径、意识形态、支持基础、性格强度、弱点、爱好、说话风格、与用户初始关系、是否用于《绝对多数》等。确认无误后，我再进入该人格 Skill。
 
-**只有用户确认后，才激活该 persona skill。** 在此之前，即使用户说"直接让他和我说话"，也必须先呈现 creation_review 并等待确认。
+**只有用户确认后，才激活该 persona skill。** 流程强制经执行器落盘：重审通过后 `scripts/review_state.py commit <persona_id>`（状态置 `reviewed`），用户确认后 `scripts/review_state.py confirm <persona_id>`（状态置 `confirmed`）。在此之前，即使用户说"直接让他和我说话"，也必须先呈现 creation_review 并等待确认。
 
 ## User Modification Sync（修改同步）
 

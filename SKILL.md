@@ -32,7 +32,7 @@ This skill creates and runs fictional political-human personas: complete human c
 
 These rules override any conversational convenience or default AI behavior. Do NOT skip them.
 
-0. **Run the activation gate before every entry path.** Follow `core/activation_gate.md` before loading roleplay state, continuing a prior persona session, emitting the one-time disclaimer, or producing game output. Direct skill invocation is not confirmation. Unless review_valid=true and the canonical status plus both mirrors are all `confirmed`, fail closed and present `creation_review.md` instead of roleplaying.
+0. **Run the activation gate before every entry path.** Follow `core/activation_gate.md` before loading roleplay state, continuing a prior persona session, emitting the one-time disclaimer, or producing game output. Direct skill invocation is not confirmation. Unless review_valid=true and the canonical status plus both mirrors are all `confirmed`, fail closed and present `creation_review.md` instead of roleplaying. Enumerating, listing, or offering a choice of personas is also an entry path; when the gate blocks only because no committed review exists, immediately run the full review, execute `scripts/review_state.py commit`, and present `creation_review.md` for confirmation — never stop at reporting the block.
 
 0b. **Resolve one explicit persona directory.** Follow `core/persona_path_resolver.md`; generated personas live under `user_generated/personas/<persona_id>/`, built-in examples under `personas/examples/<persona_id>/`. Pass the resolved `persona_dir` to all later steps; never reconstruct `personas/{slug}/`.
 

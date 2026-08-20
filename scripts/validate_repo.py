@@ -71,6 +71,7 @@ REQUIRED_FILES = [
     "scripts/validate_game_transaction.py",
     "scripts/validate_persona.py",
     "scripts/persona_runtime_contracts.py",
+    "scripts/review_state.py",
     "templates/composite_archetype_source_report_template.md",
     "templates/memory_schema.json",
     "templates/relationship_schema.json",
@@ -369,7 +370,7 @@ def validate_example_runtime_contracts(reporter: Reporter) -> None:
             reporter.pass_(f"runtime_card.md fatigue and human-moment sections are non-empty: {rel(runtime_path)}")
 
         skill_text = skill_path.read_text(encoding="utf-8")
-        gate_markers = ["core/activation_gate.md", "meta.json.latest_review_status", "creation_review.md", "原子更新"]
+        gate_markers = ["core/activation_gate.md", "meta.json.latest_review_status", "creation_review.md", "review_state.py"]
         missing_gate_markers = [marker for marker in gate_markers if marker not in skill_text]
         if missing_gate_markers:
             reporter.fail(f"persona SKILL missing activation gate markers {missing_gate_markers}: {rel(skill_path)}")
@@ -468,6 +469,7 @@ def validate_activation_entry_points(reporter: Reporter) -> None:
     """Ensure generic invocation and demos cannot bypass the canonical activation gate."""
     paths = [
         ROOT / "families" / "political_human" / "invocation.md",
+        ROOT / "core" / "runtime_protocol.md",
         ROOT / "demo" / "README.md",
         ROOT / "demo" / "run_dialogue_demo.md",
         ROOT / "demo" / "run_absolute_majority_demo.md",
@@ -475,10 +477,70 @@ def validate_activation_entry_points(reporter: Reporter) -> None:
     ]
     for path in paths:
         text = path.read_text(encoding="utf-8")
-        if "core/activation_gate.md" in text and ("unconfirmed" in text or "confirmed" in text):
-            reporter.pass_(f"entry point invokes activation gate: {rel(path)}")
+        gate_ok = "core/activation_gate.md" in text and ("unconfirmed" in text or "confirmed" in text)
+        executor_ok = "review_state.py" in text
+        if gate_ok and executor_ok:
+            reporter.pass_(f"entry point invokes activation gate via executor: {rel(path)}")
+        elif gate_ok:
+            reporter.fail(f"entry point bypasses review_state.py executor: {rel(path)}")
         else:
             reporter.fail(f"entry point can bypass activation gate: {rel(path)}")
+
+
+def validate_review_state_executor(reporter: Reporter) -> None:
+    """Integration test: the executor drives the full lifecycle fail-closed."""
+    import subprocess
+
+    source_dir = ROOT / "personas" / "examples" / "caesar_modernized"
+    with tempfile.TemporaryDirectory() as temp_root:
+        persona_dir = Path(temp_root) / "caesar_modernized"
+        shutil.copytree(source_dir, persona_dir)
+
+        def run(*args: str) -> tuple[int, dict]:
+            proc = subprocess.run(
+                [sys.executable, str(ROOT / "scripts" / "review_state.py"), *args, "--persona-dir", str(persona_dir)],
+                capture_output=True,
+                text=True,
+            )
+            try:
+                return proc.returncode, json.loads(proc.stdout)
+            except json.JSONDecodeError:
+                return proc.returncode, {"raw": proc.stdout, "stderr": proc.stderr[-400:]}
+
+        cases = [
+            (("commit", "caesar_modernized"), lambda o: o.get("committed") is True),
+            (("check", "caesar_modernized"), lambda o: o.get("decision") == "confirm_prompt"),
+            (("confirm", "caesar_modernized"), lambda o: o.get("confirmed") is True),
+            (("check", "caesar_modernized"), lambda o: o.get("decision") == "activate"),
+        ]
+        failed = False
+        for command, expectation in cases:
+            code, out = run(*command)
+            if code not in (0, 1) or not expectation(out):
+                reporter.fail(f"review_state executor lifecycle failed at {command}: {out}")
+                failed = True
+                break
+        if not failed:
+            # Mutable-state writes never invalidate; immutable edits do; confirm then refuses.
+            (persona_dir / "memory.json").write_text(
+                (persona_dir / "memory.json").read_text(encoding="utf-8") + "\n", encoding="utf-8", newline=""
+            )
+            _, out = run("check", "caesar_modernized")
+            if out.get("decision") == "activate":
+                card = persona_dir / "runtime_card.md"
+                card.write_text(card.read_text(encoding="utf-8") + "\n# executor probe\n", encoding="utf-8", newline="")
+                _, out = run("check", "caesar_modernized")
+                _, refused = run("confirm", "caesar_modernized")
+                if (
+                    out.get("decision") == "blocked"
+                    and any("stale" in r for r in out.get("reasons", []))
+                    and refused.get("confirmed") is not True
+                ):
+                    reporter.pass_("review_state executor lifecycle, mutable neutrality, and stale invalidation all hold")
+                else:
+                    reporter.fail(f"review_state executor stale invalidation broken: {out} / {refused}")
+            else:
+                reporter.fail(f"review_state executor mutable-state neutrality broken: {out}")
 
 
 def validate_required_files(reporter: Reporter) -> None:
@@ -982,6 +1044,7 @@ def validate_spec_localization_sync(reporter: Reporter) -> None:
         "disclaimer_emitted",
         "reviewed_artifact_hash",
         "scripts/persona_runtime_contracts.py",
+        "scripts/review_state.py",
         "scripts/validate_game_transaction.py",
         "scripts/validate_game_output.py",
         "templates/memory_schema.json",
@@ -1268,6 +1331,7 @@ def main() -> int:
     validate_example_runtime_contracts(reporter)
     validate_scene_cache_contract(reporter)
     validate_activation_entry_points(reporter)
+    validate_review_state_executor(reporter)
     validate_oda_dialogue_samples(reporter)
     validate_runtime_cards_testing_behavior(reporter)
     validate_generated_personas(reporter)

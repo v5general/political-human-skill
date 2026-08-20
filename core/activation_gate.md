@@ -32,7 +32,7 @@ review_valid = meta.json.validation_status == passed
 
 `current_artifact_hash` uses this byte-exact algorithm (reference implementation: `scripts/persona_runtime_contracts.py`):
 
-1. Enumerate every regular file recursively under `persona_dir`, excluding only mutable `memory.json` and `relationship.json`. Reject a symlink or any path resolving outside `persona_dir`.
+1. Enumerate every regular file recursively under `persona_dir`, excluding mutable `memory.json` and `relationship.json` plus the executor's reserved transaction artifacts (`.review_txn.marker`, `meta.json.review_stage`, `persona.yaml.review_stage`, and the `.review_state.lock/` directory). Reject a symlink or any path resolving outside `persona_dir`.
 2. Sort by the UTF-8 byte sequence of the POSIX relative path.
 3. For `persona.yaml`, parse YAML and serialize as UTF-8 JSON with sorted keys, no insignificant whitespace, and `ensure_ascii=false` after setting both review-status mirrors to `unconfirmed`.
 4. For `meta.json`, parse and serialize the same way after setting `latest_review_status=unconfirmed`, `validation_status=pending`, `review_invalidated_by_modification=true`, and `reviewed_artifact_hash=""`.
@@ -67,6 +67,16 @@ else:
 Direct skill invocation is not confirmation. A request such as "talk to X now" is an activation request, not approval of the creation review.
 
 The user sees a confirmation question only in the valid `reviewed` state. Invalid or unconfirmed artifacts route to re-review, never directly to confirmation.
+
+## Executor
+
+Every activation-status transition is executed by `scripts/review_state.py` — never by hand-editing `latest_review_status`, the persona.yaml mirrors, `validation_status`, `review_invalidated_by_modification`, or `reviewed_artifact_hash`.
+
+- `uv run python scripts/review_state.py check <persona_id> [--persona-dir <path>]` — runs the Preflight above and emits machine-readable JSON: `decision` = `activate` | `confirm_prompt` | `blocked`, plus `reasons` and `next_action`. It auto-invalidates exactly the states the Preflight requires (mirror disagreement, stale hash, interrupted transaction).
+- `... commit <persona_id>` — after a successful technical/safety review (mechanical artifact validation plus the semantic validators under `validators/`), stores the artifact hash and moves all three statuses to `reviewed`. `commit` verifies and persists mechanical validity only; the caller asserts that the semantic review has passed. Semantic enforcement is procedural (workflow discipline), not machine-checked.
+- `... confirm <persona_id>` — moves a valid `reviewed` persona to `confirmed` after explicit user approval; never alters validation or hash fields.
+
+Enumerating, listing, or offering a choice of personas is also an entry path: any reply naming activatable personas must come after the gate. When `blocked` stems from a missing committed review (not a safety failure), the harness must immediately offer the remediation path — full review, `commit`, then present the `creation_review.md` summary for confirmation. Reporting `blocked` without remediation violates this gate.
 
 ## Transitions
 

@@ -7,7 +7,8 @@
 ## 端到端流程
 
 ```text
-[0] 事务预检（scripts/validate_game_transaction.py）
+[0] 事务预检（先 scripts/review_state.py check，再 scripts/validate_game_transaction.py）
+      │  check 未返回 decision=activate → 不评分，按其 next_action 补救（复审 → commit → 用户确认 → confirm）
       │  安全解析 persona_id + 激活/hash + 输入 schema；全部通过后才评分
       │  未通过 → 不加载关系/记忆，不评分，不输出游戏 JSON，不写回
       ▼

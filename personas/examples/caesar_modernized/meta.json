@@ -12,7 +12,7 @@
   "generation_method": "historical_source_grounded_workflow",
   "source_figure": "Julius Caesar / 凯撒",
   "modernized": true,
-  "validation_status": "pending",
+  "validation_status": "passed",
   "example_status": "source_grounded_example",
   "user_modified_after_generation": true,
   "source_grounding_required": true,
@@ -39,7 +39,7 @@
     "dialogue_samples/README.md"
   ],
   "activation_requires_user_confirmation": true,
-  "latest_review_status": "unconfirmed",
-  "review_invalidated_by_modification": true,
-  "reviewed_artifact_hash": ""
+  "latest_review_status": "confirmed",
+  "review_invalidated_by_modification": false,
+  "reviewed_artifact_hash": "e77b41dbe4dc0672dd7d017915f2196fad37b5cb448c51d310c5b13c47147f2a"
 }

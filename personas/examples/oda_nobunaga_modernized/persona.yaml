@@ -32,7 +32,7 @@ meta:
   integration_target: "standalone"
   safety_status: "safe_conversion"
   source_grounding_status: "grounded"
-  creation_review_status: "unconfirmed"
+  creation_review_status: "reviewed"
   version: "v1"
   created_at: "2026-07-02"
   native_language: "ja-JP"
@@ -47,11 +47,15 @@ source_provenance:
   composite_archetype_based: false
   user_modified_after_generation: true
   modification_review_required: true
-  last_review_status: "unconfirmed"
+  last_review_status: "reviewed"
   fictionalization_notes:
     - "现代虚构议会制原型，现代 runtime 身份已删除历史指纹（不可识别为现实人物）；历史事件名仅作 provenance 溯源"
     - "human_core.formative_life_history 块为用户提供示例 + SPEC §5.3.1 推演（user_brief_based=true，speculative），非史实"
-  removed_fingerprints: []
+  removed_fingerprints:
+    - "具体历史事件结局（本能寺之变等）不进入任何 runtime 字段，仅在 provenance 溯源"
+    - "具名家臣团、对手大名与战国官职"
+    - "出身领国等历史地理细节（抽象为现代选区与出身叙事）"
+    - "死亡方式与具体遇袭事件"
 
 # -----------------------------------------------------------------------------
 # 转化溯源（mode C）
